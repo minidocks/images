@@ -19,3 +19,6 @@ Images
 
 * 9.5, latest [![](https://badge.imagelayers.io/webuni/postgres:9.5.svg)](https://imagelayers.io/?images=webuni/postgres:9.5)
 
+### Redis - webuni/redis
+
+* [![](https://badge.imagelayers.io/webuni/redis:3.0.svg)](https://imagelayers.io/?images=webuni/redis:3.0) 3.0, latest 
