@@ -1,0 +1,79 @@
+#!/bin/sh
+set -e
+
+USER_ID=$(id -u)
+GROUP_ID=$(id -g)
+
+if [ x"$SUEXEC" != x'' ] && [ "$(id -u)" = '0' ]; then
+    SUEXEC_UMASK=$(echo "$SUEXEC" | awk -F: '{print $4}')
+    if [ x"$SUEXEC_UMASK" != x'' ]; then
+        umask "$SUEXEC_UMASK"
+    fi
+
+    SUEXEC_GROUP=$(echo "$SUEXEC" | awk -F: '{print $2}')
+
+    if [ x"$SUEXEC_GROUP" != x'' ]; then
+        if [ x"$(getent group "$SUEXEC_GROUP")" != x'' ]; then
+            SUEXEC_GROUP_NAME="$(getent group "$SUEXEC_GROUP" | awk -F: '{print $1}')"
+        else
+            if [ x"$(getent group group)" != x'' ]; then
+                _USER_NAME="$(delgroup group 2>&1 | awk '{print $2}' | tr -d "'")"
+                if [ x"$_USER_NAME" != x'' ]; then
+                    _USER_ID="$(getent passwd "$_USER_NAME" | awk -F: '{print $3}')"
+                    deluser "$_USER_NAME"
+                    delgroup group
+                    addgroup -g "$SUEXEC_GROUP" -S group
+                    adduser -u "$_USER_ID" -D -S -G group "$_USER_NAME"
+
+                    unset _USER_NAME
+                    unset _USER_ID
+                else
+                    addgroup -g "$SUEXEC_GROUP" -S group
+                fi
+            else
+                addgroup -g "$SUEXEC_GROUP" -S group
+            fi
+
+            SUEXEC_GROUP_NAME="group"
+        fi
+
+        GROUP_ID="$SUEXEC_GROUP"
+    fi
+
+    SUEXEC_USER=$(echo "$SUEXEC" | awk -F: '{print $1}')
+
+    if [ x"$SUEXEC_USER" != x'' ]; then
+        SUEXEC_NAME=$(echo "$SUEXEC" | awk -F: '{print $3}')
+
+        if [ "$(getent passwd "$SUEXEC_USER")" = '' ]; then
+            if [ x"$SUEXEC_NAME" = x'' ]; then
+                SUEXEC_NAME='user'
+            fi
+
+            if [ "$(getent passwd "$SUEXEC_NAME")" != '' ]; then
+                deluser "$SUEXEC_NAME"
+            fi
+
+            if [ x"$SUEXEC_GROUP_NAME" = x'' ]; then
+                adduser -u "$SUEXEC_USER" -D -S "${SUEXEC_NAME}"
+            else
+                adduser -u "$SUEXEC_USER" -D -S -G "$SUEXEC_GROUP_NAME" "$SUEXEC_NAME"
+            fi
+        elif [ x"$SUEXEC_GROUP" != x'' ] && [ "$(getent passwd "$SUEXEC_USER" | awk -F: '{print $4}')" != "$SUEXEC_GROUP" ]; then
+            if [ x"$SUEXEC_NAME" = x'' ]; then
+                SUEXEC_NAME="$(getent passwd "$SUEXEC_USER" | awk -F: '{print $1}')"
+            fi
+
+            deluser "$SUEXEC_NAME"
+            adduser -u "$SUEXEC_USER" -D -S -G "$SUEXEC_GROUP_NAME" "$SUEXEC_NAME"
+        fi
+
+        USER_ID="$SUEXEC_USER"
+    fi
+fi
+
+if [ "$(id -u)" = '0' ]; then
+    /sbin/tini -s -- su-exec "$USER_ID:$GROUP_ID" "$@"
+else
+    /sbin/tini -s -- exec "$@"
+fi
