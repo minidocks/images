@@ -12,6 +12,7 @@ function adminer_object() {
         new AdminerJsonColumn,
         new AdminerEditTextarea,
         new AdminerRestoreMenuScroll,
+        new AdminerEnvConnections,
     );
 
     /* It is possible to combine customization and plugins:

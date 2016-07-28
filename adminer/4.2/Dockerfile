@@ -1,7 +1,7 @@
 FROM webuni/php:5.6
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-ENV ADMINER_VERSION 4.2.4
+ENV ADMINER_VERSION 4.2.5
 
 RUN mkdir -p /var/www/plugins \
     && wget -O /var/www/adminer.php https://www.adminer.org/static/download/${ADMINER_VERSION}/adminer-${ADMINER_VERSION}.php \
@@ -11,8 +11,13 @@ RUN mkdir -p /var/www/plugins \
     && wget -O /var/www/plugins/restore-menu-scroll.php https://gist.githubusercontent.com/NoxArt/8085521/raw/534dff184883698da8c56c1523f5d7eab45d8854/restore-menu-scroll.php \
     && wget -O /var/www/adminer.css https://raw.githubusercontent.com/vrana/adminer/master/designs/pepa-linha/adminer.css
 
-ADD index.php /var/www/index.php
+COPY index.php /var/www/index.php
+COPY env-connections.php /var/www/plugins/env-connections.php
+
+ENV PHP_UPLOAD_MAX_FILESIZE 128M
+ENV PHP_POST_MAX_SIZE 128M
+ENV PHP_MEMORY_LIMIT 512M
 
 EXPOSE 8080
 
-CMD [ "-S", "0.0.0.0:8080", "-t", "/var/www/" ]
+CMD [ "php", "-S", "0.0.0.0:8080", "-t", "/var/www/" ]
