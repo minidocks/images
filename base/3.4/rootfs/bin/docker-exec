@@ -16,25 +16,24 @@ if [ x"$SUEXEC" != x'' ] && [ "$(id -u)" = '0' ]; then
         if [ x"$(getent group "$SUEXEC_GROUP")" != x'' ]; then
             SUEXEC_GROUP_NAME="$(getent group "$SUEXEC_GROUP" | awk -F: '{print $1}')"
         else
-            if [ x"$(getent group group)" != x'' ]; then
-                _USER_NAME="$(delgroup group 2>&1 | awk '{print $2}' | tr -d "'")"
+            if [ x"$(getent group users)" != x'' ]; then
+                _USER_NAME="$(delgroup users 2>&1 | awk '{print $2}' | tr -d "'")"
                 if [ x"$_USER_NAME" != x'' ]; then
                     _USER_ID="$(getent passwd "$_USER_NAME" | awk -F: '{print $3}')"
                     deluser "$_USER_NAME"
-                    delgroup group
-                    addgroup -g "$SUEXEC_GROUP" -S group
-                    adduser -u "$_USER_ID" -D -S -G group "$_USER_NAME"
+                    delgroup users
+                    addgroup -g "$SUEXEC_GROUP" -S users
+                    adduser -u "$_USER_ID" -D -S -G users "$_USER_NAME"
 
-                    unset _USER_NAME
-                    unset _USER_ID
+                    unset -v _USER_NAME _USER_ID
                 else
-                    addgroup -g "$SUEXEC_GROUP" -S group
+                    addgroup -g "$SUEXEC_GROUP" -S users
                 fi
             else
-                addgroup -g "$SUEXEC_GROUP" -S group
+                addgroup -g "$SUEXEC_GROUP" -S users
             fi
 
-            SUEXEC_GROUP_NAME="group"
+            SUEXEC_GROUP_NAME="users"
         fi
 
         GROUP_ID="$SUEXEC_GROUP"
@@ -73,7 +72,7 @@ if [ x"$SUEXEC" != x'' ] && [ "$(id -u)" = '0' ]; then
 fi
 
 if [ "$(id -u)" = '0' ]; then
-    /sbin/tini -s -- su-exec "$USER_ID:$GROUP_ID" "$@"
+    /sbin/tini -s -g -- su-exec "$USER_ID:$GROUP_ID" "$@"
 else
-    /sbin/tini -s -- exec "$@"
+    /sbin/tini -s -g -- "$@"
 fi

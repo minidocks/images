@@ -3,6 +3,14 @@ MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV TEMP /tmp
 
-RUN apk --update add su-exec tini openssl ca-certificates && rm -rf /var/cache/apk/* /tmp/*
+RUN adduser -u 1000 -D -S -G users user
 
-COPY docker-exec /usr/bin/
+RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk --update add busybox-suid su-exec tini runit@community dropbear-ssh dropbear-scp openssl ca-certificates \
+    && rm -rf /var/cache/apk/* /tmp/*
+
+RUN mkdir /etc/dropbear /etc/runit
+
+ADD rootfs /
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
