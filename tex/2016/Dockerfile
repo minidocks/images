@@ -1,8 +1,12 @@
-FROM webuni/base:3.4
+FROM webuni/perl:5
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-RUN echo http://dl-4.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
-    && apk --update add texlive poppler-utils \
+RUN printf "@main http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/repositories \
+    && printf "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories \
+    && printf "@community http://dl-cdn.alpinelinux.org/alpine/edge/community\n" >> /etc/apk/repositories \
+    && apk --update add \
+        texlive-luatex@testing \
+        zziplib@community \
+        poppler@main \
+        poppler-utils@main \
     && rm -rf /var/cache/apk/* /tmp/*
-
-ENTRYPOINT [ "docker-exec" ]
