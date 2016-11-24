@@ -7,4 +7,6 @@ RUN wget -O /tmp/hugo.tar.gz https://github.com/spf13/hugo/releases/download/v${
     && tar xvzf /tmp/hugo.tar.gz -C /tmp && mv /tmp/hugo*/hugo* /usr/bin/hugo && rm -rf /tmp/* \
     && chmod a+x /usr/bin/hugo
 
+COPY rootfs /
+
 CMD [ "hugo" ]
