@@ -1,4 +1,9 @@
 #!/bin/sh
+#
+# Prefix and suffix PATH
+#
+# (c) 2016 Martin Hasoň <martin.hason@gmail.com>
+
 set -e
 
 if [ x"$PATH_PREFIX" != x ]; then

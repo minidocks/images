@@ -6,7 +6,7 @@ ENV TEMP /tmp
 RUN adduser -u 1000 -D -S -G users user
 
 RUN echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && apk --update add busybox-suid su-exec tini runit@community dropbear-ssh dropbear-scp openssl ca-certificates \
+    && apk --update add busybox-suid su-exec tini runit@community dropbear dropbear-scp openssl ca-certificates \
     && rm -rf /var/cache/apk/* /tmp/*
 
 RUN mkdir /etc/dropbear /etc/runit
