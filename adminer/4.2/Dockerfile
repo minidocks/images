@@ -1,4 +1,4 @@
-FROM webuni/php:5.6
+FROM webuni/php:7.0
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV ADMINER_VERSION 4.2.5
@@ -11,8 +11,7 @@ RUN mkdir -p /var/www/plugins \
     && wget -O /var/www/plugins/restore-menu-scroll.php https://gist.githubusercontent.com/NoxArt/8085521/raw/534dff184883698da8c56c1523f5d7eab45d8854/restore-menu-scroll.php \
     && wget -O /var/www/adminer.css https://raw.githubusercontent.com/vrana/adminer/master/designs/pepa-linha/adminer.css
 
-COPY index.php /var/www/index.php
-COPY env-connections.php /var/www/plugins/env-connections.php
+COPY rootfs /
 
 ENV PHP_UPLOAD_MAX_FILESIZE 128M
 ENV PHP_POST_MAX_SIZE 128M
