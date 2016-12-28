@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Set chown for new files and dirs
+#
+# (c) 2016 Martin Hasoň <martin.hason@gmail.com>
+
+set -e
+
+_dirs=""
+for _path in "$@"; do
+    if [ -d "$_path" ]; then
+        _dirs="$_dirs $_path"
+    else
+        printf "\"%s\" is not directory\n" "$_path"
+    fi
+done
+
+_chown(){
+    _dir=$(dirname "$1")
+    chown "$(stat -c '%u' "$_dir")":"$(stat -c '%g' "$_dir")" "$1"
+}
+
+if [ x"$_dirs" != x ]; then
+    inotifywait -m -r $_dirs -e create --format '%w%f' | while read f; do _chown "$f"; done
+fi
+
+unset _dirs _path _dir _chown
