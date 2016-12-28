@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Download language train data
+#
+# (c) 2016 Martin Hasoň <martin.hason@gmail.com>
+#
+# https://github.com/tesseract-ocr/tesseract/wiki/Data-Files
+
+set -e
+
+for _lang in "$@"; do
+    wget -O "${TESSDATA_PREFIX}/tessdata/${_lang}.traineddata" "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/${_lang}.traineddata"
+done
