@@ -3,30 +3,29 @@ MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV PHP_EXT_XDEBUG=0
 
-RUN printf "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories \
-    && apk --update add \
-        php7-apcu@testing \
-        php7-bcmath@community \
-        php7-ctype@community \
-        php7-dom@community \
-        php7-exif@community \
-        php7-ftp@community \
-        php7-gd@community \
-        php7-gettext@community \
-        php7-mbstring@community \
-        php7-mcrypt@community \
-        php7-mysqlnd@community \
-        php7-opcache@community \
-        php7-pdo_mysql@community \
-        php7-pdo_pgsql@community \
-        php7-pdo_sqlite@community \
-        php7-session@community \
-        php7-soap@community \
-        php7-sockets@community \
-        php7-xdebug@community \
-        php7-xml@community \
-        php7-xsl@community \
-        php7-zip@community \
+RUN apk --update add \
+        php7-bcmath \
+        php7-ctype \
+        php7-curl \
+        php7-dom \
+        php7-exif \
+        php7-ftp \
+        php7-gd \
+        php7-gettext \
+        php7-mbstring \
+        php7-mcrypt \
+        php7-mysqlnd \
+        php7-opcache \
+        php7-pdo_mysql \
+        php7-pdo_pgsql \
+        php7-pdo_sqlite \
+        php7-session \
+        php7-soap \
+        php7-sockets \
+        php7-xdebug \
+        php7-xml \
+        php7-xsl \
+        php7-zip \
     && rm -rf /var/cache/apk/* /tmp/*
 
 # https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70

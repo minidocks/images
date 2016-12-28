@@ -1,4 +1,4 @@
-FROM webuni/base:3.4
+FROM webuni/base:3.5
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV PHP_INI_DIR /etc/php7
@@ -8,19 +8,18 @@ ENV COMPOSER_HOME /composer
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
-RUN printf "@community http://dl-cdn.alpinelinux.org/alpine/edge/community\n" >> /etc/apk/repositories \
-    && printf "@main http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/repositories \
-    && apk --update add \
-        "php7@community<7.1" \
-        php7-curl@community \
-        php7-iconv@community \
-        php7-json@community \
-        libressl@main \
-        php7-openssl@community \
-        php7-pcntl@community \
-        php7-phar@community \
-        php7-posix@community \
-        php7-zlib@community \
+RUN apk --update add \
+        "php7<7.1" \
+        php7-apcu \
+        php7-curl \
+        php7-iconv \
+        php7-json \
+        libressl \
+        php7-openssl \
+        php7-pcntl \
+        php7-phar \
+        php7-posix \
+        php7-zlib \
     && ln -s /usr/bin/php7 /usr/bin/php \
     && rm -rf /var/cache/apk/* /tmp/*
 

@@ -1,4 +1,4 @@
-FROM webuni/base:3.4
+FROM webuni/base:3.5
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV PHP_INI_DIR /etc/php5
