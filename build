@@ -1,0 +1,34 @@
+#!/bin/sh
+set -e
+
+OPTS=""
+for _ARG in "$@"; do
+    case "$_ARG" in
+    --no-last)
+        NOLAST=YES
+        ;;
+    --force)
+        OPTS="${OPTS} --no-cache"
+        ;;
+    *)
+        if [ x"$PACKAGE" == x ]; then
+            PACKAGE="$_ARG"
+        else
+            VERSION="$_ARG"
+        fi
+        ;;
+    esac
+    shift
+done
+
+if [ x"$VERSION" == x ]; then
+    VERSION=$(find ${PACKAGE}/* -maxdepth 0 -type d -printf "%f\n" | head -n 1)
+fi
+
+DIR="$PACKAGE/$VERSION"
+
+docker build ${OPTS} -t webuni/${PACKAGE}:${VERSION} ${DIR}
+
+if [ "$NOLAST" != YES ]; then
+    docker build -t webuni/${PACKAGE}:latest ${DIR}
+fi
