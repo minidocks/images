@@ -36,4 +36,4 @@ done
 
 unset -v _ENVS _POSITION
 
-/sbin/tini -s -- dropbearmulti ssh $_PARAMS
+dropbearmulti ssh $_PARAMS

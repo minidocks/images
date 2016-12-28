@@ -6,4 +6,4 @@
 
 set -e
 
-/sbin/tini -s -- runsvdir -P /etc/sv "$@"
+runsvdir -P /etc/service "$@"
