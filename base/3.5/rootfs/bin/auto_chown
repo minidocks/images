@@ -9,19 +9,33 @@ set -e
 _dirs=""
 for _path in "$@"; do
     if [ -d "$_path" ]; then
-        _dirs="$_dirs $_path"
+        _dirs="$_dirs $(realpath "$_path")"
     else
         printf "\"%s\" is not directory\n" "$_path"
     fi
 done
 
+unset -v _path
+
 _chown(){
-    _dir=$(dirname "$1")
-    chown "$(stat -c '%u' "$_dir")":"$(stat -c '%g' "$_dir")" "$1"
+    for _dir in $_dirs; do
+        if expr match "$1" "$_dir/" > /dev/null; then
+            _stat="$(stat -c '%u' "$_dir")":"$(stat -c '%g' "$_dir")"
+            _path="$1"
+            while expr match "$_path" "$_dir/" > /dev/null; do
+                chown $_stat "$_path"
+                _path="$(dirname "$_path")"
+            done
+
+            break
+        fi
+    done
+
+    unset _dir _path _stat
 }
 
 if [ x"$_dirs" != x ]; then
-    inotifywait -m -r $_dirs -e create --format '%w%f' | while read f; do _chown "$f"; done
+    inotifywait -q -m -r -e create -t 0 --format '%w%f' $_dirs | while read f; do _chown "$f"; done
 fi
 
-unset _dirs _path _dir _chown
+unset _dirs _chown
