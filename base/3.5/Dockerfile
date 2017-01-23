@@ -5,11 +5,15 @@ ENV TEMP /tmp
 
 RUN adduser -u 1000 -D -S -G users user
 
-RUN apk --update add busybox-suid su-exec tini runit inotify-tools dropbear dropbear-scp libressl ca-certificates \
+RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates \
     && rm -rf /var/cache/apk/* /tmp/*
 
-RUN mkdir /etc/dropbear /etc/runit
+RUN mkdir /etc/dropbear /etc/monit.d
 
 ADD rootfs /
+
+RUN chmod 600 /etc/monitrc
+
+EXPOSE 2812
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]

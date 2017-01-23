@@ -7,5 +7,5 @@
 set -e
 
 if [ x"$RAWEXEC" = x ]; then
-    export RAWEXEC="runitd,crond"
+    export RAWEXEC="monit,crond"
 fi
