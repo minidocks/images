@@ -36,4 +36,4 @@ done
 
 unset -v _ENVS _POSITION
 
-dropbearmulti ssh $_PARAMS
+dbclient $_PARAMS
