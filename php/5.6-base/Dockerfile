@@ -4,6 +4,7 @@ MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 ENV PHP_INI_DIR /etc/php5
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
+ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
@@ -23,7 +24,7 @@ RUN apk --update add \
 #Psysh
 RUN wget http://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
-RUN mkdir -p /app /composer && chown www-data:www-data /app /composer
+RUN mkdir -p /app /composer && chown www-data:www-data /app /composer && chmod a+rwx /composer
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \

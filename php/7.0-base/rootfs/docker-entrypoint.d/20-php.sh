@@ -15,7 +15,7 @@ for _ENV_NAME in $(printenv | awk -F= '{print $1}'); do
         fi
 
         _PHP_VALUE="$(eval echo "\${$_ENV_NAME}")"
-        if [ x"${_PHP_VALUE}" = x'1' ] || [ x"${_PHP_VALUE}" = x'true' ]; then
+        if [ x"${_PHP_VALUE}" = x1 ] || [ x"${_PHP_VALUE}" = xtrue ]; then
             sed -i "s/^[; ]*\(zend_extension\|extension\)/\1/" "${_PHP_EXT_FILE}"
         else
             sed -i "s/^[; ]*\(zend_extension\|extension\)/;\1/" "${_PHP_EXT_FILE}"

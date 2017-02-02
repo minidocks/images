@@ -4,6 +4,7 @@ MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 ENV PHP_INI_DIR /etc/php7
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
+ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
