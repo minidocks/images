@@ -84,11 +84,11 @@ for dir in ${1:-$(ls -d */)}; do
     fi
 
     if [ "$(http_code "$response")" = "404" ]; then
-        printf "Create automatic repository \"%s\"\n" "$dir"
+        printf "Create automatic repository \"%s/%s\"\n" "$N_HUB" "$dir"
         response="$(hub "POST" "/$dir/autobuild/" "$data")"
         assert_http_code "$response" "201"
     else
-        printf "Update automatic repository \"%s\"\n" "$dir"
+        printf "Update automatic repository \"%s/%s\"\n" "$N_HUB" "$dir"
         response="$(hub "PUT" "/$dir/autobuild/" "$data")"
     fi
 
@@ -106,7 +106,7 @@ for dir in ${1:-$(ls -d */)}; do
         if [ "$id" = "" ]; then
             printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$dir"
             assert_http_code "$(hub "POST" "/$dir/autobuild/tags/" "$(to_json "isNew=true&namespace=$N_HUB&repoName=$dir&$data")")" "201"
-            assert_http_code "$(hub "POST" "/$dir/autobuild/trigger_build/" "$(to_json "$data")")" "202"
+            assert_http_code "$(hub "POST" "/$dir/autobuild/trigger-build/" "$(to_json "$data")")" "202"
         else
             printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$dir"
             assert_http_code "$(hub "PUT" "/$dir/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
