@@ -1,0 +1,11 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker pull webuni/git
+  - docker pull webuni/curl
+
+script:
+  - ./deploy

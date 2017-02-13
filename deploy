@@ -1,0 +1,133 @@
+#!/bin/sh
+
+N_GIT=microcontainers
+N_HUB=webuni
+HUB_URL=https://hub.docker.com/v2
+
+if [ -f $(pwd)'/.env' ]; then
+    . $(pwd)'/.env'
+fi
+
+for name in $(echo "GITHUB_OAUTH_TOKEN REGISTRY_LOGIN REGISTRY_PASSWORD SSH_ID_RSA"); do
+    if [ "$(eval echo "\${$name}")" = "" ]; then
+        printf "\033[30;41mEnvironment variable \"%s\" is not set.\033[0m\n" "$name" >&2
+        exit 1
+    fi
+done
+
+to_json(){
+    printf '{"%s"}' "$(echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g')"
+}
+
+_curl(){
+    docker run --rm -it webuni/curl curl -H "Content-Type: application/json" -H "$1" -X "$2" -i -s --data "$4" "$3" | tr -d '\r'
+}
+
+http_code(){
+    echo "${1:-$(</dev/stdin)}" | head -n1 | cut -d" " -f2
+}
+
+http_body(){
+    echo "${1:-$(</dev/stdin)}" | sed '1,/^$/d'
+}
+
+jq(){
+    echo "$(</dev/stdin)" | docker run --rm -i webuni/curl jq "$@"
+}
+
+git_subsplit(){
+    docker run --rm -it -v $(pwd):/$(pwd) -w $(pwd) -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -e SSH_ID_RSA="$SSH_ID_RSA" webuni/git git subsplit "$@"
+}
+
+github() {
+    _curl "Authorization: token $GITHUB_OAUTH_TOKEN" "$1" "https://api.github.com$2" "$3"
+}
+
+hub() {
+    if [ x"$REGISTRY_TOKEN" = x ]; then
+        REGISTRY_TOKEN="$(_curl "" "POST" "$HUB_URL/users/login/" "$(to_json "username=$REGISTRY_LOGIN&password=$REGISTRY_PASSWORD")" | http_body | jq -r '.token')"
+    fi
+
+    _curl "Authorization: JWT $REGISTRY_TOKEN" "$1" "$HUB_URL/repositories/$N_HUB$2" "$3"
+}
+
+assert_http_code() {
+    if [ $(http_code "$1") != "$2" ]; then
+        printf "\033[30;41m%s\033[0m\n" "$1" >&2
+        exit 1
+    fi
+}
+
+rm -rf .subsplit/
+git_subsplit init git@github.com:microcontainers/microcontainers.git
+for dir in ${1-:$(ls -d */)}; do
+    dir="${dir%/}"
+
+    # GitHub
+    response=$(github "GET" "/repos/$N_GIT/$dir")
+    if [ $(http_code "$response") = "404" ]; then
+        printf "Create git repository \"%s/%s\"\n" "$N_GIT" "$dir"
+        response=$(github "POST" "/orgs/$N_GIT/repos" "$(to_json "name=$dir")")
+        assert_http_code "$response" "201"
+    fi
+
+    git_subsplit publish "$dir:git@github.com:$N_GIT/$dir.git"
+
+    # Docker Hub
+    data="$(to_json "description=Minimal $dir images&provider=github&vcs_repo_name=$N_GIT/$dir&dockerhub_repo_name=$N_HUB/$dir&active=true&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/" )"
+
+    response="$(hub "GET" "/$dir/")"
+    if [ "$(http_body "$response" | jq -r '.is_automated')" = "false" ]; then
+        printf "Delete non-automatic repository \"%s\"\n" "$dir"
+        assert_http_code "$(hub "DELETE" "/$dir/")" "202"
+        response="$(hub "GET" "/$dir/")"
+    fi
+
+    if [ "$(http_code "$response")" = "404" ]; then
+        printf "Create automatic repository \"%s\"\n" "$dir"
+        response="$(hub "POST" "/$dir/autobuild/" "$data")"
+        assert_http_code "$response" "201"
+    else
+        printf "Update automatic repository \"%s\"\n" "$dir"
+        response="$(hub "PUT" "/$dir/autobuild/" "$data")"
+    fi
+
+    build_tags="$(http_body "$response" | jq -r ".build_tags[]")"
+    for pair in $(echo "$build_tags" | jq -r '(.id|tostring)+"/"+(.name)'); do
+        if [ ! -f "$dir/${pair#*/*}/Dockerfile" ]; then
+            printf "Delete obsolete build tag \"%s\" in repository \"%s\"\n" "${pair#*/*}" "$dir"
+            assert_http_code "$(hub "DELETE" "/$dir/autobuild/tags/${pair%*/*}/")" "204"
+        fi
+    done
+
+    for version in $(find "$dir"/*/Dockerfile -type f |cut -d/ -f2); do
+        data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
+        id="$(echo "$build_tags" | jq -r "select(.name==\"$version\")|.id")"
+        if [ "$id" = "" ]; then
+            printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$dir"
+            assert_http_code "$(hub "POST" "/$dir/autobuild/tags/" "$(to_json "isNew=true&namespace=$N_HUB&repoName=$dir&$data")")" "201"
+        else
+            printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$dir"
+            assert_http_code "$(hub "PUT" "/$dir/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
+        fi
+    done
+
+    response="$(hub "GET" "/$dir/links/")"
+    links="$(http_body "$response" | jq -r ".results[]")"
+    froms=""
+    for dockerfile in $(find "$dir"/*/Dockerfile -type f); do
+        from="$(cat "$dockerfile" | head -n 3 | grep "^FROM " | awk '{print $2}' | cut -d: -f1)"
+        if [ "$(echo $links | jq -r "select(.to_repo==\"$from\")|.id")" = "" ] && [ "${froms/ $from//}" = "$froms" ]; then
+            printf "Create docker link \"%s\" in repository \"%s\"\n" "$from" "$dir"
+            assert_http_code "$(hub "POST" "/$dir/links/" "$(to_json "to_repo=$from")")" "201"
+        fi
+        froms="$froms $from"
+    done
+
+    for pair in $(echo "$links" | jq -r '(.id|tostring)+":"+(.to_repo)'); do
+        if [ "${froms/ ${pair#*:*}//}" = "$froms" ]; then
+            printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$dir"
+            assert_http_code "$(hub "DELETE" "/$dir/links/${pair%*:*}/")" "204"
+        fi
+    done
+done
