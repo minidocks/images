@@ -36,7 +36,7 @@ jq(){
 }
 
 git_subsplit(){
-    docker run --rm -it -v $(pwd):/$(pwd) -w $(pwd) -e USER_ID=$(id -u) -e GROUP_ID=$(id -g) -e SSH_ID_RSA="$SSH_ID_RSA" webuni/git git subsplit "$@"
+    docker run --rm -it -v "$(pwd):/$(pwd)" -w "$(pwd)" -e USER_ID="$(id -u)" -e GROUP_ID="$(id -g)" -e SSH_ID_RSA="$SSH_ID_RSA" webuni/git git subsplit "$@"
 }
 
 github() {
@@ -52,7 +52,7 @@ hub() {
 }
 
 assert_http_code() {
-    if [ $(http_code "$1") != "$2" ]; then
+    if [ "$(http_code "$1")" != "$2" ]; then
         printf "\033[30;41m%s\033[0m\n" "$1" >&2
         exit 1
     fi
@@ -60,12 +60,12 @@ assert_http_code() {
 
 rm -rf .subsplit/
 git_subsplit init git@github.com:microcontainers/microcontainers.git
-for dir in ${1-:$(ls -d */)}; do
+for dir in ${1:-$(ls -d ./*/)}; do
     dir="${dir%/}"
 
     # GitHub
-    response=$(github "GET" "/repos/$N_GIT/$dir")
-    if [ $(http_code "$response") = "404" ]; then
+    response="$(github "GET" "/repos/$N_GIT/$dir")"
+    if [ "$(http_code "$response")" = "404" ]; then
         printf "Create git repository \"%s/%s\"\n" "$N_GIT" "$dir"
         response=$(github "POST" "/orgs/$N_GIT/repos" "$(to_json "name=$dir")")
         assert_http_code "$response" "201"
