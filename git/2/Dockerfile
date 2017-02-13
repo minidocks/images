@@ -5,3 +5,7 @@ RUN apk --update add git git-subtree bash \
     && wget -O /usr/libexec/git-core/git-subsplit https://raw.githubusercontent.com/dflydev/git-subsplit/master/git-subsplit.sh \
     && chmod a+x /usr/libexec/git-core/git-subsplit \
     && rm -rf /var/cache/apk/* /tmp/*
+
+COPY rootfs /
+
+CMD [ "git" ]
