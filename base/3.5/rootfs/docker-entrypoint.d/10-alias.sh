@@ -4,7 +4,7 @@
 #
 # (c) 2016 Martin Hasoň <martin.hason@gmail.com>
 #
-# ALIAS_wkhtmltopdf="ssh -y -y root@wkhtmltopdf wkhtmltopdf"
+# ALIAS_WKHTMLTOPDF="ssh -y -y root@wkhtmltopdf wkhtmltopdf"
 
 set -e
 

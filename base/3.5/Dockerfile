@@ -10,7 +10,7 @@ RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear drop
 
 RUN mkdir /etc/dropbear /etc/monit.d
 
-ADD rootfs /
+COPY rootfs /
 
 RUN chmod 600 /etc/monitrc
 
