@@ -60,7 +60,7 @@ assert_http_code() {
 
 rm -rf .subsplit/
 git_subsplit init git@github.com:microcontainers/microcontainers.git
-for dir in ${1:-$(ls -d ./*/)}; do
+for dir in ${1:-$(ls -d */)}; do
     dir="${dir%/}"
 
     # GitHub
