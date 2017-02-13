@@ -1,12 +1,11 @@
 #!/bin/sh
 set -e
 
+NAMESPACE=webuni
+
 OPTS=""
 for _ARG in "$@"; do
     case "$_ARG" in
-    --no-last)
-        NOLAST=YES
-        ;;
     --force)
         OPTS="${OPTS} --no-cache"
         ;;
@@ -21,14 +20,46 @@ for _ARG in "$@"; do
     shift
 done
 
-if [ x"$VERSION" == x ]; then
-    VERSION=$(find ${PACKAGE}/* -maxdepth 0 -type d -printf "%f\n" | head -n 1)
+_print() {
+    printf "\033[30;42mBuild %s/%s:%s - %s\033[0m\n" "$NAMESPACE" "$1" "$2" "$3"
+}
+
+_build() {
+    local PACKAGE="$1"
+    local VERSION="$2"
+    local DIR="${3:-${PACKAGE}/${VERSION}}"
+
+    if [ ! -f "$DIR/Dockerfile" ]; then
+        printf "\033[30;41mUnable to find file \"%s/Dockerfile\"\033[0m\n" "$DIR" >&2
+        return
+    fi
+
+    FROM="$(cat "$DIR/Dockerfile" | head -n 3 | grep "FROM $NAMESPACE" | awk '{print $2}')"
+    if [ x"$FROM" != x ]; then
+        FROM="${FROM#$NAMESPACE/}"
+        _build "$(echo "$FROM" | cut -d: -f1)" "$(echo "$FROM" | cut -d: -f2)"
+    fi
+
+    _print "$PACKAGE" "$VERSION" "$DIR"
+    docker build $OPTS -t "$NAMESPACE/$PACKAGE:$VERSION" "$DIR"
+    printf "\n"
+}
+
+if test "${PACKAGE#*/}" != "$PACKAGE"; then
+    VERSION="$(echo "$PACKAGE" | cut -d/ -f2)"
+    PACKAGE="$(echo "$PACKAGE" | cut -d/ -f1)"
 fi
 
-DIR="$PACKAGE/$VERSION"
+DIRS=$(find ${PACKAGE}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
 
-docker build ${OPTS} -t webuni/${PACKAGE}:${VERSION} ${DIR}
+if [ x"$VERSION" = x ]; then
+    for VERSION in $DIRS; do
+        _build "$PACKAGE" "$VERSION"
+    done
+else
+    _build "$PACKAGE" "$VERSION"
+fi
 
-if [ "$NOLAST" != YES ]; then
-    docker build -t webuni/${PACKAGE}:latest ${DIR}
+if [ $(echo "$DIRS" | wc -l) = 1 ] && [ "$VERSION" != "latest" ]; then
+    _build "$PACKAGE" "latest" "$PACKAGE/$VERSION"
 fi
