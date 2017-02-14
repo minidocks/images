@@ -24,15 +24,15 @@ _curl(){
 }
 
 http_code(){
-    echo "${1:-$(</dev/stdin)}" | head -n1 | cut -d" " -f2
+    echo "${1:-$(read response; echo $response)}" | head -n1 | cut -d" " -f2
 }
 
 http_body(){
-    echo "${1:-$(</dev/stdin)}" | sed '1,/^$/d'
+    echo "${1:-$(read response; echo $response)}" | sed '1,/^$/d'
 }
 
 jq(){
-    echo "$(</dev/stdin)" | docker run --rm -i webuni/curl jq "$@"
+    (read json; echo "$json") | docker run --rm -i webuni/curl jq "$@"
 }
 
 git_subsplit(){
@@ -92,6 +92,7 @@ for dir in ${1:-$(ls -d */)}; do
     else
         printf "Update automatic repository \"%s/%s\"\n" "$N_HUB" "$dir"
         response="$(hub "PUT" "/$dir/autobuild/" "$data")"
+        assert_http_code "$response" "200"
     fi
 
     build_tags="$(http_body "$response" | jq -r ".build_tags[]")"
