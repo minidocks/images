@@ -43,19 +43,21 @@ github() {
     _curl "Authorization: token $GITHUB_OAUTH_TOKEN" "$1" "https://api.github.com$2" "$3"
 }
 
-hub() {
-    if [ x"$REGISTRY_TOKEN" = x ]; then
-        REGISTRY_TOKEN="$(_curl "" "POST" "$HUB_URL/users/login/" "$(to_json "username=$REGISTRY_LOGIN&password=$REGISTRY_PASSWORD")" | http_body | jq -r '.token')"
-    fi
-
-    _curl "Authorization: JWT $REGISTRY_TOKEN" "$1" "$HUB_URL/repositories/$N_HUB$2" "$3"
-}
-
 assert_http_code() {
     if [ "$(http_code "$1")" != "$2" ]; then
         printf "\033[30;41m%s\033[0m\n" "$1" >&2
         exit 1
     fi
+}
+
+hub() {
+    if [ "$REGISTRY_TOKEN" = "" ]; then
+        response="$(_curl "" "POST" "$HUB_URL/users/login/" "$(to_json "username=$REGISTRY_LOGIN&password=$REGISTRY_PASSWORD")")"
+        assert_http_code "$response" "200"
+        REGISTRY_TOKEN="$(http_body "$response" | jq -r '.token')"
+    fi
+
+    _curl "Authorization: JWT $REGISTRY_TOKEN" "$1" "$HUB_URL/repositories/$N_HUB$2" "$3"
 }
 
 rm -rf .subsplit/
