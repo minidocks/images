@@ -1,0 +1,23 @@
+#!/bin/sh
+# Generic process wrapper script
+#
+# https://mmonit.com/wiki/Monit/FAQ
+#
+# (c) 2017 Martin Hasoň <martin.hason@gmail.com>
+
+_action=$1
+_name=$2
+shift
+shift
+
+case $_action in
+    start)
+        exec 2>&1 /sbin/tini -s -g -- "$@" &
+        echo $! > "/var/run/$_name.pid";
+        ;;
+    stop)
+        kill $(cat "/var/run/$_name.pid") ;;
+    *)
+        echo "usage: process_wrapper {start|stop} name [command]" ;;
+esac
+exit 0
