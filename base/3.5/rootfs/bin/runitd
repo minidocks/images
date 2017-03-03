@@ -1,9 +1,0 @@
-#!/bin/sh
-#
-# Run runit
-#
-# (c) 2016 Martin Hasoň <martin.hason@gmail.com>
-
-set -e
-
-runsvdir -P /etc/service "$@"
