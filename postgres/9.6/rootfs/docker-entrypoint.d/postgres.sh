@@ -28,17 +28,18 @@ if [ "${1:0:1}" = '-' ]; then
     set -- postgres "$@"
 fi
 
-if [ "$1" = 'postgres' ]; then
+if [ "$1" = 'postgres' ] && [ "$(id -u)" = '0' ]; then
     mkdir -p "$PGDATA"
-    chmod 700 "$PGDATA"
     chown -R postgres "$PGDATA"
+    chmod 700 "$PGDATA"
 
-    mkdir -p /run/postgresql
-    chmod g+s /run/postgresql
-    chown -R postgres /run/postgresql
+    mkdir -p /var/run/postgresql
+    chown -R postgres /var/run/postgresql
+    chmod g+s /var/run/postgresql
 
     # look specifically for PG_VERSION, as it is expected in the DB dir
     if [ ! -s "$PGDATA/PG_VERSION" ]; then
+        file_env 'POSTGRES_INITDB_ARGS'
         su-exec postgres initdb "$POSTGRES_INITDB_ARGS"
 
         # check password first so we can output the warning before postgres
@@ -67,11 +68,12 @@ EOWARN
             authMethod=trust
         fi
 
-        { echo; echo "host all all 0.0.0.0/0 $authMethod"; } | su-exec postgres tee -a "$PGDATA/pg_hba.conf" > /dev/null
+        { echo; echo "host all all all $authMethod"; } | tee -a "$PGDATA/pg_hba.conf" > /dev/null
 
         # internal start of server in order to allow set-up using psql-client
         # does not listen on external TCP/IP and waits until start finishes
-        /sbin/tini -s -g -- su-exec postgres pg_ctl -D "$PGDATA" \
+        PGUSER="${PGUSER:-postgres}" \
+        su-exec postgres pg_ctl -D "$PGDATA" \
             -o "-c listen_addresses='localhost'" \
             -w start
 
@@ -99,18 +101,17 @@ EOWARN
         for f in /docker-entrypoint-initdb.d/*; do
             case "$f" in
                 *.sh)     echo "$0: running $f"; . "$f" ;;
-                *.sql)    echo "$0: running $f"; $psql < "$f"; echo ;;
+                *.sql)    echo "$0: running $f"; $psql -f "$f"; echo ;;
                 *.sql.gz) echo "$0: running $f"; gunzip -c "$f" | $psql; echo ;;
             esac
             echo
         done
 
+        PGUSER="${PGUSER:-postgres}" \
         su-exec postgres pg_ctl -D "$PGDATA" -m fast -w stop
 
         echo
         echo 'PostgreSQL init process complete; ready for start up.'
         echo
     fi
-
-    exec /sbin/tini -s -g -- su-exec postgres "$@"
 fi
