@@ -1,4 +1,4 @@
-FROM webuni/base:3.4
+FROM webuni/base:3.5
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV MAILHOG_VERSION 0.2.1
