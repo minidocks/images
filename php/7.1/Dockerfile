@@ -12,7 +12,7 @@ RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/reposi
         php7.1-fileinfo \
         php7.1-fpm \
         php7.1-ftp \
-        php7.1-gd \
+        "libpng=1.6.25-r0" php7.1-gd \
         php7.1-gettext \
         php7.1-mbstring \
         php7.1-mcrypt \
