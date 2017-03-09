@@ -1,4 +1,4 @@
-FROM webuni/base:3.4
+FROM webuni/base:3.5
 
 RUN addgroup -S mysql && adduser -S -G mysql mysql
 
