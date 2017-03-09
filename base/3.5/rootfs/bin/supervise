@@ -6,7 +6,7 @@
 
 set -e
 
-monit -v
+monit -l /dev/stdout
 
 while [ "$(pgrep -x monit)" = "" ]; do
     sleep 1
