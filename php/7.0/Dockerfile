@@ -29,12 +29,16 @@ RUN apk --update add \
     && rm -rf /var/cache/apk/* /tmp/*
 
 ENV PHP_EXT_XDEBUG=0 \
+    FPM_PID=run/php-fpm.pid \
     FPM_DAEMONIZE=no \
     FPM_WWW_LISTEN="[::]:9000" \
-    FPM_WWW_CLEAR_ENV=no
+    FPM_WWW_CLEAR_ENV=no \
+    FPM_WWW_USER=www-data \
+    FPM_WWW_GROUP=www-data
+#    BLACKFIRE_VERSION=1.14.3
 
 # https://blackfire.io/api/v1/releases/probe/php/linux/amd64/70
-#RUN wget -O /usr/lib/php7/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/1.10.6/blackfire-php-linux_amd64-php-70.so \
+#RUN wget -O /usr/lib/php7/modules/blackfire.so "https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-linux_amd64-php-70.so" \
 #    && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php7/conf.d/blackfire.ini
 
 COPY rootfs /

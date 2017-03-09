@@ -22,7 +22,6 @@ RUN apk --update add \
         php5-xml \
         php5-xsl \
         php5-zip \
-        php5-zlib \
     && sed -i "s/^[; ]*\(zend_extension\|extension\)/;\1/" "$PHP_INI_DIR/conf.d/xdebug.ini" \
     && rm -rf /var/cache/apk/* /tmp/*
 

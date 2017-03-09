@@ -18,7 +18,7 @@ RUN apk --update add \
         php5-pcntl \
         php5-phar \
         php5-posix \
-        readline \
+        php5-zlib \
     && rm -rf /var/cache/apk/* /tmp/*
 
 #Psysh

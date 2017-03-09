@@ -1,7 +1,7 @@
 FROM webuni/base:3.5
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-ENV PHP_INI_DIR /etc/php7
+ENV PHP_INI_DIR /etc/php7.1
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
 ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
@@ -9,19 +9,19 @@ ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
-RUN apk --update add \
-        "php7<7.1" \
-        php7-apcu \
-        php7-curl \
-        php7-iconv \
-        php7-json \
-        php7-mbstring \
-        php7-openssl \
-        php7-pcntl \
-        php7-phar \
-        php7-posix \
-        php7-zlib \
-    && ln -s /usr/bin/php7 /usr/bin/php \
+RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories \
+    && apk --update add \
+        php7.1 \
+        #php7-apcu \
+        php7.1-curl \
+        php7.1-iconv \
+        php7.1-json \
+        php7.1-mbstring \
+        php7.1-openssl \
+        php7.1-pcntl \
+        php7.1-phar \
+        php7.1-posix \
+        php7.1-zlib \
     && rm -rf /var/cache/apk/* /tmp/*
 
 #Psysh
