@@ -4,31 +4,31 @@ MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/repositories \
     && printf "http://dl-cdn.alpinelinux.org/alpine/edge/community\n" >> /etc/apk/repositories \
     && apk --update add \
-        php7.1-bcmath \
-        php7.1-ctype \
-        php7.1-curl \
-        php7.1-dom \
-        php7.1-exif \
-        php7.1-fileinfo \
-        php7.1-fpm \
-        php7.1-ftp \
-        "libpng=1.6.25-r0" php7.1-gd \
-        php7.1-gettext \
-        php7.1-mbstring \
-        php7.1-mcrypt \
-        php7.1-mysqlnd \
-        php7.1-opcache \
-        php7.1-pdo_mysql \
-        php7.1-pdo_pgsql \
-        php7.1-pdo_sqlite \
-        php7.1-session \
-        php7.1-soap \
-        php7.1-sockets \
-        #php7.1-xdebug \
-        php7.1-xml \
-        php7.1-xsl \
-        php7.1-zip \
-    && ln -s /usr/sbin/php-fpm7.1 /usr/bin/php-fpm \
+        php7-bcmath \
+        php7-ctype \
+        php7-curl \
+        php7-dom \
+        php7-exif \
+        php7-fileinfo \
+        php7-fpm \
+        php7-ftp \
+        "libpng<1.6.27" php7-gd \
+        php7-gettext \
+        php7-mbstring \
+        php7-mcrypt \
+        php7-mysqlnd \
+        php7-opcache \
+        php7-pdo_mysql \
+        php7-pdo_pgsql \
+        php7-pdo_sqlite \
+        php7-session \
+        php7-soap \
+        php7-sockets \
+        #php7-xdebug \
+        php7-xml \
+        php7-xsl \
+        php7-zip \
+    && ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm \
     && rm -rf /var/cache/apk/* /tmp/*
 
 ENV PHP_EXT_XDEBUG=0 \
