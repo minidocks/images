@@ -12,6 +12,7 @@ function adminer_object() {
         new AdminerJsonColumn,
         new AdminerEditTextarea,
         new AdminerRestoreMenuScroll,
+        new AdminerLoginSqlite,
         new AdminerEnvConnections,
     );
 
