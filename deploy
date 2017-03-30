@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 N_GIT=microcontainers
 N_HUB=webuni
