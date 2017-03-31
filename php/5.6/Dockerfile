@@ -28,12 +28,15 @@ RUN apk --update add \
 ENV PHP_EXT_XDEBUG=0 \
     FPM_DAEMONIZE=no \
     FPM_WWW_LISTEN="[::]:9000" \
-    FPM_WWW_CLEAR_ENV=no
+    FPM_WWW_CLEAR_ENV=no \
+    FPM_WWW_USER=www-data \
+    FPM_WWW_GROUP=www-data \
+    BLACKFIRE_VERSION=1.16.0
 
-# https://blackfire.io/api/v1/releases/probe/php/linux/amd64/56
-#RUN wget -O /usr/lib/php5/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-linux_amd64-php-56.so \
-#    && chmod a+x /usr/lib/php5/modules/blackfire.so \
-#    && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php5/conf.d/blackfire.ini
+RUN wget -O /usr/lib/php5/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-alpine_amd64-php-56.so \
+    && mkdir /var/run/blackfire \
+    && chmod a+x /var/run/blackfire/ /usr/lib/php5/modules/blackfire.so \
+    && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php5/conf.d/blackfire.ini
 
 COPY rootfs /
 
