@@ -114,4 +114,9 @@ EOWARN
         echo 'PostgreSQL init process complete; ready for start up.'
         echo
     fi
+
+    export USER_NAME="postgres"
+    export GROUP_NAME="postgres"
+    export USER_ID="$(id -u postgres)"
+    export GROUP_ID="$(getent group postgres | awk -F: '{print $3}')"
 fi
