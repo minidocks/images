@@ -33,7 +33,7 @@ RUN mkdir -p /app /composer && chown www-data:www-data /app /composer && chmod a
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer \
     && php -r "unlink('composer-setup.php');" \
-    && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin \
+    && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin webuni/composer-neon-plugin \
     && rm -rf /composer/cache
 
 WORKDIR /app

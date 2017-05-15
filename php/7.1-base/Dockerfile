@@ -10,9 +10,11 @@ ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
 RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories \
+    && printf "http://dl-cdn.alpinelinux.org/alpine/edge/community\n" >> /etc/apk/repositories \
+    && printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/repositories \
     && apk --update add \
         "php7>7.0" \
-        #php7-apcu \
+        php7-apcu \
         php7-curl \
         php7-iconv \
         php7-json \
@@ -21,6 +23,7 @@ RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/rep
         php7-pcntl \
         php7-phar \
         php7-posix \
+        php7-tokenizer \
         php7-zlib \
     && rm -rf /var/cache/apk/* /tmp/*
 
@@ -33,7 +36,7 @@ RUN mkdir -p /app /composer && chown www-data:www-data /app /composer && chmod a
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer \
     && php -r "unlink('composer-setup.php');" \
-    && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin \
+    && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin webuni/composer-neon-plugin \
     && rm -rf /composer/cache
 
 WORKDIR /app
