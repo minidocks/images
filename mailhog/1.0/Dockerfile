@@ -1,7 +1,7 @@
 FROM webuni/base:3.5
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-ENV MAILHOG_VERSION 0.2.1
+ENV MAILHOG_VERSION 1.0.0
 
 RUN wget -O /usr/bin/mailhog https://github.com/mailhog/MailHog/releases/download/v${MAILHOG_VERSION}/MailHog_linux_amd64 \
     && chmod a+x /usr/bin/mailhog \
