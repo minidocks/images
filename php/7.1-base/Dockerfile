@@ -15,6 +15,7 @@ RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/rep
     && apk --update add \
         "php7>7.0" \
         php7-apcu \
+        php7-ctype \
         php7-curl \
         php7-iconv \
         php7-json \

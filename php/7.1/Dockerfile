@@ -24,7 +24,7 @@ RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/reposi
         php7-session \
         php7-soap \
         php7-sockets \
-        #php7-xdebug \
+        php7-xdebug \
         php7-xml \
         php7-xsl \
         php7-zip \
@@ -38,11 +38,11 @@ ENV PHP_EXT_XDEBUG=0 \
     FPM_WWW_CLEAR_ENV=no \
     FPM_WWW_USER=www-data \
     FPM_WWW_GROUP=www-data \
-    BLACKFIRE_VERSION=1.16.0
+    BLACKFIRE_VERSION=1.16.2
 
-RUN wget -O /usr/lib/php7/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-alpine_amd64-php-71.so \
+RUN wget -O /usr/lib/php7/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-alpine_amd64-php-71.so \
     && mkdir /var/run/blackfire \
-    && chmod a+x /var/run/blackfire/ /usr/lib/php7/blackfire.so \
+    && chmod a+x /var/run/blackfire/ /usr/lib/php7/modules/blackfire.so \
     && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php7/conf.d/blackfire.ini
 
 COPY rootfs /
