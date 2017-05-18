@@ -22,6 +22,7 @@ RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/reposi
         php7-pdo_pgsql \
         php7-pdo_sqlite \
         php7-session \
+        php7-simplexml \
         php7-soap \
         php7-sockets \
         php7-xdebug \
