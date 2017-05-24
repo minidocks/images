@@ -2,6 +2,7 @@
 # Generic process wrapper script
 #
 # https://mmonit.com/wiki/Monit/FAQ
+# https://stackoverflow.com/questions/23454344/use-monit-monitor-a-python-program
 #
 # (c) 2017 Martin Hasoň <martin.hason@gmail.com>
 
@@ -12,11 +13,13 @@ shift
 
 case $_action in
     start)
-        exec 2>&1 /sbin/tini -s -g -- "$@" &
+        /sbin/tini -s -g -- "$@" &
         echo $! > "/var/run/$_name.pid";
         ;;
     stop)
-        kill $(cat "/var/run/$_name.pid") ;;
+        kill $(cat "/var/run/$_name.pid")
+        rm -f "/var/run/$_name.pid"
+        ;;
     *)
         echo "usage: process_wrapper {start|stop} name [command]" ;;
 esac
