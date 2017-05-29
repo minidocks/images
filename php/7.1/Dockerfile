@@ -1,9 +1,7 @@
 FROM webuni/php:7.1-base
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/repositories \
-    && printf "http://dl-cdn.alpinelinux.org/alpine/edge/community\n" >> /etc/apk/repositories \
-    && apk --update add \
+RUN apk --update add \
         php7-bcmath \
         php7-ctype \
         php7-curl \
@@ -12,7 +10,7 @@ RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/reposi
         php7-fileinfo \
         php7-fpm \
         php7-ftp \
-        "libpng<1.6.27" php7-gd \
+        php7-gd \
         php7-gettext \
         php7-mbstring \
         php7-mcrypt \

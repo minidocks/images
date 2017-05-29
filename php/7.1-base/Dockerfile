@@ -1,4 +1,4 @@
-FROM webuni/base:3.5
+FROM webuni/base:3.6
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV PHP_INI_DIR /etc/php7
@@ -9,10 +9,7 @@ ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
-RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories \
-    && printf "http://dl-cdn.alpinelinux.org/alpine/edge/community\n" >> /etc/apk/repositories \
-    && printf "http://dl-cdn.alpinelinux.org/alpine/edge/main\n" >> /etc/apk/repositories \
-    && apk --update add \
+RUN apk --update add \
         "php7>7.0" \
         php7-apcu \
         php7-ctype \
@@ -22,6 +19,7 @@ RUN printf "http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/rep
         php7-mbstring \
         php7-openssl \
         php7-pcntl \
+        php7-pear \
         php7-phar \
         php7-posix \
         php7-tokenizer \

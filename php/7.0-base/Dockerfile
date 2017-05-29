@@ -19,10 +19,12 @@ RUN apk --update add \
         php7-mbstring \
         php7-openssl \
         php7-pcntl \
+        php7-pear \
         php7-phar \
         php7-posix \
         php7-zlib \
     && ln -s /usr/bin/php7 /usr/bin/php \
+    && ln -s /usr/bin/phpize7 /usr/bin/phpize \
     && rm -rf /var/cache/apk/* /tmp/*
 
 #Psysh
