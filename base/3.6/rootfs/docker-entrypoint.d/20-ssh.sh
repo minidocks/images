@@ -28,6 +28,7 @@ if [ x"$SSH_ID_DROPBEAR" != x ]; then
 elif [ x"$SSH_ID_RSA" != x ]; then
     _init
     $_EXEC echo "$SSH_ID_RSA" | tr -d '\r' > "$_HOME/.ssh/id_rsa"
+    $_EXEC chmod 600 "$_HOME/.ssh/id_rsa"
     $_EXEC dropbearconvert openssh dropbear "$_HOME/.ssh/id_rsa" "$_HOME/.ssh/id_dropbear"
 fi
 
