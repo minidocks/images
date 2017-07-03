@@ -24,18 +24,20 @@ _init() {
 
 if [ x"$SSH_ID_DROPBEAR" != x ]; then
     _init
-    $_EXEC echo "$SSH_ID_DROPBEAR" | tr -d '\r' > "$_HOME/.ssh/id_dropbear"
+    $_EXEC touch "$_HOME/.ssh/id_dropbear"
+    echo "$SSH_ID_DROPBEAR" | tr -d '\r' > "$_HOME/.ssh/id_dropbear"
 elif [ x"$SSH_ID_RSA" != x ]; then
     _init
-    $_EXEC echo "$SSH_ID_RSA" | tr -d '\r' > "$_HOME/.ssh/id_rsa"
-    $_EXEC chmod 600 "$_HOME/.ssh/id_rsa"
+    $_EXEC touch "$_HOME/.ssh/id_rsa"
+    echo "$SSH_ID_RSA" | tr -d '\r' > "$_HOME/.ssh/id_rsa"
+    chmod 600 "$_HOME/.ssh/id_rsa"
     $_EXEC dropbearconvert openssh dropbear "$_HOME/.ssh/id_rsa" "$_HOME/.ssh/id_dropbear"
 fi
 
 if [ -r "/etc/dropbear/ssh_known_hosts" ]; then
     _init
     $_EXEC touch "$_HOME/.ssh/known_hosts"
-    $_EXEC cat "/etc/dropbear/ssh_known_hosts" >> "$_HOME/.ssh/known_hosts"
+    cat "/etc/dropbear/ssh_known_hosts" >> "$_HOME/.ssh/known_hosts"
 fi
 
 unset -v _USER _HOME _EXEC
