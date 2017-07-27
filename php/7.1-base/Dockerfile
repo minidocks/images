@@ -1,10 +1,11 @@
 FROM webuni/base:3.6
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-ENV PHP_INI_DIR /etc/php7
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /composer
-ENV PATH $COMPOSER_HOME/vendor/bin:$PATH
+ENV PHP_INI_DIR=/etc/php7 \
+    COMPOSER_ALLOW_SUPERUSER=1 \
+    COMPOSER_HOME=/composer \
+    COMPOSER_CACHE_DIR="$COMPOSER_HOME/cache \
+    PATH="$COMPOSER_HOME/vendor/bin:$PATH"
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
@@ -33,7 +34,7 @@ RUN mkdir -p /app /composer && chown www-data:www-data /app /composer && chmod a
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer \
+    && php composer-setup.php --snapshot --install-dir=/usr/bin --filename=composer \
     && php -r "unlink('composer-setup.php');" \
     && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin webuni/composer-neon-plugin \
     && rm -rf /composer/cache
