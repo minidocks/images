@@ -25,6 +25,9 @@ RUN apk --update add \
         php7-sockets \
         php7-xdebug \
         php7-xml \
+        php7-xmlreader \
+        php7-xmlrpc \
+        php7-xmlwriter \
         php7-xsl \
         php7-zip \
     && ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm \

@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
+
 if [ "$(id -u)" != 0 ] || [ x"${PHP_RUNTIME_CONF-1}" != x'1' ]; then
     return
 fi

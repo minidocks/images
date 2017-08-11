@@ -20,6 +20,9 @@ RUN apk --update add \
         php5-sockets \
         php5-xdebug \
         php5-xml \
+        php5-xmlreader \
+        php5-xmlrpc \
+        #php5-xmlwriter \
         php5-xsl \
         php5-zip \
     && sed -i "s/^[; ]*\(zend_extension\|extension\)/;\1/" "$PHP_INI_DIR/conf.d/xdebug.ini" \

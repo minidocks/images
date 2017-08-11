@@ -1,12 +1,6 @@
 FROM webuni/base:3.5
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-ENV PHP_INI_DIR=/etc/php7 \
-    COMPOSER_ALLOW_SUPERUSER=1 \
-    COMPOSER_HOME=/composer \
-    COMPOSER_CACHE_DIR="$COMPOSER_HOME/cache \
-    PATH="$COMPOSER_HOME/vendor/bin:$PATH"
-
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
@@ -31,14 +25,20 @@ RUN apk --update add \
 #Psysh
 RUN wget http://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
-RUN mkdir -p /app /composer && chown www-data:www-data /app /composer && chmod a+rwx /composer
+ENV PHP_INI_DIR=/etc/php7 \
+    COMPOSER_VERSION=1.5.1 \
+    COMPOSER_ALLOW_SUPERUSER=1 \
+    COMPOSER_HOME=/composer \
+    COMPOSER_CACHE_DIR=/composer-cache
+
+RUN mkdir -p /app "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /app "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer --version="$COMPOSER_VERSION" \
     && php -r "unlink('composer-setup.php');" \
     && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin webuni/composer-neon-plugin \
-    && rm -rf /composer/cache
+    && rm -rf "$COMPOSER_CACHE_DIR"
 
 WORKDIR /app
 
