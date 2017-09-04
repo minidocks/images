@@ -1,4 +1,4 @@
-FROM webuni/base:3.5
+FROM webuni/base:3.6
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
 ENV SCANTAILOR_VERSION=0_9_12_2
