@@ -26,10 +26,11 @@ RUN apk --update add \
 RUN wget http://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
 ENV PHP_INI_DIR=/etc/php7 \
-    COMPOSER_VERSION=1.5.1 \
+    COMPOSER_VERSION=1.5.2 \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
-    COMPOSER_CACHE_DIR=/composer-cache
+    COMPOSER_CACHE_DIR=/composer-cache \
+    COMPOSER_HTACCESS_PROTECT=0
 
 RUN mkdir -p /app "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /app "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
 
@@ -38,7 +39,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer --version="$COMPOSER_VERSION" \
     && php -r "unlink('composer-setup.php');" \
     && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin webuni/composer-neon-plugin \
-    && rm -rf "$COMPOSER_CACHE_DIR"
+    && rm -rf $COMPOSER_CACHE_DIR/*
 
 WORKDIR /app
 
