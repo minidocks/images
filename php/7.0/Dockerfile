@@ -25,7 +25,7 @@ RUN apk --update add \
         php7-xml \
         php7-xmlreader \
         php7-xmlrpc \
-        php7-xmlwriter \
+        #php7-xmlwriter \
         php7-xsl \
         php7-zip \
     && ln -s /usr/sbin/php-fpm7 /usr/bin/php-fpm \
@@ -38,7 +38,7 @@ ENV PHP_EXT_XDEBUG=0 \
     FPM_WWW_CLEAR_ENV=no \
     FPM_WWW_USER=www-data \
     FPM_WWW_GROUP=www-data \
-    BLACKFIRE_VERSION=1.17.3
+    BLACKFIRE_VERSION=1.18.0
 
 RUN wget -O /usr/lib/php7/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-alpine_amd64-php-70.so \
     && mkdir /var/run/blackfire \
