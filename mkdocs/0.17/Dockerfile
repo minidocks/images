@@ -1,7 +1,7 @@
 FROM webuni/python:3.6
 MAINTAINER Martin Hasoň "martin.hason@gmail.com"
 
-ENV MKDOCS_VERSION=0.16.3 \
+ENV MKDOCS_VERSION=0.17.0 \
     MKDOCS_MATERIAL_VERSION=1.12.1
 
 #TODO mkdocs-merge
