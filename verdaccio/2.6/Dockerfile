@@ -1,7 +1,9 @@
 FROM webuni/node:8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN yarn global add verdaccio sinopia-github-oauth sinopia-gitlab \
+ENV VERDACCIO_VERSION=2.6.6
+
+RUN yarn global add verdaccio@$VERDACCIO_VERSION sinopia-github-oauth sinopia-gitlab \
     && rm -rf /var/cache/apk/* $NPM_CONFIG_CACHE/* $YARN_CACHE_FOLDER/* /tmp/*
 
 COPY rootfs /
