@@ -1,8 +1,0 @@
-set daemon 10
-set logfile /dev/null
-
-set pidfile /var/run/monit.pid
-set idfile /var/.monit.id
-set statefile /var/.monit.state
-
-include /etc/monit.d/*.cfg

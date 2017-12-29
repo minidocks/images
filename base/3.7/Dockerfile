@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.7
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV TEMP /tmp
