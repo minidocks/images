@@ -108,41 +108,32 @@ for dir in ${1:-$(ls -d */)}; do
 
     build_tags="$(http_body "$response" | jq -r ".build_tags")"
     for pair in $(echo "$build_tags" | jq -r '.[] | (.id|tostring)+"/"+(.name)'); do
-        if [ ! -f "$dir/${pair#*/*}/Dockerfile" ]; then
-            printf "Delete obsolete build tag \"%s\" in repository \"%s\"\n" "${pair#*/*}" "$dir"
+        if [ "${pair#*/*}" != "latest" ]; then
+            printf "Delete obsolete auto build tag \"%s\" in repository \"%s\"\n" "${pair#*/*}" "$dir"
             assert_http_code "$(hub "DELETE" "/$dir/autobuild/tags/${pair%*/*}/")" "204"
         fi
     done
 
     for version in $(find "$dir"/*/Dockerfile -type f | cut -d/ -f2); do
-        data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
-        id="$(echo "$build_tags" | jq -r ".[] | select(.name==\"$version\") | .id")"
-        if [ -z "$id" ]; then
-            printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
-            assert_http_code "$(hub "POST" "/$dir/autobuild/tags/" "$(to_json "isNew=true&namespace=$N_HUB&repoName=$dir&$data")")" "201"
-            assert_http_code "$(hub "POST" "/$dir/autobuild/trigger-build/" "$(to_json "$data")")" "202"
-        else
-            printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
-            assert_http_code "$(hub "PUT" "/$dir/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
-        fi
-    done
+        ./build "$dir" "$version"
+        docker push "$hub_name:$version"
 
-    response="$(hub "GET" "/$dir/links/")"
-    links="$(http_body "$response" | jq -r ".results")"
-    froms=" $hub_name"
-    for dockerfile in $(find "$dir"/*/Dockerfile -type f); do
-        from="$(head -n 3 "$dockerfile" | grep "^FROM " | awk '{print $2}' | cut -d: -f1)"
-        if [ -z "$(echo "$links" | jq -r ".[] | select(.to_repo==\"$from\") | .id")" ] && [ "${froms/ $from//}" = "$froms" ]; then
-            printf "Create docker link \"%s\" in repository \"%s\"\n" "$from" "$hub_name"
-            assert_http_code "$(hub "POST" "/$dir/links/" "$(to_json "to_repo=$from")")" "201"
+        if [ "$version" == "latest" ]; then
+            data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
+            id="$(echo "$build_tags" | jq -r ".[] | select(.name==\"$version\") | .id")"
+            if [ -z "$id" ]; then
+                printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
+                assert_http_code "$(hub "POST" "/$dir/autobuild/tags/" "$(to_json "isNew=true&namespace=$N_HUB&repoName=$dir&$data")")" "201"
+                assert_http_code "$(hub "POST" "/$dir/autobuild/trigger-build/" "$(to_json "$data")")" "202"
+            else
+                printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
+                assert_http_code "$(hub "PUT" "/$dir/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
+            fi
         fi
-        froms="$froms $from"
     done
 
     for pair in $(echo "$links" | jq -r '.[] | (.id|tostring)+":"+(.to_repo)'); do
-        if [ "${froms/ ${pair#*:*}//}" = "$froms" ]; then
-            printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
-            assert_http_code "$(hub "DELETE" "/$dir/links/${pair%*:*}/")" "204"
-        fi
+        printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
+        assert_http_code "$(hub "DELETE" "/$dir/links/${pair%*:*}/")" "204"
     done
 done

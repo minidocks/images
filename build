@@ -10,7 +10,7 @@ for _ARG in "$@"; do
         OPTS="${OPTS} --no-cache"
         ;;
     *)
-        if [ x"$PACKAGE" == x ]; then
+        if [ -z "$PACKAGE" ]; then
             PACKAGE="$_ARG"
         else
             VERSION="$_ARG"
@@ -27,21 +27,24 @@ _print() {
 _build() {
     local PACKAGE="$1"
     local VERSION="$2"
-    local DIR="${3:-${PACKAGE}/${VERSION}}"
+    local SOURCE_DIR="${3:-${PACKAGE}/${VERSION}}"
+    local TARGET_DIR="/tmp/${3:-${PACKAGE}-${VERSION}}"
 
-    if [ ! -f "$DIR/Dockerfile" ]; then
-        printf "\033[30;41mUnable to find file \"%s/Dockerfile\"\033[0m\n" "$DIR" >&2
+    if [ ! -f "$SOURCE_DIR/Dockerfile" ]; then
+        printf "\033[30;41mUnable to find file \"%s/Dockerfile\"\033[0m\n" "$SOURCE_DIR" >&2
         return
     fi
 
-    FROM="$(cat "$DIR/Dockerfile" | head -n 3 | grep "FROM $NAMESPACE" | awk '{print $2}')"
-    if [ x"$FROM" != x ]; then
+    FROM="$(cat "$SOURCE_DIR/Dockerfile" | head -n 3 | grep "FROM $NAMESPACE" | awk '{print $2}')"
+    if [ -n "$FROM" ]; then
         FROM="${FROM#$NAMESPACE/}"
         _build "$(echo "$FROM" | cut -d: -f1)" "$(echo "$FROM" | cut -d: -f2)"
     fi
 
-    _print "$PACKAGE" "$VERSION" "$DIR"
-    docker build $OPTS -t "$NAMESPACE/$PACKAGE:$VERSION" "$DIR"
+    _print "$PACKAGE" "$VERSION" "$SOURCE_DIR"
+    cp -rfL "$SOURCE_DIR" "$TARGET_DIR"
+    docker build $OPTS -t "$NAMESPACE/$PACKAGE:$VERSION" "$TARGET_DIR"
+    rm -rf "$TARGET_DIR"
     printf "\n"
 }
 
@@ -52,7 +55,7 @@ fi
 
 DIRS=$(find ${PACKAGE}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
 
-if [ x"$VERSION" = x ]; then
+if [ -z "$VERSION" ]; then
     for VERSION in $DIRS; do
         _build "$PACKAGE" "$VERSION"
     done
