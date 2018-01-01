@@ -1,5 +1,5 @@
 FROM webuni/base:3.6
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV NPM_CONFIG_CACHE=/npm \
     YARN_CACHE_FOLDER=/yarn
