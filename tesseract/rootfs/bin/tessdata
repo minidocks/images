@@ -9,5 +9,5 @@
 set -e
 
 for _lang in "$@"; do
-    wget -O "${TESSDATA_PREFIX}/tessdata/${_lang}.traineddata" "https://github.com/tesseract-ocr/tessdata/raw/3.04.00/${_lang}.traineddata"
+    wget -O "${TESSDATA_PREFIX:-/usr/share}/tessdata/${_lang}.traineddata" "${TESSDATA_URL}/${_lang}.traineddata"
 done
