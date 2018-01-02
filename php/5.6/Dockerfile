@@ -1,7 +1,8 @@
 FROM webuni/php:5.6-base
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk --update add \
+RUN printf "@3.5-community http://dl-cdn.alpinelinux.org/alpine/v3.5/community\n" >> /etc/apk/repositories \
+    && apk --update add \
         php5-apcu \
         php5-bcmath \
         php5-ctype \
@@ -18,7 +19,7 @@ RUN apk --update add \
         php5-pdo_pgsql \
         php5-soap \
         php5-sockets \
-        php5-xdebug \
+        "php5-xdebug@3.5-community" \
         php5-xml \
         php5-xmlreader \
         php5-xmlrpc \
@@ -40,7 +41,5 @@ RUN wget -O /usr/lib/php5/modules/blackfire.so https://packages.blackfire.io/bin
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ /usr/lib/php5/modules/blackfire.so \
     && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php5/conf.d/blackfire.ini
-
-COPY rootfs /
 
 EXPOSE 9000

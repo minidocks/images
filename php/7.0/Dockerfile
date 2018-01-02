@@ -1,5 +1,5 @@
 FROM webuni/php:7.0-base
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add \
         php7-bcmath \
@@ -44,7 +44,5 @@ RUN wget -O /usr/lib/php7/modules/blackfire.so https://packages.blackfire.io/bin
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ /usr/lib/php7/modules/blackfire.so \
     && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > /etc/php7/conf.d/blackfire.ini
-
-COPY rootfs /
 
 EXPOSE 9000

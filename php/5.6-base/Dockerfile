@@ -1,11 +1,11 @@
-FROM webuni/base:3.5
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+FROM webuni/base:3.7
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
 RUN apk --update add \
-        "php5>=5.6" \
+        php5 \
         php5-curl \
         php5-iconv \
         php5-json \
@@ -15,21 +15,21 @@ RUN apk --update add \
         php5-phar \
         php5-posix \
         php5-zlib \
-    #&& ln -s /usr/bin/php5 /usr/bin/php \
-    #&& ln -s /usr/bin/phpize5 /usr/bin/phpize \
+    && ln -s /usr/bin/php5 /usr/bin/php \
+    && ln -s /usr/bin/phpize5 /usr/bin/phpize \
     && rm -rf /var/cache/apk/* /tmp/*
 
 #Psysh
 RUN wget http://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
 ENV PHP_INI_DIR=/etc/php5 \
-    COMPOSER_VERSION=1.5.2 \
+    COMPOSER_VERSION="1.6.0-RC" \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
     COMPOSER_CACHE_DIR=/composer-cache \
     COMPOSER_HTACCESS_PROTECT=0
 
-RUN mkdir -p /app "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /app "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
+RUN mkdir -p /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
@@ -38,7 +38,7 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && su-exec user composer global require hirak/prestissimo webuni/composer-yaml-plugin webuni/composer-neon-plugin \
     && rm -rf $COMPOSER_CACHE_DIR/*
 
-WORKDIR /app
+WORKDIR /var/www
 
 COPY rootfs /
 
