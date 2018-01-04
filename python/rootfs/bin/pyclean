@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Removes .pyc, .pyo and __pycache__ files and directories
+#
+# (c) 2018 Martin Hasoň <martin.hason@gmail.com>
+#
+# https://stackoverflow.com/questions/28991015/python3-project-remove-pycache-folders-and-pyc-files
+
+set -e
+
+find "${1:-/}" -type f -name \*.pyc -o -name \*.pyo -o -name __pycache__ | xargs rm -rf

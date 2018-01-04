@@ -1,8 +1,13 @@
-FROM webuni/base:3.6
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+FROM webuni/base:3.7
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
+
+ENV PIP_NO_COMPILE=1 \
+    PIP_CACHE_DIR=/pip-cache
+
+COPY rootfs /
 
 RUN apk --update add "python3<3.7" \
-    && rm -rf /var/cache/apk/* && find /usr/lib/python3.6 -name '*.pyc' -delete
+    && rm -rf /var/cache/apk/* && pyclean
 
 # make some useful symlinks that are expected to exist
 RUN ln -s /usr/bin/python3 /usr/bin/python \
@@ -11,9 +16,8 @@ RUN ln -s /usr/bin/python3 /usr/bin/python \
     && ln -s /usr/bin/idle3 /usr/bin/idle \
     && ln -s /usr/bin/pydoc3 /usr/bin/pydoc
 
-RUN pip install -U pip virtualenv \
-    && rm -rf /root/.cache/pip && find /usr/lib/python3.6 -name '*.pyc' -delete
-
-COPY rootfs /
+RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
+    && pip install -U pip virtualenv \
+    && rm -rf $PIP_CACHE_DIR/* && pyclean
 
 CMD [ "python" ]

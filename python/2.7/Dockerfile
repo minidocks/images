@@ -1,12 +1,16 @@
-FROM webuni/base:3.6
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+FROM webuni/base:3.7
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk --update add python2 py2-pip \
-    && rm -rf /var/cache/apk/* && find /usr/lib/python2.7 -name '*.pyc' -delete
-
-RUN pip install -U pip virtualenv \
-    && rm -rf /root/.cache/pip && find /usr/lib/python2.7 -name '*.pyc' -delete
+ENV PIP_NO_COMPILE=1 \
+    PIP_CACHE_DIR=/pip-cache
 
 COPY rootfs /
+
+RUN apk --update add python2 py2-pip \
+    && rm -rf /var/cache/apk/* && pyclean
+
+RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
+    && pip install -U pip virtualenv \
+    && rm -rf $PIP_CACHE_DIR/* && pyclean
 
 CMD [ "python" ]
