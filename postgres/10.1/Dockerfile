@@ -1,4 +1,4 @@
-FROM webuni/base:3.6
+FROM webuni/base:3.7
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 # group postgres already exists
@@ -16,7 +16,6 @@ RUN mkdir /docker-entrypoint-initdb.d
 
 ENV LANG=en_US.utf8 \
     PGDATA=/var/lib/postgresql/data
-
 RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA" # this 777 will be replaced by 700 at runtime (allows semi-arbitrary "--user" values)
 
 COPY rootfs /
@@ -25,4 +24,4 @@ EXPOSE 5432
 
 CMD [ "postgres" ]
 
-# Dockerfile is based on https://github.com/docker-library/postgres/blob/master/9.6/alpine/Dockerfile
+# Dockerfile is based on https://github.com/docker-library/postgres/blob/master/10/alpine/Dockerfile

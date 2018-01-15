@@ -1,33 +1,7 @@
 #!/bin/sh
 set -e
 
-# usage: file_env VAR [DEFAULT]
-#    ie: file_env 'XYZ_DB_PASSWORD' 'example'
-# (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
-#  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
-file_env() {
-    local var="$1"
-    local fileVar="${var}_FILE"
-    local def="${2:-}"
-
-    if [ "$(eval echo "\${$var}")" ] && [ "$(eval echo "\${$fileVar}")" ]; then
-        echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
-        exit 1
-    fi
-    local val="$def"
-    if [ "$(eval echo "\${$var}")" ]; then
-        val="$(eval echo "\${$var}")"
-    elif [ "$(eval echo "\${$fileVar}")" ]; then
-        val="$(< eval echo "\${$fileVar}")"
-    fi
-    export "$var"="$val"
-    unset "$fileVar"
-}
-
-if [ "${1:0:1}" = '-' ]; then
-    set -- postgres "$@"
-fi
-
+# allow the container to be started with `--user`
 if [ "$1" = 'postgres' ] && [ "$(id -u)" = '0' ]; then
     mkdir -p "$PGDATA"
     chown -R postgres "$PGDATA"
@@ -35,16 +9,50 @@ if [ "$1" = 'postgres' ] && [ "$(id -u)" = '0' ]; then
 
     mkdir -p /var/run/postgresql
     chown -R postgres /var/run/postgresql
-    chmod g+s /var/run/postgresql
+    chmod 775 /var/run/postgresql
+
+    # Create the transaction log directory before initdb is run (below) so the directory is owned by the correct user
+    # on PostgreSQL 9.x, this variable is POSTGRES_INITDB_XLOGDIR
+    _waldir="${POSTGRES_INITDB_WALDIR:-$POSTGRES_INITDB_XLOGDIR}"
+    if [ "$_waldir" ]; then
+        mkdir -p "$_waldir"
+        chown -R postgres "$_waldir"
+        chmod 700 "$_waldir"
+    fi
+    unset _waldir
+
+    export USER_NAME="postgres"
+    export GROUP_NAME="postgres"
+    export USER_ID="$(id -u postgres)"
+    export GROUP_ID="$(getent group postgres | awk -F: '{print $3}')"
+fi
+
+if [ "$1" = 'postgres' ]; then
+    mkdir -p "$PGDATA"
+    chown -R "$USER_ID" "$PGDATA" 2>/dev/null || :
+    chmod 700 "$PGDATA" 2>/dev/null || :
 
     # look specifically for PG_VERSION, as it is expected in the DB dir
     if [ ! -s "$PGDATA/PG_VERSION" ]; then
+        source /bin/file_env
         file_env 'POSTGRES_INITDB_ARGS'
-        su-exec postgres initdb "$POSTGRES_INITDB_ARGS"
+        _waldir="${POSTGRES_INITDB_WALDIR:-$POSTGRES_INITDB_XLOGDIR}"
+        if [ "$_waldir" ]; then
+            if [ "$(postgres --version | awk '{print $NF}' | cut -d. -f1)" -ge "10" ]; then
+                export POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS --waldir $_waldir"
+            else
+                export POSTGRES_INITDB_ARGS="$POSTGRES_INITDB_ARGS --xlogdir $_waldir"
+            fi
+        fi
+        unset _waldir
+        su-exec "${PGUSER:-postgres}" initdb --username=postgres $POSTGRES_INITDB_ARGS
+
+        # one line url configuration
+        file_env 'POSTGRES_URL'
 
         # check password first so we can output the warning before postgres
         # messes it up
-        file_env 'POSTGRES_PASSWORD'
+        file_env 'POSTGRES_PASSWORD' "$(parse_url "$POSTGRES_URL" pass)"
         if [ "$POSTGRES_PASSWORD" ]; then
             pass="PASSWORD '$POSTGRES_PASSWORD'"
             authMethod=md5
@@ -72,13 +80,10 @@ EOWARN
 
         # internal start of server in order to allow set-up using psql-client
         # does not listen on external TCP/IP and waits until start finishes
-        PGUSER="${PGUSER:-postgres}" \
-        su-exec postgres pg_ctl -D "$PGDATA" \
-            -o "-c listen_addresses='localhost'" \
-            -w start
+        su-exec "${PGUSER:-postgres}" pg_ctl -D "$PGDATA" -o "-c listen_addresses='localhost'" -w start
 
-        file_env 'POSTGRES_USER' 'postgres'
-        file_env 'POSTGRES_DB' "$POSTGRES_USER"
+        file_env 'POSTGRES_USER' "$(parse_url "$POSTGRES_URL" user)" "postgres"
+        file_env 'POSTGRES_DB' "$(parse_url "$POSTGRES_URL" path)" "$POSTGRES_USER"
 
         psql="psql -v ON_ERROR_STOP=1"
 
@@ -103,20 +108,15 @@ EOWARN
                 *.sh)     echo "$0: running $f"; . "$f" ;;
                 *.sql)    echo "$0: running $f"; $psql -f "$f"; echo ;;
                 *.sql.gz) echo "$0: running $f"; gunzip -c "$f" | $psql; echo ;;
+                *) echo "$0: ignoring $f" ;;
             esac
             echo
         done
 
-        PGUSER="${PGUSER:-postgres}" \
-        su-exec postgres pg_ctl -D "$PGDATA" -m fast -w stop
+        su-exec "${PGUSER:-postgres}" pg_ctl -D "$PGDATA" -m fast -w stop
 
         echo
         echo 'PostgreSQL init process complete; ready for start up.'
         echo
     fi
-
-    export USER_NAME="postgres"
-    export GROUP_NAME="postgres"
-    export USER_ID="$(id -u postgres)"
-    export GROUP_ID="$(getent group postgres | awk -F: '{print $3}')"
 fi
