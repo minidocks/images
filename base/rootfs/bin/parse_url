@@ -1,0 +1,48 @@
+#!/bin/sh
+# https://unix.stackexchange.com/questions/159253/decoding-url-encoding-percent-encoding
+# https://stackoverflow.com/questions/6174220/parse-url-in-shell-script
+
+urldecode() {
+     echo "$@" | sed 's@+@ @g;s@%@\\x@g' | xargs -0 printf "%b"
+}
+
+parse_url() {
+    local scheme="$(echo $1 | grep :// | sed -e's,^\(.*\)://.*,\1,g')"
+    local url="$(echo ${1/$scheme:\/\//})"
+    local user="$(echo $url | grep @ | cut -d@ -f1)"
+    local pass="$(echo $user | grep : | cut -d: -f2-)"
+    if [ -n "$pass" ]; then
+        user="$(echo $user | grep : | cut -d: -f1)"
+    fi
+
+    local host="$(echo ${url/$userpass@/} | cut -d/ -f1)"
+    local port="$(echo $host | grep : | cut -d: -f2)"
+    if [ -n "$port" ]; then
+        host="$(echo $host | grep : | cut -d: -f1)"
+    fi
+
+    local path="$(echo $url | grep / | cut -d/ -f2-)"
+    local query="$(echo $path | grep ? | cut -d? -f2-)"
+    if [ -n "$query" ]; then
+        path="$(echo $path | grep ? | cut -d? -f1)"
+    fi
+
+    local fragment="$(echo $query | grep "#" | cut -d# -f2-)"
+    if [ -n "$fragment" ]; then
+        query="$(echo $query | grep "#" | cut -d# -f1)"
+    fi
+
+    case "$2" in
+        scheme) urldecode "$scheme";;
+        user) urldecode "$user";;
+        pass) urldecode "$pass";;
+        host) urldecode "$host";;
+        port) urldecode "$port";;
+        path) urldecode "$path";;
+        query) urldecode "$query";;
+        fragment) urldecode "$fragment";;
+        *) urldecode "$1";;
+    esac
+}
+
+parse_url "$1" "$2"
