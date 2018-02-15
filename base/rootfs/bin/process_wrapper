@@ -13,11 +13,22 @@ shift
 
 case $_action in
     start)
+        _recent_pid="$!"
+        _i=0;
         /sbin/tini -s -g -- "$@" &
-        echo $! > "/var/run/$_name.pid";
+        while [ "$_recent_pid" = "$!" ] || [ "$(pgrep "$_name")" = "" ]; do
+            sleep 1
+            _i="$("$_i" + 1)"
+
+            if [ "$_i" -ge 5 ]; then
+                printf "\033[30;41mUnable to start process \"%s\"\033[0m\n" "$@" >&2
+                exit 1;
+            fi
+        done
+        echo "$!" > "/var/run/$_name.pid";
         ;;
     stop)
-        kill $(cat "/var/run/$_name.pid")
+        kill "$(cat "/var/run/$_name.pid")"
         rm -f "/var/run/$_name.pid"
         ;;
     *)
