@@ -8,13 +8,12 @@ function adminer_object() {
         include_once "./$filename";
     }
 
-    $plugins = array(
-        new AdminerJsonColumn,
-        new AdminerEditTextarea,
-        new AdminerRestoreMenuScroll,
-        new AdminerLoginSqlite,
-        new AdminerEnvConnections,
-    );
+    $plugins = [];
+    foreach (preg_split('/[ ,]/', getenv('ADMINER_PLUGINS')) as $plugin) {
+        if (class_exists($plugin)) {
+            $plugins[] = new $plugin;
+        }
+    }
 
     /* It is possible to combine customization and plugins:
     class AdminerCustomization extends AdminerPlugin {
