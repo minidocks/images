@@ -63,6 +63,14 @@ hub() {
     _curl "Authorization: JWT $REGISTRY_TOKEN" "$1" "$HUB_URL/repositories/$N_HUB$2" "$3"
 }
 
+fold_start() {
+  echo -e "travis_fold:start:$1\033[33;1m$2\033[0m"
+}
+
+fold_end() {
+  echo -e "\ntravis_fold:end:$1\r"
+}
+
 # Subsplit repository
 
 rm -rf .subsplit/
@@ -71,6 +79,7 @@ for dir in ${1:-$(ls -d */)}; do
     dir="${dir%/}"
     git_name="$N_GIT/$dir"
 
+    fold_start "split.$git_name" "$dir -> http://github.com/$N_GIT/$git_name"
     response="$(github "GET" "/repos/$git_name")"
     if [ "$(http_code "$response")" = "404" ]; then
         printf "Create git repository \"%s\"\n" "$git_name"
@@ -79,6 +88,7 @@ for dir in ${1:-$(ls -d */)}; do
     fi
 
     git_subsplit publish "$dir:git@github.com:$git_name.git"
+    fold_end "split.$gitname"
 done
 rm -rf .subsplit/
 
@@ -86,6 +96,8 @@ rm -rf .subsplit/
 for dir in ${1:-$(ls -d */)}; do
     dir="${dir%/}"
     hub_name="$N_HUB/$dir"
+
+    fold_start "split.$hub_name" "build all docker images for $hub_name"
 
     data="$(to_json "description=Minimal $dir images&provider=github&vcs_repo_name=$N_GIT/$dir&dockerhub_repo_name=$hub_name&active=true&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/" )"
 
@@ -136,4 +148,6 @@ for dir in ${1:-$(ls -d */)}; do
         printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
         assert_http_code "$(hub "DELETE" "/$dir/links/${pair%*:*}/")" "204"
     done
+
+    fold_end "docker.$hub_name"
 done
