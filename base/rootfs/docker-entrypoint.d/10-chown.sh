@@ -6,6 +6,6 @@
 
 set -e
 
-if [ x"$AUTO_CHOWN" != x ]; then
+if [ -n "$AUTO_CHOWN" ]; then
     auto_chown $AUTO_CHOWN &
 fi
