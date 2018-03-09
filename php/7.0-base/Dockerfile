@@ -26,7 +26,7 @@ RUN apk --update add \
 RUN wget http://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
 ENV PHP_INI_DIR=/etc/php7 \
-    COMPOSER_VERSION="1.6.0-RC" \
+    COMPOSER_VERSION="1.6.3" \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
     COMPOSER_CACHE_DIR=/composer-cache \
