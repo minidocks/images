@@ -10,7 +10,7 @@ RUN apk --update add python2 py2-pip \
     && rm -rf /var/cache/apk/* && pyclean
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
-    && pip install -U pip virtualenv \
+    && pip install -U pip pipenv \
     && rm -rf $PIP_CACHE_DIR/* && pyclean
 
 CMD [ "python" ]
