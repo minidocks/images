@@ -6,17 +6,17 @@
 #
 # (c) 2017 Martin Hasoň <martin.hason@gmail.com>
 
-_action=$1
-_name=$2
+action=$1
+name=$2
 shift
 shift
 
-case $_action in
+case $action in
     start)
-        _recent_pid="$!"
         _i=0;
-        /sbin/tini -s -g -- "$@" &
-        while [ "$_recent_pid" = "$!" ] || [ "$(pgrep "$_name")" = "" ]; do
+        command="/sbin/tini -s -g -- $@"
+        eval "$command" &
+        while [ -z "$(pgrep -o -f -x "$command")" ]; do
             sleep 1
             _i="$("$_i" + 1)"
 
@@ -25,11 +25,11 @@ case $_action in
                 exit 1;
             fi
         done
-        echo "$!" > "/var/run/$_name.pid";
+        echo "$(pgrep -o -f -x "$command")" > "/var/run/$name.pid";
         ;;
     stop)
-        kill "$(cat "/var/run/$_name.pid")"
-        rm -f "/var/run/$_name.pid"
+        kill "$(cat "/var/run/$name.pid")"
+        rm -f "/var/run/$name.pid"
         ;;
     *)
         echo "usage: process_wrapper {start|stop} name [command]" ;;
