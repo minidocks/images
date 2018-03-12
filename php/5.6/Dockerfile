@@ -26,6 +26,7 @@ RUN printf "@3.5-community http://dl-cdn.alpinelinux.org/alpine/v3.5/community\n
         #php5-xmlwriter \
         php5-xsl \
         php5-zip \
+    && ln -s /usr/bin/php-fpm5 /usr/bin/php-fpm \
     && sed -i "s/^[; ]*\(zend_extension\|extension\)/;\1/" "$PHP_INI_DIR/conf.d/xdebug.ini" \
     && rm -rf /var/cache/apk/* /tmp/*
 
