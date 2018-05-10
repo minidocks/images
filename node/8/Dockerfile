@@ -6,7 +6,7 @@ ENV NPM_CONFIG_CACHE=/npm \
 
 RUN apk --update add 'nodejs<9' \
     && mkdir -p $NPM_CONFIG_CACHE $YARN_CACHE_FOLDER && chmod a+rwx -R $NPM_CONFIG_CACHE $YARN_CACHE_FOLDER \
-    && npm update -g && npm install -g yarn \
+    && npm i -g npm@latest && npm install -g yarn \
     && rm -rf /var/cache/apk/* $NPM_CONFIG_CACHE/* $YARN_CACHE_FOLDER/* /tmp/* /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/html
 
 COPY rootfs /
