@@ -3,7 +3,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S kibana && adduser -S -G kibana kibana
 
-ENV KIBANA_VERSION=5.6.9 \
+ENV KIBANA_VERSION=6.2.4 \
     ELASTIC_CONTAINER=true \
     PATH=/usr/share/kibana/bin:$PATH
 
@@ -28,4 +28,4 @@ EXPOSE 5601
 
 CMD [ "kibana" ]
 
-# Dockerfile based on https://github.com/docker-library/kibana/tree/master/5
+# Dockerfile based on https://github.com/elastic/kibana-docker
