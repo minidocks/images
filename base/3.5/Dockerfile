@@ -5,8 +5,9 @@ ENV TEMP /tmp
 
 RUN adduser -u 1000 -D -S -G users user
 
-RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates \
-    && rm -rf /var/cache/apk/* /tmp/*
+RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates gettext libintl \
+    && mv /usr/bin/envsubst /usr/local/bin/envsubst \
+    && apk del gettext && rm -rf /var/cache/apk/* /tmp/*
 
 RUN mkdir /etc/dropbear /etc/monit.d
 
