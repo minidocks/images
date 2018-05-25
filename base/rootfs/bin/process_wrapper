@@ -13,19 +13,24 @@ shift
 
 case $action in
     start)
-        _i=0;
-        command="/sbin/tini -s -g -- $@"
+        command="/sbin/tini -s -g --"
+        pattern="$command"
+        for arg in "$@"; do
+            command="$command '$(echo "$arg" | sed -e "s/'/'\"'\"'/g")'"
+            pattern="$pattern $arg"
+        done
         eval "$command" &
-        while [ -z "$(pgrep -o -f -x "$command")" ]; do
+        _i=0;
+        while [ -z "$(pgrep -o -f -x "$pattern")" ]; do
             sleep 1
             _i="$("$_i" + 1)"
 
             if [ "$_i" -ge 5 ]; then
-                printf "\033[30;41mUnable to start process \"%s\"\033[0m\n" "$@" >&2
+                printf "\\033[30;41mUnable to start process \"%s\"\\033[0m\\n" "$@" >&2
                 exit 1;
             fi
         done
-        echo "$(pgrep -o -f -x "$command")" > "/var/run/$name.pid";
+        pgrep -o -f -x "$pattern" > "/var/run/$name.pid";
         ;;
     stop)
         kill "$(cat "/var/run/$name.pid")"
