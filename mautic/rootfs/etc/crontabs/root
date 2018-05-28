@@ -1,0 +1,13 @@
+8,23,38,52 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:segments:update > /var/log/cron.pipe 2>&1
+       */5 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:import > /var/log/cron.pipe 2>&1
+5,20,35,50 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:campaigns:rebuild > /var/log/cron.pipe 2>&1
+2,17,32,47 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:campaigns:trigger > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:messages:send > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:emails:send > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:email:fetch > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:social:monitoring > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:webhooks:process > /var/log/cron.pipe 2>&1
+0,15,30,45 * * * *  su-exec www-data:www-data php /var/www/app/console mautic:broadcasts:send > /var/log/cron.pipe 2>&1
+         * 1 * * *  su-exec www-data:www-data php /var/www/app/console mautic:maintenance:cleanup --days-old=365 > /var/log/cron.pipe 2>&1
+        0 4 15 * *  su-exec www-data:www-data php /var/www/app/console mautic:iplookup:download > /var/log/cron.pipe 2>&1
+        */5 * * * * su-exec www-data:www-data php /var/www/app/console mautic:reports:scheduler > /var/log/cron.pipe 2>&1

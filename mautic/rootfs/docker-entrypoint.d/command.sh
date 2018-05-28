@@ -81,6 +81,9 @@ echo >&2 "Database Password: $MAUTIC_DB_PASSWORD"
 chown www-data:www-data /var/www/app/config/local.php
 mkdir -p /var/www/app/logs
 chown www-data:www-data /var/www/app/logs
+mkdir -p /var/log
+touch /var/log/cron.pipe
+chown www-data:www-data /var/log/cron.pipe
 
 if [ -z "$(ls -A /var/www/app/cache/ip_data 2>/dev/null)" ]; then
     echo >&2 "Download the IP lookup service database"
