@@ -15,7 +15,7 @@ parse_url() {
         user="$(echo $user | grep : | cut -d: -f1)"
     fi
 
-    local host="$(echo ${url/$userpass@/} | cut -d/ -f1)"
+    local host="$(echo ${url/$user*$pass@/} | cut -d/ -f1)"
     local port="$(echo $host | grep : | cut -d: -f2)"
     if [ -n "$port" ]; then
         host="$(echo $host | grep : | cut -d: -f1)"
