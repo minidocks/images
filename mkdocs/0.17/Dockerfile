@@ -1,8 +1,8 @@
 FROM webuni/python:3.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV MKDOCS_VERSION=0.17.4 \
-    MKDOCS_MATERIAL_VERSION=2.9.1
+ENV MKDOCS_VERSION=0.17.5 \
+    MKDOCS_MATERIAL_VERSION=2.9.2
 
 RUN pip install \
       mkdocs==$MKDOCS_VERSION \
