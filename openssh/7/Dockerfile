@@ -1,7 +1,7 @@
-FROM webuni/base:3.6
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+FROM webuni/base:3.8
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN rm -rf /bin/ssh /bin/sshd \
     && apk del dropbear-dbclient dropbear-scp \
-    && apk --update add openssh-client openssh-server openssh-keygen openssh-sftp-server \
+    && apk --update add openssh-client openssh-server openssh-keysign openssh-keygen openssh-sftp-server \
     && rm -rf /var/cache/apk/* /tmp/*
