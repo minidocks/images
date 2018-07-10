@@ -1,7 +1,7 @@
 FROM webuni/ghostscript:9
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk --update add imagemagick \
+RUN apk --update add imagemagick6 \
     && rm -rf /var/cache/apk/* /tmp/*
 
 COPY rootfs /
