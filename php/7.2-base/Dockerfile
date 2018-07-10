@@ -1,11 +1,11 @@
-FROM webuni/base:3.7
+FROM webuni/base:3.8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
 RUN apk --update add \
-        "php7>7.0" \
+        "php7>7.1" \
         php7-apcu \
         php7-ctype \
         php7-curl \

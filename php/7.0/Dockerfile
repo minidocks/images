@@ -3,6 +3,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add \
         php7-bcmath \
+        php7-cgi \
         php7-ctype \
         php7-curl \
         php7-dom \
@@ -34,10 +35,14 @@ RUN apk --update add \
 ENV PHP_EXT_XDEBUG=0 \
     FPM_PID=run/php-fpm.pid \
     FPM_DAEMONIZE=no \
-    FPM_WWW_LISTEN="[::]:9000" \
+    FPM_ERROR_LOG=/dev/stderr.pipe \
+    FPM_WWW_ACCESS__LOG=/dev/stdout.pipe \
+    FPM_WWW_CATCH_WORKERS_OUTPUT=yes \
     FPM_WWW_CLEAR_ENV=no \
-    FPM_WWW_USER=www-data \
     FPM_WWW_GROUP=www-data \
+    FPM_WWW_LISTEN="[::]:9000" \
+    FPM_WWW_USER=www-data \
+    FPM_WWW_SLOWLOG=/dev/stdout.pipe \
     BLACKFIRE_VERSION=1.20.0
 
 RUN wget -O /usr/lib/php7/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-alpine_amd64-php-70.so \

@@ -5,6 +5,7 @@ RUN printf "@3.5-community http://dl-cdn.alpinelinux.org/alpine/v3.5/community\n
     && apk --update add \
         php5-apcu \
         php5-bcmath \
+        php5-cgi \
         php5-ctype \
         php5-dom \
         php5-exif \
@@ -32,10 +33,14 @@ RUN printf "@3.5-community http://dl-cdn.alpinelinux.org/alpine/v3.5/community\n
 
 ENV PHP_EXT_XDEBUG=0 \
     FPM_DAEMONIZE=no \
-    FPM_WWW_LISTEN="[::]:9000" \
+    FPM_ERROR_LOG=/dev/stderr.pipe \
+    FPM_WWW_ACCESS__LOG=/dev/stdout.pipe \
+    FPM_WWW_CATCH_WORKERS_OUTPUT=yes \
     FPM_WWW_CLEAR_ENV=no \
-    FPM_WWW_USER=www-data \
     FPM_WWW_GROUP=www-data \
+    FPM_WWW_LISTEN="[::]:9000" \
+    FPM_WWW_USER=www-data \
+    FPM_WWW_SLOWLOG=/dev/stdout.pipe \
     BLACKFIRE_VERSION=1.20.0
 
 RUN wget -O /usr/lib/php5/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-alpine_amd64-php-56.so \
