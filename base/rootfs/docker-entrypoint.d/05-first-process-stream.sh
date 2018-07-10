@@ -5,6 +5,7 @@
 # (c) 2018 Martin Hasoň <martin.hason@gmail.com>
 #
 # https://en.wikipedia.org/wiki/Named_pipe
+# https://github.com/moby/moby/issues/19616#issuecomment-174355979
 #
 
 set -e
