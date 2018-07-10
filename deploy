@@ -20,7 +20,7 @@ to_json(){
 }
 
 _curl(){
-    docker run --rm -it webuni/curl curl -H "Content-Type: application/json" -H "$1" -X "$2" -i -s --data "$4" "$3" | tr -d '\r'
+    docker run --rm -it webuni/curl curl --retry 5 --retry-delay 3 -H "Content-Type: application/json" -H "$1" -X "$2" -i -s --data "$4" "$3" | tr -d '\r'
 }
 
 http_code(){
@@ -65,7 +65,7 @@ hub() {
 }
 
 fold_start() {
-  echo -en "travis_fold:start:$1\\r\033[33;1m$2\033[0m"
+  echo -e "travis_fold:start:$1\\r\033[33;1m$2\033[0m"
 }
 
 fold_end() {
@@ -89,7 +89,7 @@ for dir in ${1:-$(ls -d */)}; do
     fi
 
     git_subsplit publish "$dir:git@github.com:$git_name.git"
-    fold_end "split.$gitname"
+    fold_end "split.$git_name"
 done
 rm -rf .subsplit/
 
