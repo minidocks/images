@@ -20,7 +20,9 @@ to_json(){
 }
 
 _curl(){
-    docker run --rm -it webuni/curl curl --retry 5 --retry-delay 3 -H "Content-Type: application/json" -H "$1" -X "$2" -i -s --data "$4" "$3" | tr -d '\r'
+    docker run --rm -it webuni/curl \
+        curl --retry 5 --retry-delay 3 -H "Content-Type: application/json" -H "$1" -X "$2" -i -s --data "$4" "$3" \
+    | tr -d '\r' | tr '\n' '\r' | sed -e 's/.\+\(HTTP\/1.\+\)/-\1-/' | tr '\r' '\n'
 }
 
 http_code(){
