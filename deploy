@@ -54,21 +54,22 @@ assert_http_code() {
 }
 
 hub() {
-    if [ -z "$REGISTRY_TOKEN" ]; then
+    if [ -z "$REGISTRY_TOKEN" ] || [ $(( $(date +"%s") - REGISTRY_TOKEN_TIME )) -gt 300 ]; then
         response="$(_curl "" "POST" "$HUB_URL/users/login/" "$(to_json "username=$REGISTRY_LOGIN&password=$REGISTRY_PASSWORD")")"
         assert_http_code "$response" "200"
         REGISTRY_TOKEN="$(http_body "$response" | jq -r '.token')"
+        REGISTRY_TOKEN_TIME="$(date +"%s")"
     fi
 
     _curl "Authorization: JWT $REGISTRY_TOKEN" "$1" "$HUB_URL/repositories/$N_HUB$2" "$3"
 }
 
 fold_start() {
-  echo -e "travis_fold:start:$1\033[33;1m$2\033[0m"
+  echo -en "travis_fold:start:$1\\r\033[33;1m$2\033[0m"
 }
 
 fold_end() {
-  echo -e "\ntravis_fold:end:$1\r"
+  echo -en "travis_fold:end:$1\\r"
 }
 
 # Subsplit repository
@@ -97,7 +98,7 @@ for dir in ${1:-$(ls -d */)}; do
     dir="${dir%/}"
     hub_name="$N_HUB/$dir"
 
-    fold_start "split.$hub_name" "build all docker images for $hub_name"
+    fold_start "docker.$hub_name" "build all docker images for $hub_name"
 
     data="$(to_json "description=Minimal $dir images&provider=github&vcs_repo_name=$N_GIT/$dir&dockerhub_repo_name=$hub_name&active=true&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/" )"
 
