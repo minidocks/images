@@ -3,12 +3,12 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S kibana && adduser -S -G kibana kibana
 
-ENV KIBANA_VERSION=6.2.4 \
+ENV KIBANA_VERSION=6.3.1 \
     ELASTIC_CONTAINER=true \
     PATH=/usr/share/kibana/bin:$PATH
 
-RUN wget -O /tmp/kibana.tar.gz "https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VERSION}-linux-x86_64.tar.gz" \
-    && tar -xvzf /tmp/kibana.tar.gz -C /usr/share && mv /usr/share/kibana* /usr/share/kibana \
+RUN wget -qO /tmp/kibana.tar.gz "https://artifacts.elastic.co/downloads/kibana/kibana-${KIBANA_VERSION}-linux-x86_64.tar.gz" \
+    && tar -xzf /tmp/kibana.tar.gz -C /usr/share && mv /usr/share/kibana* /usr/share/kibana \
     && rm -rf /usr/share/kibana/node \
     && mkdir -p /etc/kibana && mv /usr/share/kibana/config/kibana.yml /etc/kibana/kibana.yml && ln -s /etc/kibana/kibana.yml /usr/share/kibana/config/kibana.yml \
     && chown kibana:kibana -R /usr/share/kibana \
