@@ -82,7 +82,7 @@ for dir in ${1:-$(ls -d */)}; do
     dir="${dir%/}"
     git_name="$N_GIT/$dir"
 
-    fold_start "split.$git_name" "$dir -> http://github.com/$N_GIT/$git_name"
+    fold_start "split.$dir" "$dir -> http://github.com/$N_GIT/$git_name"
     response="$(github "GET" "/repos/$git_name")"
     if [ "$(http_code "$response")" = "404" ]; then
         printf "Create git repository \"%s\"\n" "$git_name"
@@ -91,7 +91,7 @@ for dir in ${1:-$(ls -d */)}; do
     fi
 
     git_subsplit publish "$dir:git@github.com:$git_name.git"
-    fold_end "split.$git_name"
+    fold_end "split.$dir"
 done
 rm -rf .subsplit/
 
@@ -100,7 +100,7 @@ for dir in ${1:-$(ls -d */)}; do
     dir="${dir%/}"
     hub_name="$N_HUB/$dir"
 
-    fold_start "docker.$hub_name" "build all docker images for $hub_name"
+    fold_start "docker.$dir" "build all docker images for $hub_name"
 
     data="$(to_json "description=Minimal $dir images&provider=github&vcs_repo_name=$N_GIT/$dir&dockerhub_repo_name=$hub_name&active=true&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/" )"
 
@@ -130,7 +130,7 @@ for dir in ${1:-$(ls -d */)}; do
     done
 
     for version in $(find "$dir"/*/Dockerfile -type f | cut -d/ -f2); do
-        ./build "$dir" "$version"
+        ./build --no-clear "$dir" "$version"
         docker push "$hub_name:$version"
 
         if [ "$version" == "latest" ]; then
@@ -152,5 +152,5 @@ for dir in ${1:-$(ls -d */)}; do
         assert_http_code "$(hub "DELETE" "/$dir/links/${pair%*:*}/")" "204"
     done
 
-    fold_end "docker.$hub_name"
+    fold_end "docker.$dir"
 done

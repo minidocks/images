@@ -2,27 +2,17 @@
 set -e
 
 NAMESPACE=webuni
-
+PACKAGE=""
+NO_CLEAR=""
 OPTS=""
 for _ARG in "$@"; do
     case "$_ARG" in
-    --force)
-        OPTS="${OPTS} --no-cache"
-        ;;
-    *)
-        if [ -z "$PACKAGE" ]; then
-            PACKAGE="$_ARG"
-        else
-            VERSION="$_ARG"
-        fi
-        ;;
+        --force) OPTS="${OPTS} --no-cache";;
+        --no-clear) NO_CLEAR="1";;
+        *) if [ -z "$PACKAGE" ]; then PACKAGE="$_ARG"; else VERSION="$_ARG"; fi;;
     esac
     shift
 done
-
-_print() {
-    printf "\033[30;42mBuild %s/%s:%s - %s\033[0m\n" "$NAMESPACE" "$1" "$2" "$3"
-}
 
 _build() {
     local PACKAGE="$1"
@@ -41,12 +31,16 @@ _build() {
         _build "$(echo "$FROM" | cut -d: -f1)" "$(echo "$FROM" | cut -d: -f2)"
     fi
 
-    _print "$PACKAGE" "$VERSION" "$SOURCE_DIR"
-    rm -rf "$TARGET_DIR"
-    cp -rfL "$SOURCE_DIR" "$TARGET_DIR"
-    docker build $OPTS -t "$NAMESPACE/$PACKAGE:$VERSION" "$TARGET_DIR"
-    rm -rf "$TARGET_DIR"
-    printf "\n"
+    if [ ! -d "$TARGET_DIR" ] || [ "$NO_CLEAR" != "1" ]; then
+        printf "\033[32mBuild %s/%s:%s - %s\033[0m\n" "$NAMESPACE" "$PACKAGE" "$VERSION" "$SOURCE_DIR"
+        rm -rf "$TARGET_DIR"
+        cp -rfL "$SOURCE_DIR" "$TARGET_DIR"
+        docker build $OPTS -t "$NAMESPACE/$PACKAGE:$VERSION" "$TARGET_DIR" | sed "s/^/ |  /"
+        if [ "$NO_CLEAR" != "1" ]; then rm -rf "$TARGET_DIR"; fi
+        printf "\n"
+    else
+        printf "\033[32mImage %s/%s:%s exists\033[0m\n" "$NAMESPACE" "$PACKAGE" "$VERSION"
+    fi
 }
 
 if test "${PACKAGE#*/}" != "$PACKAGE"; then
