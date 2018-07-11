@@ -1,11 +1,11 @@
-FROM webuni/python:3.5
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+FROM webuni/python:3.6
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S jupyter && adduser -S -G jupyter jupyter
 
 RUN apk add --update py3-zmq \
     && pip install jupyter \
-    && rm -rf /var/cache/apk/* /tmp/* /root/.cache/pip && find /usr/lib/python3.5 -name '*.pyc' -delete
+    && rm -rf /var/cache/apk/* /tmp/* /root/.cache/pip && pyclean
 
 RUN mkdir -p /etc/jupyter /notebooks
 

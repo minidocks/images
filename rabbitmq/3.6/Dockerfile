@@ -1,6 +1,6 @@
 # Dockerfile is based on https://github.com/docker-library/rabbitmq/blob/master/Dockerfile
 FROM webuni/erlang
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S rabbitmq && adduser -S -G rabbitmq rabbitmq
 

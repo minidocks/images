@@ -1,5 +1,5 @@
 FROM webuni/java:8-jre-nogui
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add openjdk8-jre \
     && rm -rf /var/cache/apk/* /tmp/*

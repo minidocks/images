@@ -1,10 +1,10 @@
-FROM webuni/base:3.7
+FROM webuni/base:3.8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN printf "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories \
     && apk --update add --virtual .build-dependencies g++ git make automake autoconf libtool leptonica-dev pango-dev icu-dev cairo-dev && apk add autoconf-archive@testing \
     && wget -O /tmp/tesseract.tar.gz https://github.com/tesseract-ocr/tesseract/archive/master.tar.gz \
-    && tar -xvzf /tmp/tesseract.tar.gz -C /tmp && cd /tmp/tesseract*/ \
+    && tar -xzf /tmp/tesseract.tar.gz -C /tmp && cd /tmp/tesseract*/ \
     && ./autogen.sh \
     && ./configure --prefix=/usr --sysconfdir=/etc --mandir=/usr/share/man --infodir=/usr/share/info --localstatedir=/var --disable-static \
     && make && make training && make install && make training-install \

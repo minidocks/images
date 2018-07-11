@@ -1,5 +1,5 @@
 FROM webuni/php:7.1-base
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV DEPLOYER_VERSION 4.3.1
 

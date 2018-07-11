@@ -1,13 +1,13 @@
 FROM webuni/java:8-jre
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S elasticsearch && adduser -S -G elasticsearch elasticsearch
 
 ENV ELASTICSEARCH_VERSION 5.5.1
 
 RUN apk add --update bash \
-    && wget -O /tmp/elasticsearch.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}.tar.gz \
-    && tar -xvzf /tmp/elasticsearch.tar.gz -C /usr/share && mv /usr/share/elasticsearch* /usr/share/elasticsearch \
+    && wget -qO /tmp/elasticsearch.tar.gz https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTICSEARCH_VERSION}.tar.gz \
+    && tar -xzf /tmp/elasticsearch.tar.gz -C /usr/share && mv /usr/share/elasticsearch* /usr/share/elasticsearch \
     && rm -rf /var/cache/apk/* /tmp/*
 
 #    && sed -i "s|^#\?\\s*\(discovery\.zen\.minimum_master_nodes:\).*|\1 1|" /usr/share/elasticsearch/config/elasticsearch.yml

@@ -1,5 +1,5 @@
 FROM webuni/php:7.1-base
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add php7-ctype \
     && su-exec user composer global require friendsofphp/php-cs-fixer "2.3.*" \

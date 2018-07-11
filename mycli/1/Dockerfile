@@ -1,5 +1,5 @@
 FROM webuni/python:3.6
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV MYCLI_VERSION=v1.12.1
 
