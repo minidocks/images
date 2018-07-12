@@ -102,7 +102,7 @@ for dir in ${1:-$(ls -d */)}; do
 
     fold_start "docker.$dir" "build all docker images for $hub_name"
 
-    data="$(to_json "description=Minimal $dir images&provider=github&vcs_repo_name=$N_GIT/$dir&dockerhub_repo_name=$hub_name&active=true&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/" )"
+    data="$(to_json "description=Minimal $dir images&provider=github&vcs_repo_name=$N_GIT/$dir&dockerhub_repo_name=$hub_name&active=false&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/" )"
 
     response="$(hub "GET" "/$dir/")"
     if [ "$(http_body "$response" | jq -r '.is_automated')" = "false" ]; then
@@ -131,7 +131,7 @@ for dir in ${1:-$(ls -d */)}; do
 
     for version in $(find "$dir"/*/Dockerfile -type f | cut -d/ -f2); do
         ./build --no-clear "$dir" "$version"
-        docker push "$hub_name:$version"
+        docker push "$hub_name:$version" | grep 'refers\|digest'
 
         if [ "$version" == "latest" ]; then
             data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
