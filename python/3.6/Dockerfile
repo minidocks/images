@@ -17,7 +17,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python \
     && ln -s /usr/bin/pydoc3 /usr/bin/pydoc
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
-    && pip install -U pip pipenv \
+    && pip install -U pip pipenv wheel \
     && rm -rf $PIP_CACHE_DIR/* && pyclean
 
 CMD [ "python" ]
