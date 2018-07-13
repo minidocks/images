@@ -15,31 +15,31 @@ for _ARG in "$@"; do
 done
 
 _build() {
-    local PACKAGE="$1"
-    local VERSION="$2"
-    local SOURCE_DIR="${3:-${PACKAGE}/${VERSION}}"
-    local TARGET_DIR="/tmp/${3:-${PACKAGE}-${VERSION}}"
+    local package="$1"
+    local version="$2"
+    local source_dir="${3:-${package}/${version}}"
+    local target_dir="/tmp/${3:-${package}-${version}}"
 
-    if [ ! -f "$SOURCE_DIR/Dockerfile" ]; then
-        printf "\033[30;41mUnable to find file \"%s/Dockerfile\"\033[0m\n" "$SOURCE_DIR" >&2
+    if [ ! -f "$source_dir/Dockerfile" ]; then
+        printf "\033[30;41mUnable to find file \"%s/Dockerfile\"\033[0m\n" "$source_dir" >&2
         return
     fi
 
-    FROM="$(cat "$SOURCE_DIR/Dockerfile" | head -n 3 | grep "FROM $NAMESPACE" | awk '{print $2}')"
-    if [ -n "$FROM" ]; then
-        FROM="${FROM#$NAMESPACE/}"
-        _build "$(echo "$FROM" | cut -d: -f1)" "$(echo "$FROM" | cut -d: -f2)"
-    fi
+    froms="$(cat "$source_dir/Dockerfile" | grep "FROM $NAMESPACE" | awk '{print $2}')"
+    for from in $froms; do
+        from="${from#$NAMESPACE/}"
+        _build "$(echo "$from" | cut -d: -f1)" "$(echo "$from" | cut -d: -f2)"
+    done
 
-    if [ ! -d "$TARGET_DIR" ] || [ "$NO_CLEAR" != "1" ]; then
-        printf "\033[32mBuild %s/%s:%s - %s\033[0m\n" "$NAMESPACE" "$PACKAGE" "$VERSION" "$SOURCE_DIR"
-        rm -rf "$TARGET_DIR"
-        cp -rfL "$SOURCE_DIR" "$TARGET_DIR"
-        docker build $OPTS -t "$NAMESPACE/$PACKAGE:$VERSION" "$TARGET_DIR" | sed "s/^/ |  /"
-        if [ "$NO_CLEAR" != "1" ]; then rm -rf "$TARGET_DIR"; fi
+    if [ ! -d "$target_dir" ] || [ "$NO_CLEAR" != "1" ]; then
+        printf "\033[32mBuild %s/%s:%s - %s\033[0m\n" "$NAMESPACE" "$package" "$version" "$source_dir"
+        rm -rf "$target_dir"
+        cp -rfL "$source_dir" "$target_dir"
+        docker build $OPTS -t "$NAMESPACE/$package:$version" "$target_dir" | sed "s/^/ |  /"
+        if [ "$NO_CLEAR" != "1" ]; then rm -rf "$target_dir"; fi
         printf "\n"
     else
-        printf "\033[32mImage %s/%s:%s exists\033[0m\n" "$NAMESPACE" "$PACKAGE" "$VERSION"
+        printf "\033[32mImage %s/%s:%s exists\033[0m\n" "$NAMESPACE" "$package" "$version"
     fi
 }
 
