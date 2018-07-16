@@ -5,6 +5,7 @@ RUN printf "@3.5-community http://dl-cdn.alpinelinux.org/alpine/v3.5/community\n
     && apk --update add \
         php5-apcu \
         php5-bcmath \
+        php5-calendar \
         php5-cgi \
         php5-ctype \
         php5-dom \

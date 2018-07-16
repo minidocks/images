@@ -3,6 +3,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add \
         php7-bcmath \
+        php7-calendar \
         php7-cgi \
         php7-ctype \
         php7-curl \
