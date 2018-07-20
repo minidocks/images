@@ -16,10 +16,12 @@ case $action in
         command="/sbin/tini -s -g --"
         pattern="$command"
         for arg in "$@"; do
-            command="$command '$(echo "$arg" | sed -e "s/'/'\"'\"'/g")'"
+            command="$command '$(printf "%s" "$arg" | sed -e "s/'/'\"'\"'/g")'"
             pattern="$pattern $arg"
         done
+
         eval "$command" &
+
         _i=0;
         while [ -z "$(pgrep -o -f -x "$pattern")" ]; do
             sleep 1
@@ -30,8 +32,10 @@ case $action in
                 exit 1;
             fi
         done
+
         pgrep -o -f -x "$pattern" > "/var/run/$name.pid";
         ;;
+
     stop)
         kill "$(cat "/var/run/$name.pid")"
         rm -f "/var/run/$name.pid"
@@ -39,4 +43,5 @@ case $action in
     *)
         echo "usage: process_wrapper {start|stop} name [command]" ;;
 esac
+
 exit 0
