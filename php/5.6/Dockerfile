@@ -14,6 +14,7 @@ RUN printf "@3.5-community http://dl-cdn.alpinelinux.org/alpine/v3.5/community\n
         php5-ftp \
         php5-gd \
         php5-gettext \
+        php5-ldap \
         php5-mcrypt \
         php5-opcache \
         php5-pdo_sqlite \
