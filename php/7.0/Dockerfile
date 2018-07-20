@@ -13,6 +13,7 @@ RUN apk --update add \
         php7-ftp \
         php7-gd \
         php7-gettext \
+        php7-gmp \
         php7-ldap \
         php7-mbstring \
         php7-mcrypt \
