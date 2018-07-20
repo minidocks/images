@@ -9,9 +9,7 @@ RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear drop
     && mv /usr/bin/envsubst /usr/local/bin/envsubst \
     && apk del gettext && rm -rf /var/cache/apk/* /tmp/*
 
-RUN mkdir /etc/dropbear /etc/monit.d \
-    && touch /var/log/stdout /var/log/stderr \
-    && chmod a+rw /var/log/stdout /var/log/stderr
+RUN mkdir /etc/dropbear /etc/monit.d
 
 COPY rootfs /
 
