@@ -14,7 +14,6 @@ RUN apk --update add \
         php5-pear \
         php5-phar \
         php5-posix \
-        php5-zlib \
     && ln -s /usr/bin/php5 /usr/bin/php \
     && ln -s /usr/bin/phpize5 /usr/bin/phpize \
     && rm -rf /var/cache/apk/* /tmp/*

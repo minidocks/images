@@ -18,7 +18,6 @@ RUN apk --update add \
         php7-phar \
         php7-posix \
         php7-tokenizer \
-        php7-zlib \
     && rm -rf /var/cache/apk/* /tmp/*
 
 #Psysh
