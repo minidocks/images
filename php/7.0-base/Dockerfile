@@ -27,7 +27,7 @@ RUN wget http://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
 ENV PHP_INI_DIR=/etc/php7 \
     PHP_ERROR_LOG=/dev/stderr.pipe \
-    COMPOSER_VERSION="1.6.5" \
+    COMPOSER_VERSION="1.7.1" \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
     COMPOSER_CACHE_DIR=/composer-cache \
