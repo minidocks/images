@@ -49,10 +49,11 @@ if [ "$1" = 'postgres' ]; then
 
         # one line url configuration
         file_env 'POSTGRES_URL'
+        file_env 'DATABASE_URL'
 
         # check password first so we can output the warning before postgres
         # messes it up
-        file_env 'POSTGRES_PASSWORD' "$(parse_url "$POSTGRES_URL" pass)"
+        file_env 'POSTGRES_PASSWORD' "$(parse_url "${POSTGRES_URL:-$DATABASE_URL}" pass)"
         if [ "$POSTGRES_PASSWORD" ]; then
             pass="PASSWORD '$POSTGRES_PASSWORD'"
             authMethod=md5
@@ -82,8 +83,8 @@ EOWARN
         # does not listen on external TCP/IP and waits until start finishes
         su-exec "${PGUSER:-postgres}" pg_ctl -D "$PGDATA" -o "-c listen_addresses='localhost'" -w start
 
-        file_env 'POSTGRES_USER' "$(parse_url "$POSTGRES_URL" user)" "postgres"
-        file_env 'POSTGRES_DB' "$(parse_url "$POSTGRES_URL" path)" "$POSTGRES_USER"
+        file_env 'POSTGRES_USER' "$(parse_url "${POSTGRES_URL:-$DATABASE_URL}" user)" "postgres"
+        file_env 'POSTGRES_DB' "$(parse_url "${POSTGRES_URL:-$DATABASE_URL}" path)" "$POSTGRES_USER"
 
         psql="psql -v ON_ERROR_STOP=1"
 
