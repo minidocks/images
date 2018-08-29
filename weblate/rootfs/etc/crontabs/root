@@ -1,8 +1,8 @@
 # Fulltext index updates
-*/5 * * * * . /etc/profile.d/weblate.sh; /usr/local/bin/weblate update_index
+*/5 * * * * weblate update_index
 
 # Cleanup stale objects
-@weekly . /etc/profile.d/weblate.sh; /usr/local/bin/weblate cleanuptrans
+0 0 * * 0   weblate cleanuptrans
 
 # Commit pending changes
-@hourly . /etc/profile.d/weblate.sh; /usr/local/bin/weblate commit_pending --all
+0 * * * *   weblate commit_pending --all
