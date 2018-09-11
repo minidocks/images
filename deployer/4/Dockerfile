@@ -3,7 +3,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV DEPLOYER_VERSION 4.3.2
 
-RUN apk del dropbear-scp && apk --update add bash shadow openssh-client php7-dom \
+RUN apk del dropbear-scp && apk --update add bash shadow openssh-client rsync php7-dom \
     && rm -rf /bin/ssh /var/cache/apk/* /tmp/* \
     && chsh -s /bin/bash \
     && wget -O /usr/bin/dep http://deployer.org/releases/v${DEPLOYER_VERSION}/deployer.phar \
