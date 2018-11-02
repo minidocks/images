@@ -5,11 +5,11 @@ NAMESPACE=webuni
 PACKAGE=""
 NO_CLEAR=""
 OPTS=""
-for _ARG in "$@"; do
-    case "$_ARG" in
+while [ -n "$1" ]; do
+    case "$1" in
         --force) OPTS="${OPTS} --no-cache";;
         --no-clear) NO_CLEAR="1";;
-        *) if [ -z "$PACKAGE" ]; then PACKAGE="$_ARG"; else VERSION="$_ARG"; fi;;
+        *) if [ -z "$PACKAGE" ]; then PACKAGE="$1"; else VERSION="$1"; fi;;
     esac
     shift
 done
@@ -28,7 +28,8 @@ _build() {
     froms="$(cat "$source_dir/Dockerfile" | grep "FROM $NAMESPACE" | awk '{print $2}')"
     for from in $froms; do
         from="${from#$NAMESPACE/}"
-        _build "$(echo "$from" | cut -d: -f1)" "$(echo "$from" | cut -d: -f2)"
+        tag="$(echo "$from" | cut -d: -f2 -s)"
+        _build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}"
     done
 
     if [ ! -d "$target_dir" ] || [ "$NO_CLEAR" != "1" ]; then
