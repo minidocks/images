@@ -1,39 +1,72 @@
 #!/bin/sh
+# ssh wrapper for dropbear with support for environment variables, working directory and password
 #
-# SSH wrapper for dropbear with support for environment variables
-#
-# (c) 2016 Martin Hasoň <martin.hason@gmail.com>
+# (c) 2016,2018 Martin Hasoň <martin.hason@gmail.com>
 
 set -e
 
-_PARAMS=""
-_ENVS=""
-while [ x"$1" != x ]; do
-    case "$1" in
-    -p|-l|-o|-i|-L|-R|-W|-K|-I|-B|-J|-c|-m)
-        _PARAMS="${_PARAMS} ${1} ${2}"
-        shift
-        ;;
-    -e)
-        if test "${2#*=}" != "$2"; then
-            _ENVS="${_ENVS}export $2;"
+ssh_help() {
+    dbclient -h 2>&1 | sed 's/dbclient/ssh/g' | sed -e "\$a-P <password>  (default \"password\")\n-e <environment_variable[=value]>\n-w <path>  (default actual working directory)" >&2
+}
+
+run_dbclient(){
+    local options=""
+    local hosts=""
+    local command=""
+    local envs=""
+    local pwd="$(pwd)"
+    local password="password"
+
+    while [ -n "$1" ]; do
+        if [ -z "$hosts" ]; then
+            case "$1" in
+                -h|--help)
+                    ssh_help
+                    exit 0;;
+                -p|-l|-o|-i|-L|-R|-W|-K|-I|-B|-J|-c|-m)
+                    options="$options $1 $2";
+                    shift;;
+                -P)
+                    password="$2"
+                    shift;;
+                -w)
+                    pwd="\"$2\""
+                    shift;;
+                -e)
+                    if test "${2#*=}" != "$2"; then
+                        envs="${envs}export $2;"
+                    else
+                        envs="${envs}export $2=\"$(eval printf "%s" \${"$2"})\";"
+                    fi
+                    shift;;
+                *)
+                    if [ "${1:0:1}" == "-" ]; then
+                        options="$options $1"
+                    else
+                        hosts="$1"
+                    fi;;
+            esac
         else
-            _ENVS="${_ENVS}export $2=\"$(eval echo \${"$2"})\";"
+            command="$command $1"
         fi
         shift
-        ;;
-    *)
-        if [ "${1:0:1}" != "-" ] && [ x"$_ENVS" != x ]; then
-            _PARAMS="${_PARAMS} ${_ENVS}"
-            unset -v _ENVS
-        fi
+    done
 
-        _PARAMS="${_PARAMS} ${1}"
-        ;;
-    esac
-    shift
-done
+    if [ -z "$hosts" ]; then
+        ssh_help
+        exit 0
+    fi
 
-unset -v _ENVS _POSITION
+    if [ -n "$pwd" ]; then
+        if [ -n "$command" ]; then command="&& $command"; fi
+        command="cd $pwd $command";
+    fi
+    if [ -n "$envs" ]; then command="$envs $command"; fi
 
-dbclient $_PARAMS
+    ! empty -f -i in -o out dbclient $hosts exit
+    ! empty -w -i out -o in "y/n" "y" 2>/dev/null
+
+    DROPBEAR_PASSWORD="$password" dbclient $options $hosts $command
+}
+
+run_dbclient "$@"
