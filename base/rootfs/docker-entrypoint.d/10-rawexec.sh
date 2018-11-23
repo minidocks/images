@@ -6,6 +6,6 @@
 
 set -e
 
-if [ x"$RAWEXEC" = x ]; then
-    export RAWEXEC="monit,crond,supervise"
+if [ -z "$RAWEXEC" ]; then
+    export RAWEXEC="monit crond supervise sshd"
 fi
