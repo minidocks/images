@@ -1,21 +1,32 @@
 #!/bin/sh
+#
 # ssh wrapper for dropbear with support for environment variables, working directory and password
 #
 # (c) 2016,2018 Martin Hasoň <martin.hason@gmail.com>
 
 set -e
 
-ssh_help() {
+ssh_help()(
     dbclient -h 2>&1 | sed 's/dbclient/ssh/g' | sed -e "\$a-P <password>  (default \"password\")\n-e <environment_variable[=value]>\n-w <path>  (default actual working directory)" >&2
-}
+)
 
-run_dbclient(){
-    local options=""
-    local hosts=""
-    local command=""
-    local envs=""
-    local pwd="$(pwd)"
-    local password="password"
+load_dropbear_keys()(
+    touch "$HOME/.ssh/known_hosts"
+
+    if [ -n "$(grep "^$1" "$HOME/.ssh/known_hosts")" ]; then
+        return
+    fi
+
+    for type in "dss" "rsa" "ecdsa"; do
+        file="/etc/dropbear/dropbear_${type}_host_key.pub"
+        if [ -r "$file" ]; then
+            sed "s/^/$1 /" "$file" >> "$HOME/.ssh/known_hosts"
+        fi
+    done
+)
+
+run_dbclient()(
+    pwd="$(pwd)" password="password"
 
     while [ -n "$1" ]; do
         if [ -z "$hosts" ]; then
@@ -63,10 +74,11 @@ run_dbclient(){
     fi
     if [ -n "$envs" ]; then command="$envs $command"; fi
 
-    ! empty -f -i in -o out dbclient $hosts exit
-    ! empty -w -i out -o in "y/n" "y" 2>/dev/null
+    for host in "$(printf '%s' "$hosts" | tr ',' ' ')"; do
+        load_dropbear_keys "$(parse_url "$host" 'host')"
+    done
 
     DROPBEAR_PASSWORD="$password" dbclient $options $hosts $command
-}
+)
 
 run_dbclient "$@"

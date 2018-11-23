@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# SSHD wrapper for dropbear
+# sshd wrapper for dropbear
 #
 # (c) 2017 Martin Hasoň <martin.hason@gmail.com>
 
