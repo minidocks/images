@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Clean paths and/or run another cleaner
+#
+# (c) 2018 Martin Hasoň <martin.hason@gmail.com>
+
+set -e
+
+clean() (
+    for entry in $(printf '%s' "$1" | tr ':' ' '); do
+        if [ "$(printf '%s' "$entry" | cut -c1)" = '$' ]; then
+            entry="$(eval printf '%s' \"${entry}\")"
+        fi
+
+        if [ -d "$entry" ] && [ "$(printf '%s' "$entry" | tail -c 1)" = '/' ]; then
+            find "$entry" -mindepth 1 -maxdepth 1 -exec rm -rf {} \;
+        elif [ -d "$entry" ] || [ -f "$entry" ]; then
+            rm -rf "$entry"
+        elif [ -x "$(command -pv "$entry")" ]; then
+            "$entry"
+        fi
+    done
+)
+
+clean "${1:-$CLEAN}"
