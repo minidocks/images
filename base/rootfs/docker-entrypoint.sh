@@ -2,24 +2,27 @@
 #
 # Main docker entry point
 #
-# (c) 2016 Martin Hasoň <martin.hason@gmail.com>
-#
+# (c) 2016, 2018 Martin Hasoň <martin.hason@gmail.com>
 
 set -e
 
-for _FILE in /docker-entrypoint.d/*.sh; do
-    if [ -r "$_FILE" ]; then
-        . "$_FILE"
-    fi
-done
+load_entrypoints(){
+    local file
 
-unset -v _FILE
+    for file in /docker-entrypoint.d/*.sh; do
+        if [ -r "$file" ]; then
+            . "$file"
+        fi
+    done
+}
 
-if [ x"$(echo "$@")" = x ]; then
+load_entrypoints
+
+if [ -z "$(printf '%s' "$@")" ]; then
     return
 fi
 
-if [ "$(id -u)" = 0 ] && [ x"$(echo " $RAWEXEC " | tr "," " " | grep " $1 ")" = x ]; then
+if [ "$(id -u)" = 0 ] && [ -z "$(echo " $RAWEXEC " | tr ',' ' ' | grep " $1 ")" ]; then
     exec /sbin/tini -s -g -- su-exec "${USER_ID:-$(id -u)}:${GROUP_ID:-$(id -g)}" "$@"
 else
     exec /sbin/tini -s -g -- "$@"

@@ -1,17 +1,16 @@
 FROM alpine:3.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV TEMP /tmp
+ENV TEMP /tmp \
+    CLEAN="/var/cache/apk/:/tmp/"
 
-RUN adduser -u 1000 -D -S -G users user
-
-RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates gettext libintl \
-    && mv /usr/bin/envsubst /usr/local/bin/envsubst \
-    && apk del gettext && rm -rf /var/cache/apk/* /tmp/*
-
-RUN mkdir /etc/dropbear /etc/monit.d
+RUN adduser -u 1000 -S -s /bin/sh -G users user
 
 COPY rootfs /
+
+RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates gettext libintl \
+    && mv /usr/bin/envsubst /usr/local/bin/ \
+    && apk del gettext && clean
 
 RUN chmod 600 /etc/monitrc
 
