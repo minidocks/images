@@ -6,6 +6,6 @@
 
 set -e
 
-if [ x"$TIMEZONE" != x ] && [ "$(id -u)" = 0 ]; then
+if [ -n "$TIMEZONE" ] && [ "$(id -u)" = 0 ]; then
     exec set_tz "$TIMEZONE";
 fi

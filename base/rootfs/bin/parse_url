@@ -1,36 +1,33 @@
 #!/bin/sh
+#
+# Parse uri string
+#
 # https://unix.stackexchange.com/questions/159253/decoding-url-encoding-percent-encoding
 # https://stackoverflow.com/questions/6174220/parse-url-in-shell-script
+#
+# (c) 2018 Martin Hasoň <martin.hason@gmail.com>
 
-urldecode() {
-     echo "$@" | sed 's@+@ @g;s@%@\\x@g' | xargs -0 printf "%b"
-}
+urldecode()(
+    printf '%s' "$@" | sed 's@+@ @g;s@%@\\x@g' | xargs -0 printf "%b"
+)
 
-parse_url() {
-    local scheme="$(echo $1 | grep :// | sed -e's,^\(.*\)://.*,\1,g')"
-    local url="$(echo ${1/$scheme:\/\//})"
-    local user="$(echo $url | grep @ | cut -d@ -f1)"
-    local pass="$(echo $user | grep : | cut -d: -f2-)"
-    if [ -n "$pass" ]; then
-        user="$(echo $user | grep : | cut -d: -f1)"
-    fi
+parse_url()(
+    scheme="$(printf '%s' "$1" | grep :// | sed -E 's,^(.+)://.*,\1,')"
+    url="$(printf '%s' "$1" | sed -E 's,^.+://,,')"
+    userpass="$(printf '%s' "$url" | cut -d@ -s -f1)"
+    user="$(printf '%s' "$userpass" | cut -d: -f1)"
+    pass="$(printf '%s' "$userpass" | cut -d: -s -f2-)"
 
-    local host="$(echo ${url/$user*$pass@/} | cut -d/ -f1)"
-    local port="$(echo $host | grep : | cut -d: -f2)"
+    host="$(printf '%s' "$url" | sed -E 's/[^@]+@//' | cut -d/ -f1)"
+    port="$(printf '%s' "$host" | cut -d: -s -f2)"
     if [ -n "$port" ]; then
-        host="$(echo $host | grep : | cut -d: -f1)"
+        host="$(printf '%s' "$host" | cut -d: -s -f1)"
     fi
 
-    local path="$(echo $url | grep / | cut -d/ -f2-)"
-    local query="$(echo $path | grep ? | cut -d? -f2-)"
-    if [ -n "$query" ]; then
-        path="$(echo $path | grep ? | cut -d? -f1)"
-    fi
-
-    local fragment="$(echo $query | grep "#" | cut -d# -f2-)"
-    if [ -n "$fragment" ]; then
-        query="$(echo $query | grep "#" | cut -d# -f1)"
-    fi
+    fullpath="$(printf '%s' "$url" | cut -d/ -s -f2-)"
+    path="$(printf '%s' "$fullpath" | sed -E 's/^([^?#]*).*/\1/')"
+    query="$(printf '%s' "$fullpath" | sed -E 's/^[^?]*\?([^#]+).*/\1/')"
+    fragment="$(printf '%s' "$fullpath" | sed -E 's/^[^#]*#(.+)/\1/')"
 
     case "$2" in
         scheme) urldecode "$scheme";;
@@ -43,6 +40,6 @@ parse_url() {
         fragment) urldecode "$fragment";;
         *) urldecode "$1";;
     esac
-}
+)
 
 parse_url "$1" "$2"

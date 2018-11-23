@@ -1,22 +1,22 @@
 #!/bin/sh
+#
 # Generic process wrapper script
 #
 # https://mmonit.com/wiki/Monit/FAQ
 # https://stackoverflow.com/questions/23454344/use-monit-monitor-a-python-program
 #
-# (c) 2017 Martin Hasoň <martin.hason@gmail.com>
+# (c) 2017,2018 Martin Hasoň <martin.hason@gmail.com>
 
 action=$1
 name=$2
-shift
-shift
+shift 2
 
 case $action in
     start)
         command="/sbin/tini -s -g --"
         pattern="$command"
         for arg in "$@"; do
-            command="$command '$(printf "%s" "$arg" | sed -e "s/'/'\"'\"'/g")'"
+            command="$command '$(printf '%s' "$arg" | sed -e "s/'/'\"'\"'/g")'"
             pattern="$pattern $arg"
         done
 

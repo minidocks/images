@@ -8,16 +8,16 @@ set -e
 
 monit -l /dev/stdout
 
-while [ "$(pgrep -x monit)" = "" ]; do
+while [ -z "$(pgrep -x monit)" ]; do
     sleep 1
 done
 
-while [ x"$1" != x ]; do
+while [ -n "$1" ]; do
     monit start "$1"
     shift
 done
 
-while [ "$(pgrep -x monit)" != "" ]; do
+while [ -n "$(pgrep -x monit)" ]; do
     sleep 3
 done
 

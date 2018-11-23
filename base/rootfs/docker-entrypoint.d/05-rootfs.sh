@@ -3,7 +3,6 @@
 # Copy rootfs
 #
 # (c) 2018 Martin Hasoň <martin.hason@gmail.com>
-#
 
 set -e
 

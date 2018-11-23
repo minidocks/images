@@ -1,28 +1,27 @@
 #!/bin/sh
+#
 # usage: file_env VAR [DEFAULT] [DEFAULT] [DEFAULT]
 #
 # (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
 #  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
 #
-#
+# (c) 2018 Martin Hasoň <martin.hason@gmail.com>
 
 file_env() {
-    local var="$1"
+    local var="$1" fileVar="${var}_FILE" val arg
     shift
-    local fileVar="${var}_FILE"
 
     if [ "$(eval echo "\${$var}")" ] && [ "$(eval echo "\${$fileVar}")" ]; then
         echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
         exit 1
     fi
 
-    local val=""
-    if [ "$(eval echo "\${$var}")" ]; then
-        val="$(eval echo "\${$var}")"
-    elif [ "$(eval echo "\${$fileVar}")" ]; then
+    val="$(eval printf '%s' "\${$var}")"
+    if [ -z "$val" ]; then
         val="$(eval cat "\${$fileVar}")"
-    else
-        local arg=""
+    fi
+
+    if [ -z "$val" ]; then
         for arg in "$@"; do
             if [ -n "$arg" ]; then
                 val="$arg"
@@ -33,9 +32,9 @@ file_env() {
 
     export "$var"="$val"
 
-    if [ "$(basename $0)" == "file_env" ] && [ -n "$val" ]; then
-        echo "$val"
+    if [ "$(basename "$0")" = 'file_env' ] && [ -n "$val" ]; then
+        printf '%s' "$val"
     fi
 }
 
-file_env $@
+file_env "$@"
