@@ -11,5 +11,4 @@ script:
   - docker --version
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u "$REGISTRY_LOGIN" -p "$REGISTRY_PASSWORD";
-      ./deploy;
     fi
