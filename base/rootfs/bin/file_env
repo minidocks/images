@@ -17,7 +17,8 @@ file_env() {
     fi
 
     val="$(eval printf '%s' "\${$var}")"
-    if [ -z "$val" ]; then
+
+    if [ -z "$val" ] && [ -r "$(eval printf '%s' "\${$fileVar}")" ]; then
         val="$(eval cat "\${$fileVar}")"
     fi
 
