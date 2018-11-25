@@ -6,17 +6,13 @@
 
 set -e
 
-load_entrypoints(){
-    local file
+for file in /docker-entrypoint.d/*.sh; do
+    if [ -r "$file" ]; then
+        . "$file"
+    fi
+done
 
-    for file in /docker-entrypoint.d/*.sh; do
-        if [ -r "$file" ]; then
-            . "$file"
-        fi
-    done
-}
-
-load_entrypoints
+unset -v file
 
 if [ -z "$(printf '%s' "$@")" ]; then
     return
