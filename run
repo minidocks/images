@@ -65,7 +65,7 @@ hub(){
 }
 
 lsdir(){
-    find "${1:-.}" -maxdepth 1 -type d -printf '%f\n'
+    find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -printf '%f\n'
 }
 
 fold_start() {
