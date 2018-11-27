@@ -3,12 +3,7 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker pull webuni/git
-  - docker pull webuni/curl
-
 script:
   - docker --version
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u "$REGISTRY_LOGIN" -p "$REGISTRY_PASSWORD";
-    fi
+  - ./run split
+  - ./run request

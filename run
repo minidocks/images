@@ -1,0 +1,290 @@
+#!/bin/sh
+set -e
+
+if [ -r $(pwd)'/.env' ]; then
+    . $(pwd)'/.env'
+fi
+
+IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-webuni}"
+GIT_NAMESPACE="${GIT_NAMESPACE:-microcontainers}"
+HUB_NAMESPACE="${HUB_NAMESPACE:-webuni}"
+HUB_URL=https://hub.docker.com/v2
+
+#for name in $(echo "GITHUB_OAUTH_TOKEN REGISTRY_LOGIN REGISTRY_PASSWORD SSH_ID_RSA"); do
+#    if [ -z "$(eval echo "\${$name}")" ]; then
+#        _ansi --bg-red --black --format "Environment variable \"%s\" is not set." "$name" >&2
+#        exit 1
+#    fi
+#done
+
+to_json(){
+    printf '{"%s"}' "$(echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g')"
+}
+
+http_code(){
+    printf "%s" "$1" | head -n1 | cut -d" " -f2
+}
+
+http_body(){
+    printf "%s" "$1" | sed '1,/^$/d'
+}
+
+assert_http_code(){
+    if [ "$(http_code "$1")" != "$2" ]; then
+        printf "\033[30;41m%s\033[0m\n" "$1" >&2
+        exit 1
+    fi
+}
+
+query()(
+    json="$1"
+    shift
+    printf '%s' "$json" | _docker_run webuni/curl jq "$@"
+)
+
+do_request(){
+    _docker_run webuni/curl \
+        curl --retry 5 --retry-delay 3 -H "Content-Type: application/json" -H "Accept: application/json" -i -s "$@" \
+    | tr -d '\r' | tr '\n' '\r' | sed -e 's/.\+\(HTTP\/1.\+\)/-\1-/' | tr '\r' '\n'
+}
+
+run_git(){
+    _docker_run -e FILE_NETRC_PATH="/home/user/.netrc" -e FILE_NETRC_CONTENT="machine github.com login token password $GITHUB_TOKEN" webuni/git git "$@"
+}
+
+github(){
+    do_request -H "Authorization: token $GITHUB_TOKEN" -X "$1" --data "$3" "https://api.github.com$2"
+}
+
+travis() {
+    do_request -H "Travis-API-Version: 3" -H "Authorization: token $TRAVIS_TOKEN" -X "$1" --data "$3" "https://api.travis-ci.com$2"
+}
+
+hub(){
+    if [ -z "$REGISTRY_TOKEN" ] || [ $(( $(date +"%s") - REGISTRY_TOKEN_TIME )) -gt 300 ]; then
+        response="$(do_request -X "POST" --data "$(to_json "username=$REGISTRY_LOGIN&password=$REGISTRY_PASSWORD")" "$HUB_URL/users/login/")"
+        assert_http_code "$response" "200"
+        REGISTRY_TOKEN="$(query "$(http_body "$response")" -r '.token')"
+        REGISTRY_TOKEN_TIME="$(date +"%s")"
+    fi
+
+    do_request -H "Authorization: JWT $REGISTRY_TOKEN" -X "$1" --data "$3" "$HUB_URL/repositories/$HUB_NAMESPACE$2"
+}
+
+fold_start() {
+    echo -e "travis_fold:start:$1\\r\033[33;1m$2\033[0m"
+}
+
+fold_end() {
+    echo -en "travis_fold:end:$1\\r"
+}
+
+build()(
+    package="" version="" source_dir=""
+    while [ -n "$1" ]; do
+        case "$1" in
+            --force) opts="${opts} --no-cache";;
+            --no-clear) no_clear="1";;
+            -*) opts="${opts} $1";;
+            *) if [ -z "$package" ]; then package="$1"; elif [ -z "$version" ]; then version="$1"; else source_dir="$1"; fi;;
+        esac
+        shift
+    done
+
+    source_dir="${source_dir:-${package}/${version}}"
+    target_dir="/tmp/${package}-${version}"
+    if [ ! -d "$source_dir" ]; then
+        git clone "https://github.com/$GIT_NAMESPACE/$package"
+    fi
+
+    if [ ! -f "$source_dir/Dockerfile" ]; then
+        _ansi --bg-red --nl --black -f "Unable to find file \"%s/Dockerfile\"" "$source_dir" >&2
+        return
+    fi
+
+    froms="$(cat "$source_dir/Dockerfile" | grep "FROM $IMAGE_NAMESPACE" | awk '{print $2}')"
+    for from in $froms; do
+        from="${from#$IMAGE_NAMESPACE/}"
+        tag="$(echo "$from" | cut -d: -f2 -s)"
+        build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
+    done
+
+    if [ ! -d "$target_dir" ] || [ "$no_clear" != 1 ]; then
+        _ansi --nl --green --format "Build %s/%s:%s - %s" "$IMAGE_NAMESPACE" "$package" "$version" "$source_dir"
+        rm -rf "$target_dir"
+        cp -rfL "$source_dir" "$target_dir"
+        docker build $opts -t "$IMAGE_NAMESPACE/$package:$version" "$target_dir" | sed "s/^/ | /"
+        if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
+        printf "\n"
+    else
+        _ansi --gren --nl --fromat "Image %s/%s:%s exists" "$IMAGE_NAMESPACE" "$package" "$version"
+    fi
+)
+
+# Build docker image
+#
+# Argument
+# $1: Package name
+# [$2: Version]
+#
+# Options:
+#
+task_build()(
+    while [ -n "$1" ]; do
+        case "$1" in
+            --dir*) dir="$2"; shift;;
+            -*) opts="${opts} --no-cache";;
+            *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
+        esac
+        shift
+    done
+
+    if [ "${package#*/}" != "$package" ]; then
+        version="$(printf '%s' "$package" | cut -d/ -f2)"
+        package="$(printf '%s' "$package" | cut -d/ -f1)"
+    fi
+
+    if [ -z "$dir" ]; then
+        dir="$package"
+    fi
+
+    versions=$(find ${dir}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
+
+    if [ -z "$version" ]; then
+        for version in $versions; do
+            build "$package" "$version" "$dir/$version" $opts
+        done
+    else
+        build "$package" "$version" "$dir/$version" $opts
+    fi
+
+    if [ $(echo "$versions" | wc -l) = 1 ] && [ "$version" != "latest" ]; then
+        build "$package" "latest" "$dir/$version" $opts
+    fi
+)
+
+task_split()(
+    rm -rf .subsplit/
+    run_git subsplit init "https://github.com/$GIT_NAMESPACE/$GIT_NAMESPACE"
+
+    for name in ${1:-$(ls -d *)}; do
+        repo="$GIT_NAMESPACE/$name"
+
+        fold_start "split.$name" "$name -> https://github.com/$repo"
+        response="$(github "GET" "/repos/$repo")"
+        if [ "$(http_code "$response")" = "404" ]; then
+            printf 'Create git repository "%s"\n' "$repo"
+            response="$(github "POST" "/orgs/$GIT_NAMESPACE/repos" "$(to_json "name=$name")")"
+            assert_http_code "$response" "201"
+        fi
+
+        run_git subsplit publish "$name:https://github.com/$repo"
+        fold_end "split.$name"
+    done
+
+    rm -rf .subsplit/
+)
+
+task_env()(
+    for name in ${1:-$(ls -d *)}; do
+        repo="${GIT_NAMESPACE}%2F${name}"
+        fold_start "env.$name" "$name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
+        response="$(travis 'GET' "/repo/${repo}/env_vars")"
+        if [ "$(http_code "$response")" = "200" ]; then
+            vars="$(query "$(http_body "$response")" -r '.env_vars[] | .name')"
+            for var in "REGISTRY_LOGIN" "REGISTRY_PASSWORD"; do
+                if [ -z "$(printf '%s' "$vars" | grep "$var")" ]; then
+                    printf 'Copy "%s" variable\n' "$var"
+                    response="$(travis 'POST' "/repo/${repo}/env_vars" "$(to_json "env_var.name=${var}&env_var.value=$(eval printf '%s' "\$$var")&env_var.public=false")")"
+                    assert_http_code "$response" "201"
+                fi
+            done
+        else
+            printf 'Repository "%s" does not exist\n' "$GIT_NAMESPACE/$name"
+        fi
+        fold_end "env.$name"
+    done
+)
+
+task_request()(
+    for name in ${1:-$(ls -d *)}; do
+        repo="${GIT_NAMESPACE}%2F${name}"
+        fold_start "travis.$name" "$name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
+        task_env "$name"
+        response="$(travis 'POST' "/repo/${repo}/requests" '{"request":{"branch":"master","config":{"sudo":"required","services":["docker"],"script":[
+            "docker --version",
+            "docker login -u \"$REGISTRY_LOGIN\" -p \"$REGISTRY_PASSWORD\"",
+            "wget -O 'run' 'https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner'",
+            "sh ./run build \"'$name'\" \".\"",
+            "sh ./run push \"'$name'\"",
+        ]}}}')"
+        if [ "$(http_code "$response")" != "202" ]; then
+            _ansi --bg-red --nl --black -f 'Error to trigger a build of "%s"' "$name"
+        fi
+        fold_end "travis.$name"
+    done
+)
+
+task_push()(
+    for name in ${1:-$(ls -d *)}; do
+        hub_name="$HUB_NAMESPACE/$name"
+
+        fold_start "docker.$name" "build all docker images for $hub_name"
+
+        data="$(to_json "description=Minimal $name images&provider=github&vcs_repo_name=$GIT_NAMESPACE/$name&dockerhub_repo_name=$hub_name&active=false&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/")"
+
+        response="$(hub "GET" "/$name/")"
+        if [ "$(query "$(http_body "$response")" -r '.is_automated')" = "false" ]; then
+            printf "Delete non-automatic repository \"%s\"\n" "$name"
+            assert_http_code "$(hub "DELETE" "/$name/")" "202"
+            response="$(hub "GET" "/$name/")"
+        fi
+
+        if [ "$(http_code "$response")" = "404" ]; then
+            printf "Create automatic repository \"%s\"\n" "$hub_name"
+            response="$(hub "POST" "/$name/autobuild/" "$data")"
+            assert_http_code "$response" "201"
+        else
+            printf "Update automatic repository \"%s\"\n" "$hub_name"
+            response="$(hub "PUT" "/$name/autobuild/" "$data")"
+            assert_http_code "$response" "200"
+        fi
+
+        build_tags="$(query "$(http_body "$response")" -r ".build_tags")"
+        for pair in $(query "$build_tags" -r '.[] | (.id|tostring)+"/"+(.name)'); do
+            if [ "${pair#*/*}" != "latest" ]; then
+                printf "Delete obsolete auto build tag \"%s\" in repository \"%s\"\n" "${pair#*/*}" "$name"
+                assert_http_code "$(hub "DELETE" "/$name/autobuild/tags/${pair%*/*}/")" "204"
+            fi
+        done
+
+        for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
+            docker push "$hub_name:$version"
+
+            if [ "$version" == "latest" ]; then
+                data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
+                id="$(query "$build_tags" -r ".[] | select(.name==\"$version\") | .id")"
+                if [ -z "$id" ]; then
+                    printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
+                    assert_http_code "$(hub "POST" "/$name/autobuild/tags/" "$(to_json "isNew=true&namespace=$N_HUB&repoName=$dir&$data")")" "201"
+                    assert_http_code "$(hub "POST" "/$name/autobuild/trigger-build/" "$(to_json "$data")")" "202"
+                else
+                    printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
+                    assert_http_code "$(hub "PUT" "/$name/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
+                fi
+            fi
+        done
+
+#        response="$(hub "GET" "/$name/links/")"
+#        links="$(query "$(http_body "$response")" -r ".results")"
+#        for pair in $(query "$links" -r '.[] | (.id|tostring)+":"+(.to_repo)'); do
+#            printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
+#            assert_http_code "$(hub "DELETE" "/$name/links/${pair%*:*}/")" "204"
+#        done
+
+        fold_end "docker.$name"
+    done
+)
+
+url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
+if [ -n "$(command -v 'wget')" ]; then eval "$(wget -qO- "$url")"; else eval "$(curl -s "$url")"; fi
