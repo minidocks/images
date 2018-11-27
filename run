@@ -10,13 +10,6 @@ GIT_NAMESPACE="${GIT_NAMESPACE:-microcontainers}"
 HUB_NAMESPACE="${HUB_NAMESPACE:-webuni}"
 HUB_URL=https://hub.docker.com/v2
 
-#for name in $(echo "GITHUB_OAUTH_TOKEN REGISTRY_LOGIN REGISTRY_PASSWORD SSH_ID_RSA"); do
-#    if [ -z "$(eval echo "\${$name}")" ]; then
-#        _ansi --bg-red --black --format "Environment variable \"%s\" is not set." "$name" >&2
-#        exit 1
-#    fi
-#done
-
 to_json(){
     printf '{"%s"}' "$(echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g')"
 }
@@ -71,6 +64,10 @@ hub(){
     do_request -H "Authorization: JWT $REGISTRY_TOKEN" -X "$1" --data "$3" "$HUB_URL/repositories/$HUB_NAMESPACE$2"
 }
 
+lsdir(){
+    find "${1:-.}" -maxdepth 1 -type d -printf '%f\n'
+}
+
 fold_start() {
     echo -e "travis_fold:start:$1\\r\033[33;1m$2\033[0m"
 }
@@ -98,7 +95,7 @@ build()(
     fi
 
     if [ ! -f "$source_dir/Dockerfile" ]; then
-        _ansi --bg-red --nl --black -f "Unable to find file \"%s/Dockerfile\"" "$source_dir" >&2
+        _ansi --bg-yellow --nl --black -f 'Skip "%s". Unable to find file "%s/Dockerfile"' "$source_dir" >&2
         return
     fi
 
@@ -113,7 +110,7 @@ build()(
         _ansi --nl --green --format "Build %s/%s:%s - %s" "$IMAGE_NAMESPACE" "$package" "$version" "$source_dir"
         rm -rf "$target_dir"
         cp -rfL "$source_dir" "$target_dir"
-        docker build $opts -t "$IMAGE_NAMESPACE/$package:$version" "$target_dir" | sed "s/^/ | /"
+        exec docker build $opts -t "$IMAGE_NAMESPACE/$package:$version" "$target_dir" | sed "s/^/ | /"
         if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
         printf "\n"
     else
@@ -167,7 +164,7 @@ task_split()(
     rm -rf .subsplit/
     run_git subsplit init "https://github.com/$GIT_NAMESPACE/$GIT_NAMESPACE"
 
-    for name in ${1:-$(ls -d *)}; do
+    for name in ${1:-$(lsdir)}; do
         repo="$GIT_NAMESPACE/$name"
 
         fold_start "split.$name" "$name -> https://github.com/$repo"
@@ -186,9 +183,9 @@ task_split()(
 )
 
 task_env()(
-    for name in ${1:-$(ls -d *)}; do
+    for name in ${1:-$(lsdir)}; do
         repo="${GIT_NAMESPACE}%2F${name}"
-        fold_start "env.$name" "$name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
+        fold_start "env.$name" "Sync env: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
         response="$(travis 'GET' "/repo/${repo}/env_vars")"
         if [ "$(http_code "$response")" = "200" ]; then
             vars="$(query "$(http_body "$response")" -r '.env_vars[] | .name')"
@@ -207,26 +204,29 @@ task_env()(
 )
 
 task_request()(
-    for name in ${1:-$(ls -d *)}; do
+    for name in ${1:-$(lsdir)}; do
         repo="${GIT_NAMESPACE}%2F${name}"
-        fold_start "travis.$name" "$name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
         task_env "$name"
-        response="$(travis 'POST' "/repo/${repo}/requests" '{"request":{"branch":"master","config":{"sudo":"required","services":["docker"],"script":[
+        fold_start "travis.$name" "Build request: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
+        config='{"request":{"branch":"master","config":{"sudo":"required","services":["docker"],"script":[
             "docker --version",
             "docker login -u \"$REGISTRY_LOGIN\" -p \"$REGISTRY_PASSWORD\"",
-            "wget -O 'run' 'https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner'",
-            "sh ./run build \"'$name'\" \".\"",
-            "sh ./run push \"'$name'\"",
-        ]}}}')"
+            "wget -O 'run' 'https://raw.githubusercontent.com/microcontainers/microcontainers/master/run'",
+            "sh ./run build \"'$name'\" --dir \".\"",
+            "sh ./run push \"'$name'\""
+        ]}}}'
+        response="$(travis 'POST' "/repo/${repo}/requests" "$config")"
+
         if [ "$(http_code "$response")" != "202" ]; then
             _ansi --bg-red --nl --black -f 'Error to trigger a build of "%s"' "$name"
+            exit 1
         fi
         fold_end "travis.$name"
     done
 )
 
 task_push()(
-    for name in ${1:-$(ls -d *)}; do
+    for name in ${1:-$(lsdir)}; do
         hub_name="$HUB_NAMESPACE/$name"
 
         fold_start "docker.$name" "build all docker images for $hub_name"
@@ -261,7 +261,7 @@ task_push()(
         for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
             docker push "$hub_name:$version"
 
-            if [ "$version" == "latest" ]; then
+            if [ "$version" = "latest" ]; then
                 data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
                 id="$(query "$build_tags" -r ".[] | select(.name==\"$version\") | .id")"
                 if [ -z "$id" ]; then
