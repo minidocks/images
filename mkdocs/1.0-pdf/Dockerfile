@@ -1,4 +1,4 @@
-FROM webuni/python:3.6
+FROM webuni/weasyprint:43
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV MKDOCS_VERSION=1.0.4 \
@@ -12,6 +12,12 @@ RUN pip install \
       "mkdocs-merge>=0.6" \
       pygments \
       pymdown-extensions \
+      mkdocs-pdf-export-plugin \
+    && clean
+
+RUN wget -O /tmp/roboto.zip https://fonts.google.com/download?family=Roboto \
+    && unzip /tmp/roboto.zip -d /usr/share/fonts/truetype \
+    && fc-cache -f \
     && clean
 
 COPY rootfs /

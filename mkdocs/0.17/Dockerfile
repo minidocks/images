@@ -11,7 +11,7 @@ RUN pip install \
       "mkdocs-awesome-pages-plugin<2.0" \
       pygments \
       pymdown-extensions \
-    && rm -rf $PIP_CACHE_DIR/* && pyclean
+    && clean
 
 COPY rootfs /
 
