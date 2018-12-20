@@ -6,4 +6,4 @@ services:
 script:
   - docker --version
   - ./run split
-  - ./run request
+  - ./run env
