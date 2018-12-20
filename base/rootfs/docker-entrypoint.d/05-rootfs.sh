@@ -12,5 +12,5 @@ if [ -d /mnt/rootfs ]; then
         return
     fi
 
-    cp -rpf /mnt/rootfs/. /
+    cp -rf /mnt/rootfs/. /
 fi
