@@ -2,7 +2,8 @@ FROM webuni/base:3.5
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \
-    PIP_CACHE_DIR=/pip-cache
+    PIP_CACHE_DIR=/pip-cache \
+    CLEAN="$CLEAN:\$PIP_CACHE_DIR/:pyclean"
 
 COPY rootfs /
 
@@ -18,6 +19,6 @@ RUN ln -s /usr/bin/python3 /usr/bin/python \
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
     && pip install -U pip pipenv wheel \
-    && rm -rf $PIP_CACHE_DIR/* && pyclean
+    && clean
 
 CMD [ "python" ]

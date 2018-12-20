@@ -75,7 +75,7 @@ RUN apk --update --no-cache add nginx \
         uwsgi-xslt \
         uwsgi-zabbix \
         uwsgi-zergpool \
-    && rm -rf /var/cache/apk/* && pyclean
+    && clean
 
 COPY rootfs /
 
