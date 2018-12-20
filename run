@@ -65,7 +65,7 @@ hub(){
 }
 
 lsdir(){
-    find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -printf '%f\n'
+    find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n'
 }
 
 fold_start() {
@@ -75,6 +75,40 @@ fold_start() {
 fold_end() {
     echo -en "travis_fold:end:$1\\r"
 }
+
+deps()(
+    dir="${1:-$(pwd)}"
+    basename="$(basename "$dir")"
+    froms=""
+
+    if [ -d "$dir" ]; then
+        for file in $(find "$dir" -name "Dockerfile"); do
+            froms="$(cat "$file" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2 | cut -d: -f1) $froms"
+        done
+    fi
+
+    froms="$(echo "$froms" | sed -e 's/ /\n/g' | grep -v "$basename" | sort | uniq | xargs)"
+    for from in $froms; do
+        froms="$(deps "$from") $froms"
+    done
+
+    echo "$froms" | xargs
+)
+
+split()(
+    name="$1"
+    repo="$2"
+    fold_start "split.$name" "$name -> https://github.com/$repo"
+        response="$(github "GET" "/repos/$repo")"
+        if [ "$(http_code "$response")" = "404" ]; then
+            printf 'Create git repository "%s"\n' "$repo"
+            response="$(github "POST" "/orgs/$GIT_NAMESPACE/repos" "$(to_json "name=$name")")"
+            assert_http_code "$response" "201"
+        fi
+
+        run_git subsplit publish "$name:https://github.com/$repo"
+    fold_end "split.$name"
+)
 
 build()(
     package="" version="" source_dir=""
@@ -99,9 +133,8 @@ build()(
         return
     fi
 
-    froms="$(cat "$source_dir/Dockerfile" | grep "FROM $IMAGE_NAMESPACE" | awk '{print $2}')"
+    froms="$(cat "$source_dir/Dockerfile" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2)"
     for from in $froms; do
-        from="${from#$IMAGE_NAMESPACE/}"
         tag="$(echo "$from" | cut -d: -f2 -s)"
         build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
     done
@@ -160,28 +193,34 @@ task_build()(
     fi
 )
 
+# Split monorepository
 task_split()(
     rm -rf .subsplit/
     run_git subsplit init "https://github.com/$GIT_NAMESPACE/$GIT_NAMESPACE"
 
+    processed=" "
     for name in ${1:-$(lsdir)}; do
-        repo="$GIT_NAMESPACE/$name"
+        for dep in $(deps "$name"); do
+            if [ -z "${processed##* $dep *}" ]; then
+                continue
+            fi
 
-        fold_start "split.$name" "$name -> https://github.com/$repo"
-        response="$(github "GET" "/repos/$repo")"
-        if [ "$(http_code "$response")" = "404" ]; then
-            printf 'Create git repository "%s"\n' "$repo"
-            response="$(github "POST" "/orgs/$GIT_NAMESPACE/repos" "$(to_json "name=$name")")"
-            assert_http_code "$response" "201"
+            split "$dep" "$GIT_NAMESPACE/$dep"
+            processed=" $dep $processed"
+        done
+
+        if [ -z "${processed##* $name *}" ]; then
+            continue
         fi
 
-        run_git subsplit publish "$name:https://github.com/$repo"
-        fold_end "split.$name"
+        split "$name" "$GIT_NAMESPACE/$name"
+        processed=" $name $processed"
     done
 
     rm -rf .subsplit/
 )
 
+# Copy environment variables to travis
 task_env()(
     for name in ${1:-$(lsdir)}; do
         repo="${GIT_NAMESPACE}%2F${name}"
@@ -203,28 +242,7 @@ task_env()(
     done
 )
 
-task_request()(
-    for name in ${1:-$(lsdir)}; do
-        repo="${GIT_NAMESPACE}%2F${name}"
-        task_env "$name"
-        fold_start "travis.$name" "Build request: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
-        config='{"request":{"branch":"master","config":{"sudo":"required","services":["docker"],"script":[
-            "docker --version",
-            "docker login -u \"$REGISTRY_LOGIN\" -p \"$REGISTRY_PASSWORD\"",
-            "wget -O 'run' 'https://raw.githubusercontent.com/microcontainers/microcontainers/master/run'",
-            "sh ./run build \"'$name'\" --dir \".\"",
-            "sh ./run push \"'$name'\""
-        ]}}}'
-        response="$(travis 'POST' "/repo/${repo}/requests" "$config")"
-
-        if [ "$(http_code "$response")" != "202" ]; then
-            _ansi --bg-red --nl --black -f 'Error to trigger a build of "%s"' "$name"
-            exit 1
-        fi
-        fold_end "travis.$name"
-    done
-)
-
+# Push docker image to https://hub.docker.com
 task_push()(
     for name in ${1:-$(lsdir)}; do
         hub_name="$HUB_NAMESPACE/$name"
