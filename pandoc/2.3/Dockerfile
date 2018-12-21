@@ -4,6 +4,7 @@ RUN apk -U add ghc cabal wget zlib-dev
 
 ENV PANDOC_VERSION=2.3.1
 
+RUN watch -n 300 'echo tick' &
 RUN cabal update && cabal install "pandoc-${PANDOC_VERSION}" -fembed_data_files
 
 FROM webuni/base:3.8
