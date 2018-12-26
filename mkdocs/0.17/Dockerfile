@@ -8,6 +8,7 @@ RUN pip install \
       mkdocs==$MKDOCS_VERSION \
       mkdocs-material==$MKDOCS_MATERIAL_VERSION \
       mkdocs-alabaster \
+      mkdocs-rtd-dropdown \
       "mkdocs-awesome-pages-plugin<2.0" \
       pygments \
       pymdown-extensions \
