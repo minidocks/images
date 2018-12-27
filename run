@@ -143,7 +143,7 @@ build()(
         _ansi --nl --green --format "Build %s/%s:%s - %s" "$IMAGE_NAMESPACE" "$package" "$version" "$source_dir"
         rm -rf "$target_dir"
         cp -rfL "$source_dir" "$target_dir"
-        exec docker build $opts -t "$IMAGE_NAMESPACE/$package:$version" "$target_dir" | sed "s/^/ | /"
+        exec docker build $opts -t "$IMAGE_NAMESPACE/$package:$version" "$target_dir"
         if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
         printf "\n"
     else
