@@ -11,6 +11,36 @@ Usage
 docker run --rm -v `pwd`:/app -w /app webuni/pandoc http://pandoc.org/MANUAL.html -t markdown
 ```
 
+### Creating a PDF
+
+To produce a pdf pandoc requires a pdf engine (LaTeX, ConTeXt, Weasyprint etc.). We must connect
+two containers via the ssh protocol. The easiest solution is to use docker compose.
+
+So create a file `docker-compose.yml` with content:
+```yaml
+version: '3.1'
+services:
+  context:
+    image: webuni/context
+    volumes:
+    - .:/app
+    working_dir: /app
+    command: sshd
+
+  pandoc:
+    image: webuni/pandoc
+    volumes:
+    - .:/app
+    working_dir: /app
+    environment:
+      ALIAS_CONTEXT: ssh context context
+```
+
+And in the same directory run command:
+```bash
+docker-compose run --rm pandoc https://raw.githubusercontent.com/jgm/pandoc/master/MANUAL.txt -t context -o manual.pdf
+```
+
 Tags
 ----
 
