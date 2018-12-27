@@ -2,8 +2,11 @@
 #
 # sshd wrapper for dropbear
 #
-# (c) 2017 Martin Hasoň <martin.hason@gmail.com>
+# https://unix.stackexchange.com/questions/308421/how-to-store-load-exported-environment-variables-to-from-a-file
+#
+# (c) 2017, 2018 Martin Hasoň <martin.hason@gmail.com>
 
 set -e
 
-dropbear -R -F -B -E -a
+export -p | grep -vE " (PWD|OLDPWD|SHLVL|USER|SHELL)=" > /tmp/.ssh_env
+dropbear -R -F -B -E -a -c /usr/local/bin/ssh_wrapper

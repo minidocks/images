@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Wrapper for forced ssh command to load env file
+#
+# https://binblog.info/2008/10/20/openssh-going-flexible-with-forced-commands/
+#
+# (c) 2018 Martin Hasoň <martin.hason@gmail.com>
+
+set -e
+
+if [ -f '/tmp/.ssh_env' ]; then
+    . '/tmp/.ssh_env'
+fi
+
+eval "$SSH_ORIGINAL_COMMAND"
