@@ -4,8 +4,8 @@ RUN apk -U add ghc cabal wget zlib-dev
 
 ENV PANDOC_VERSION=2.5
 
-RUN watch -n 300 'echo tick' &
-RUN cabal update && cabal install "pandoc-${PANDOC_VERSION}" -fembed_data_files
+RUN echo "while true; do echo tick > /proc/1/fd/1; sleep 60; done &" > tick.sh && sh tick.sh \
+    && cabal update && cabal install "pandoc-${PANDOC_VERSION}" -fembed_data_files
 
 FROM webuni/base:3.8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
