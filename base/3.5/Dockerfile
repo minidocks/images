@@ -5,7 +5,7 @@ ENV TEMP /tmp \
     ENV=/etc/profile \
     CLEAN="/var/cache/apk/:/tmp/"
 
-RUN adduser -u 1000 -S -s /bin/sh -G users user
+RUN adduser -u 1000 -S -s /bin/sh -G users user && echo "user:password" | chpasswd 2>/dev/null
 
 COPY rootfs /
 
