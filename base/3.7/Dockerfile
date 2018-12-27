@@ -2,6 +2,7 @@ FROM alpine:3.7
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV TEMP /tmp \
+    ENV=/etc/profile \
     CLEAN="/var/cache/apk/:/tmp/"
 
 RUN adduser -u 1000 -S -s /bin/sh -G users user
