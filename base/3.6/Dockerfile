@@ -1,7 +1,7 @@
 FROM alpine:3.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV TEMP /tmp \
+ENV TEMP=/tmp \
     ENV=/etc/profile \
     CLEAN="/var/cache/apk/:/tmp/"
 
