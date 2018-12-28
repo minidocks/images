@@ -44,7 +44,7 @@ ENV PHP_EXT_XDEBUG=0 \
     FPM_WWW_LISTEN="[::]:9000" \
     FPM_WWW_USER=www-data \
     FPM_WWW_SLOWLOG=/dev/stdout.pipe \
-    BLACKFIRE_VERSION=1.22.0
+    BLACKFIRE_VERSION=1.23.1
 
 RUN wget -O /usr/lib/php5/modules/blackfire.so https://packages.blackfire.io/binaries/blackfire-php/${BLACKFIRE_VERSION}/blackfire-php-alpine_amd64-php-56.so \
     && mkdir /var/run/blackfire \
