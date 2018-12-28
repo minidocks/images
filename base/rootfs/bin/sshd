@@ -9,4 +9,4 @@
 set -e
 
 export -p | grep -vE " (PWD|OLDPWD|SHLVL|USER|SHELL)=" > /tmp/.ssh_env
-dropbear -R -F -B -E -a -c /usr/local/bin/ssh_wrapper
+dropbear -R -F -B -E -a -c /bin/ssh_wrapper
