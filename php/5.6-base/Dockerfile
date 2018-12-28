@@ -6,6 +6,8 @@ RUN addgroup -g 82 -S www-data && adduser -u 82 -D -S -G www-data www-data
 
 RUN apk --update add \
         php5 \
+        php5-cli \
+        php5-ctype \
         php5-curl \
         php5-iconv \
         php5-json \
