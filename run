@@ -75,7 +75,7 @@ deps()(
 
     if [ -d "$dir" ]; then
         for file in $(find "$dir" -name "Dockerfile"); do
-            froms="$(cat "$file" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2 | cut -d: -f1) $froms"
+            froms="$(cat "$file" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2 | cut -d: -f1 | cut -d' ' -f1) $froms"
         done
     fi
 
@@ -124,7 +124,7 @@ build()(
         return
     fi
 
-    froms="$(cat "$source_dir/Dockerfile" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2)"
+    froms="$(cat "$source_dir/Dockerfile" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2 | cut -d' ' -f1)"
     for from in $froms; do
         tag="$(echo "$from" | cut -d: -f2 -s)"
         build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
@@ -138,7 +138,7 @@ build()(
         if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
         printf "\n"
     else
-        _ansi --gren --nl --fromat "Image %s/%s:%s exists" "$IMAGE_NAMESPACE" "$package" "$version"
+        _ansi --gren --nl --format "Image %s/%s:%s exists" "$IMAGE_NAMESPACE" "$package" "$version"
     fi
 )
 
