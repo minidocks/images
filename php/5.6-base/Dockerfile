@@ -21,7 +21,7 @@ RUN apk --update add \
     && clean
 
 #Psysh
-RUN wget http://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
+RUN wget https://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
 ENV PHP_INI_DIR=/etc/php5 \
     PHP_ERROR_LOG=/dev/stderr.pipe \
