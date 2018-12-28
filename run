@@ -68,14 +68,6 @@ lsdir(){
     find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n' | sort
 }
 
-fold_start() {
-    echo -e "travis_fold:start:$1\\r\033[33;1m$2\033[0m"
-}
-
-fold_end() {
-    echo -en "travis_fold:end:$1\\r"
-}
-
 deps()(
     dir="${1:-$(pwd)}"
     basename="$(basename "$dir")"
@@ -98,16 +90,15 @@ deps()(
 split()(
     name="$1"
     repo="$2"
-    fold_start "split.$name" "$name -> https://github.com/$repo"
-        response="$(github "GET" "/repos/$repo")"
-        if [ "$(http_code "$response")" = "404" ]; then
-            printf 'Create git repository "%s"\n' "$repo"
-            response="$(github "POST" "/orgs/$GIT_NAMESPACE/repos" "$(to_json "name=$name")")"
-            assert_http_code "$response" "201"
-        fi
+    _ansi --yellow --nl "Split $name -> https://github.com/$repo"
+    response="$(github "GET" "/repos/$repo")"
+    if [ "$(http_code "$response")" = "404" ]; then
+        printf 'Create git repository "%s"\n' "$repo"
+        response="$(github "POST" "/orgs/$GIT_NAMESPACE/repos" "$(to_json "name=$name")")"
+        assert_http_code "$response" "201"
+    fi
 
-        run_git subsplit publish "$name:https://github.com/$repo"
-    fold_end "split.$name"
+    run_git subsplit publish "$name:https://github.com/$repo"
 )
 
 build()(
@@ -224,7 +215,7 @@ task_split()(
 task_env()(
     for name in ${1:-$(lsdir)}; do
         repo="${GIT_NAMESPACE}%2F${name}"
-        fold_start "env.$name" "Sync env: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
+        _ansi --yellow --nl "Sync env: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
         response="$(travis 'GET' "/repo/${repo}/env_vars")"
         if [ "$(http_code "$response")" = "200" ]; then
             vars="$(query "$(http_body "$response")" -r '.env_vars[] | .name')"
@@ -238,7 +229,25 @@ task_env()(
         else
             printf 'Repository "%s" does not exist\n' "$GIT_NAMESPACE/$name"
         fi
-        fold_end "env.$name"
+    done
+)
+
+# Trigger build on travis
+task_trigger()(
+    for name in ${1:-$(lsdir)}; do
+        repo="${GIT_NAMESPACE}%2F${name}"
+        _ansi --yellow --nl "Build request: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
+        response="$(travis 'GET' "/repo/${repo}/builds")"
+        ! state="$(query "$(http_body "$response")" -r '.builds[] | .state' | grep -E '(created|started)')"
+        if [ -n "$state" ]; then
+            continue
+        fi
+
+        response="$(travis 'POST' "/repo/${repo}/requests")"
+        if [ "$(http_code "$response")" != "202" ]; then
+            _ansi --bg-red --nl --black -f 'Error to trigger a build of "%s"' "$name"
+            exit 1
+        fi
     done
 )
 
@@ -247,7 +256,7 @@ task_push()(
     for name in ${1:-$(lsdir)}; do
         hub_name="$HUB_NAMESPACE/$name"
 
-        fold_start "docker.$name" "build all docker images for $hub_name"
+        _ansi --yellow --nl "Build all docker images for $hub_name"
 
         data="$(to_json "description=Minimal $name images&provider=github&vcs_repo_name=$GIT_NAMESPACE/$name&dockerhub_repo_name=$hub_name&active=false&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/")"
 
@@ -299,8 +308,6 @@ task_push()(
 #            printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
 #            assert_http_code "$(hub "DELETE" "/$name/links/${pair%*:*}/")" "204"
 #        done
-
-        fold_end "docker.$name"
     done
 )
 
