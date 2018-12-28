@@ -1,12 +1,11 @@
-FROM webuni/base:3.5
-MAINTAINER Martin Hasoň "martin.hason@gmail.com"
+FROM webuni/base:3.8
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/testing >> /etc/apk/repositories \
-    && apk --update add wkhtmltopdf xvfb ttf-freefont fontconfig dbus \
+RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk --update add wkhtmltopdf@edge xvfb ttf-freefont fontconfig dbus \
     && dbus-uuidgen > /var/lib/dbus/machine-id && apk del dbus \
     && rm -rf /var/cache/apk/* /tmp/*
 
-RUN mv /usr/bin/wkhtmltopdf /usr/bin/wkhtmltopdf-origin
 COPY rootfs /
 
 CMD [ "wkhtmltopdf" ]
