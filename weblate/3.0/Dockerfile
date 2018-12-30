@@ -10,12 +10,20 @@ RUN addgroup -S weblate && adduser -S -G weblate weblate
 
 COPY --from=0 /tmp/wheelhouse/* /tmp/
 
+ENV WEBLATE_VERSION=3.0.1
+
 RUN apk --update add git hiredis py3-lxml py3-pillow py3-psycopg2 py3-pyldap \
-    && pip install /tmp/*.whl weblate babel phply python-bidi pyuca pyyaml "django-auth-ldap<1.4.0" \
+    && pip install /tmp/*.whl weblate==$WEBLATE_VERSION babel phply python-bidi pyuca pyyaml django-redis django-debug-toolbar django-environ "django-auth-ldap<1.4.0" \
     && rm -rf /var/cache/apk/* /tmp/* $PIP_CACHE_DIR/* && pyclean
 
-ENV DJANGO_SETTINGS_MODULE=weblate.settings
+COPY rootfs /
+
+RUN chmod a+rwx /app/data && ln -s /app/etc/settings.py /usr/lib/python3.6/site-packages/weblate/settings.py
+
+ENV DJANGO_SETTINGS_MODULE="weblate.settings"
+
+WORKDIR /app
 
 EXPOSE 80
 
-CMD [ "runserver" ]
+CMD [ "supervise", "crond", "nginx", "uwsgi" ]

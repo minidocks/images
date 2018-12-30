@@ -11,7 +11,7 @@ RUN addgroup -S weblate && adduser -S -G weblate weblate
 
 COPY --from=0 /tmp/wheelhouse/* /tmp/
 
-ENV WEBLATE_VERSION=3.1.1 \
+ENV WEBLATE_VERSION=3.2.2 \
     LANG=C.UTF-8 \
     LC_ALL=C.UTF-8 \
     DJANGO_SETTINGS_MODULE="weblate.settings"

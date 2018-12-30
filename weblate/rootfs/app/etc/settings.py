@@ -48,6 +48,7 @@ DATA_DIR = '/app/data'
 
 TIME_ZONE = env.str('WEBLATE_TIME_ZONE', 'UTC')
 LANGUAGE_CODE = env.str('WEBLATE_LANGUAGE_CODE', 'en-us')
+USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 URL_PREFIX = ''
@@ -129,7 +130,7 @@ SOCIAL_AUTH_FACEBOOK_KEY = env.str('WEBLATE_SOCIAL_AUTH_FACEBOOK_KEY', '')
 SOCIAL_AUTH_FACEBOOK_SECRET = env.str('WEBLATE_SOCIAL_AUTH_FACEBOOK_SECRET', '')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
 
-if 'WEBLATE_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY' in os.environ:
+if 'WEBLATE_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY' in env:
     AUTHENTICATION_BACKENDS += ('social_core.backends.google.GoogleOAuth2',)
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.str('WEBLATE_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY', '')
@@ -149,15 +150,15 @@ SOCIAL_AUTH_GITLAB_SCOPE = ['api']
 if 'WEBLATE_SOCIAL_AUTH_AZUREAD_OAUTH2_KEY' in env:
     AUTHENTICATION_BACKENDS += ('social_core.backends.azuread.AzureADOAuth2',)
 
-SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = os.environ.get('WEBLATE_SOCIAL_AUTH_AZUREAD_OAUTH2_KEY', '')
-SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = os.environ.get('WEBLATE_SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET', '')
+SOCIAL_AUTH_AZUREAD_OAUTH2_KEY = env.str('WEBLATE_SOCIAL_AUTH_AZUREAD_OAUTH2_KEY', '')
+SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET = env.str('WEBLATE_SOCIAL_AUTH_AZUREAD_OAUTH2_SECRET', '')
 
 # https://docs.weblate.org/en/latest/admin/auth.html#ldap-authentication
 if 'WEBLATE_AUTH_LDAP_SERVER_URI' in env:
     AUTH_LDAP_SERVER_URI = env.str('WEBLATE_AUTH_LDAP_SERVER_URI')
     AUTH_LDAP_USER_DN_TEMPLATE = env.str('WEBLATE_AUTH_LDAP_USER_DN_TEMPLATE', 'cn=%(user)s,o=Example')
     AUTHENTICATION_BACKENDS += ('django_auth_ldap.backend.LDAPBackend',)
-    AUTH_LDAP_USER_ATTR_MAP = env.dict('WEBLATE_AUTH_LDAP_USER_ATTR_MAP', { 'first_name': 'name', 'email': 'mail' })
+    AUTH_LDAP_USER_ATTR_MAP = env.dict('WEBLATE_AUTH_LDAP_USER_ATTR_MAP', { 'full_name': 'name', 'email': 'mail' })
 
 # Always include Weblate backend
 AUTHENTICATION_BACKENDS += ('weblate.accounts.auth.WeblateUserBackend',)
@@ -252,7 +253,11 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
 ]
 
+# Allow new user registrations
+REGISTRATION_OPEN = env.bool('WEBLATE_REGISTRATION_OPEN', True)
+
 MIDDLEWARE = [
+    'weblate.middleware.ProxyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -266,6 +271,23 @@ MIDDLEWARE = [
     'weblate.middleware.SecurityMiddleware',
     'weblate.wladmin.middleware.ConfigurationErrorsMiddleware',
 ]
+
+# Rollbar integration
+if 'ROLLBAR_KEY' in env:
+    MIDDLEWARE.append(
+        'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
+    )
+
+    ROLLBAR = {
+        'access_token': env.str('ROLLBAR_KEY'),
+        'environment': env.str('ROLLBAR_ENVIRONMENT', 'production'),
+        'branch': 'master',
+        'root': '/usr/local/lib/python3.6/dist-packages/weblate/',
+        'exception_level_filters': [
+             (PermissionDenied, 'ignored'),
+             (Http404, 'ignored'),
+        ],
+    }
 
 ROOT_URLCONF = 'weblate.urls'
 
@@ -303,6 +325,19 @@ INSTALLED_APPS = (
     # Optional: Git exporter
     'weblate.gitexport',
 )
+
+# Sentry integration
+if 'SENTRY_DSN' in env:
+    RAVEN_CONFIG = {
+        'dsn': env.str('SENTRY_DSN'),
+        'public_dsn': env.str('SENTRY_PUBLIC_DSN', ''),
+        'environment': env.str('SENTRY_ENVIRONMENT', 'production'),
+        'release': 'weblate-{}'.format(env.str('VERSION')),
+        'string_max_length': 1000,
+        'list_max_length': 100,
+    }
+    INSTALLED_APPS.append('raven.contrib.django.raven_compat')
+
 
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'weblate', 'locale'), )
 
@@ -560,11 +595,15 @@ if env.bool('WEBLATE_REQUIRE_LOGIN', False):
         ),
     )
 
-REGISTRATION_OPEN = env.bool('WEBLATE_REGISTRATION_OPEN', True)
-
 GOOGLE_ANALYTICS_ID = env.str('WEBLATE_GOOGLE_ANALYTICS_ID', '')
 
 AKISMET_API_KEY = env.str('WEBLATE_AKISMET_API_KEY', None)
+
+# Celery settings, it is not recommended to change these
+CELERY_WORKER_PREFETCH_MULTIPLIER = 0
+CELERY_BEAT_SCHEDULE_FILENAME = os.path.join(
+    DATA_DIR, 'celery', 'beat-schedule'
+)
 
 ADDITIONAL_CONFIG = '/app/settings-override.py'
 if os.path.exists(ADDITIONAL_CONFIG):
