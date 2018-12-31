@@ -3,7 +3,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S rabbitmq && adduser -S -h /var/lib/rabbitmq -G rabbitmq rabbitmq
 
-ENV RABBITMQ_VERSION=3.6.16 \
+ENV RABBITMQ_VERSION=3.7.9 \
     PATH=/usr/share/rabbitmq/sbin:$PATH \
     RABBITMQ_HOME=/usr/share/rabbitmq \
     RABBITMQ_LOGS=- \
