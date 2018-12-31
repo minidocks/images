@@ -24,7 +24,7 @@ RUN apk --update add bash procps \
         erlang-ssl \
         erlang-syntax-tools \
         erlang-xmerl \
-    && wget -O /tmp/rabbitmq.tar.xz https://github.com/rabbitmq/rabbitmq-server/releases/download/v${RABBITMQ_VERSION}/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.xz \
+    && wget -O /tmp/rabbitmq.tar.xz "https://github.com/rabbitmq/rabbitmq-server/releases/download/rabbitmq_v$(echo "$RABBITMQ_VERSION" | sed 's/\./_/g')/rabbitmq-server-generic-unix-${RABBITMQ_VERSION}.tar.xz" \
     && tar -Jxvzf /tmp/rabbitmq.tar.xz -C /usr/share && mv /usr/share/rabbitmq* /usr/share/rabbitmq \
     && clean
 
