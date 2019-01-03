@@ -1,13 +1,12 @@
 FROM webuni/python:3.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV SPHINX_VERSION=1.6.7
+ENV SPHINX_VERSION=1.8.3
 
 RUN pip install \
       sphinx==$SPHINX_VERSION \
       m2r \
       recommonmark \
-      phix \
       sphinx_rtd_theme \
       sphinx-autobuild \
       sphinx-multibuild \

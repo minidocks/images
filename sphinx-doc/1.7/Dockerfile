@@ -1,7 +1,7 @@
 FROM webuni/python:3.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV SPHINX_VERSION=1.7.5
+ENV SPHINX_VERSION=1.7.9
 
 RUN pip install \
       sphinx==$SPHINX_VERSION \
@@ -11,7 +11,8 @@ RUN pip install \
       sphinx_rtd_theme \
       sphinx-autobuild \
       sphinx-multibuild \
-    && rm -rf $PIP_CACHE_DIR/* && pyclean
+      sphinx-tabs \
+    && clean
 
 COPY rootfs /
 
