@@ -9,7 +9,7 @@ RUN adduser -u 1000 -S -s /bin/sh -G users user && echo "user:password" | chpass
 
 COPY rootfs /
 
-RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates gettext libintl \
+RUN apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates gettext libintl ttf-inconsolata \
     && mv /usr/bin/envsubst /usr/local/bin/ \
     && apk del gettext && clean
 
