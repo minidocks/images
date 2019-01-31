@@ -25,7 +25,7 @@ RUN wget https://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
 ENV PHP_INI_DIR=/etc/php5 \
     PHP_ERROR_LOG=/dev/stderr.pipe \
-    COMPOSER_VERSION="1.8.0" \
+    COMPOSER_VERSION="1.8.3" \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
     COMPOSER_CACHE_DIR=/composer-cache \
