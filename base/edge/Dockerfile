@@ -1,0 +1,18 @@
+FROM alpine:edge
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
+
+ENV TEMP=/tmp \
+    ENV=/etc/profile \
+    CLEAN="/var/cache/apk/:/tmp/"
+
+RUN adduser -u 1000 -S -s /bin/sh -G users user && echo "user:password" | chpasswd 2>/dev/null
+
+COPY rootfs /
+
+RUN apk --update add busybox-extras busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert libressl ca-certificates gettext libintl ttf-inconsolata \
+    && mv /usr/bin/envsubst /usr/local/bin/ \
+    && apk del gettext && clean
+
+RUN chmod 600 /etc/monitrc
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
