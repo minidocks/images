@@ -11,10 +11,15 @@
 set -e
 
 if [ -w /dev ]; then
-    mkfifo /dev/stdout.pipe
-    mkfifo /dev/stderr.pipe
-    chmod a+rw /dev/stdout.pipe /dev/stderr.pipe
+    if [ ! -e /dev/stdout.pipe ]; then
+        mkfifo /dev/stdout.pipe
+        chmod a+rw /dev/stdout.pipe
+        cat <>/dev/stdout.pipe > /proc/1/fd/1 &
+    fi
 
-    cat <>/dev/stdout.pipe > /proc/1/fd/1 &
-    cat <>/dev/stderr.pipe > /proc/1/fd/2 &
+    if [ ! -e /dev/stderr.pipe ]; then
+        mkfifo /dev/stderr.pipe
+        chmod a+rw /dev/stderr.pipe
+        cat <>/dev/stderr.pipe > /proc/1/fd/2 &
+    fi
 fi

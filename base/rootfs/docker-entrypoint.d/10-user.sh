@@ -75,22 +75,22 @@ fix_user_group()(
 )
 
 export USER_ID="$(non_empty "$USER_ID" "$(get_id 1)" "$(get_suexec 1)" "$([ "$(id -u)" != 0 ] && id -u)" "$([ -z "$USER_NO_PWD" ] && stat -c %u $(pwd))" "$(id -u)")"
-export USER_NAME="$(non_empty "$USER_NAME" "$(get_id 3)" "$(get_suexec 3)" "$(getent passwd "$USER_ID" | cut -d: -f1)" "$([ "$(id -u)" != 0 ] && id -u -n 2>dev/null)" "user")"
+export USER_NAME="$(non_empty "$USER_NAME" "$(get_id 3)" "$(get_suexec 3)" "$(getent passwd "$USER_ID" | cut -d: -f1)" "$([ "$(id -u)" != 0 ] && id -u -n 2>/dev/null)" "user")"
 export GROUP_ID="$(non_empty "$GROUP_ID" "$(get_id 4)" "$(get_suexec 2)" "$([ "$(id -g)" != 0 ] && id -g)" "$([ -z "$USER_NO_PWD" ] && stat -c %g $(pwd))" "$([ "$USER_ID" != 0 ] && getent group users | cut -d: -s -f3)" "$(id -g)")"
-export GROUP_NAME="$(non_empty "$GROUP_NAME" "$(get_id 6)" "$(getent group "$GROUP_ID" | cut -d: -f1)" "$([ "$(id -u)" != 0 ] && id -g -n 2>dev/null)" "users")"
+export GROUP_NAME="$(non_empty "$GROUP_NAME" "$(get_id 6)" "$(getent group "$GROUP_ID" | cut -d: -f1)" "$([ "$(id -u)" != 0 ] && id -g -n 2>/dev/null)" "users")"
 export USER_MASK="$(non_empty "$USER_MASK" "$(get_suexec 4)" "$(umask)")"
 
 if [ -n "$USER_MASK" ]; then
     umask "$USER_MASK"
 fi
 
-if [ "$USER_ID" = 0 ] && [ "$USER_NAME" != 'root' ] && [ -n "$USER_NAME" ]; then
+if [ "$USER_ID" = 0 ] && [ -n "$USER_NAME" ] && [ "$USER_NAME" != 'root' ]; then
     printf 'User root can not be renamed to %s\n' "$USER_NAME" >&2
     export USER_NAME='root'
     return
 fi
 
-if [ "$GROUP_ID" = 0 ] && [ "$GROUP_NAME" != 'root' ] && [ -n "$GROUP_NAME" ]; then
+if [ "$GROUP_ID" = 0 ] && [ -n "$GROUP_NAME" ] && [ "$GROUP_NAME" != 'root' ]; then
     printf 'Group root can not be renamed to %s\n' "$GROUP_NAME" >&2
     export GROUP_NAME='root'
     return
