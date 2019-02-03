@@ -26,7 +26,7 @@ load_dropbear_keys()(
 )
 
 run_dbclient()(
-    pwd="$(pwd)" password="password"
+    pwd="$(pwd)" password="password" skip_keys=""
 
     while [ -n "$1" ]; do
         if [ -z "$hosts" ]; then
@@ -50,6 +50,10 @@ run_dbclient()(
                         envs="${envs}export $2=\"$(eval printf "%s" \${"$2"})\";"
                     fi
                     shift;;
+                -y|-yy)
+                    options="$options $1"
+                    skip_keys=1
+                    ;;
                 *)
                     if [ "${1:0:1}" == "-" ]; then
                         options="$options $1"
@@ -72,11 +76,14 @@ run_dbclient()(
         if [ -n "$command" ]; then command="&& $command"; fi
         command="cd $pwd $command";
     fi
+
     if [ -n "$envs" ]; then command="$envs $command"; fi
 
-    for host in "$(printf '%s' "$hosts" | tr ',' ' ')"; do
-        load_dropbear_keys "$(parse_url "$host" 'host')"
-    done
+    if [ -z "$skip_keys" ]; then
+        for host in "$(printf '%s' "$hosts" | tr ',' ' ')"; do
+            load_dropbear_keys "$(parse_url "$host" 'host')"
+        done
+    fi
 
     DROPBEAR_PASSWORD="$password" dbclient $options $hosts $command
 )
