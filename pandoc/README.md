@@ -32,6 +32,8 @@ services:
     volumes:
     - .:/app
     working_dir: /app
+    links:
+    - context
     environment:
       ALIAS_CONTEXT: ssh context context
 ```

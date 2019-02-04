@@ -1,24 +1,12 @@
-FROM webuni/base:3.8-build AS cache
-
-RUN apk -U add ghc cabal wget zlib-dev
-
-RUN echo "while true; do echo tick > /proc/1/fd/1; sleep 60; done &" > tick.sh && sh tick.sh \
-    && cabal update && cabal install "pandoc" -fembed_data_files
-
-FROM cache AS build
-
-ENV PANDOC_VERSION=2.4
-
-RUN sh tick.sh && cabal install "pandoc-${PANDOC_VERSION}" -fembed_data_files
-
-FROM webuni/base:3.8
+FROM webuni/base:3.9
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk add gmp libffi && clean
-
 ENV PANDOC_VERSION=2.4
 
-COPY --from=0 /root/.cabal/bin/pandoc /usr/local/bin/pandoc
+RUN wget -O /tmp/pandoc.tar.gz "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux.tar.gz" \
+    && tar -xvzf /tmp/pandoc.tar.gz -C /tmp && mv /tmp/pandoc*/bin/pandoc /usr/local/bin/pandoc \
+    && clean
+
 COPY rootfs /
 
 CMD [ "pandoc" ]
