@@ -47,8 +47,8 @@ Usage
 Tags
 ----
 
- Tag    | Size
- ------ | ----
- latest | [![](https://images.microbadger.com/badges/image/webuni/gimp.svg)](https://microbadger.com/images/webuni/gimp)
- 2.10   | [![](https://images.microbadger.com/badges/image/webuni/gimp:2.10.svg)](https://microbadger.com/images/webuni/gimp:2.10)
- 2.8    | [![](https://images.microbadger.com/badges/image/webuni/gimp:2.8.svg)](https://microbadger.com/images/webuni/gimp:2.8)
+ Tag          | Size
+ ---          | ----
+ latest, 2.10 | [![](https://images.microbadger.com/badges/image/webuni/gimp.svg)](https://microbadger.com/images/webuni/gimp)
+ 2.10         | [![](https://images.microbadger.com/badges/image/webuni/gimp:2.10.svg)](https://microbadger.com/images/webuni/gimp:2.10)
+ 2.8          | [![](https://images.microbadger.com/badges/image/webuni/gimp:2.8.svg)](https://microbadger.com/images/webuni/gimp:2.8)
