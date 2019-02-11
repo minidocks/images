@@ -1,9 +1,31 @@
 Poppler docker image (webuni/poppler)
 =====================================
 
-<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Poppler_logotype.svg/100px-Poppler_logotype.svg.png"></p>
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Poppler_logotype.svg/150px-Poppler_logotype.svg.png)
 
 Poppler is an utility library for rendering PDF documents.
+
+Utilities
+---------
+
+- pdftotext
+- pdfunite
+- pdftops
+- pdffonts
+- pdftohtml
+- pdfimages
+- pdfinfo
+- pdftocairo
+- pdftoppm
+- pdfseparate
+- pdfdetach
+
+Usage
+-----
+
+```bash
+docker run --rm  -v "`pwd`:/app" -w /app webuni/poppler pdftotext --help
+```
 
 Tags
 ----
