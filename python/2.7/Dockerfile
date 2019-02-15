@@ -1,4 +1,4 @@
-FROM webuni/base:3.8
+FROM webuni/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \
