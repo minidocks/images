@@ -6,7 +6,7 @@ if [ -r $(pwd)'/.env' ]; then
 fi
 
 IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-webuni}"
-GIT_NAMESPACE="${GIT_NAMESPACE:-microcontainers}"
+GIT_NAMESPACE="${GIT_NAMESPACE:-minidocks}"
 HUB_NAMESPACE="${HUB_NAMESPACE:-webuni}"
 HUB_URL=https://hub.docker.com/v2
 
