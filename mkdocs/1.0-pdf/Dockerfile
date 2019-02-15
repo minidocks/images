@@ -1,8 +1,8 @@
-FROM webuni/weasyprint:43
+FROM webuni/weasyprint
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV MKDOCS_VERSION=1.0.4 \
-    MKDOCS_MATERIAL_VERSION=3.1.0
+    MKDOCS_MATERIAL_VERSION=4.0.1
 
 RUN pip install \
       mkdocs==$MKDOCS_VERSION \

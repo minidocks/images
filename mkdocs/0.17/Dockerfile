@@ -1,4 +1,4 @@
-FROM webuni/python:3.6
+FROM webuni/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV MKDOCS_VERSION=0.17.5 \
