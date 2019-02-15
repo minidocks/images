@@ -1,7 +1,7 @@
 FROM webuni/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV WEASYPRINT_VERSION=43
+ENV WEASYPRINT_VERSION=44
 
 RUN apk add --update cairo cairo-gobject pango gdk-pixbuf py3-lxml py3-cffi py3-pillow msttcorefonts-installer fontconfig \
     && update-ms-fonts && fc-cache -f \

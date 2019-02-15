@@ -15,9 +15,10 @@ docker run --rm -v `pwd`:/app -w /app webuni/weasyprint https://weasyprint.org/ 
 Tags
 ----
 
- Tag    | Size
- ------ | ----
- latest | [![](https://images.microbadger.com/badges/image/webuni/weasyprint.svg)](https://microbadger.com/images/webuni/weasyprint)
- 43     | [![](https://images.microbadger.com/badges/image/webuni/weasyprint:43.svg)](https://microbadger.com/images/webuni/weasyprint:43)
- 0.42   | [![](https://images.microbadger.com/badges/image/webuni/weasyprint:0.42.svg)](https://microbadger.com/images/webuni/weasyprint:0.42)
+ Tag        | Size
+ ---        | ----
+ latest, 44 | [![](https://images.microbadger.com/badges/image/webuni/weasyprint.svg)](https://microbadger.com/images/webuni/weasyprint)
+ 44         | [![](https://images.microbadger.com/badges/image/webuni/weasyprint:44.svg)](https://microbadger.com/images/webuni/weasyprint:44)
+ 43         | [![](https://images.microbadger.com/badges/image/webuni/weasyprint:43.svg)](https://microbadger.com/images/webuni/weasyprint:43)
+ 0.42       | [![](https://images.microbadger.com/badges/image/webuni/weasyprint:0.42.svg)](https://microbadger.com/images/webuni/weasyprint:0.42)
 
