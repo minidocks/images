@@ -5,9 +5,9 @@ if [ -r $(pwd)'/.env' ]; then
     . $(pwd)'/.env'
 fi
 
-IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-webuni}"
+IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-minidocks webuni}"
 GIT_NAMESPACE="${GIT_NAMESPACE:-minidocks}"
-HUB_NAMESPACE="${HUB_NAMESPACE:-webuni}"
+HUB_NAMESPACE="${HUB_NAMESPACE:-minidocks webuni}"
 HUB_URL=https://hub.docker.com/v2
 
 to_json(){
@@ -32,24 +32,24 @@ assert_http_code(){
 query()(
     json="$1"
     shift
-    printf '%s' "$json" | _docker_run webuni/curl jq "$@"
+    printf '%s' "$json" | _docker_run minidocks/curl jq "$@"
 )
 
 do_request(){
-    _docker_run webuni/curl \
+    _docker_run minidocks/curl \
         curl --retry 5 --retry-delay 3 -H "Content-Type: application/json" -H "Accept: application/json" -i -s "$@" \
     | tr -d '\r' | tr '\n' '\r' | sed -e 's/.\+\(HTTP\/1.\+\)/-\1-/' | tr '\r' '\n'
 }
 
 run_git(){
-    _docker_run -e FILE_NETRC_PATH="/home/user/.netrc" -e FILE_NETRC_CONTENT="machine github.com login token password $GITHUB_TOKEN" webuni/git git "$@"
+    _docker_run -e FILE_NETRC_PATH="/home/user/.netrc" -e FILE_NETRC_CONTENT="machine github.com login token password $GITHUB_TOKEN" minidocks/git git "$@"
 }
 
 github(){
     do_request -H "Authorization: token $GITHUB_TOKEN" -X "$1" --data "$3" "https://api.github.com$2"
 }
 
-travis() {
+travis(){
     do_request -H "Travis-API-Version: 3" -H "Authorization: token $TRAVIS_TOKEN" -X "$1" --data "$3" "https://api.travis-ci.com$2"
 }
 
@@ -61,12 +61,18 @@ hub(){
         REGISTRY_TOKEN_TIME="$(date +"%s")"
     fi
 
-    do_request -H "Authorization: JWT $REGISTRY_TOKEN" -X "$1" --data "$3" "$HUB_URL/repositories/$HUB_NAMESPACE$2"
+    do_request -H "Authorization: JWT $REGISTRY_TOKEN" -X "$1" --data "$3" "$HUB_URL/repositories$2"
 }
 
 lsdir(){
     find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n' | sort
 }
+
+froms()(
+    for namespace in $IMAGE_NAMESPACE; do
+        printf '%s ' "$1" | grep "FROM $namespace/" | cut -d/ -f2 | cut -d' ' -f1
+    done
+)
 
 deps()(
     dir="${1:-$(pwd)}"
@@ -75,11 +81,11 @@ deps()(
 
     if [ -d "$dir" ]; then
         for file in $(find "$dir" -name "Dockerfile"); do
-            froms="$(cat "$file" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2 | cut -d: -f1 | cut -d' ' -f1) $froms"
+            froms="$(froms "$(cat "$file")") $froms"
         done
     fi
 
-    froms="$(echo "$froms" | sed -e 's/ /\n/g' | grep -v "$basename" | sort | uniq | xargs)"
+    froms="$(echo "$froms" | sed -e 's/ /\n/g' | grep -v "$basename" | cut -d: -f1 | sort | uniq | xargs)"
     for from in $froms; do
         froms="$(deps "$from") $froms"
     done
@@ -124,17 +130,19 @@ build()(
         return
     fi
 
-    froms="$(cat "$source_dir/Dockerfile" | grep "FROM $IMAGE_NAMESPACE/" | cut -d/ -f2 | cut -d' ' -f1)"
+    froms="$(froms "$(cat "$source_dir/Dockerfile")")"
     for from in $froms; do
         tag="$(echo "$from" | cut -d: -f2 -s)"
         build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
     done
 
     if [ ! -d "$target_dir" ] || [ "$no_clear" != 1 ]; then
-        _ansi --nl --green --format "Build %s/%s:%s - %s" "$IMAGE_NAMESPACE" "$package" "$version" "$source_dir"
         rm -rf "$target_dir"
         cp -rfL "$source_dir" "$target_dir"
-        exec docker build $opts -t "$IMAGE_NAMESPACE/$package:$version" "$target_dir"
+        for namespace in $IMAGE_NAMESPACE; do
+            _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
+            docker build $opts -t "$namespace/$package:$version" "$target_dir"
+        done
         if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
         printf "\n"
     else
@@ -254,62 +262,65 @@ task_trigger()(
 # Push docker image to https://hub.docker.com
 task_push()(
     for name in ${1:-$(lsdir)}; do
-        hub_name="$HUB_NAMESPACE/$name"
+        for namespace in $HUB_NAMESPACE; do
+            hub_name="$namespace/$name"
 
-        _ansi --yellow --nl "Build all docker images for $hub_name"
+            _ansi --yellow --nl "Build all docker images for $hub_name"
 
-        data="$(to_json "description=Minimal $name images&provider=github&vcs_repo_name=$GIT_NAMESPACE/$name&dockerhub_repo_name=$hub_name&active=false&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/")"
+            data="$(to_json "description=Minimal $name images&provider=github&vcs_repo_name=$GIT_NAMESPACE/$name&dockerhub_repo_name=$hub_name&active=false&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/")"
 
-        response="$(hub "GET" "/$name/")"
-        if [ "$(query "$(http_body "$response")" -r '.is_automated')" = "false" ]; then
-            printf "Delete non-automatic repository \"%s\"\n" "$name"
-            assert_http_code "$(hub "DELETE" "/$name/")" "202"
-            response="$(hub "GET" "/$name/")"
-        fi
-
-        if [ "$(http_code "$response")" = "404" ]; then
-            printf "Create automatic repository \"%s\"\n" "$hub_name"
-            response="$(hub "POST" "/$name/autobuild/" "$data")"
-            assert_http_code "$response" "201"
-        else
-            printf "Update automatic repository \"%s\"\n" "$hub_name"
-            response="$(hub "PUT" "/$name/autobuild/" "$data")"
-            assert_http_code "$response" "200"
-        fi
-
-        build_tags="$(query "$(http_body "$response")" -r ".build_tags")"
-        for pair in $(query "$build_tags" -r '.[] | (.id|tostring)+"/"+(.name)'); do
-            if [ "${pair#*/*}" != "latest" ]; then
-                printf "Delete obsolete auto build tag \"%s\" in repository \"%s\"\n" "${pair#*/*}" "$name"
-                assert_http_code "$(hub "DELETE" "/$name/autobuild/tags/${pair%*/*}/")" "204"
+            response="$(hub "GET" "/$hub_name/")"
+            if [ "$(query "$(http_body "$response")" -r '.is_automated')" = "false" ]; then
+                printf "Delete non-automatic repository \"%s\"\n" "$hub_name"
+                assert_http_code "$(hub "DELETE" "/$hub_name/")" "202"
+                response="$(hub "GET" "/$hub_name/")"
             fi
-        done
 
-        for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
-            docker push "$hub_name:$version"
+            if [ "$(http_code "$response")" = "404" ]; then
+                printf "Create automatic repository \"%s\"\n" "$hub_name"
+                response="$(hub "POST" "/$hub_name/autobuild/" "$data")"
+                assert_http_code "$response" "201"
+            else
+                printf "Update automatic repository \"%s\"\n" "$hub_name"
+                response="$(hub "PUT" "/$hub_name/autobuild/" "$data")"
+                assert_http_code "$response" "200"
+            fi
 
-            if [ "$version" = "latest" ]; then
-                data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
-                id="$(query "$build_tags" -r ".[] | select(.name==\"$version\") | .id")"
-                if [ -z "$id" ]; then
-                    printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
-                    assert_http_code "$(hub "POST" "/$name/autobuild/tags/" "$(to_json "isNew=true&namespace=$N_HUB&repoName=$dir&$data")")" "201"
-                    assert_http_code "$(hub "POST" "/$name/autobuild/trigger-build/" "$(to_json "$data")")" "202"
-                else
-                    printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
-                    assert_http_code "$(hub "PUT" "/$name/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
+            build_tags="$(query "$(http_body "$response")" -r ".build_tags")"
+            for pair in $(query "$build_tags" -r '.[] | (.id|tostring)+"/"+(.name)'); do
+                if [ "${pair#*/*}" != "latest" ]; then
+                    printf "Delete obsolete auto build tag \"%s\" in repository \"%s\"\n" "${pair#*/*}" "$name"
+                    assert_http_code "$(hub "DELETE" "/$hub_name/autobuild/tags/${pair%*/*}/")" "204"
                 fi
-            fi
-        done
+            done
 
-#        response="$(hub "GET" "/$name/links/")"
-#        links="$(query "$(http_body "$response")" -r ".results")"
-#        for pair in $(query "$links" -r '.[] | (.id|tostring)+":"+(.to_repo)'); do
-#            printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
-#            assert_http_code "$(hub "DELETE" "/$name/links/${pair%*:*}/")" "204"
-#        done
+            for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
+                docker push "$hub_name:$version"
+
+                if [ "$version" = "latest" ]; then
+                    data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
+                    id="$(query "$build_tags" -r ".[] | select(.name==\"$version\") | .id")"
+                    if [ -z "$id" ]; then
+                        printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
+                        assert_http_code "$(hub "POST" "/$hub_name/autobuild/tags/" "$(to_json "isNew=true&namespace=$namespace&repoName=$name&$data")")" "201"
+                        assert_http_code "$(hub "POST" "/$hub_name/autobuild/trigger-build/" "$(to_json "$data")")" "202"
+                    else
+                        printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
+                        assert_http_code "$(hub "PUT" "/$hub_name/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
+                    fi
+                fi
+            done
+
+#            response="$(hub "GET" "/$hub_name/links/")"
+#            links="$(query "$(http_body "$response")" -r ".results")"
+#            for pair in $(query "$links" -r '.[] | (.id|tostring)+":"+(.to_repo)'); do
+#                printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
+#                assert_http_code "$(hub "DELETE" "/$hub_name/links/${pair%*:*}/")" "204"
+#            done
+        done
     done
 )
 
 url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
-if [ -n "$(command -v 'wget')" ]; then eval "$(wget -qO- "$url")"; else eval "$(curl -s "$url")"; fi
+! if [ -n "$(command -v 'wget')" ]; then r="$(wget -qT 1 "$url" -O-)" && echo "$r" > .runner; else curl --connect-timeout 1 -fso .runner "$url"; fi
+. ./.runner

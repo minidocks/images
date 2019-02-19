@@ -1,2 +1,5 @@
 .env
-.subsplit/
+.history
+.idea
+.runner
+.subsplit
