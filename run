@@ -298,7 +298,7 @@ task_push()(
                 docker push "$hub_name:$version"
 
                 if [ "$version" = "latest" ]; then
-                    data="name=$version&source_type=Branch&source_name=master&dockerfile_location=$version"
+                    data="name=$version&source_type=Branch&source_name=master&dockerfile_location=.hub"
                     id="$(query "$build_tags" -r ".[] | select(.name==\"$version\") | .id")"
                     if [ -z "$id" ]; then
                         printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
