@@ -195,7 +195,7 @@ task_build()(
 # Split monorepository
 task_split()(
     rm -rf .subsplit/
-    run_git subsplit init "https://github.com/$GIT_NAMESPACE/$GIT_NAMESPACE"
+    run_git subsplit init "https://github.com/$GIT_NAMESPACE/images"
 
     processed=" "
     for name in ${1:-$(lsdir)}; do
