@@ -1,6 +1,6 @@
 script:
   - docker login -u "$REGISTRY_LOGIN" -p "$REGISTRY_PASSWORD"
-  - wget -O run https://raw.githubusercontent.com/minidocs/images/master/run
+  - wget -O run https://raw.githubusercontent.com/minidocks/images/master/run
   - export TRAVIS_REPO_NAME=${TRAVIS_REPO_SLUG#*/}
   - export HUB_NAMESPACE=cognitocz
   - sh ./run build "$TRAVIS_REPO_NAME" --dir "."
