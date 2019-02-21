@@ -1,5 +1,5 @@
-Weblate docker image (webuni/weblate)
-=====================================
+Weblate docker image (minidocks/weblate)
+========================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Weblate_logo.svg/100px-Weblate_logo.svg.png)
 
@@ -11,9 +11,10 @@ Tags
 ----
 
  Tag         | Size
- ----------- | ----
- latest, 3.3 | [![](https://images.microbadger.com/badges/image/webuni/weblate.svg)](https://microbadger.com/images/webuni/weblate)
- 3.3         | [![](https://images.microbadger.com/badges/image/webuni/weblate:3.3.svg)](https://microbadger.com/images/webuni/weblate:3.3)
- 3.2         | [![](https://images.microbadger.com/badges/image/webuni/weblate:3.2.svg)](https://microbadger.com/images/webuni/weblate:3.2)
- 3.1         | [![](https://images.microbadger.com/badges/image/webuni/weblate:3.1.svg)](https://microbadger.com/images/webuni/weblate:3.1)
- 3.0         | [![](https://images.microbadger.com/badges/image/webuni/weblate:3.1.svg)](https://microbadger.com/images/webuni/weblate:3.0)
+ ---         | ----
+ latest, 3.4 | [![](https://images.microbadger.com/badges/image/minidocks/weblate.svg)](https://microbadger.com/images/minidocks/weblate)
+ 3.4         | [![](https://images.microbadger.com/badges/image/minidocks/weblate:3.3.svg)](https://microbadger.com/images/minidocks/weblate:3.4)
+ 3.3         | [![](https://images.microbadger.com/badges/image/minidocks/weblate:3.3.svg)](https://microbadger.com/images/minidocks/weblate:3.3)
+ 3.2         | [![](https://images.microbadger.com/badges/image/minidocks/weblate:3.2.svg)](https://microbadger.com/images/minidocks/weblate:3.2)
+ 3.1         | [![](https://images.microbadger.com/badges/image/minidocks/weblate:3.1.svg)](https://microbadger.com/images/minidocks/weblate:3.1)
+ 3.0         | [![](https://images.microbadger.com/badges/image/minidocks/weblate:3.1.svg)](https://microbadger.com/images/minidocks/weblate:3.0)

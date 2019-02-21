@@ -1,4 +1,4 @@
-FROM webuni/php:7.1-base
+FROM minidocks/php:7.1-base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV ADMINER_VERSION 4.6.2

@@ -1,5 +1,5 @@
-Python docker image (webuni/python)
-===================================
+Python docker image (minidocks/python)
+======================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/320px-Python_logo_and_wordmark.svg.png)
 
@@ -28,9 +28,9 @@ Tags
 
  Tag       | Size
 ---------- | ----
- latest    | [![](https://images.microbadger.com/badges/image/webuni/python.svg)](https://microbadger.com/images/webuni/python)
- 3.6       | [![](https://images.microbadger.com/badges/image/webuni/python:3.6.svg)](https://microbadger.com/images/webuni/python:3.6)
- 3.6-uwsgi | [![](https://images.microbadger.com/badges/image/webuni/python:3.6-uwsgi.svg)](https://microbadger.com/images/webuni/python:3.6-uwsgi)
- 3.5       | [![](https://images.microbadger.com/badges/image/webuni/python:3.5.svg)](https://microbadger.com/images/webuni/python:3.5)
- 2.7       | [![](https://images.microbadger.com/badges/image/webuni/python:2.7.svg)](https://microbadger.com/images/webuni/python:2.7)
+ latest    | [![](https://images.microbadger.com/badges/image/minidocks/python.svg)](https://microbadger.com/images/minidocks/python)
+ 3.6       | [![](https://images.microbadger.com/badges/image/minidocks/python:3.6.svg)](https://microbadger.com/images/minidocks/python:3.6)
+ 3.6-uwsgi | [![](https://images.microbadger.com/badges/image/minidocks/python:3.6-uwsgi.svg)](https://microbadger.com/images/minidocks/python:3.6-uwsgi)
+ 3.5       | [![](https://images.microbadger.com/badges/image/minidocks/python:3.5.svg)](https://microbadger.com/images/minidocks/python:3.5)
+ 2.7       | [![](https://images.microbadger.com/badges/image/minidocks/python:2.7.svg)](https://microbadger.com/images/minidocks/python:2.7)
 

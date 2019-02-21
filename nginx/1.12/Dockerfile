@@ -1,4 +1,4 @@
-FROM webuni/base:3.7
+FROM minidocks/base:3.7
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S nginx && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx

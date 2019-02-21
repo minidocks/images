@@ -1,4 +1,4 @@
-FROM webuni/postgres:10
+FROM minidocks/postgres:10
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV LANG cs_CZ.UTF-8

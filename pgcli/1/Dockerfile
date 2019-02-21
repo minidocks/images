@@ -1,4 +1,4 @@
-FROM webuni/python:3.6
+FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PGCLI_VERSION=v1.11.0

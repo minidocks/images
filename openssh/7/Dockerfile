@@ -1,4 +1,4 @@
-FROM webuni/base:3.8
+FROM minidocks/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN rm -rf /bin/ssh /bin/sshd \

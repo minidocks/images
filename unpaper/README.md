@@ -1,5 +1,5 @@
-Unpaper docker image (webuni/unpaper)
-=====================================
+Unpaper docker image (minidocks/unpaper)
+========================================
 
 unpaper is a post-processing tool for scanned sheets of paper, especially for book pages that have been scanned from
 previously created photocopies. The main purpose is to make scanned book pages better readable on screen after
@@ -10,13 +10,13 @@ Usage
 -----
 
 ```bash
-docker run --rm -v "`pwd`:/app" -w /app webuni/unpaper --help
+docker run --rm -v "`pwd`:/app" -w /app minidocks/unpaper --help
 ```
 
 Tags
 ----
 
  Tag       | Size
- --------- | ----
- latest, 6 | [![](https://images.microbadger.com/badges/image/webuni/unpaper.svg)](https://microbadger.com/images/webuni/unpaper)
- 6         | [![](https://images.microbadger.com/badges/image/webuni/unpaper:6.svg)](https://microbadger.com/images/webuni/unpaper:6)
+ ---       | ----
+ latest, 6 | [![](https://images.microbadger.com/badges/image/minidocks/unpaper.svg)](https://microbadger.com/images/minidocks/unpaper)
+ 6         | [![](https://images.microbadger.com/badges/image/minidocks/unpaper:6.svg)](https://microbadger.com/images/minidocks/unpaper:6)

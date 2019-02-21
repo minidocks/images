@@ -1,5 +1,5 @@
-Imagemagick docker image (webuni/imagemagick)
-=============================================
+Imagemagick docker image (minidocks/imagemagick)
+================================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/ImageMagick_logo.svg/100px-ImageMagick_logo.svg.png)
 
@@ -10,7 +10,7 @@ Usage
 -----
 
 ```bash
-docker run --rm -v `pwd`:/app -w /app webuni/imagemagick \
+docker run --rm -v `pwd`:/app -w /app minidocks/imagemagick \
     https://www.ece.rice.edu/~wakin/images/lena512color.tiff -resize 256x256\> -colorspace Gray lenna.png
 ```
 
@@ -19,6 +19,6 @@ Tags
 
  Tag    | Size
  ------ | ----
- latest | [![](https://images.microbadger.com/badges/image/webuni/imagemagick.svg)](https://microbadger.com/images/webuni/imagemagick)
- 7      | [![](https://images.microbadger.com/badges/image/webuni/imagemagick:7.svg)](https://microbadger.com/images/webuni/imagemagick:7)
- 6      | [![](https://images.microbadger.com/badges/image/webuni/imagemagick:6.svg)](https://microbadger.com/images/webuni/imagemagick:6)
+ latest | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick.svg)](https://microbadger.com/images/minidocks/imagemagick)
+ 7      | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:7.svg)](https://microbadger.com/images/minidocks/imagemagick:7)
+ 6      | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:6.svg)](https://microbadger.com/images/minidocks/imagemagick:6)

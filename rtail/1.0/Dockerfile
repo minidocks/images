@@ -1,4 +1,4 @@
-FROM webuni/node:8
+FROM minidocks/node:8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV RTAIL_VERSION=1.0.6

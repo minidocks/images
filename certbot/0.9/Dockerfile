@@ -1,4 +1,4 @@
-FROM webuni/python:2.7
+FROM minidocks/python:2.7
 MAINTAINER Martin Hasoň <martin.hason@gmail.com>
 
 RUN apk --update add certbot \

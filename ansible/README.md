@@ -1,5 +1,5 @@
-Ansible docker image (webuni/ansible)
-=====================================
+Ansible docker image (minidocks/ansible)
+========================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ansible_logo.svg/100px-Ansible_logo.svg.png)
 
@@ -12,7 +12,7 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 2.7 | [![](https://images.microbadger.com/badges/image/webuni/ansible.svg)](https://microbadger.com/images/webuni/ansible)
- 2.7         | [![](https://images.microbadger.com/badges/image/webuni/ansible:2.7.svg)](https://microbadger.com/images/webuni/ansible:2.7)
- 2.6         | [![](https://images.microbadger.com/badges/image/webuni/ansible:2.6.svg)](https://microbadger.com/images/webuni/ansible:2.6)
- 2.6-python2 | [![](https://images.microbadger.com/badges/image/webuni/ansible:2.6-python2.svg)](https://microbadger.com/images/webuni/ansible:2.6-python2)
+ latest, 2.7 | [![](https://images.microbadger.com/badges/image/minidocks/ansible.svg)](https://microbadger.com/images/minidocks/ansible)
+ 2.7         | [![](https://images.microbadger.com/badges/image/minidocks/ansible:2.7.svg)](https://microbadger.com/images/minidocks/ansible:2.7)
+ 2.6         | [![](https://images.microbadger.com/badges/image/minidocks/ansible:2.6.svg)](https://microbadger.com/images/minidocks/ansible:2.6)
+ 2.6-python2 | [![](https://images.microbadger.com/badges/image/minidocks/ansible:2.6-python2.svg)](https://microbadger.com/images/minidocks/ansible:2.6-python2)

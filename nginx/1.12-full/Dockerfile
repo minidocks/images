@@ -1,4 +1,4 @@
-FROM webuni/nginx:1.12
+FROM minidocks/nginx:1.12
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add \

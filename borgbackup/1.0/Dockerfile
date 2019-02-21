@@ -1,4 +1,4 @@
-FROM webuni/python:3.5
+FROM minidocks/python:3.5
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk add --update borgbackup \

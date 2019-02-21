@@ -1,5 +1,5 @@
-Mailhog docker image (webuni/mailhog)
-=====================================
+Mailhog docker image (minidocks/mailhog)
+========================================
 
 ![](https://avatars3.githubusercontent.com/u/10258541?s=200&v=4)
 
@@ -30,5 +30,5 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 1.0 | [![](https://images.microbadger.com/badges/image/webuni/mailhog.svg)](https://microbadger.com/images/webuni/mailhog)
- 1.0         | [![](https://images.microbadger.com/badges/image/webuni/mailhog:1.0.svg)](https://microbadger.com/images/webuni/mailhog:1.0)
+ latest, 1.0 | [![](https://images.microbadger.com/badges/image/minidocks/mailhog.svg)](https://microbadger.com/images/minidocks/mailhog)
+ 1.0         | [![](https://images.microbadger.com/badges/image/minidocks/mailhog:1.0.svg)](https://microbadger.com/images/minidocks/mailhog:1.0)

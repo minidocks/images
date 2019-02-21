@@ -1,4 +1,4 @@
-FROM webuni/php:7.2-base
+FROM minidocks/php:7.2-base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV DEPLOYER_VERSION=6.3.0

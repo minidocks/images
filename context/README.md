@@ -1,5 +1,5 @@
-ConTeXt standalone docker image (webuni/context)
-================================================
+ConTeXt standalone docker image (minidocks/context)
+===================================================
 
 ![](https://wiki.contextgarden.net/skins/common/images/context/context_logo_inv.png?6c748)
 
@@ -11,7 +11,7 @@ Usage
 -----
 
 ```bash
-docker run --rm -v `pwd`:/app -w /app webuni/context --help
+docker run --rm -v `pwd`:/app -w /app minidocks/context --help
 ```
 
 If we want to use an another tool (e.g. Inkscape for convert svg image to pdf), we must connect
@@ -22,7 +22,7 @@ So create a file `docker-compose.yml` with content:
 version: '3.1'
 services:
   context:
-    image: webuni/context
+    image: minidocks/context
     volumes:
     - .:/app
     links:
@@ -33,7 +33,7 @@ services:
     command: context
 
   inkscape:
-    image: webuni/inkscape
+    image: minidocks/inkscape
     volumes:
     - .:/app
     working_dir: /app
@@ -50,7 +50,7 @@ Tags
 
  Tag          | Size
  ---          | ----
- latest, beta | [![](https://images.microbadger.com/badges/image/webuni/context.svg)](https://microbadger.com/images/webuni/context)
- beta         | [![](https://images.microbadger.com/badges/image/webuni/context:beta.svg)](https://microbadger.com/images/webuni/context:beta)
- current      | [![](https://images.microbadger.com/badges/image/webuni/context:current.svg)](https://microbadger.com/images/webuni/context:current)
+ latest, beta | [![](https://images.microbadger.com/badges/image/minidocks/context.svg)](https://microbadger.com/images/minidocks/context)
+ beta         | [![](https://images.microbadger.com/badges/image/minidocks/context:beta.svg)](https://microbadger.com/images/minidocks/context:beta)
+ current      | [![](https://images.microbadger.com/badges/image/minidocks/context:current.svg)](https://microbadger.com/images/minidocks/context:current)
 

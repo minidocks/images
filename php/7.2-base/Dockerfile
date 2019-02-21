@@ -1,4 +1,4 @@
-FROM webuni/base:3.8
+FROM minidocks/base:3.8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 # 82 is the standard uid/gid for "www-data" in Alpine

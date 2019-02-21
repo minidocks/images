@@ -1,4 +1,4 @@
-FROM webuni/python:3.6
+FROM minidocks/python:3.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV ANSIBLE_VERSION 2.6.12

@@ -1,4 +1,4 @@
-FROM webuni/base:3.8
+FROM minidocks/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV GIT_STANDUP_VERSION=2.3.0
@@ -12,3 +12,5 @@ RUN apk --update add git git-subtree git-lfs ncurses less bash \
 COPY rootfs /
 
 CMD [ "git" ]
+
+# https://github.com/jderusse/docker-gitsplit/blob/master/Dockerfile

@@ -1,5 +1,5 @@
-GIMP docker image (webuni/gimp)
-===============================
+GIMP docker image (minidocks/gimp)
+==================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/The_GIMP_icon_-_gnome.svg/100px-The_GIMP_icon_-_gnome.svg.png)
 
@@ -32,7 +32,7 @@ Usage
 
   Then run command:
   ```bash
-  docker run --rm -v `pwd`:/app -w /app -v ~/unsharp.scm:/gimp/scripts/unsharp.scm webuni/gimp \
+  docker run --rm -v `pwd`:/app -w /app -v ~/unsharp.scm:/gimp/scripts/unsharp.scm minidocks/gimp \
       -i -b '(simple-unsharp-mask "/usr/share/gimp/2.0/images/gimp-splash.png" 5.0 0.5 0)' -b '(gimp-quit 0)'
   ```
 
@@ -41,7 +41,7 @@ Usage
 - **Run GUI**
   ```bash
   xhost +
-  docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`:/app -w /app webuni/gimp
+  docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`:/app -w /app minidocks/gimp
   ```
 
 Tags
@@ -49,6 +49,6 @@ Tags
 
  Tag          | Size
  ---          | ----
- latest, 2.10 | [![](https://images.microbadger.com/badges/image/webuni/gimp.svg)](https://microbadger.com/images/webuni/gimp)
- 2.10         | [![](https://images.microbadger.com/badges/image/webuni/gimp:2.10.svg)](https://microbadger.com/images/webuni/gimp:2.10)
- 2.8          | [![](https://images.microbadger.com/badges/image/webuni/gimp:2.8.svg)](https://microbadger.com/images/webuni/gimp:2.8)
+ latest, 2.10 | [![](https://images.microbadger.com/badges/image/minidocks/gimp.svg)](https://microbadger.com/images/minidocks/gimp)
+ 2.10         | [![](https://images.microbadger.com/badges/image/minidocks/gimp:2.10.svg)](https://microbadger.com/images/minidocks/gimp:2.10)
+ 2.8          | [![](https://images.microbadger.com/badges/image/minidocks/gimp:2.8.svg)](https://microbadger.com/images/minidocks/gimp:2.8)

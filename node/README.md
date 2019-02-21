@@ -1,5 +1,5 @@
-NodeJS docker image (webuni/node)
-=================================
+NodeJS docker image (minidocks/node)
+====================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/170px-Node.js_logo.svg.png)
 
@@ -22,11 +22,11 @@ Tags
 
  Tag        | Size
 ----------- | ----
- latest, 11 | [![](https://images.microbadger.com/badges/image/webuni/node.svg)](https://microbadger.com/images/webuni/node)
- 11         | [![](https://images.microbadger.com/badges/image/webuni/node:11.svg)](https://microbadger.com/images/webuni/node:11)
- 10         | [![](https://images.microbadger.com/badges/image/webuni/node:10.svg)](https://microbadger.com/images/webuni/node:10)
- 9          | [![](https://images.microbadger.com/badges/image/webuni/node:9.svg)](https://microbadger.com/images/webuni/node:9)
- 8          | [![](https://images.microbadger.com/badges/image/webuni/node:8.svg)](https://microbadger.com/images/webuni/node:8)
- 7          | [![](https://images.microbadger.com/badges/image/webuni/node:7.svg)](https://microbadger.com/images/webuni/node:7)
- 6          | [![](https://images.microbadger.com/badges/image/webuni/node:6.svg)](https://microbadger.com/images/webuni/node:6)
+ latest, 11 | [![](https://images.microbadger.com/badges/image/minidocks/node.svg)](https://microbadger.com/images/minidocks/node)
+ 11         | [![](https://images.microbadger.com/badges/image/minidocks/node:11.svg)](https://microbadger.com/images/minidocks/node:11)
+ 10         | [![](https://images.microbadger.com/badges/image/minidocks/node:10.svg)](https://microbadger.com/images/minidocks/node:10)
+ 9          | [![](https://images.microbadger.com/badges/image/minidocks/node:9.svg)](https://microbadger.com/images/minidocks/node:9)
+ 8          | [![](https://images.microbadger.com/badges/image/minidocks/node:8.svg)](https://microbadger.com/images/minidocks/node:8)
+ 7          | [![](https://images.microbadger.com/badges/image/minidocks/node:7.svg)](https://microbadger.com/images/minidocks/node:7)
+ 6          | [![](https://images.microbadger.com/badges/image/minidocks/node:6.svg)](https://microbadger.com/images/minidocks/node:6)
 

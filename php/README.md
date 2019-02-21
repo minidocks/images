@@ -1,5 +1,5 @@
-PHP docker image (webuni/php)
-=============================
+PHP docker image (minidocks/php)
+================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/200px-PHP-logo.svg.png)
 
@@ -25,7 +25,7 @@ Usage
 
 Run interactive REPL:
 ```bash
-docker run --rm -it -v `pwd`:`pwd` -w `pwd` webuni/php
+docker run --rm -it -v `pwd`:`pwd` -w `pwd` minidocks/php
 ```
 
 Tags
@@ -33,16 +33,18 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 7.2 | [![](https://images.microbadger.com/badges/image/webuni/php.svg)](https://microbadger.com/images/webuni/php)
- 7.2-base    | [![](https://images.microbadger.com/badges/image/webuni/php:7.2-base.svg)](https://microbadger.com/images/webuni/php:7.2-base)
- 7.2         | [![](https://images.microbadger.com/badges/image/webuni/php:7.2.svg)](https://microbadger.com/images/webuni/php:7.2)
- 7.2-intl    | [![](https://images.microbadger.com/badges/image/webuni/php:7.2-intl.svg)](https://microbadger.com/images/webuni/php:7.2-intl)
- 7.1-base    | [![](https://images.microbadger.com/badges/image/webuni/php:7.1-base.svg)](https://microbadger.com/images/webuni/php:7.1-base)
- 7.1         | [![](https://images.microbadger.com/badges/image/webuni/php:7.1.svg)](https://microbadger.com/images/webuni/php:7.1)
- 7.1-intl    | [![](https://images.microbadger.com/badges/image/webuni/php:7.1-intl.svg)](https://microbadger.com/images/webuni/php:7.1-intl)
- 7.0-base    | [![](https://images.microbadger.com/badges/image/webuni/php:7.0-base.svg)](https://microbadger.com/images/webuni/php:7.0-base)
- 7.0         | [![](https://images.microbadger.com/badges/image/webuni/php:7.0.svg)](https://microbadger.com/images/webuni/php:7.0)
- 7.0-intl    | [![](https://images.microbadger.com/badges/image/webuni/php:7.0-intl.svg)](https://microbadger.com/images/webuni/php:7.0-intl)
- 5.6-base    | [![](https://images.microbadger.com/badges/image/webuni/php:5.6-base.svg)](https://microbadger.com/images/webuni/php:5.6-base)
- 5.6         | [![](https://images.microbadger.com/badges/image/webuni/php:5.6.svg)](https://microbadger.com/images/webuni/php:5.6-intl)
- 5.6-intl    | [![](https://images.microbadger.com/badges/image/webuni/php:5.6-intl.svg)](https://microbadger.com/images/webuni/php:5.6-intl)
+ latest, 7.2 | [![](https://images.microbadger.com/badges/image/minidocks/php.svg)](https://microbadger.com/images/minidocks/php)
+ 7.2-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.2-base.svg)](https://microbadger.com/images/minidocks/php:7.2-base)
+ 7.2         | [![](https://images.microbadger.com/badges/image/minidocks/php:7.2.svg)](https://microbadger.com/images/minidocks/php:7.2)
+ 7.2-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.2-intl.svg)](https://microbadger.com/images/minidocks/php:7.2-intl)
+ 7.1-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.1-base.svg)](https://microbadger.com/images/minidocks/php:7.1-base)
+ 7.1         | [![](https://images.microbadger.com/badges/image/minidocks/php:7.1.svg)](https://microbadger.com/images/minidocks/php:7.1)
+ 7.1-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.1-intl.svg)](https://microbadger.com/images/minidocks/php:7.1-intl)
+ 7.0-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.0-base.svg)](https://microbadger.com/images/minidocks/php:7.0-base)
+ 7.0         | [![](https://images.microbadger.com/badges/image/minidocks/php:7.0.svg)](https://microbadger.com/images/minidocks/php:7.0)
+ 7.0-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.0-intl.svg)](https://microbadger.com/images/minidocks/php:7.0-intl)
+ 5.6-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:5.6-base.svg)](https://microbadger.com/images/minidocks/php:5.6-base)
+ 5.6         | [![](https://images.microbadger.com/badges/image/minidocks/php:5.6.svg)](https://microbadger.com/images/minidocks/php:5.6-intl)
+ 5.6-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:5.6-intl.svg)](https://microbadger.com/images/minidocks/php:5.6-intl)
+
+https://github.com/codecasts/php-alpine

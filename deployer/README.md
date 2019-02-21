@@ -1,5 +1,5 @@
-Deployer docker image (webuni/deployer)
-=======================================
+Deployer docker image (minidocks/deployer)
+==========================================
 
 ![](https://deployer.org/images/deployer-sticker.png)
 
@@ -9,8 +9,8 @@ Usage
 -----
 
 ```bash
-docker run --rm -v `pwd`:/app -w /app webuni/deployer init
-docker run --rm -v `pwd`:/app -w /app webuni/deployer deploy
+docker run --rm -v `pwd`:/app -w /app minidocks/deployer init
+docker run --rm -v `pwd`:/app -w /app minidocks/deployer deploy
 ```
 
 Tags
@@ -18,7 +18,7 @@ Tags
 
  Tag       | Size
  --------- | ----
- latest, 6 | [![](https://images.microbadger.com/badges/image/webuni/deployer.svg)](https://microbadger.com/images/webuni/deployer)
- 6         | [![](https://images.microbadger.com/badges/image/webuni/deployer:6.svg)](https://microbadger.com/images/webuni/deployer:6)
- 4         | [![](https://images.microbadger.com/badges/image/webuni/deployer:4.svg)](https://microbadger.com/images/webuni/deployer:4)
+ latest, 6 | [![](https://images.microbadger.com/badges/image/minidocks/deployer.svg)](https://microbadger.com/images/minidocks/deployer)
+ 6         | [![](https://images.microbadger.com/badges/image/minidocks/deployer:6.svg)](https://microbadger.com/images/minidocks/deployer:6)
+ 4         | [![](https://images.microbadger.com/badges/image/minidocks/deployer:4.svg)](https://microbadger.com/images/minidocks/deployer:4)
 

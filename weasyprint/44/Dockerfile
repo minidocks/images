@@ -1,4 +1,4 @@
-FROM webuni/python
+FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV WEASYPRINT_VERSION=44

@@ -1,4 +1,4 @@
-FROM webuni/php:7.1-base
+FROM minidocks/php:7.1-base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk add --update php7-xml php7-dom php7-soap php7-xmlwriter php7-xdebug \

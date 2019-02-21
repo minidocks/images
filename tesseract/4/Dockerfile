@@ -1,4 +1,4 @@
-FROM webuni/base:3.8
+FROM minidocks/base:3.8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN printf "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing\n" >> /etc/apk/repositories \

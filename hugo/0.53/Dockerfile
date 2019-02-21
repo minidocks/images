@@ -1,4 +1,4 @@
-FROM webuni/base:3.8
+FROM minidocks/base:3.8
 MAINTAINER Martin Hasoň <martin.hason@gmail.com>
 
 ENV HUGO_VERSION=0.53

@@ -1,4 +1,4 @@
-FROM webuni/php:7.1
+FROM minidocks/php:7.1
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add php7-intl \

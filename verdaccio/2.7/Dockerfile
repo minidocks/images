@@ -1,4 +1,4 @@
-FROM webuni/node:8
+FROM minidocks/node:8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV VERDACCIO_VERSION=2.7.1

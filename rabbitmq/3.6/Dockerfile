@@ -1,4 +1,4 @@
-FROM webuni/erlang
+FROM minidocks/erlang
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S rabbitmq && adduser -S -h /var/lib/rabbitmq -G rabbitmq rabbitmq

@@ -1,5 +1,5 @@
-Ruby docker image (webuni/ruby)
-===============================
+Ruby docker image (minidocks/ruby)
+==================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/100px-Ruby_logo.svg.png)
 
@@ -11,7 +11,7 @@ Tags
 
  Tag       | Size
 ---------- | ----
- latest    | [![](https://images.microbadger.com/badges/image/webuni/ruby.svg)](https://microbadger.com/images/webuni/ruby)
- 2.5       | [![](https://images.microbadger.com/badges/image/webuni/ruby:2.5.svg)](https://microbadger.com/images/webuni/ruby:2.5)
- 2.4       | [![](https://images.microbadger.com/badges/image/webuni/ruby:2.4.svg)](https://microbadger.com/images/webuni/ruby:2.4)
+ latest    | [![](https://images.microbadger.com/badges/image/minidocks/ruby.svg)](https://microbadger.com/images/minidocks/ruby)
+ 2.5       | [![](https://images.microbadger.com/badges/image/minidocks/ruby:2.5.svg)](https://microbadger.com/images/minidocks/ruby:2.5)
+ 2.4       | [![](https://images.microbadger.com/badges/image/minidocks/ruby:2.4.svg)](https://microbadger.com/images/minidocks/ruby:2.4)
 

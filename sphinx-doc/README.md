@@ -1,5 +1,5 @@
-Sphinx docker image (webuni/sphinx-doc)
-=====================================
+Sphinx docker image (minidocks/sphinx-doc)
+==========================================
 
 ![](https://upload.wikimedia.org/wikipedia/en/d/dc/Sphinx_Python_Documentation_Logo.png)
 
@@ -24,19 +24,19 @@ Usage
 
 Create own image with custom theme:
 ```docker
-FROM webuni/sphinx-doc
+FROM minidocks/sphinx-doc
 
 RUN pip install sphinx_rtd_theme && clean
 ```
 
 Generate a new documentation:
 ``` bash
-docker run --rm -it -v `pwd`:/doc -w /doc webuni/sphinx-doc sphinx-quickstart .
+docker run --rm -it -v `pwd`:/doc -w /doc minidocks/sphinx-doc sphinx-quickstart .
 ```
 
 And run documentation server:
 ``` bash
-docker run --rm -v `pwd`:/doc -w /doc -p 8000:8000 webuni/sphinx-doc sphinx-autobuild -H 0.0.0.0 . _build/
+docker run --rm -v `pwd`:/doc -w /doc -p 8000:8000 minidocks/sphinx-doc sphinx-autobuild -H 0.0.0.0 . _build/
 ```
 
 Tags
@@ -44,7 +44,7 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 1.8 | [![](https://images.microbadger.com/badges/image/webuni/sphinx-doc.svg)](https://microbadger.com/images/webuni/sphinx-doc)
- 1.8         | [![](https://images.microbadger.com/badges/image/webuni/sphinx-doc:1.8.svg)](https://microbadger.com/images/webuni/sphinx-doc:1.8)
- 1.7         | [![](https://images.microbadger.com/badges/image/webuni/sphinx-doc:1.7.svg)](https://microbadger.com/images/webuni/sphinx-doc:1.7)
- 1.6         | [![](https://images.microbadger.com/badges/image/webuni/sphinx-doc:1.6.svg)](https://microbadger.com/images/webuni/sphinx-doc:1.6)
+ latest, 1.8 | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)](https://microbadger.com/images/minidocks/sphinx-doc)
+ 1.8         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.8.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.8)
+ 1.7         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.7.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.7)
+ 1.6         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.6.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.6)

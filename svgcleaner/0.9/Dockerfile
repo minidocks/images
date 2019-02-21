@@ -1,4 +1,4 @@
-FROM webuni/base
+FROM minidocks/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV SVGCLEANER_VERSION=0.9.5

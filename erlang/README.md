@@ -1,5 +1,5 @@
-Erlang docker image (webuni/erlang)
-===================================
+Erlang docker image (minidocks/erlang)
+======================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Erlang_logo.svg/100px-Erlang_logo.svg.png)
 
@@ -10,6 +10,6 @@ Tags
 
  Tag        | Size
  ---------- | ----
- latest, 20 | [![](https://images.microbadger.com/badges/image/webuni/erlang.svg)](https://microbadger.com/images/webuni/erlang)
- 20         | [![](https://images.microbadger.com/badges/image/webuni/erlang:20.svg)](https://microbadger.com/images/webuni/erlang:20)
- 19         | [![](https://images.microbadger.com/badges/image/webuni/erlang:19.svg)](https://microbadger.com/images/webuni/erlang:19)
+ latest, 20 | [![](https://images.microbadger.com/badges/image/minidocks/erlang.svg)](https://microbadger.com/images/minidocks/erlang)
+ 20         | [![](https://images.microbadger.com/badges/image/minidocks/erlang:20.svg)](https://microbadger.com/images/minidocks/erlang:20)
+ 19         | [![](https://images.microbadger.com/badges/image/minidocks/erlang:19.svg)](https://microbadger.com/images/minidocks/erlang:19)

@@ -1,4 +1,4 @@
-FROM webuni/php:5.6
+FROM minidocks/php:5.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add php5-intl \

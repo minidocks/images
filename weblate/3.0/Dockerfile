@@ -1,9 +1,9 @@
-FROM webuni/base:3.8-build
+FROM minidocks/base:3.9-build
 
 RUN apk --update add python3-dev && pip3 install wheel siphashc rjsmin rcssmin python-Levenshtein hiredis \
     && pip3 wheel --wheel-dir=/tmp/wheelhouse siphashc rjsmin rcssmin python-Levenshtein
 
-FROM webuni/python:3.6-uwsgi
+FROM minidocks/python:3.6-uwsgi
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S weblate && adduser -S -G weblate weblate

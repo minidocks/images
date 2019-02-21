@@ -1,4 +1,4 @@
-FROM webuni/base:3.7
+FROM minidocks/base:3.7
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add postfix opendkim libsasl \

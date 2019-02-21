@@ -1,4 +1,4 @@
-FROM webuni/jupyter:4
+FROM minidocks/jupyter:4
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk add --update py3-psutil \

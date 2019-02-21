@@ -1,4 +1,4 @@
-FROM webuni/base:3.5
+FROM minidocks/base:3.5
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \

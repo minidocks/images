@@ -1,4 +1,4 @@
-FROM webuni/php:5.6-base
+FROM minidocks/php:5.6-base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN printf "@3.5-community http://dl-cdn.alpinelinux.org/alpine/v3.5/community\n" >> /etc/apk/repositories \

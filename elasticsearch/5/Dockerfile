@@ -1,4 +1,4 @@
-FROM webuni/java:8-jre
+FROM minidocks/java:8-jre
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S elasticsearch && adduser -S -G elasticsearch elasticsearch

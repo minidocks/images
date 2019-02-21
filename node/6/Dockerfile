@@ -1,4 +1,4 @@
-FROM webuni/base:3.6
+FROM minidocks/base:3.6
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV NPM_CONFIG_CACHE=/npm-cache \

@@ -1,4 +1,4 @@
-FROM webuni/weasyprint
+FROM minidocks/weasyprint
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV MKDOCS_VERSION=1.0.4 \

@@ -1,4 +1,4 @@
-FROM webuni/php:7.0-base
+FROM minidocks/php:7.0-base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add \

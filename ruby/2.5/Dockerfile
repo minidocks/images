@@ -1,4 +1,4 @@
-FROM webuni/base:3.8
+FROM minidocks/base:3.8
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 # install things globally, for great justice and don't create ".bundle" in all our apps

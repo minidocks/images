@@ -1,5 +1,5 @@
-LFTP docker image (webuni/lftp)
-===============================
+LFTP docker image (minidocks/lftp)
+==================================
 
 ![](https://lftp.yar.ru/lftp1.png)
 
@@ -12,6 +12,6 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 4.8 | [![](https://images.microbadger.com/badges/image/webuni/lftp.svg)](https://microbadger.com/images/webuni/lftp)
- 4.8         | [![](https://images.microbadger.com/badges/image/webuni/lftp:4.8.svg)](https://microbadger.com/images/webuni/lftp:4.8)
+ latest, 4.8 | [![](https://images.microbadger.com/badges/image/minidocks/lftp.svg)](https://microbadger.com/images/minidocks/lftp)
+ 4.8         | [![](https://images.microbadger.com/badges/image/minidocks/lftp:4.8.svg)](https://microbadger.com/images/minidocks/lftp:4.8)
 

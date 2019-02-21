@@ -1,4 +1,4 @@
-FROM webuni/php:7.1-intl
+FROM minidocks/php:7.1-intl
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV MAUTIC_VERSION 2.13.1

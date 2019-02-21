@@ -1,4 +1,5 @@
-FROM webuni/base:3.5
+FROM minidocks/base:3.7
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S mysql && adduser -S -G mysql mysql
 

@@ -1,5 +1,5 @@
-Wkhtmltopdf docker image (webuni/wkhtmltopdf)
-=============================================
+Wkhtmltopdf docker image (minidocks/wkhtmltopdf)
+================================================
 
 ![](https://wkhtmltopdf.org/images/logo.png)
 
@@ -10,13 +10,13 @@ Usage
 -----
 
 ```bash
-docker run --rm -v `pwd`:/app -w /app webuni/wkhtmltopdf http://google.com google.pdf
+docker run --rm -v `pwd`:/app -w /app minidocks/wkhtmltopdf http://google.com google.pdf
 ```
 
 Tags
 ----
 
  Tag          | Size
- ------------ | ----
- latest, 0.12 | [![](https://images.microbadger.com/badges/image/webuni/wkhtmltopdf.svg)](https://microbadger.com/images/webuni/wkhtmltopdf)
- 0.12         | [![](https://images.microbadger.com/badges/image/webuni/wkhtmltopdf:0.12.svg)](https://microbadger.com/images/webuni/wkhtmltopdf:0.12)
+ ---          | ----
+ latest, 0.12 | [![](https://images.microbadger.com/badges/image/minidocks/wkhtmltopdf.svg)](https://microbadger.com/images/minidocks/wkhtmltopdf)
+ 0.12         | [![](https://images.microbadger.com/badges/image/minidocks/wkhtmltopdf:0.12.svg)](https://microbadger.com/images/minidocks/wkhtmltopdf:0.12)
