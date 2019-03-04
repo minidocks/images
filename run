@@ -8,10 +8,11 @@ fi
 IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-minidocks webuni}"
 GIT_NAMESPACE="${GIT_NAMESPACE:-minidocks}"
 HUB_NAMESPACE="${HUB_NAMESPACE:-minidocks webuni}"
-HUB_URL=https://hub.docker.com/v2
+HUB_URL=https://cloud.docker.com/v2
+HUB_API_URL=https://cloud.docker.com/api/build/v1
 
 to_json(){
-    printf '{"%s"}' "$(echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g')"
+    printf '{"%s"}' "$(echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g' | sed -E 's/"(true|false)"/\1/g')"
 }
 
 http_code(){
@@ -61,8 +62,12 @@ hub(){
         REGISTRY_TOKEN_TIME="$(date +"%s")"
     fi
 
-    do_request -H "Authorization: JWT $REGISTRY_TOKEN" -X "$1" --data "$3" "$HUB_URL/repositories$2"
+    do_request -H "Authorization: JWT $REGISTRY_TOKEN" -X "$1" --data "$3" "${4:-$HUB_URL}$2"
 }
+
+hub_api()(
+    hub "$1" "$2" "$3" "$HUB_API_URL"
+)
 
 lsdir(){
     find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n' | sort
@@ -265,58 +270,36 @@ task_push()(
         for namespace in $HUB_NAMESPACE; do
             hub_name="$namespace/$name"
 
-            _ansi --yellow --nl "Build all docker images for $hub_name"
+            _ansi --yellow --nl "Push docker image $hub_name"
 
-            data="$(to_json "description=Minimal $name images&provider=github&vcs_repo_name=$GIT_NAMESPACE/$name&dockerhub_repo_name=$hub_name&active=false&is_private=false&build_tags=__TAGS__" | sed "s/\"__TAGS__\"/[]/")"
+            data="$(to_json "description=Minimal $name images&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false&provider=github&owner=$GIT_NAMESPACE&repository=base&build_settings=__SETTINGS__")"
+            settings="source_type=Branch&tag=latest&source_name=master&autobuild=true&nocache=true&dockerfile=Dockerfile&build_context=";
+            if [ -f "$name/build.sh" ]; then settings="$settings/"; else settings="$settings/.hub"; fi
+            settings="$(to_json "$settings")"
+            data="$(echo "$data" | sed -e "s/\"__SETTINGS__\"/[$(echo "$settings" | sed -e 's/[\/&]/\\&/g')]/")"
 
-            response="$(hub "GET" "/$hub_name/")"
-            if [ "$(query "$(http_body "$response")" -r '.is_automated')" = "false" ]; then
-                printf "Delete non-automatic repository \"%s\"\n" "$hub_name"
-                assert_http_code "$(hub "DELETE" "/$hub_name/")" "202"
-                response="$(hub "GET" "/$hub_name/")"
-            fi
-
+            response="$(hub "GET" "/repositories/$hub_name/")"
             if [ "$(http_code "$response")" = "404" ]; then
                 printf "Create automatic repository \"%s\"\n" "$hub_name"
-                response="$(hub "POST" "/$hub_name/autobuild/" "$data")"
+                response="$(hub "POST" "/repositories/" "$data")"
                 assert_http_code "$response" "201"
-            else
-                printf "Update automatic repository \"%s\"\n" "$hub_name"
-                response="$(hub "PUT" "/$hub_name/autobuild/" "$data")"
-                assert_http_code "$response" "200"
             fi
 
-            build_tags="$(query "$(http_body "$response")" -r ".build_tags")"
-            for pair in $(query "$build_tags" -r '.[] | (.id|tostring)+"/"+(.name)'); do
-                if [ "${pair#*/*}" != "latest" ]; then
-                    printf "Delete obsolete auto build tag \"%s\" in repository \"%s\"\n" "${pair#*/*}" "$name"
-                    assert_http_code "$(hub "DELETE" "/$hub_name/autobuild/tags/${pair%*/*}/")" "204"
-                fi
-            done
+            response="$(hub_api "GET" "/$namespace/source/?image=$namespace%2F$name")"
+            assert_http_code "$response" "200"
+            uuid="$(query "$(http_body "$response")" -r ".objects[0].uuid")"
+            printf "Update automatic repository \"%s(%s)\"\n" "$hub_name" "$uuid"
+            if [ "$uuid" = "null" ]; then
+                response="$(hub_api "POST" "/$namespace/source/" "$data")"
+                assert_http_code "$response" "201"
+            else
+                response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "{\"build_settings\":[$settings]}")"
+                assert_http_code "$response" "202"
+            fi
 
             for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
-                docker push "$hub_name:$version"
-
-                if [ "$version" = "latest" ]; then
-                    data="name=$version&source_type=Branch&source_name=master&dockerfile_location=.hub"
-                    id="$(query "$build_tags" -r ".[] | select(.name==\"$version\") | .id")"
-                    if [ -z "$id" ]; then
-                        printf "Create build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
-                        assert_http_code "$(hub "POST" "/$hub_name/autobuild/tags/" "$(to_json "isNew=true&namespace=$namespace&repoName=$name&$data")")" "201"
-                        assert_http_code "$(hub "POST" "/$hub_name/autobuild/trigger-build/" "$(to_json "$data")")" "202"
-                    else
-                        printf "Update build tag \"%s\" in repository \"%s\"\n" "$version" "$hub_name"
-                        assert_http_code "$(hub "PUT" "/$hub_name/autobuild/tags/$id/" "$(to_json "id=$id&$data")")" "200"
-                    fi
-                fi
+                echo docker push "$hub_name:$version"
             done
-
-#            response="$(hub "GET" "/$hub_name/links/")"
-#            links="$(query "$(http_body "$response")" -r ".results")"
-#            for pair in $(query "$links" -r '.[] | (.id|tostring)+":"+(.to_repo)'); do
-#                printf "Delete obsolete docker link \"%s\" in repository \"%s\"\n" "${pair#*:*}" "$hub_name"
-#                assert_http_code "$(hub "DELETE" "/$hub_name/links/${pair%*:*}/")" "204"
-#            done
         done
     done
 )
