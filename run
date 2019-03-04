@@ -75,7 +75,7 @@ lsdir(){
 
 froms()(
     for namespace in $IMAGE_NAMESPACE; do
-        printf '%s ' "$1" | grep "FROM $namespace/" | cut -d/ -f2 | cut -d' ' -f1
+        printf '%s ' "$1" | grep "FROM $namespace/" | cut -d/ -f2 | cut -d' ' -f1 | uniq
     done
 )
 
@@ -113,19 +113,24 @@ split()(
 )
 
 build()(
-    package="" version="" source_dir=""
+    package="" version="" opts=""
     while [ -n "$1" ]; do
         case "$1" in
             --force) opts="${opts} --no-cache";;
             --no-clear) no_clear="1";;
             -*) opts="${opts} $1";;
-            *) if [ -z "$package" ]; then package="$1"; elif [ -z "$version" ]; then version="$1"; else source_dir="$1"; fi;;
+            *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
         esac
         shift
     done
 
-    source_dir="${source_dir:-${package}/${version}}"
-    target_dir="/tmp/${package}-${version}"
+    if [ -f "$package/build.sh" ]; then
+        source_dir="$package"
+    else
+        source_dir="${package}/${version}"
+        target_dir="/tmp/${package}-${version}"
+    fi
+
     if [ ! -d "$source_dir" ]; then
         git clone "https://github.com/$GIT_NAMESPACE/$package"
     fi
@@ -141,7 +146,13 @@ build()(
         build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
     done
 
-    if [ ! -d "$target_dir" ] || [ "$no_clear" != 1 ]; then
+    if [ -f "$package/build.sh" ]; then
+        for namespace in $IMAGE_NAMESPACE; do
+            _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
+            namespace="$namespace" "$package/build.sh" "$version" $opts
+        done
+        printf "\n"
+    elif [ ! -d "$target_dir" ] || [ "$no_clear" != 1 ]; then
         rm -rf "$target_dir"
         cp -rfL "$source_dir" "$target_dir"
         for namespace in $IMAGE_NAMESPACE; do
@@ -182,18 +193,18 @@ task_build()(
         dir="$package"
     fi
 
-    versions=$(find ${dir}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
-
     if [ -z "$version" ]; then
+        if [ -f "$dir/build.sh" ]; then
+            versions=$("$dir/build.sh" --versions)
+        else
+            versions=$(find ${dir}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
+        fi
+
         for version in $versions; do
-            build "$package" "$version" "$dir/$version" $opts
+            build "$package" "$version" $opts
         done
     else
-        build "$package" "$version" "$dir/$version" $opts
-    fi
-
-    if [ $(echo "$versions" | wc -l) = 1 ] && [ "$version" != "latest" ]; then
-        build "$package" "latest" "$dir/$version" $opts
+        build "$package" "$version" $opts
     fi
 )
 
