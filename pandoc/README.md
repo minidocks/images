@@ -48,7 +48,9 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 2.5 | [![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)](https://microbadger.com/images/minidocks/pandoc)
+ latest, 2.7 | [![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)](https://microbadger.com/images/minidocks/pandoc)
+ 2.7         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.7.svg)](https://microbadger.com/images/minidocks/pandoc:2.7)
+ 2.6         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.6.svg)](https://microbadger.com/images/minidocks/pandoc:2.6)
  2.5         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.5.svg)](https://microbadger.com/images/minidocks/pandoc:2.5)
  2.4         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.4.svg)](https://microbadger.com/images/minidocks/pandoc:2.4)
  2.3         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.3.svg)](https://microbadger.com/images/minidocks/pandoc:2.3)
