@@ -283,7 +283,7 @@ task_push()(
 
             _ansi --yellow --nl "Push docker image $hub_name"
 
-            data="$(to_json "description=Minimal $name images&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false&provider=github&owner=$GIT_NAMESPACE&repository=base&build_settings=__SETTINGS__")"
+            data="$(to_json "description=Minimal $name images&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false&provider=github&owner=$GIT_NAMESPACE&repository=$name&build_settings=__SETTINGS__")"
             settings="source_type=Branch&tag=latest&source_name=master&autobuild=true&nocache=true&dockerfile=Dockerfile&build_context=";
             if [ -f "$name/build.sh" ]; then settings="$settings/"; else settings="$settings/.hub"; fi
             settings="$(to_json "$settings")"
@@ -304,12 +304,12 @@ task_push()(
                 response="$(hub_api "POST" "/$namespace/source/" "$data")"
                 assert_http_code "$response" "201"
             else
-                response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "{\"build_settings\":[$settings]}")"
+                response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "{\"owner\":\"$GIT_NAMESPACE\",\"repository\":\"$name\",\"build_settings\":[$settings]}")"
                 assert_http_code "$response" "202"
             fi
 
             for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
-                echo docker push "$hub_name:$version"
+                docker push "$hub_name:$version"
             done
         done
     done
