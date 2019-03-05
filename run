@@ -113,11 +113,12 @@ split()(
 )
 
 build()(
-    package="" version="" opts=""
+    package="" version="" source_dir="" opts=""
     while [ -n "$1" ]; do
         case "$1" in
             --force) opts="${opts} --no-cache";;
             --no-clear) no_clear="1";;
+            --dir*) source_dir="$2"; shift;;
             -*) opts="${opts} $1";;
             *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
         esac
@@ -126,10 +127,10 @@ build()(
 
     if [ -f "$package/build.sh" ]; then
         source_dir="$package"
-    else
+    elif [ -z "$source_dir" ]; then
         source_dir="${package}/${version}"
-        target_dir="/tmp/${package}-${version}"
     fi
+    target_dir="/tmp/${package}-${version}"
 
     if [ ! -d "$source_dir" ]; then
         git clone "https://github.com/$GIT_NAMESPACE/$package"
@@ -146,10 +147,10 @@ build()(
         build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
     done
 
-    if [ -f "$package/build.sh" ]; then
+    if [ -f "$source_dir/build.sh" ]; then
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
-            namespace="$namespace" "$package/build.sh" "$version" $opts
+            namespace="$namespace" "$source_dir/build.sh" "$version" $opts
         done
         printf "\n"
     elif [ ! -d "$target_dir" ] || [ "$no_clear" != 1 ]; then
@@ -189,22 +190,19 @@ task_build()(
         package="$(printf '%s' "$package" | cut -d/ -f1)"
     fi
 
-    if [ -z "$dir" ]; then
-        dir="$package"
-    fi
-
     if [ -z "$version" ]; then
-        if [ -f "$dir/build.sh" ]; then
-            versions=$("$dir/build.sh" --versions)
+        directory="${dir:-$package}"
+        if [ -f "$directory/build.sh" ]; then
+            versions=$("$directory/build.sh" --versions)
         else
-            versions=$(find ${dir}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
+            versions=$(find ${directory}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
         fi
 
         for version in $versions; do
-            build "$package" "$version" $opts
+            build "$package" "$version" --dir "$dir" $opts
         done
     else
-        build "$package" "$version" $opts
+        build "$package" "$version" --dir "$dir" $opts
     fi
 )
 
@@ -309,6 +307,7 @@ task_push()(
             fi
 
             for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
+                printf " - $hub_name:$version\n"
                 docker push "$hub_name:$version"
             done
         done
