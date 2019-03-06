@@ -129,8 +129,9 @@ build()(
         source_dir="$package"
     elif [ -z "$source_dir" ]; then
         source_dir="${package}/${version}"
+    else
+        source_dir="${source_dir}/${version}"
     fi
-    target_dir="/tmp/${package}-${version}"
 
     if [ ! -d "$source_dir" ]; then
         git clone "https://github.com/$GIT_NAMESPACE/$package"
@@ -147,6 +148,7 @@ build()(
         build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
     done
 
+    target_dir="/tmp/${package}-${version}"
     if [ -f "$source_dir/build.sh" ]; then
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
@@ -179,7 +181,8 @@ task_build()(
     while [ -n "$1" ]; do
         case "$1" in
             --dir*) dir="$2"; shift;;
-            -*) opts="${opts} --no-cache";;
+            --force) opts="${opts} --no-cache";;
+            -*) opts="${opts} $1";;
             *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
         esac
         shift
