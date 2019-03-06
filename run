@@ -135,6 +135,7 @@ build()(
 
     if [ ! -d "$source_dir" ]; then
         git clone "https://github.com/$GIT_NAMESPACE/$package"
+        if [ -f "$package/build.sh" ]; then source_dir="$package"; fi
     fi
 
     if [ ! -f "$source_dir/Dockerfile" ]; then
