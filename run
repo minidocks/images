@@ -153,7 +153,8 @@ build()(
 
     froms="$(froms "$(cat "$source_dir/Dockerfile")")"
     for from in $froms; do
-        task_build "$(echo "$from" | tr ':' '/')"
+        tag="$(echo "$from" | cut -d: -f2 -s)"
+        task_build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}"
     done
 
     target_dir="/tmp/${package}-${version}"
