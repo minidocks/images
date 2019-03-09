@@ -112,6 +112,14 @@ split()(
     run_git subsplit publish "$name:https://github.com/$repo"
 )
 
+versions()(
+    if [ -f "$1/build.sh" ]; then
+        "$1/build.sh" --versions
+    else
+        find ${1}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2
+    fi
+)
+
 build()(
     package="" version="" source_dir="" opts=""
     while [ -n "$1" ]; do
@@ -145,8 +153,7 @@ build()(
 
     froms="$(froms "$(cat "$source_dir/Dockerfile")")"
     for from in $froms; do
-        tag="$(echo "$from" | cut -d: -f2 -s)"
-        build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" # TODO no-clear
+        task_build "$(echo "$from" | tr ':' '/')"
     done
 
     target_dir="/tmp/${package}-${version}"
@@ -177,8 +184,8 @@ build()(
 # [$2: Version]
 #
 # Options:
-#
 task_build()(
+    package="" version="" dir="" opts=""
     while [ -n "$1" ]; do
         case "$1" in
             --dir*) dir="$2"; shift;;
@@ -194,19 +201,13 @@ task_build()(
         package="$(printf '%s' "$package" | cut -d/ -f1)"
     fi
 
-    if [ -z "$version" ]; then
-        directory="${dir:-$package}"
-        if [ -f "$directory/build.sh" ]; then
-            versions=$("$directory/build.sh" --versions)
-        else
-            versions=$(find ${directory}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2)
-        fi
-
+    versions="$(versions "${dir:-$package}")"
+    if [ -n "$version" ] && echo "$versions" | grep -qx "$version"; then
+        build "$package" "$version" --dir "$dir" $opts
+    else
         for version in $versions; do
             build "$package" "$version" --dir "$dir" $opts
         done
-    else
-        build "$package" "$version" --dir "$dir" $opts
     fi
 )
 
