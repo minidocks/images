@@ -1,0 +1,27 @@
+Index: src/ocrmypdf/pdfa.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/ocrmypdf/pdfa.py	(date 1552088311000)
++++ src/ocrmypdf/pdfa.py	(date 1552640610000)
+@@ -32,6 +32,7 @@
+ """
+
+ import os
++import shutil
+ from binascii import hexlify
+ from pathlib import Path
+ from string import Template
+@@ -105,6 +106,11 @@
+     else:
+         raise NotImplementedError("Only supporting sRGB")
+
++    # copy icc profile to target directory, which is readable by Ghostscript
++    target_icc_profile = os.path.join(os.path.dirname(target_filename), os.path.basename(icc_profile))
++    shutil.copy(icc_profile, target_icc_profile)
++    icc_profile = target_icc_profile
++
+     # pdfmark must contain the full path to the ICC profile, and pdfmark must be
+     # also encoded in ASCII. ocrmypdf can be installed anywhere, including to
+     # paths that have a non-ASCII character in the filename. Ghostscript
