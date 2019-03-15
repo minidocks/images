@@ -27,11 +27,11 @@ COPY rootfs /
 
 CMD [ "context" ]
 
-FROM beta AS fonts
+FROM latest AS fonts
 
-COPY --from=0 /usr/share/texmf-fonts/* /usr/share/tex/texmf/fonts/*
+COPY --from=0 /usr/share/texmf-fonts/* /usr/share/tex/texmf/fonts/
 
-FROM beta AS docs
+FROM latest AS docs
 
 COPY --from=0 /usr/share/texmf-context-doc /usr/share/tex/texmf-context/doc
 COPY --from=0 /usr/share/texmf-modules-doc /usr/share/tex/texmf-modules/doc
