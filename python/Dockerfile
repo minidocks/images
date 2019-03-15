@@ -1,4 +1,39 @@
-FROM minidocks/python:3.6
+ARG version=3.6
+ARG base_version=base
+
+FROM minidocks/base:3.5 as v35
+
+FROM minidocks/base as base
+
+FROM $base_version as latest
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
+
+ENV PIP_NO_COMPILE=1 \
+    PIP_CACHE_DIR=/pip-cache \
+    CLEAN="$CLEAN:\$PIP_CACHE_DIR/:pyclean"
+
+COPY rootfs /
+
+ARG version
+
+RUN if [ "${version%%.*}" = 2 ]; then apk -U add python2 py2-pip; else apk -U add python3; fi && clean
+
+# make some useful symlinks that are expected to exist
+RUN if [ "${version%%.*}" = 3 ]; then \
+        ln -s /usr/bin/python3 /usr/bin/python; \
+        ln -s /usr/bin/pip3 /usr/bin/pip; \
+        ln -s /usr/bin/easy_install-$version /usr/bin/easy_install; \
+        ln -s /usr/bin/idle3 /usr/bin/idle; \
+        ln -s /usr/bin/pydoc3 /usr/bin/pydoc; \
+    fi
+
+RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
+    && pip install -U pip pipenv wheel && if [ "${version%%.*}" = 3 ]; then pip install flit; fi \
+    && clean
+
+CMD [ "python" ]
+
+FROM latest as uwsgi
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update --no-cache add nginx \
@@ -77,6 +112,8 @@ RUN apk --update --no-cache add nginx \
         uwsgi-zergpool \
     && clean
 
-COPY rootfs /
+COPY rootfs-uwsgi /
 
 CMD [ "uwsgi", "--ini", "/etc/uwsgi/uwsgi.ini" ]
+
+FROM latest
