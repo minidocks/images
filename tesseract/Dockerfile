@@ -13,7 +13,7 @@ ARG version
 ENV TESSDATA_PREFIX=/usr/share/tessdata \
     TESSDATA_URL=https://github.com/tesseract-ocr/tessdata/raw/$version
 
-RUN apk --update add tesseract-ocr && rm -rf /usr/share/tessdata/eng* && chmod a+rwx "$TESSDATA_PREFIX" && clean
+RUN apk --update add tesseract-ocr && chmod a+rwx "$TESSDATA_PREFIX" && clean
 
 COPY rootfs /
 
