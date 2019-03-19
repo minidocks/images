@@ -11,13 +11,14 @@ ssh_help()(
 )
 
 load_dropbear_keys()(
+    mkdir -p "$HOME/.ssh"
     touch "$HOME/.ssh/known_hosts"
 
     if [ -n "$(grep "^$1" "$HOME/.ssh/known_hosts")" ]; then
         return
     fi
 
-    for type in "dss" "rsa" "ecdsa"; do
+    for type in dss rsa ecdsa; do
         file="/etc/dropbear/dropbear_${type}_host_key.pub"
         if [ -r "$file" ]; then
             sed "s/^/$1 /" "$file" >> "$HOME/.ssh/known_hosts"
@@ -26,7 +27,7 @@ load_dropbear_keys()(
 )
 
 run_dbclient()(
-    pwd="$(pwd)" password="password" skip_keys=""
+    pwd=$(escape "$(pwd)") password=$(escape "password") skip_keys=""
 
     while [ -n "$1" ]; do
         if [ -z "$hosts" ]; then
@@ -38,16 +39,16 @@ run_dbclient()(
                     options="$options $1 $2";
                     shift;;
                 -P)
-                    password="$2"
+                    password=$(escape "$2")
                     shift;;
                 -w)
-                    pwd="\"$2\""
+                    pwd=$(escape "$2")
                     shift;;
                 -e)
                     if test "${2#*=}" != "$2"; then
-                        envs="${envs}export $2;"
+                        envs="${envs}export ${2%%=*}=$(escape "${2#*=}");"
                     else
-                        envs="${envs}export $2=\"$(eval printf "%s" \${"$2"})\";"
+                        envs="${envs}export $2=$(escape "$(eval printf %s "\"\${$2}\"")");"
                     fi
                     shift;;
                 -y|-yy)
@@ -55,14 +56,14 @@ run_dbclient()(
                     skip_keys=1
                     ;;
                 *)
-                    if [ "${1:0:1}" == "-" ]; then
+                    if [ "${1:0:1}" = "-" ]; then
                         options="$options $1"
                     else
                         hosts="$1"
                     fi;;
             esac
         else
-            command="$command $1"
+            command="$command $(quote "$1")"
         fi
         shift
     done
@@ -74,18 +75,18 @@ run_dbclient()(
 
     if [ -n "$pwd" ]; then
         if [ -n "$command" ]; then command="&& $command"; fi
-        command="cd $pwd $command";
+        command="if [ -d $pwd ]; then cd $pwd; fi $command";
     fi
 
     if [ -n "$envs" ]; then command="$envs $command"; fi
 
     if [ -z "$skip_keys" ]; then
-        for host in "$(printf '%s' "$hosts" | tr ',' ' ')"; do
+        for host in $(printf '%s' "$hosts" | tr ',' ' '); do
             load_dropbear_keys "$(parse_url "$host" 'host')"
         done
     fi
 
-    DROPBEAR_PASSWORD="$password" dbclient $options $hosts $command
+    DROPBEAR_PASSWORD="$password" dbclient $options $hosts "$command"
 )
 
 run_dbclient "$@"

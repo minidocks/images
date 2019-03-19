@@ -3,6 +3,7 @@
 # Wrapper for forced ssh command to load env file
 #
 # https://binblog.info/2008/10/20/openssh-going-flexible-with-forced-commands/
+# https://blog.linuxway.cz/2014/03/22/shell-omezeni-prikazu-pro-uzivatele/
 #
 # (c) 2018 Martin Hasoň <martin.hason@gmail.com>
 
