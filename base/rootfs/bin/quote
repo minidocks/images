@@ -1,0 +1,6 @@
+#!/bin/sh
+quote()(
+    printf %s\\n "$1" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/'/"
+)
+
+quote "$@"
