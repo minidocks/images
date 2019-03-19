@@ -30,7 +30,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version
 
-RUN [ 'edge' = "$version" ] && apk --update upgrade || apk update \
+RUN apk --update upgrade \
     && apk add build-base make cmake automake autoconf libtool && clean
 
 FROM latest
