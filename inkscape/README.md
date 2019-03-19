@@ -15,6 +15,12 @@ docker run --rm -v `pwd`:/app -w /app minidocks/inkscape \
     /usr/share/inkscape/screens/about.svg --export-area-drawing --export-pdf=about.pdf
 ```
 
+If you want to run GUI:
+```bash
+xhost +
+docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`:/app -w /app minidocks/inkscape
+```
+
 Tags
 ----
 
