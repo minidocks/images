@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/poppler"
+image="${namespace:-minidocks}/poppler"
 versions="
 0.56
 latest

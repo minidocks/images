@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/inkscape"
+image="${namespace:-minidocks}/inkscape"
 versions="
 0.92
 latest

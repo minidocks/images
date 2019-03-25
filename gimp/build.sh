@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/gimp"
+image="${namespace:-minidocks}/gimp"
 versions="
 2.8;gimp@community38<2.9 gegl@community38
 2.10;gimp<2.11

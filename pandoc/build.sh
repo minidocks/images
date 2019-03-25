@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/pandoc"
+image="${namespace:-minidocks}/pandoc"
 versions="
 2.3;2.3.1
 2.4;2.4

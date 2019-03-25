@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/base"
+image="${namespace:-minidocks}/base"
 versions="
 3.5;3.5
 3.6;3.6

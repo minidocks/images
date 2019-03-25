@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/ocrmypdf"
+image="${namespace:-minidocks}/ocrmypdf"
 versions="
 8;8.2.2
 latest;8.2.2

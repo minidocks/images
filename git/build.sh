@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/git"
+image="${namespace:-minidocks}/git"
 versions="
 2
 latest

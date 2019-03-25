@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/img2pdf"
+image="${namespace:-minidocks}/img2pdf"
 versions="
 0.3;0.3.3
 latest;0.3.3

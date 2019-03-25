@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/context"
+image="${namespace:-minidocks}/context"
 versions="
 beta;beta
 beta-with-fonts;beta;fonts

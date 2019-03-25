@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/python"
+image="${namespace:-minidocks}/python"
 versions="
 2.7;2.7;base
 3.5;3.5;v35

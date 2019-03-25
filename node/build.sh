@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocs}/node"
+image="${namespace:-minidocks}/node"
 versions="
 6;3.6;nodejs-npm<7
 7;3.6;nodejs-current-npm<8
