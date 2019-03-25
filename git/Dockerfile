@@ -1,4 +1,4 @@
-FROM minidocks/base
+FROM minidocks/base AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV GIT_STANDUP_VERSION=2.3.0
