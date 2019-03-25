@@ -1,4 +1,4 @@
-ARG packages="npm 'nodejs-current<12'"
+ARG package=nodejs-current<12
 ARG base_version=3.9
 
 FROM minidocks/base:3.6 AS v3.6

@@ -14,7 +14,7 @@ latest;3.9;npm nodejs-current<12
 "
 
 build() {
-    docker build --pull --target=latest --build-arg package="$3" --build-arg base_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build --target=latest --build-arg package="$3" --build-arg base_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
