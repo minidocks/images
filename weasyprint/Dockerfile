@@ -1,11 +1,11 @@
 FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV WEASYPRINT_VERSION=0.42.3
+ARG version=46
 
 RUN apk add --update cairo cairo-gobject pango gdk-pixbuf py3-lxml py3-cffi py3-pillow msttcorefonts-installer fontconfig \
     && update-ms-fonts && fc-cache -f \
-    && pip install weasyprint==$WEASYPRINT_VERSION \
+    && pip install weasyprint==$version \
     && clean
 
 ADD rootfs /
