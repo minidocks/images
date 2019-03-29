@@ -1,10 +1,10 @@
-FROM minidocks/python:3.6
+FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ENV SPHINX_VERSION=1.8.3
+ARG version=2.0.0
 
 RUN pip install \
-      sphinx==$SPHINX_VERSION \
+      sphinx=="$version" \
       m2r \
       recommonmark \
       sphinx_rtd_theme \

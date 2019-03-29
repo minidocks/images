@@ -43,8 +43,9 @@ Tags
 ----
 
  Tag         | Size
- ----------- | ----
- latest, 1.8 | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)](https://microbadger.com/images/minidocks/sphinx-doc)
+ ---         | ----
+ latest, 2.0 | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)](https://microbadger.com/images/minidocks/sphinx-doc)
+ 2.0         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:2.0.svg)](https://microbadger.com/images/minidocks/sphinx-doc:2.0)
  1.8         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.8.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.8)
  1.7         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.7.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.7)
  1.6         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.6.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.6)
