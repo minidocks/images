@@ -24,7 +24,7 @@ RUN wget -O /etc/apk/keys/php-alpine.rsa.pub https://dl.bintray.com/php-alpine/k
     && for module in apcu ctype curl iconv json openssl pcntl phar posix; do modules="$modules php$major-$module"; done \
     && if [ "$version" = "5.6" ]; then modules="$modules php5-cli"; fi \
     && if [ "$version" != "5.6" ]; then modules="$modules php7-mbstring"; fi \
-    && if [ "$version" = "7.0" ]; then modules="$modules php7-zlib"; fi \
+    && if echo "7.0 7.3" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
     && if echo "7.1 7.2" | grep -q "$version"; then modules="$modules php7-tokenizer"; fi \
     && if [ "$version" = "7.3" ]; then \
         sed -i "1i @php https://dl.bintray.com/php-alpine/v3.9/php-7.3" /etc/apk/repositories; \

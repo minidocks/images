@@ -6,6 +6,8 @@ PHP docker image (minidocks/php)
 PHP is a popular general-purpose scripting language that is especially suited to web development.
 Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.
 
+For the latest version of PHP is used https://github.com/codecasts/php-alpine repository.
+
 Configuration by environment variables
 --------------------------------------
 
