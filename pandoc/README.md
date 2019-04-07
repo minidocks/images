@@ -4,6 +4,13 @@ Pandoc docker image (minidocks/pandoc)
 Pandoc is a document converter, widely used as a writing tool (especially by scholars) and as a basis for publishing
 workflows.
 
+Extensions
+----------
+
+All extensions are instaled in `/pandoc` directory. Directory `/home/user/.pandoc` is symlink to `/pandoc`.
+
+- [Latex template](https://github.com/Wandmalfarbe/pandoc-latex-template)
+
 Usage
 -----
 
