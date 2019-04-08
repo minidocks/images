@@ -25,7 +25,7 @@ for _ENV_NAME in $(printenv | awk -F= '{print $1}'); do
     _FPM_NAME="$(echo "${_ENV_NAME:$_START}" | sed -e 's|__|\.|g' | tr '[:upper:]' '[:lower:]')"
     _FPM_VALUE="$(eval echo "\${$_ENV_NAME}")"
     if grep "${_FPM_NAME} =" "$_FILE" > /dev/null; then
-        sed -i "s|^;\?\($_FPM_NAME =\).*|\1 $_FPM_VALUE|" "$_FILE"
+        sed -i "s|^[; ]*\($_FPM_NAME *=\).*|\1 $_FPM_VALUE|" "$_FILE"
     else
         echo "${_FPM_NAME} = ${_FPM_VALUE}" >> "$_FILE"
     fi

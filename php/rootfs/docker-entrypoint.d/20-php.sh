@@ -3,7 +3,7 @@ set -e
 
 export PATH="$COMPOSER_HOME/vendor/bin:$PATH"
 
-if [ "$(id -u)" != 0 ] || [ x"${PHP_RUNTIME_CONF-1}" != x'1' ]; then
+if [ "$(id -u)" != 0 ] || [ "${PHP_RUNTIME_CONF-1}" != '1' ]; then
     return
 fi
 
@@ -17,7 +17,7 @@ for _ENV_NAME in $(printenv | awk -F= '{print $1}'); do
         fi
 
         _PHP_VALUE="$(eval echo "\${$_ENV_NAME}")"
-        if [ x"${_PHP_VALUE}" = x1 ] || [ x"${_PHP_VALUE}" = xtrue ]; then
+        if [ "${_PHP_VALUE}" = 1 ] || [ "${_PHP_VALUE}" = true ]; then
             sed -i "s/^[; ]*\(zend_extension\|extension\)/\1/" "${_PHP_EXT_FILE}"
         else
             sed -i "s/^[; ]*\(zend_extension\|extension\)/;\1/" "${_PHP_EXT_FILE}"
@@ -26,7 +26,7 @@ for _ENV_NAME in $(printenv | awk -F= '{print $1}'); do
         _PHP_NAME="$(echo "${_ENV_NAME:4}" | sed -e 's|__|\.|g' | tr '[:upper:]' '[:lower:]')"
         _PHP_VALUE="$(eval echo "\${$_ENV_NAME}")"
         if grep "${_PHP_NAME} =" "$_PHP_INI" > /dev/null; then
-            sed -i "s|^;\?\($_PHP_NAME =\).*|\1 $_PHP_VALUE|" "$_PHP_INI"
+            sed -i "s|^[; ]*\($_PHP_NAME *=\).*|\1 $_PHP_VALUE|" "$_PHP_INI"
         else
             echo "${_PHP_NAME} = ${_PHP_VALUE}" >> "$_PHP_INI"
         fi
