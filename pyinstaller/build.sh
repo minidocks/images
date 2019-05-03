@@ -1,17 +1,16 @@
 #!/bin/sh
 set -e
 
-image="${namespace:-minidocks}/python"
+image="${namespace:-minidocks}/pyinstaller"
 versions="
-2.7;2.7;latest
-3.5;3.5;3.5
-3.6;3.6;latest
-3.6-uwsgi;3.6;latest;uwsgi
-latest;3.6;latest
+3.4-py2;3.4;2
+3.4-py3;3.4;3
+3.4;3.4;3
+latest;3.4;3
 "
 
 build() {
-    docker build --target "${4:-latest}" --build-arg base_version="$3" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build --build-arg python_version="$3" --build-arg pyinstaller_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

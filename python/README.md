@@ -34,3 +34,7 @@ Tags
  3.5       | [![](https://images.microbadger.com/badges/image/minidocks/python:3.5.svg)](https://microbadger.com/images/minidocks/python:3.5)
  2.7       | [![](https://images.microbadger.com/badges/image/minidocks/python:2.7.svg)](https://microbadger.com/images/minidocks/python:2.7)
 
+Related images
+--------------
+
+- [PyInstaller](../pyinstaller)

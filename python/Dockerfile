@@ -1,11 +1,13 @@
 ARG version=3.6
-ARG base_version=base
+ARG base_version=latest
 
-FROM minidocks/base:3.5 as v35
+FROM minidocks/base:3.5 AS base_3.5
 
-FROM minidocks/base as base
+FROM minidocks/base:3.9 AS base_latest
 
-FROM $base_version as latest
+FROM minidocks/base:3.9-build AS base_latest-build
+
+FROM base_$base_version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \
@@ -33,7 +35,7 @@ RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
 
 CMD [ "python" ]
 
-FROM latest as uwsgi
+FROM latest AS uwsgi
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update --no-cache add nginx \
