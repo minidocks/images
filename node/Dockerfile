@@ -18,7 +18,7 @@ ARG package
 
 RUN apk --update add $package \
     && mkdir -p "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" && chmod 777 "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" \
-    && npm i -g npm@latest && npm install -g yarn \
+    && npm i -g npm@latest npm-check-updates yarn \
     && clean
 
 COPY rootfs /
