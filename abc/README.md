@@ -1,0 +1,28 @@
+ABC music image (minidocks/abc)
+===============================
+
+![](http://abcplus.sourceforge.net/Scherzando.png)
+
+ABC notation is a shorthand form of musical notation.
+
+Installed programs
+-------------------
+
+- [abcm2ps](https://github.com/leesavide/abcm2ps/)
+- [abc2svg](https://chiselapp.com/user/moinejf/repository/abc2svg/doc/trunk/README.md)
+- [abc2xml](https://wim.vree.org/svgParse/abc2xml.html)
+- [xml2abc](https://wim.vree.org/svgParse/xml2abc.html)
+
+Usage
+-----
+
+```
+docker run --rm -it -v "`pwd`:/app" -w /app minidocks/abc abc2svg /usr/local/share/doc/abcm2ps/examples/sample.abc
+```
+
+Tags
+----
+
+ Tag    | Size
+ ---    | ----
+ latest | [![](https://images.microbadger.com/badges/image/minidocks/abc.svg)](https://microbadger.com/images/minidocks/abc)
