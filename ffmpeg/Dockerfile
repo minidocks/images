@@ -7,7 +7,7 @@ FROM minidocks/base:3.9 AS v3.9
 FROM v$base_version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk --update add ffmpeg && clean
+RUN apk --update add ffmpeg ffmpegthumbnailer && clean
 
 COPY rootfs /
 
