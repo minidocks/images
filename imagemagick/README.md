@@ -17,8 +17,8 @@ docker run --rm -v `pwd`:/app -w /app minidocks/imagemagick \
 Tags
 ----
 
- Tag    | Size
- ------ | ----
- latest | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick.svg)](https://microbadger.com/images/minidocks/imagemagick)
- 7      | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:7.svg)](https://microbadger.com/images/minidocks/imagemagick:7)
- 6      | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:6.svg)](https://microbadger.com/images/minidocks/imagemagick:6)
+ Tag       | Size
+ ---       | ----
+ latest, 7 | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick.svg)](https://microbadger.com/images/minidocks/imagemagick)
+ 7         | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:7.svg)](https://microbadger.com/images/minidocks/imagemagick:7)
+ 6         | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:6.svg)](https://microbadger.com/images/minidocks/imagemagick:6)
