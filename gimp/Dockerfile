@@ -1,6 +1,6 @@
 ARG packages=gimp
 
-FROM minidocks/poppler
+FROM minidocks/librsvg
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG packages

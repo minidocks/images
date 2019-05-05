@@ -4,7 +4,7 @@ ARG lang="eng"
 
 FROM minidocks/base:3.8 as v3
 
-FROM minidocks/base:3.9 as v4
+FROM minidocks/librsvg as v4
 
 FROM $base_version as latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

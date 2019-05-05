@@ -1,4 +1,4 @@
-FROM minidocks/poppler
+FROM minidocks/librsvg
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add inkscape potrace msttcorefonts-installer fontconfig \
