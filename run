@@ -241,17 +241,35 @@ task_split()(
 
 # Copy environment variables to travis
 task_env()(
-    for name in ${1:-$(lsdir)}; do
+    force='' dir=''
+    while [ -n "$1" ]; do
+        case "$1" in
+            -f|--force) force=1;;
+            *) dir="$1";;
+        esac
+        shift
+    done
+
+    for name in ${dir:-$(lsdir)}; do
         repo="${GIT_NAMESPACE}%2F${name}"
         _ansi --yellow --nl "Sync env: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
         response="$(travis 'GET' "/repo/${repo}/env_vars")"
         if [ "$(http_code "$response")" = "200" ]; then
-            vars="$(query "$(http_body "$response")" -r '.env_vars[] | .name')"
-            for var in "REGISTRY_LOGIN" "REGISTRY_PASSWORD"; do
-                if [ -z "$(printf '%s' "$vars" | grep "$var")" ]; then
-                    printf 'Copy "%s" variable\n' "$var"
-                    response="$(travis 'POST' "/repo/${repo}/env_vars" "$(to_json "env_var.name=${var}&env_var.value=$(eval printf '%s' "\$$var")&env_var.public=false")")"
-                    assert_http_code "$response" "201"
+            vars="$(query "$(http_body "$response")" -r '.env_vars[] | .name+":"+.id')"
+            for var in REGISTRY_LOGIN REGISTRY_PASSWORD; do
+                value="$(eval printf '%s' "\$$var")"
+                value="$(printf '%s' "$value" | sed 's/\"/\\\"/g')"
+                body="{\"env_var.name\": \"${var}\", \"env_var.value\": \"${value}\", \"env_var.public\": false}"
+                varid="$(printf '%s' "$vars" | grep "$var" || true)"
+
+                if [ -n "$force" ] && [ -n "$varid" ]; then
+                    printf 'Update "%s" variable' "$var"
+                    response="$(travis 'PATCH' "/repo/${repo}/env_var/${varid#*:}" "$body")"
+                    assert_http_code "$response" "200" && _pass || _fail
+                elif [ -z "$varid" ]; then
+                    printf 'Copy "%s" variable' "$var"
+                    response="$(travis 'POST' "/repo/${repo}/env_vars" "$body")"
+                    assert_http_code "$response" "201" && _pass || _fail
                 fi
             done
         else
