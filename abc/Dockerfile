@@ -1,4 +1,5 @@
 ARG abcm2ps_version=8.14.4
+ARG abc2midi_version=2019.04.22
 ARG xml2abc_version=135
 ARG abc2xml_version=218
 
@@ -9,6 +10,14 @@ ARG abcm2ps_version
 RUN apk add pango-dev
 
 RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v${abcm2ps_version}.tar.gz" \
+    && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
+    && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
+
+ARG abc2midi_version
+
+RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
+    && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
+    && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abc* \
     && mkdir /tmp/build && ./configure && make DESTDIR=/tmp/build install
 

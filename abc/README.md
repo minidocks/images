@@ -10,6 +10,7 @@ Installed programs
 
 - [abcm2ps](https://github.com/leesavide/abcm2ps/)
 - [abc2svg](https://chiselapp.com/user/moinejf/repository/abc2svg/doc/trunk/README.md)
+- [abc2midi and midi2abc](https://ifdo.ca/~seymour/runabc/top.html)
 - [abc2xml](https://wim.vree.org/svgParse/abc2xml.html)
 - [xml2abc](https://wim.vree.org/svgParse/xml2abc.html)
 
