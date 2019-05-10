@@ -1,6 +1,3 @@
 script:
-  - docker login -u "$REGISTRY_LOGIN" -p "$REGISTRY_PASSWORD"
   - wget -O run https://raw.githubusercontent.com/minidocks/images/master/run
-  - export TRAVIS_REPO_NAME=${TRAVIS_REPO_SLUG#*/}
-  - sh ./run build "$TRAVIS_REPO_NAME" --dir "."
-  - sh ./run push "$TRAVIS_REPO_NAME"
+  - sh ./run travis:build

@@ -244,7 +244,7 @@ task_split()(
 )
 
 # Copy environment variables to travis
-task_env()(
+task_travis__env()(
     force='' dir=''
     while [ -n "$1" ]; do
         case "$1" in
@@ -282,7 +282,7 @@ task_env()(
 )
 
 # Trigger build on travis
-task_trigger()(
+task_travis__trigger()(
     for name in ${1:-$(lsdir)}; do
         repo="${GIT_NAMESPACE}%2F${name}"
         _ansi --yellow --nl "Build request: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
@@ -339,6 +339,14 @@ task_push()(
             done
         done
     done
+)
+
+# Build image via travis
+task_travis__build()(
+    echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_LOGIN" --password-stdin
+    TRAVIS_REPO_NAME="${TRAVIS_REPO_SLUG#*/}"
+    run build "$TRAVIS_REPO_NAME" --dir "."
+    run push "$TRAVIS_REPO_NAME"
 )
 
 url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"

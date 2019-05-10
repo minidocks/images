@@ -6,5 +6,5 @@ services:
 script:
   - docker --version
   - ./run split
-  - ./run env
-  - ./run trigger
+  - ./run travis:env
+  - ./run travis:trigger
