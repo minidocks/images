@@ -343,10 +343,10 @@ task_push()(
 
 # Build image via travis
 task_travis__build()(
-    echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_LOGIN" --password-stdin
+    docker login -u "$REGISTRY_LOGIN" -p "$REGISTRY_PASSWORD"
     TRAVIS_REPO_NAME="${TRAVIS_REPO_SLUG#*/}"
-    run build "$TRAVIS_REPO_NAME" --dir "."
-    run push "$TRAVIS_REPO_NAME"
+    task_build "$TRAVIS_REPO_NAME" --dir "."
+    task_push "$TRAVIS_REPO_NAME"
 )
 
 url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
