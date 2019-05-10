@@ -12,8 +12,12 @@ HUB_URL=https://cloud.docker.com/v2
 HUB_API_URL=https://cloud.docker.com/api/build/v1
 
 to_json(){
-    printf '{"%s"}' "$(echo "$1" | sed 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g' | sed -E 's/"(true|false)"/\1/g')"
+    printf '{"%s"}' "$(echo "$1" | sed -E 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g; s/"(true|false)"/\1/g')"
 }
+
+json_escape()(
+    printf "%s" "$1" | sed 's/"/\\"/g'
+)
 
 http_code(){
     printf "%s" "$1" | head -n1 | cut -d" " -f2
@@ -56,7 +60,7 @@ travis(){
 
 hub(){
     if [ -z "$REGISTRY_TOKEN" ] || [ $(( $(date +"%s") - REGISTRY_TOKEN_TIME )) -gt 300 ]; then
-        response="$(do_request -X "POST" --data "$(to_json "username=$REGISTRY_LOGIN&password=$REGISTRY_PASSWORD")" "$HUB_URL/users/login/")"
+        response="$(do_request -X "POST" --data "{\"username\": \"$(json_escape "$REGISTRY_LOGIN")\", \"password\": \"$(json_escape "$REGISTRY_PASSWORD")\"}" "$HUB_URL/users/login/")"
         assert_http_code "$response" "200"
         REGISTRY_TOKEN="$(query "$(http_body "$response")" -r '.token')"
         REGISTRY_TOKEN_TIME="$(date +"%s")"
@@ -257,8 +261,7 @@ task_env()(
         if [ "$(http_code "$response")" = "200" ]; then
             vars="$(query "$(http_body "$response")" -r '.env_vars[] | .name+":"+.id')"
             for var in REGISTRY_LOGIN REGISTRY_PASSWORD; do
-                value="$(eval printf '%s' "\$$var")"
-                value="$(printf '%s' "$value" | sed 's/\"/\\\"/g')"
+                value="$(eval printf '%s' "\$$var" | sed -E 's/([$&\])/\\\1/g; s/\\/\\\\/g; s/"/\\"/g')"
                 body="{\"env_var.name\": \"${var}\", \"env_var.value\": \"${value}\", \"env_var.public\": false}"
                 varid="$(printf '%s' "$vars" | grep "$var" || true)"
 
