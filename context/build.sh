@@ -9,7 +9,7 @@ beta-with-docs;beta;docs
 current;current
 current-with-fonts;current;fonts
 current-with-docs;current;docs
-latest;latest
+latest;beta
 "
 
 build() {

@@ -9,7 +9,7 @@ RUN cd /usr/share && wget http://minimals.contextgarden.net/setup/first-setup.sh
 RUN cd /usr/share && sh ./first-setup.sh --modules=all --engine=luatex --context="$version"
 RUN mv /usr/share/tex/texmf-modules/doc /usr/share/texmf-modules-doc
 RUN mv /usr/share/tex/texmf-context/doc /usr/share/texmf-context-doc
-RUN mkdir -p /usr/share/texmf-fonts && for dir in truetype type1 opentype; do mv "/usr/share/tex/texmf/fonts/$dir/" /usr/share/texmf-fonts/; done
+RUN mkdir -p /usr/share/texmf-fonts && for dir in opentype truetype type1; do mv "/usr/share/tex/texmf/fonts/$dir/" /usr/share/texmf-fonts/; done
 RUN rm -rf /usr/share/tex/texmf-cache/*
 
 FROM minidocks/base AS latest
