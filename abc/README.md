@@ -13,6 +13,8 @@ Installed programs
 - [abc2midi and midi2abc](https://ifdo.ca/~seymour/runabc/top.html)
 - [abc2xml](https://wim.vree.org/svgParse/abc2xml.html)
 - [xml2abc](https://wim.vree.org/svgParse/xml2abc.html)
+- [abc2prt](https://github.com/leesavide/abc2prt)
+- [abcpp](https://github.com/leesavide/abcpp)
 
 Usage
 -----

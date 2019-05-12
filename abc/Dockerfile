@@ -1,7 +1,9 @@
 ARG abcm2ps_version=8.14.4
-ARG abc2midi_version=2019.04.22
-ARG xml2abc_version=135
-ARG abc2xml_version=218
+ARG abc2midi_version=2019.05.08
+ARG abcpp_version=1.4.5
+ARG abc2prt_version=1.0.2
+ARG xml2abc_version=137
+ARG abc2xml_version=220
 
 FROM minidocks/base:3.9-build AS abcm2ps
 
@@ -18,8 +20,18 @@ ARG abc2midi_version
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
-    && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abc* \
-    && mkdir /tmp/build && ./configure && make DESTDIR=/tmp/build install
+
+ARG abc2prt_version
+
+RUN wget -O /tmp/abc2prt.tar.gz "https://sourceforge.net/projects/abcplus/files/abc2prt/abc2prt-${abc2prt_version}.tar.gz" \
+    && tar -xvzf /tmp/abc2prt.tar.gz -C /tmp && cd /tmp/abc2prt* \
+    && mkdir -p /tmp/build && make && mv abc2prt /tmp/build
+
+ARG abcpp_version
+
+RUN wget -O /tmp/abcpp.tar.gz "https://sourceforge.net/projects/abcplus/files/abcpp/abcpp-${abcpp_version}.tar.gz" \
+    && tar -xvzf /tmp/abcpp.tar.gz -C /tmp && cd /tmp/abcpp* \
+    && mkdir -p /tmp/build && make && mv abcpp /tmp/build
 
 FROM minidocks/pyinstaller AS abc2xml
 
