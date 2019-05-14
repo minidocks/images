@@ -12,8 +12,12 @@
 # Copyright (C) 2012 Dragonfly Development Inc.
 #
 # Original file: https://github.com/dflydev/git-subsplit/blob/master/git-subsplit.sh
-# Applied patches: https://github.com/dflydev/git-subsplit/pull/23.patch
-# Applied patches: https://github.com/dflydev/git-subsplit/pull/24.patch
+# Applied patches:
+# - https://github.com/dflydev/git-subsplit/pull/23.patch
+# - https://github.com/dflydev/git-subsplit/pull/24.patch
+# - https://github.com/dflydev/git-subsplit/pull/32.patch
+# - https://github.com/dflydev/git-subsplit/pull/33.patch
+# - https://github.com/dflydev/git-subsplit/pull/36.patch
 #
 if [ $# -eq 0 ]; then
 	set -- -h
@@ -31,11 +35,14 @@ work-dir=     directory that contains the subsplit working directory
 
  options for 'publish'
 heads=        only publish for listed heads instead of all heads
+search-heads= search and only publish matching heads instead of all heads (grep pattern)
 no-heads      do not publish any heads
 tags=         only publish for listed tags instead of all tags
 no-tags       do not publish any tags
 update        fetch updates from repository before publishing
 rebuild-tags  rebuild all tags (as opposed to skipping tags that are already synced)
+use-splitsh   use the splitsh-lite binary instead of git git-subtree
+no-force      do not force push git branches or tags
 "
 eval "$(echo "$OPTS_SPEC" | git rev-parse --parseopt -- "$@" || echo exit $?)"
 
@@ -59,12 +66,15 @@ SPLITS=
 REPO_URL=
 WORK_DIR="${PWD}/.subsplit"
 HEADS=
+SEARCH_HEADS=
 NO_HEADS=
 TAGS=
 NO_TAGS=
 REBUILD_TAGS=
 DRY_RUN=
 VERBOSE=
+USE_SPLITSH=0
+GIT_FORCE="--force"
 
 subsplit_main()
 {
@@ -75,14 +85,17 @@ subsplit_main()
 			-q) QUIET=1 ;;
 			--debug) VERBOSE=1 ;;
 			--heads) HEADS="$1"; shift ;;
-			--work-dir) WORK_DIR="$1"; shift ;;
+			--search-heads) SEARCH_HEADS="$1"; shift ;;
 			--no-heads) NO_HEADS=1 ;;
+			--work-dir) WORK_DIR="$1"; shift ;;
 			--tags) TAGS="$1"; shift ;;
 			--no-tags) NO_TAGS=1 ;;
 			--update) UPDATE=1 ;;
 			-n) DRY_RUN="--dry-run" ;;
 			--dry-run) DRY_RUN="--dry-run" ;;
 			--rebuild-tags) REBUILD_TAGS=1 ;;
+			--use-splitsh) USE_SPLITSH=1 ;;
+			--no-force) GIT_FORCE="" ;;
 			--) break ;;
 			*) die "Unexpected option: $opt" ;;
 		esac
@@ -168,10 +181,22 @@ subsplit_publish()
 		subsplit_update
 	fi
 
-	if [ -z "$HEADS" ] && [ -z "$NO_HEADS" ]
+	if [ -z "$HEADS" ] && [ -z "$NO_HEADS" ] && [ -z "$SEARCH_HEADS" ]
 	then
 		# If heads are not specified and we want heads, discover them.
 		HEADS="$(git ls-remote origin 2>/dev/null | grep "refs/heads/" | cut -f3- -d/)"
+
+		if [ -n "$VERBOSE" ];
+		then
+			echo "${DEBUG} HEADS=\"${HEADS}\""
+		fi
+	fi
+
+	# search for matching heads
+	if [ ! -z "$SEARCH_HEADS" ] && [ -z "$HEADS" ] && [ -z "$NO_HEADS" ]
+	then
+		# If heads are not specified and we want heads, discover them.
+		HEADS="$(git ls-remote origin 2>/dev/null | grep "refs/heads/" | grep "${SEARCH_HEADS}" | cut -f3- -d/)"
 
 		if [ -n "$VERBOSE" ];
 		then
@@ -237,30 +262,27 @@ subsplit_publish()
 
 			say " - syncing branch '${HEAD}'"
 
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git checkout master >/dev/null 2>&1"
 			git checkout master >/dev/null 2>&1 || fatal 1 "## Failed while git checkout master"
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git branch -D \"$LOCAL_BRANCH\" >/dev/null 2>&1"
 			git branch -D "$LOCAL_BRANCH" >/dev/null 2>&1
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git branch -D \"${LOCAL_BRANCH}-checkout\" >/dev/null 2>&1"
 			git branch -D "${LOCAL_BRANCH}-checkout" >/dev/null 2>&1
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git checkout -b \"${LOCAL_BRANCH}-checkout\" \"origin/${HEAD}\" >/dev/null 2>&1"
 			git checkout -b "${LOCAL_BRANCH}-checkout" "origin/${HEAD}" >/dev/null 2>&1 || fatal 1 "## Failed while git checkout"
-			git subtree split -q --prefix="$SUBPATH" --branch="$LOCAL_BRANCH" "origin/${HEAD}" >/dev/null || fatal 4 "## Failed while git subtree split for HEADS"
+			if [ $USE_SPLITSH -eq 0 ]; then
+				[ -n "$VERBOSE" ] && echo "${DEBUG} git subtree split -q --prefix=\"$SUBPATH\" --branch=\"$LOCAL_BRANCH\" \"origin/${HEAD}\" >/dev/null"
+				git subtree split -q --prefix="$SUBPATH" --branch="$LOCAL_BRANCH" "origin/${HEAD}" >/dev/null
+			else
+				[ -n "$VERBOSE" ] && echo "${DEBUG} splitsh-lite -prefix=\"${SUBPATH}\" -origin=\"refs/heads/${LOCAL_BRANCH}-checkout\" -target=\"refs/heads/${LOCAL_BRANCH}\" >/dev/null"
+				splitsh-lite -prefix="${SUBPATH}" -origin="refs/heads/${LOCAL_BRANCH}-checkout" -target="refs/heads/${LOCAL_BRANCH}" >/dev/null
+			fi
 			RETURNCODE=$?
 
-			if [ -n "$VERBOSE" ];
-			then
-				echo "${DEBUG} git checkout master >/dev/null 2>&1"
-				echo "${DEBUG} git branch -D \"$LOCAL_BRANCH\" >/dev/null 2>&1"
-				echo "${DEBUG} git branch -D \"${LOCAL_BRANCH}-checkout\" >/dev/null 2>&1"
-				echo "${DEBUG} git checkout -b \"${LOCAL_BRANCH}-checkout\" \"origin/${HEAD}\" >/dev/null 2>&1"
-				echo "${DEBUG} git subtree split -q --prefix=\"$SUBPATH\" --branch=\"$LOCAL_BRANCH\" \"origin/${HEAD}\" >/dev/null"
-			fi
+			if [ $RETURNCODE -eq 0 ]; then
+				PUSH_CMD="git push -q ${DRY_RUN} ${GIT_FORCE} $REMOTE_NAME ${LOCAL_BRANCH}:${HEAD}"
 
-			if [ $RETURNCODE -eq 0 ]
-			then
-				PUSH_CMD="git push -q ${DRY_RUN} --force $REMOTE_NAME ${LOCAL_BRANCH}:${HEAD}"
-
-				if [ -n "$VERBOSE" ];
-				then
-					echo "${DEBUG} $PUSH_CMD"
-				fi
+				[ -n "$VERBOSE" ] && echo "${DEBUG} $PUSH_CMD"
 
 				if [ -n "$DRY_RUN" ]
 				then
@@ -269,61 +291,54 @@ subsplit_publish()
 				else
 					$PUSH_CMD || fatal 3 "## Failed pushing branchs to remote repo"
 				fi
+			elif [ -d "${SUBPATH}" ]; then
+				fatal 4 "## Failed while git subtree split for HEADS"
+			else
+				say " - skipping branch '${HEAD}' (subpath '${SUBPATH}' does not exist)"
 			fi
 		done
 
+		if [ "$USE_SPLITSH" != 0 ]; then
+			echo "${DEBUG} tags are not supported with Splitsh-lite - skipping"
+			continue
+		fi
+
 		for TAG in $TAGS
 		do
-			if [ -n "$VERBOSE" ];
-			then
-				echo "${DEBUG} git show-ref --quiet --verify -- \"refs/tags/${TAG}\""
-			fi
-
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git show-ref --quiet --verify -- \"refs/tags/${TAG}\""
 			if ! git show-ref --quiet --verify -- "refs/tags/${TAG}"
 			then
 				say " - skipping tag '${TAG}' (does not exist)"
 				continue
 			fi
+
+			[ -n "$VERBOSE" ] && echo "${DEBUG} LOCAL_TAG=\"${LOCAL_TAG}\""
 			LOCAL_TAG="${REMOTE_NAME}-tag-${TAG}"
 
-			if [ -n "$VERBOSE" ];
-			then
-				echo "${DEBUG} LOCAL_TAG="${LOCAL_TAG}""
-			fi
-
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git branch | grep \"${LOCAL_TAG}$\" >/dev/null && [ -z \"${REBUILD_TAGS}\" ]"
 			if git branch | grep "${LOCAL_TAG}$" >/dev/null && [ -z "$REBUILD_TAGS" ]
 			then
 				say " - skipping tag '${TAG}' (already synced)"
 				continue
 			fi
 
-			if [ -n "$VERBOSE" ];
-			then
-				echo "${DEBUG} git branch | grep \"${LOCAL_TAG}$\" >/dev/null && [ -z \"${REBUILD_TAGS}\" ]"
-			fi
-
 			say " - syncing tag '${TAG}'"
+
 			say " - deleting '${LOCAL_TAG}'"
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git branch -D \"${LOCAL_TAG}\" >/dev/null 2>&1"
 			git branch -D "$LOCAL_TAG" >/dev/null 2>&1
-
-			if [ -n "$VERBOSE" ];
-			then
-				echo "${DEBUG} git branch -D \"${LOCAL_TAG}\" >/dev/null 2>&1"
-			fi
-
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git branch -D \"${LOCAL_TAG}-checkout\" >/dev/null 2>&1"
+			git branch -D "$LOCAL_TAG-checkout" >/dev/null 2>&1
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git checkout -b \"${LOCAL_TAG}-checkout\" \"tags/${TAG}\" >/dev/null"
+			git checkout -b "${LOCAL_TAG}-checkout" "tags/${TAG}" >/dev/null 2>&1 || fatal 1 "## Failed while git checkout"
 			say " - subtree split for '${TAG}'"
-			git subtree split -q --annotate="${ANNOTATE}" --prefix="$SUBPATH" --branch="$LOCAL_TAG" "$TAG" >/dev/null || fatal 4 "## Failed while git subtree split for TAGS"
+			[ -n "$VERBOSE" ] && echo "${DEBUG} git subtree split -q --annotate=\"${ANNOTATE}\" --prefix=\"$SUBPATH\" --branch=\"$LOCAL_TAG\" \"$TAG\" >/dev/null"
+			git subtree split -q --annotate="${ANNOTATE}" --prefix="$SUBPATH" --branch="$LOCAL_TAG" "$TAG" >/dev/null
 			RETURNCODE=$?
 
-			if [ -n "$VERBOSE" ];
-			then
-				echo "${DEBUG} git subtree split -q --annotate=\"${ANNOTATE}\" --prefix=\"$SUBPATH\" --branch=\"$LOCAL_TAG\" \"$TAG\" >/dev/null"
-			fi
-
 			say " - subtree split for '${TAG}' [DONE]"
-			if [ $RETURNCODE -eq 0 ]
-			then
-				PUSH_CMD="git push -q ${DRY_RUN} --force ${REMOTE_NAME} ${LOCAL_TAG}:refs/tags/${TAG}"
+			if [ $RETURNCODE -eq 0 ]; then
+				PUSH_CMD="git push -q ${DRY_RUN} ${GIT_FORCE} ${REMOTE_NAME} ${LOCAL_TAG}:refs/tags/${TAG}"
 
 				if [ -n "$VERBOSE" ];
 				then
@@ -337,6 +352,10 @@ subsplit_publish()
 				else
 					$PUSH_CMD || fatal 3 "## Failed pushing tags to remote repo"
 				fi
+			elif [ -d "${SUBPATH}" ]; then
+				fatal 4 "## Failed while git subtree split for TAGS"
+			else
+				say " - skipping tag '${TAG}' (subpath '${SUBPATH}' does not exist)"
 			fi
 		done
 	done
