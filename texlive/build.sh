@@ -3,13 +3,16 @@ set -e
 
 image="${namespace:-minidocks}/texlive"
 versions="
-basic;2018
-2018;2018
-latest;2018
+2018;2018;1
+2018-basic;2018;1
+2019;2019
+2019-basic;2019
+basic;2019
+latest;2019
 "
 
 build() {
-    docker build --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build --build-arg historic="$3" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

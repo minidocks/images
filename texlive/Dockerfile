@@ -1,11 +1,12 @@
 FROM minidocks/perl
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=2018
+ARG version=2019
+ARG historic=''
 
 ENV PATH="$PATH:/usr/local/texlive/bin/x86_64-linuxmusl"
 
-RUN wget -O /tmp/install-tl-unx.tar.gz "ftp://tug.org/historic/systems/texlive/${version}/install-tl-unx.tar.gz" \
+RUN wget -O /tmp/install-tl-unx.tar.gz "http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${version}/install-tl-unx.tar.gz" \
     && tar -xvzf /tmp/install-tl-unx.tar.gz -C /tmp \
     && printf "selected_scheme scheme-basic\n\
 TEXDIR /usr/local/texlive\n\
@@ -30,7 +31,8 @@ tlpdbopt_install_docfiles 0\n\
 tlpdbopt_install_srcfiles 0\n\
 tlpdbopt_post_code 1\n\
 " > /tmp/texlive.profile \
-    && /tmp/*/install-tl --profile=/tmp/texlive.profile \
+    && if [ -z "$historic" ]; then repository="http://ftp.math.utah.edu/pub/texlive/tlnet"; else repository="http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${version}/tlnet-final"; fi \
+    && /tmp/*/install-tl --repository="$repository" --profile=/tmp/texlive.profile \
     && clean
 
 RUN tlmgr install pdfpages ms pdfjam pdfcrop pdfbook2
