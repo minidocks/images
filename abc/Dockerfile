@@ -1,8 +1,8 @@
 ARG abcm2ps_version=8.14.4
-ARG abc2midi_version=2019.05.08
+ARG abc2midi_version=2019.05.15
 ARG abcpp_version=1.4.5
 ARG abc2prt_version=1.0.2
-ARG xml2abc_version=137
+ARG xml2abc_version=139
 ARG abc2xml_version=220
 
 FROM minidocks/base:3.9-build AS abcm2ps
