@@ -7,6 +7,7 @@ versions="
 3.5;3.5;3.5
 3.6;3.6;latest
 3.6-uwsgi;3.6;latest;uwsgi
+3.7;3.7;edge
 latest;3.6;latest
 "
 
