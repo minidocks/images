@@ -1,0 +1,23 @@
+version: '3.4'
+services:
+  puppeteer:
+    image: minidocks/puppeteer
+    volumes:
+      - .:/app
+    links:
+      - chromium
+    environment:
+      PUPPETEER_EXECUTABLE_PATH: /bin/chromium
+      PUPPETEER_ARG_REMOTE_DEBUGGING_ADDRESS: chromium
+      PUPPETEER_ARG_REMOTE_DEBUGGING_PORT: 0
+      ALIAS_CHROMIUM: ssh chromium chromium
+    working_dir: /app
+
+  chromium:
+    image: minidocks/chromium
+    volumes:
+      - .:/app
+    cap_add:
+      - SYS_ADMIN
+    working_dir: /app
+    command: sshd
