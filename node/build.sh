@@ -9,8 +9,9 @@ versions="
 9;3.8;npm nodejs-current<10
 10;3.9;npm nodejs<11
 11;3.9;npm nodejs-current<12
+12;3.9;npm nodejs-current@edge libuv@edge
 lts;3.9;npm nodejs<11
-latest;3.9;npm nodejs-current<12
+latest;3.9;npm nodejs-current@edge libuv@edge
 "
 
 build() {
