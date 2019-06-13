@@ -1,8 +1,7 @@
-FROM minidocks/base:3.8
+FROM minidocks/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && apk --update add wkhtmltopdf@edge xvfb ttf-freefont fontconfig dbus \
+RUN apk --update add wkhtmltopdf xvfb ttf-freefont fontconfig dbus \
     && dbus-uuidgen > /var/lib/dbus/machine-id && apk del dbus \
     && rm -rf /var/cache/apk/* /tmp/*
 
