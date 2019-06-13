@@ -8,7 +8,7 @@ FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG mkdocs_version=1.0.4
-ARG mkdocs_material_version=4.1.0
+ARG mkdocs_material_version=4.3.1
 
 RUN pip install \
       mkdocs==$mkdocs_version \
