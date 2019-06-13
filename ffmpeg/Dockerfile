@@ -1,6 +1,6 @@
 ARG base_version=3.9
 
-FROM minidocks/base:3.9 AS v3.8
+FROM minidocks/base:3.8 AS v3.8
 
 FROM minidocks/base:3.9 AS v3.9
 

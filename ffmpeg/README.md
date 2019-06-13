@@ -3,7 +3,7 @@ FFmpeg docker image (minidocks/ffmpeg)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/FFmpeg_Logo_new.svg/320px-FFmpeg_Logo_new.svg.png)
 
-FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video.
+[FFmpeg](https://ffmpeg.org/) is a complete, cross-platform solution to record, convert and stream audio and video.
 
 Usage
 -----
