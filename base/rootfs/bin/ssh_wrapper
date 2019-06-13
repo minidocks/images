@@ -9,8 +9,8 @@
 
 set -e
 
-if [ -f '/tmp/.ssh_env' ]; then
-    . '/tmp/.ssh_env'
+if [ -f "/tmp/.ssh_env$HOSTNAME" ]; then
+    . "/tmp/.ssh_env$HOSTNAME"
 fi
 
 eval "$SSH_ORIGINAL_COMMAND"

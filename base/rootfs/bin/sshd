@@ -8,5 +8,5 @@
 
 set -e
 
-export -p | grep -vE " (PWD|OLDPWD|SHLVL|USER|SHELL|HOME)=" > /tmp/.ssh_env && chmod a+rw /tmp/.ssh_env
+export -p | grep -vE " (PWD|OLDPWD|SHLVL|USER|SHELL|HOME)=" > "/tmp/.ssh_env$HOSTNAME" && chmod a+rw "/tmp/.ssh_env$HOSTNAME"
 dropbear -R -F -B -E -a -c /bin/ssh_wrapper
