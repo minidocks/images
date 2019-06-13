@@ -1,7 +1,7 @@
 FROM minidocks/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk --update add lftp && clean
+RUN apk --update add lftp ncftp && clean
 
 COPY rootfs /
 
