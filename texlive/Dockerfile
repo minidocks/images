@@ -1,38 +1,35 @@
-FROM minidocks/perl
+FROM minidocks/perl AS minimal
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version=2019
-ARG historic=''
 
 ENV PATH="$PATH:/usr/local/texlive/bin/x86_64-linuxmusl"
 
+COPY rootfs /
+
 RUN wget -O /tmp/install-tl-unx.tar.gz "http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${version}/install-tl-unx.tar.gz" \
     && tar -xvzf /tmp/install-tl-unx.tar.gz -C /tmp \
-    && printf "selected_scheme scheme-basic\n\
-TEXDIR /usr/local/texlive\n\
-TEXMFCONFIG ~/.texlive/texmf-config\n\
-TEXMFHOME ~/texmf\n\
-TEXMFLOCAL /usr/local/texlive/texmf-local\n\
-TEXMFSYSCONFIG /usr/local/texlive/texmf-config\n\
-TEXMFSYSVAR /usr/local/texlive/texmf-var\n\
-TEXMFVAR ~/.texlive/texmf-var\n\
-binary_x86_64-linuxmusl 1\n\
-instopt_adjustpath 0\n\
-instopt_adjustrepo 1\n\
-instopt_letter 0\n\
-instopt_portable 0\n\
-instopt_write18_restricted 1\n\
-tlpdbopt_autobackup 0\n\
-tlpdbopt_create_formats 1\n\
-tlpdbopt_desktop_integration 0\n\
-tlpdbopt_file_assocs 1\n\
-tlpdbopt_generate_updmap 0\n\
-tlpdbopt_install_docfiles 0\n\
-tlpdbopt_install_srcfiles 0\n\
-tlpdbopt_post_code 1\n\
-" > /tmp/texlive.profile \
-    && if [ -z "$historic" ]; then repository="http://ftp.math.utah.edu/pub/texlive/tlnet"; else repository="http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${version}/tlnet-final"; fi \
-    && /tmp/*/install-tl --repository="$repository" --profile=/tmp/texlive.profile \
-    && clean
+    && if [ "$version" = 2019 ]; then repository="http://ftp.math.utah.edu/pub/texlive/tlnet"; else repository="http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$version/tlnet-final"; fi \
+    && /tmp/*/install-tl --repository="$repository" --profile=/etc/texlive.profile --scheme=minimal && clean
 
-RUN tlmgr install pdfpages ms pdfjam pdfcrop pdfbook2
+FROM minimal AS context
+
+RUN apk add fontconfig freetype libgcc && tlmgr install scheme-context && clean
+
+FROM minimal AS basic
+
+RUN tlmgr install scheme-basic pdfpages ms pdfjam pdfcrop pdfbook2 && clean
+
+FROM basic AS small
+
+RUN apk add fontconfig freetype libgcc && tlmgr install scheme-small pagecolor csquotes xurl adjustbox bidi mdframed sourcecodepro sourcesanspro titling needspace ly1 mweights && clean
+
+FROM small AS medium
+
+RUN tlmgr install scheme-medium && clean
+
+FROM medium AS full
+
+RUN tlmgr install scheme-full && clean
+
+FROM basic
