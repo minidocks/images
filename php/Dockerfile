@@ -134,6 +134,6 @@ FROM latest AS intl
 
 ARG major
 
-RUN apk --update add "php${major}-intl" && clean
+RUN apk --force-broken-world add "php${major}-intl" && clean
 
 FROM latest
