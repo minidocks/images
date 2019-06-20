@@ -4,4 +4,5 @@ script:
   - sh ./run build texlive/2018-full --dir "."
   - sh ./run build texlive/2019-full --dir "."
   - sh ./run build texlive/full --dir "."
+  - docker login -u "$REGISTRY_LOGIN" -p "$REGISTRY_PASSWORD"
   - sh ./run push texlive
