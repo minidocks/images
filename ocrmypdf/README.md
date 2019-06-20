@@ -40,6 +40,8 @@ services:
   tesseract:
     <<: *base
     image: minidocks/tesseract:4-eng
+    environment:
+      OMP_THREAD_LIMIT: 1
 
   unpaper:
     <<: *base
@@ -48,7 +50,7 @@ services:
 
 And in the same directory run command:
 ```bash
-docker-compose run --rm ocrmypdf -l eng -j2 input.pdf output.pdf
+docker-compose run --rm ocrmypdf -l eng input.pdf output.pdf
 ```
 
 Tags
