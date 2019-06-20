@@ -1,3 +1,7 @@
 script:
   - wget -O run https://raw.githubusercontent.com/minidocks/images/master/run
-  - sh ./run travis:build
+  - for version in $(sh ./build.sh --versions | grep -v 'full'); do echo sh ./run build texlive/$version --dir "."; done
+  - sh ./run build texlive/2018-full --dir "."
+  - sh ./run build texlive/2019-full --dir "."
+  - sh ./run build texlive/full --dir "."
+  - sh ./run push texlive
