@@ -1,42 +1,35 @@
-ARG abcm2ps_version=8.14.4
-ARG abc2midi_version=2019.05.15
-ARG abcpp_version=1.4.5
-ARG abc2prt_version=1.0.2
-ARG xml2abc_version=139
-ARG abc2xml_version=220
-
-FROM minidocks/base:3.9-build AS abcm2ps
-
-ARG abcm2ps_version
+FROM minidocks/base:3.10-build AS abcm2ps
 
 RUN apk add pango-dev
 
-RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v${abcm2ps_version}.tar.gz" \
-    && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
-    && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
-
-ARG abc2midi_version
-
-RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
-    && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
-    && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
-
-ARG abc2prt_version
+ARG abc2prt_version=1.0.2
 
 RUN wget -O /tmp/abc2prt.tar.gz "https://sourceforge.net/projects/abcplus/files/abc2prt/abc2prt-${abc2prt_version}.tar.gz" \
     && tar -xvzf /tmp/abc2prt.tar.gz -C /tmp && cd /tmp/abc2prt* \
     && mkdir -p /tmp/build && make && mv abc2prt /tmp/build
 
-ARG abcpp_version
+ARG abcpp_version=1.4.5
 
 RUN wget -O /tmp/abcpp.tar.gz "https://sourceforge.net/projects/abcplus/files/abcpp/abcpp-${abcpp_version}.tar.gz" \
     && tar -xvzf /tmp/abcpp.tar.gz -C /tmp && cd /tmp/abcpp* \
     && mkdir -p /tmp/build && make && mv abcpp /tmp/build
 
+ARG abcm2ps_version=8.14.4
+
+RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v${abcm2ps_version}.tar.gz" \
+    && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
+    && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
+
+ARG abc2midi_version=2019.06.20
+
+RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
+    && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
+    && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
+
 FROM minidocks/pyinstaller AS abc2xml
 
-ARG xml2abc_version
-ARG abc2xml_version
+ARG xml2abc_version=139
+ARG abc2xml_version=220
 
 RUN apk add wget && wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2abc.py-${xml2abc_version}.zip" \
     && wget -O /tmp/abc2xml.zip "https://wim.vree.org/svgParse/abc2xml.py-${abc2xml_version}.zip" \

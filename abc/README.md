@@ -3,7 +3,7 @@ ABC music image (minidocks/abc)
 
 ![](http://abcplus.sourceforge.net/Scherzando.png)
 
-ABC notation is a shorthand form of musical notation.
+[ABC](http://abcnotation.com/) notation is a shorthand form of musical notation.
 
 Installed programs
 -------------------
