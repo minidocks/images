@@ -10,9 +10,11 @@ versions="
 3.8-build;3.8;build
 3.9;3.9
 3.9-build;3.9;build
+3.10;3.10
+3.10-build;3.10;build
 edge;edge
 edge-build;edge;build
-latest;3.9
+latest;3.10
 "
 
 build() {
