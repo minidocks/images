@@ -14,6 +14,7 @@ versions="
 3.10-build;3.10;build
 edge;edge
 edge-build;edge;build
+build;3.10;build
 latest;3.10
 "
 
