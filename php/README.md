@@ -3,10 +3,8 @@ PHP docker image (minidocks/php)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/200px-PHP-logo.svg.png)
 
-PHP is a popular general-purpose scripting language that is especially suited to web development.
+[PHP](https://php.net/) is a popular general-purpose scripting language that is especially suited to web development.
 Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.
-
-For the latest version of PHP is used https://github.com/codecasts/php-alpine repository.
 
 Configuration by environment variables
 --------------------------------------
@@ -51,3 +49,8 @@ Tags
  5.6-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:5.6-base.svg)](https://microbadger.com/images/minidocks/php:5.6-base)
  5.6         | [![](https://images.microbadger.com/badges/image/minidocks/php:5.6.svg)](https://microbadger.com/images/minidocks/php:5.6-intl)
  5.6-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:5.6-intl.svg)](https://microbadger.com/images/minidocks/php:5.6-intl)
+
+See also
+--------
+
+- https://github.com/codecasts/php-alpine

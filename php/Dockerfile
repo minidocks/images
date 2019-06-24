@@ -1,38 +1,34 @@
-ARG base_version=3.9
 ARG version=7.3
 ARG major=7
 ARG composer_version=1.8.6
 ARG blackfire_version=1.25.0
 
-FROM minidocks/base:3.5 AS v3.5
+FROM minidocks/base:3.5 AS v7.0
 
-FROM minidocks/base:3.7 AS v3.7
+FROM minidocks/base:3.7 AS v7.1
 
-FROM minidocks/base:3.8 AS v3.8
+FROM minidocks/base:3.8 AS v5.6
 
-FROM minidocks/base:3.9 AS v3.9
+FROM minidocks/base:3.9 AS v7.2
 
-FROM v$base_version AS base
+FROM minidocks/base:3.10 AS v7.3
+
+FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG base_version
 ARG version
 ARG major
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -S -s /bin/sh -G www-data www-data
 
-RUN wget -O /etc/apk/keys/php-alpine.rsa.pub https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub \
-    && for module in apcu ctype curl iconv json openssl pcntl phar posix; do modules="$modules php$major-$module"; done \
-    && if [ "$version" = "5.6" ]; then modules="$modules php5-cli"; fi \
+RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$modules php$major-$module"; done \
+    && if [ "$version" = "5.6" ]; then modules="$modules php5-cli php5-apcu"; fi \
     && if [ "$version" != "5.6" ]; then modules="$modules php7-mbstring"; fi \
-    && if echo "7.0 7.3" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
+    && if echo "7.0" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
     && if echo "7.1 7.2" | grep -q "$version"; then modules="$modules php7-tokenizer"; fi \
-    && if [ "$version" = "7.3" ]; then \
-        sed -i "1i @php https://dl.bintray.com/php-alpine/v3.9/php-7.3" /etc/apk/repositories; \
-        sed -i "1i https://dl.bintray.com/php-alpine/v3.9/php-7.3" /etc/apk/repositories; \
-        modules="$modules php7-apcu@php"; \
-        fi \
+    && if echo "7.0 7.1" | grep -q "$version"; then modules="$modules php7-apcu"; fi \
+    && if echo "7.2 7.3" | grep -q "$version"; then modules="$modules php7-pecl-apcu"; fi \
     && apk --update add "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phpize ]; then ln -s "/usr/bin/phpize$major" /usr/bin/phpize; fi
