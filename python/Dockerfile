@@ -1,13 +1,14 @@
-ARG version=3.6
-ARG base_version=latest
+ARG version=3.7
 
 FROM minidocks/base:3.5 AS base_3.5
 
-FROM minidocks/base:3.9 AS base_latest
+FROM minidocks/base:3.9 AS base_3.6
 
-FROM minidocks/base:edge AS base_edge
+FROM minidocks/base:3.10 AS base_2.7
 
-FROM base_$base_version AS latest
+FROM minidocks/base:3.10 AS base_3.7
+
+FROM base_$version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \

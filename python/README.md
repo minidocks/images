@@ -3,7 +3,7 @@ Python docker image (minidocks/python)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Python_logo_and_wordmark.svg/320px-Python_logo_and_wordmark.svg.png)
 
-Python is an interpreted, high-level, general-purpose programming language.
+[Python](https://www.python.org/) is an interpreted, high-level, general-purpose programming language.
 
 Configuration by environment variables
 --------------------------------------
@@ -37,4 +37,4 @@ Tags
 Related images
 --------------
 
-- [PyInstaller](../pyinstaller)
+- [PyInstaller](https://github.com/minidocks/pyinstaller)

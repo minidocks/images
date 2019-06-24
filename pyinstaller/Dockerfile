@@ -1,7 +1,7 @@
 ARG python_version=3
 ARG pyinstaller_version=3.4
 
-FROM minidocks/base:3.9-build AS build
+FROM minidocks/base:3.10-build AS build
 
 ARG python_version
 ARG pyinstaller_version
@@ -13,7 +13,7 @@ RUN apk add "python${python_version}" zlib-dev \
 
 FROM minidocks/python:2.7 AS v2
 
-FROM minidocks/python:3.6 AS v3
+FROM minidocks/python:3.7 AS v3
 
 FROM v$python_version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

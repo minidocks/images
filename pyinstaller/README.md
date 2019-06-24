@@ -3,7 +3,7 @@ PyInstaller docker image (minidocks/pyinstaller)
 
 ![](https://www.pyinstaller.org/_images/pyinstaller-draft1c-header-trans.png)
 
-PyInstaller freezes (packages) Python applications into stand-alone executables, under Windows, GNU/Linux, Mac OS X, FreeBSD, Solaris and AIX.
+[PyInstaller](https://www.pyinstaller.org/) freezes (packages) Python applications into stand-alone executables, under Windows, GNU/Linux, Mac OS X, FreeBSD, Solaris and AIX.
 
 Tags
 ----
@@ -18,7 +18,7 @@ Tags
 Related images
 --------------
 
-- [Python](../python)
+- [Python](https://github.com/minidocks/python)
 
 Alternatives
 ------------

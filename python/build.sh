@@ -3,16 +3,17 @@ set -e
 
 image="${namespace:-minidocks}/python"
 versions="
-2.7;2.7;latest
-3.5;3.5;3.5
-3.6;3.6;latest
-3.6-uwsgi;3.6;latest;uwsgi
-3.7;3.7;edge
-latest;3.6;latest
+2.7;2.7
+3.5;3.5
+3.6;3.6
+3.6-uwsgi;3.6;uwsgi
+3.7;3.7
+3.7-uwsgi;3.7;uwsgi
+latest;3.7
 "
 
 build() {
-    docker build --target "${4:-latest}" --build-arg base_version="$3" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build --target "${3:-latest}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
