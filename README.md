@@ -1,5 +1,7 @@
-Docker Micro Containers
-=======================
+Mini Docker Containers (Minidocks)
+==================================
+
+![](minidocks.png)
 
 The smallest possible images for tools and programming languages.All images contain
 [`tini`](https://github.com/docker-library/official-images#init), `su-exec` and `docker-exec`.
@@ -9,7 +11,7 @@ The smallest possible images for tools and programming languages.All images cont
 Handling user permissions
 -------------------------
 
-    docker run --rm -e SUEXEC=$(id -u):$(id -g) <webuni/image> sh
+    docker run --rm -e SUEXEC=$(id -u):$(id -g) <minidocks/image> sh
 
 - https://denibertovic.com/posts/handling-permissions-with-docker-volumes/
 

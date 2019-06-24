@@ -3,7 +3,7 @@ ReLaXed docker image (minidocks/relaxed)
 
 ![](https://github.com/RelaxedJS/ReLaXed/raw/master/logo-blue.png)
 
-ReLaXed creates PDF documents interactively using HTML or Pug (a shorthand for HTML).
+[ReLaXed](https://github.com/RelaxedJS/ReLaXed) creates PDF documents interactively using HTML or Pug (a shorthand for HTML).
 It allows complex layouts to be defined with CSS and JavaScript, while writing
 the content in a friendly, minimal syntax close to Markdown or LaTeX.
 
@@ -58,7 +58,7 @@ Tags
 Related images
 --------------
 
-- [Chromium](../chromium)
-- [Puppeteer](../puppeteer)
-- [WeasyPrint](../weasyprint)
-- [Wkhtmltopdf](../wkhtmltopdf)
+- [Chromium](https://github.com/minidocks/chromium)
+- [Puppeteer](https://github.com/minidocks/puppeteer)
+- [WeasyPrint](https://github.com/minidocks/weasyprint)
+- [Wkhtmltopdf](https://github.com/minidocks/wkhtmltopdf)

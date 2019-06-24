@@ -3,9 +3,9 @@ ConTeXt standalone docker image (minidocks/context)
 
 ![](https://wiki.contextgarden.net/skins/common/images/context/context_logo_inv.png?6c748)
 
-ConTeXt is a document engineering system based on TeX, a typesetting system and programming
-language to typeset and produce documents. Ths system is easy to use and enables you
-to make complex paper and electronic documents.
+[ConTeXt](https://wiki.contextgarden.net) is a document engineering system based on TeX,
+a typesetting system and programming language to typeset and produce documents. This
+system is easy to use and enables you to make complex paper and electronic documents.
 
 Usage
 -----
@@ -44,7 +44,6 @@ And in the same directory run command:
 docker-compose run --rm context --help
 ```
 
-
 Tags
 ----
 
@@ -54,3 +53,7 @@ Tags
  beta         | [![](https://images.microbadger.com/badges/image/minidocks/context:beta.svg)](https://microbadger.com/images/minidocks/context:beta)
  current      | [![](https://images.microbadger.com/badges/image/minidocks/context:current.svg)](https://microbadger.com/images/minidocks/context:current)
 
+Related images
+--------------
+
+- [TeXlive](https://github.com/minidocks/texLive)

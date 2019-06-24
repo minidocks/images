@@ -61,5 +61,5 @@ Tags
 Related images
 --------------
 
-- [Chromium](../chromium)
-- [ReLaXed](../relaxed)
+- [Chromium](https://github.com/minidocks/chromium)
+- [ReLaXed](https://github.com/minidocks/relaxed)

@@ -1,4 +1,4 @@
-FROM minidocks/base:3.10-build AS abcm2ps
+FROM minidocks/base:build AS abcm2ps
 
 RUN apk add pango-dev
 

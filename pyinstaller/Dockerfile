@@ -1,7 +1,7 @@
 ARG python_version=3
 ARG pyinstaller_version=3.4
 
-FROM minidocks/base:3.10-build AS build
+FROM minidocks/base:build AS build
 
 ARG python_version
 ARG pyinstaller_version
@@ -11,9 +11,9 @@ RUN apk add "python${python_version}" zlib-dev \
     && wget -O /tmp/pyinstaller.tar.gz "https://github.com/pyinstaller/pyinstaller/archive/v${pyinstaller_version}.tar.gz" && tar -xzf /tmp/pyinstaller.tar.gz -C /tmp \
     && cd /tmp/pyinstaller*/bootloader && "python${python_version}" ./waf configure --no-lsb all && "pip${python_version}" install --install-option="--prefix=/tmp/pyinstaller" ..
 
-FROM minidocks/python:2.7 AS v2
+FROM minidocks/python:2 AS v2
 
-FROM minidocks/python:3.7 AS v3
+FROM minidocks/python:3 AS v3
 
 FROM v$python_version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

@@ -73,17 +73,19 @@ docker run --rm -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd
 Tags
 ----
 
- Tag         | Size
- ---         | ----
- latest, 3.9 | [![](https://images.microbadger.com/badges/image/minidocks/base.svg)](https://microbadger.com/images/minidocks/base)
- edge        | [![](https://images.microbadger.com/badges/image/minidocks/base:edge.svg)](https://microbadger.com/images/minidocks/base:edge)
- 3.9         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9.svg)](https://microbadger.com/images/minidocks/base:3.9)
- 3.9-build   | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9-build.svg)](https://microbadger.com/images/minidocks/base:3.9-build)
- 3.8         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.8.svg)](https://microbadger.com/images/minidocks/base:3.8)
- 3.8-build   | [![](https://images.microbadger.com/badges/image/minidocks/base:3.8-build.svg)](https://microbadger.com/images/minidocks/base:3.8-build)
- 3.7         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.7.svg)](https://microbadger.com/images/minidocks/base:3.7)
- 3.6         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.6.svg)](https://microbadger.com/images/minidocks/base:3.6)
- 3.5         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.5.svg)](https://microbadger.com/images/minidocks/base:3.5)
+ Tag               | Size
+ ---               | ----
+ latest, 3.10      | [![](https://images.microbadger.com/badges/image/minidocks/base.svg)](https://microbadger.com/images/minidocks/base)
+ edge              | [![](https://images.microbadger.com/badges/image/minidocks/base:edge.svg)](https://microbadger.com/images/minidocks/base:edge)
+ 3.10              | [![](https://images.microbadger.com/badges/image/minidocks/base:3.10.svg)](https://microbadger.com/images/minidocks/base:3.10)
+ build, 3.10-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.10-build.svg)](https://microbadger.com/images/minidocks/base:3.10-build)
+ 3.9               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9.svg)](https://microbadger.com/images/minidocks/base:3.9)
+ 3.9-build         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9-build.svg)](https://microbadger.com/images/minidocks/base:3.9-build)
+ 3.8               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.8.svg)](https://microbadger.com/images/minidocks/base:3.8)
+ 3.8-build         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.8-build.svg)](https://microbadger.com/images/minidocks/base:3.8-build)
+ 3.7               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.7.svg)](https://microbadger.com/images/minidocks/base:3.7)
+ 3.6               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.6.svg)](https://microbadger.com/images/minidocks/base:3.6)
+ 3.5               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.5.svg)](https://microbadger.com/images/minidocks/base:3.5)
 
 Inspiration
 -----------

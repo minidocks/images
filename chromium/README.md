@@ -3,7 +3,7 @@ Chromium docker image (minidocks/chromium)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Chromium_Material_Icon.png/100px-Chromium_Material_Icon.png)
 
-Chromium is Google's open-source web browser project. It is a fully functional
+[Chromium](https://www.chromium.org/Home) is Google's open-source web browser project. It is a fully functional
 browser on its own and supplies the vast majority of code for the Google Chrome browser.
 
 Usage
@@ -24,7 +24,7 @@ Tags
 Related images
 --------------
 
-- [Puppeteer](../puppeteer)
+- [Puppeteer](https://github.com/minidocks/puppeteer)
 
 Alternatives
 ------------

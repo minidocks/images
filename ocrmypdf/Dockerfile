@@ -1,7 +1,7 @@
 ARG version=8.3.0
 ARG qpdf_version=8.4.2
 
-FROM minidocks/base:3.9-build
+FROM minidocks/base:build
 
 RUN apk --update add python3-dev py-defusedxml py-lxml libjpeg-turbo-dev zlib-dev libxml2-dev libxslt-dev py3-pybind11@edge
 
