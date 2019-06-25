@@ -90,11 +90,9 @@ RUN for module in \
         xsl \
         zip \
     ; do modules="$modules php${major}-$module"; done \
-    && if [ "$version" = "5.6" ]; then modules="$modules php5-xdebug@35"; fi \
-    && if [ "$version" != "5.6" ]; then modules="$modules php7-xdebug php7-mysqlnd php7-session"; fi \
-    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-redis"; fi \
-    && if echo "7.1 7.2" | grep -q "$version"; then modules="$modules php7-fileinfo php7-simplexml php7-xmlwriter"; fi \
-    && if [ "$version" != "7.3" ]; then modules="$modules php7-mcrypt"; fi \
+    && if [ "$version" = "5.6" ]; then modules="$modules php5-xdebug@35"; else modules="$modules php7-xdebug php7-mysqlnd php7-session"; fi \
+    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-redis php7-fileinfo php7-simplexml php7-xmlwriter"; fi \
+    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-mcrypt"; else modules="$modules php7-pecl-mcrypt"; fi \
     && apk --update --force-broken-world add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm${major}" /usr/bin/php-fpm; fi \
     && clean
