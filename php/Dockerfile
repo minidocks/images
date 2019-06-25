@@ -23,12 +23,11 @@ ARG major
 RUN addgroup -g 82 -S www-data && adduser -u 82 -S -s /bin/sh -G www-data www-data
 
 RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$modules php$major-$module"; done \
-    && if [ "$version" = "5.6" ]; then modules="$modules php5-cli php5-apcu"; fi \
+    && if [ "$version" = "5.6" ]; then modules="$modules php5-cli"; fi \
     && if [ "$version" != "5.6" ]; then modules="$modules php7-mbstring"; fi \
     && if echo "7.0" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
-    && if echo "7.1 7.2" | grep -q "$version"; then modules="$modules php7-tokenizer"; fi \
-    && if echo "7.0 7.1" | grep -q "$version"; then modules="$modules php7-apcu"; fi \
-    && if echo "7.2 7.3" | grep -q "$version"; then modules="$modules php7-pecl-apcu"; fi \
+    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-tokenizer"; fi \
+    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-apcu"; else modules="$modules php7-pecl-apcu"; fi \
     && apk --update add "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phpize ]; then ln -s "/usr/bin/phpize$major" /usr/bin/phpize; fi
