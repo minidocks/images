@@ -15,10 +15,12 @@ RUN apk --update --no-cache add rsync
 
 RUN rsync -rlptv rsync://contextgarden.net/minimals/setup/$platform/bin /usr/local
 RUN cd /usr/local/bin && wget -O luatex-bin-x86_64-musl.tar.gz https://github.com/TeX-Live/luatex/releases/download/1.10.1-svn7143/luatex-bin-x86_64-musl.tar.gz \
-    && tar -xzvf luatex-bin-x86_64-musl.tar.gz && rm -rf *.gz luajittex
+    && tar -xzvf luatex-bin-x86_64-musl.tar.gz
 RUN mkdir -p /usr/share/tex && cd /usr/share/tex && CONTEXTROOT=/usr/share/tex PATH="$CONTEXTROOT/texmf-$platform/bin:$PATH" MTX_PLATFORM="$platform" \
     mtxrun --script /usr/local/bin/mtx-update.lua --force --update --make --context=$version --engine=luatex --modules=all --platform="$platform" --texroot="$CONTEXTROOT"
 
+#Bug https://mailman.ntg.nl/pipermail/ntg-context/2019/095184.html
+RUN cp /usr/local/bin/luatex /usr/share/tex/texmf-linuxmusl-64/bin && cp /usr/local/bin/luajittex /usr/share/tex/texmf-linuxmusl-64/bin
 RUN mv /usr/share/tex/texmf-modules/doc /usr/share/texmf-modules-doc
 RUN mv /usr/share/tex/texmf-context/doc /usr/share/texmf-context-doc
 RUN mkdir -p /usr/share/texmf-fonts && for dir in opentype truetype type1; do mv "/usr/share/tex/texmf/fonts/$dir/" /usr/share/texmf-fonts/; done
