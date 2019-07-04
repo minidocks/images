@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+args=""
+files=""
+while [ -n "$1" ]; do
+    case "$1" in
+        -c|-p|-t) args="$args $1 $2"; shift;;
+        -*) args="$args $1"; shift;;
+        *) files="$files $1"
+    esac
+    shift;
+done
+
+eval set -- "$files"
+git difftool -y -x "htmldiff $args" "$@"
