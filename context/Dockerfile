@@ -15,7 +15,7 @@ RUN apk --update --no-cache add rsync
 
 RUN rsync -rlptv rsync://contextgarden.net/minimals/setup/$platform/bin /usr/local
 RUN cd /usr/local/bin && wget -O luatex-bin-x86_64-musl.tar.gz https://github.com/TeX-Live/luatex/releases/download/1.10.1-svn7143/luatex-bin-x86_64-musl.tar.gz \
-    && tar -xzvf luatex-bin-x86_64-musl.tar.gz
+    && tar -xzvf luatex-bin-x86_64-musl.tar.gz && rm -rf *.gz
 RUN mkdir -p /usr/share/tex && cd /usr/share/tex && CONTEXTROOT=/usr/share/tex PATH="$CONTEXTROOT/texmf-$platform/bin:$PATH" MTX_PLATFORM="$platform" \
     mtxrun --script /usr/local/bin/mtx-update.lua --force --update --make --context=$version --engine=luatex --modules=all --platform="$platform" --texroot="$CONTEXTROOT"
 
