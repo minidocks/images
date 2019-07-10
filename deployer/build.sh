@@ -4,8 +4,8 @@ set -e
 image="${namespace:-minidocks}/deployer"
 versions="
 4;4.3.4
-6;6.4.3
-latest;6.4.3
+6;6.4.5
+latest;6.4.5
 "
 
 build() {
