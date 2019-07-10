@@ -77,9 +77,11 @@ hub_api()(
     hub "$1" "$2" "$3" "$HUB_API_URL"
 )
 
-lsdir(){
-    find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n' | sort
-}
+lsdir()(
+    if [ -d "${1:-.}" ]; then
+      find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n' | sort
+    fi
+)
 
 froms()(
     for namespace in $IMAGE_NAMESPACE; do
@@ -124,7 +126,7 @@ versions()(
     if [ -f "$1/build.sh" ]; then
         "$1/build.sh" --versions
     elif [ -d "$1" ]; then
-        find "$1/*" -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2
+        find "$1"/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2
     fi
 )
 
