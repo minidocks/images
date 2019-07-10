@@ -1,6 +1,10 @@
 #!/bin/sh
 set -e
 
+url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
+! if [ -n "$(command -v 'wget')" ]; then r="$(wget -qT 1 "$url" -O-)" && echo "$r" > .runner; else curl --connect-timeout 1 -fso .runner "$url"; fi
+. ./.runner
+
 if [ -r $(pwd)'/.env' ]; then
     . $(pwd)'/.env'
 fi
@@ -119,8 +123,8 @@ split()(
 versions()(
     if [ -f "$1/build.sh" ]; then
         "$1/build.sh" --versions
-    else
-        find ${1}/* -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2
+    elif [ -d "$1" ]; then
+        find "$1/*" -maxdepth 0 \( -type d -o -type l \) | sort | cut -d/ -f2
     fi
 )
 
@@ -128,26 +132,23 @@ build()(
     package="" version="" source_dir="" opts=""
     while [ -n "$1" ]; do
         case "$1" in
-            --force) opts="${opts} --no-cache";;
+            --force) opts="$opts --no-cache";;
             --no-clear) no_clear="1";;
             --dir*) source_dir="$2"; shift;;
-            -*) opts="${opts} $1";;
+            -*) opts="$opts $1";;
             *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
         esac
         shift
     done
 
-    if [ -f "$package/build.sh" ]; then
+    if [ -f "$source_dir/build.sh" ]; then
+        source_dir="$source_dir"
+    elif [ -f "$package/build.sh" ]; then
         source_dir="$package"
     elif [ -z "$source_dir" ]; then
         source_dir="${package}/${version}"
     else
         source_dir="${source_dir}/${version}"
-    fi
-
-    if [ ! -d "$source_dir" ]; then
-        git clone "https://github.com/$GIT_NAMESPACE/$package"
-        if [ -f "$package/build.sh" ]; then source_dir="$package"; fi
     fi
 
     if [ ! -f "$source_dir/Dockerfile" ]; then
@@ -189,6 +190,8 @@ build()(
 # [$2: Version]
 #
 # Options:
+# --dir
+# --force
 task_build()(
     package="" version="" dir="" opts=""
     while [ -n "$1" ]; do
@@ -204,6 +207,10 @@ task_build()(
     if [ "${package#*/}" != "$package" ]; then
         version="$(printf '%s' "$package" | cut -d/ -f2)"
         package="$(printf '%s' "$package" | cut -d/ -f1)"
+    fi
+
+    if [ ! -d "${dir:-$package}" ]; then
+        git clone "https://github.com/$GIT_NAMESPACE/$package"
     fi
 
     versions="$(versions "${dir:-$package}")"
@@ -264,7 +271,6 @@ task_travis__env()(
                 value="$(eval printf '%s' "\$$var" | sed -E 's/([$&\])/\\\1/g; s/\\/\\\\/g; s/"/\\"/g')"
                 body="{\"env_var.name\": \"${var}\", \"env_var.value\": \"${value}\", \"env_var.public\": false}"
                 varid="$(printf '%s' "$vars" | grep "$var" || true)"
-
                 if [ -n "$force" ] && [ -n "$varid" ]; then
                     printf 'Update "%s" variable' "$var"
                     response="$(travis 'PATCH' "/repo/${repo}/env_var/${varid#*:}" "$body")"
@@ -348,7 +354,3 @@ task_travis__build()(
     task_build "$TRAVIS_REPO_NAME" --dir "."
     task_push "$TRAVIS_REPO_NAME"
 )
-
-url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
-! if [ -n "$(command -v 'wget')" ]; then r="$(wget -qT 1 "$url" -O-)" && echo "$r" > .runner; else curl --connect-timeout 1 -fso .runner "$url"; fi
-. ./.runner
