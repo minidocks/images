@@ -9,7 +9,7 @@ latest;gimp<2.11
 "
 
 build() {
-    docker build --build-arg packages="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg packages="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

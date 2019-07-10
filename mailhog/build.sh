@@ -8,7 +8,7 @@ latest;1.0.0
 "
 
 build() {
-    docker build --build-arg mailhog_version="${2:-python}" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg mailhog_version="${2:-python}" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

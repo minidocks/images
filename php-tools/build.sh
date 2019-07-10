@@ -9,7 +9,7 @@ latest;7.3
 "
 
 build() {
-    docker build --build-arg php_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg php_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

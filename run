@@ -165,7 +165,7 @@ build()(
     if [ -f "$source_dir/build.sh" ]; then
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
-            namespace="$namespace" "$source_dir/build.sh" "$version" $opts
+            namespace="$namespace" docker_opts="$(echo "$opts" | xargs)" "$source_dir/build.sh" "$version"
         done
         printf "\n"
     elif [ ! -d "$target_dir" ] || [ "$no_clear" != 1 ]; then

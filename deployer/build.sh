@@ -9,7 +9,7 @@ latest;6.4.3
 "
 
 build() {
-    docker build --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

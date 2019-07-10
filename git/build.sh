@@ -8,7 +8,7 @@ latest
 "
 
 build() {
-    docker build --target=latest -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --target=latest -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

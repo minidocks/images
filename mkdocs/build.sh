@@ -9,7 +9,7 @@ latest;1.0.4;4.1.0;
 "
 
 build() {
-    docker build --target="${5:-latest}" --build-arg base_image="${4:-python}" --build-arg mkdocs_material_version="$3" --build-arg mkdocs_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --target="${5:-latest}" --build-arg base_image="${4:-python}" --build-arg mkdocs_material_version="$3" --build-arg mkdocs_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

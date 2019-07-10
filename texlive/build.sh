@@ -30,7 +30,7 @@ latest;2019;basic;
 "
 
 build() {
-    docker build --target "${3:-basic}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --target "${3:-basic}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

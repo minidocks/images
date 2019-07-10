@@ -9,7 +9,7 @@ latest;1.0.0
 "
 
 build() {
-    docker build --build-arg maildev_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg maildev_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

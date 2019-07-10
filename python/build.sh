@@ -15,7 +15,7 @@ latest;3.7
 "
 
 build() {
-    docker build --target "${3:-latest}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --target "${3:-latest}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

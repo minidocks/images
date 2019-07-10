@@ -10,7 +10,7 @@ latest;3.4;3
 "
 
 build() {
-    docker build --build-arg python_version="$3" --build-arg pyinstaller_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg python_version="$3" --build-arg pyinstaller_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

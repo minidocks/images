@@ -8,7 +8,7 @@ latest;0.9.5
 "
 
 build() {
-    docker build --build-arg svgcleaner_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg svgcleaner_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
