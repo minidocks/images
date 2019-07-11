@@ -28,9 +28,11 @@ RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$m
     && if echo "7.0" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
     && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-tokenizer"; fi \
     && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-apcu"; else modules="$modules php7-pecl-apcu"; fi \
-    && apk --update add "php$major" $modules && clean \
+    && apk --update add gnu-libiconv@310 "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phpize ]; then ln -s "/usr/bin/phpize$major" /usr/bin/phpize; fi
+
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 #Psysh
 RUN wget https://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh

@@ -6,6 +6,8 @@ PHP docker image (minidocks/php)
 [PHP](https://php.net/) is a popular general-purpose scripting language that is especially suited to web development.
 Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world.
 
+These images solves [problem with iconv library](https://github.com/docker-library/php/issues/240#issuecomment-506651614).
+
 Configuration by environment variables
 --------------------------------------
 
