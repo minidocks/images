@@ -4,19 +4,19 @@ set -e
 image="${namespace:-minidocks}/tesseract"
 europe="bel bos bul cat ces cym dan deu ell eng est eus fin fra gle grc hrv hun ita lat lav nor pol por ron rus slk slv spa srp swe ukr"
 versions="
-3;3.04.00;v3
-4;4.0.0;v4
-latest;4.0.0;v4
-4-europe;4.0.0;v4;$europe;lang
+3;3.04.00;38
+4;4.0.0;edge
+latest;4.0.0;edge
+4-europe;4.0.0;edge;$europe;lang
 "
 
 for lang in $europe; do versions="
 $versions
-4-$lang;4.0.0;v4;$lang;lang
+4-$lang;4.0.0;edge;$lang;lang
 "; done
 
 build() {
-    docker build $docker_opts --target "${5:-latest}" --build-arg lang="$4" --build-arg base_version="$3" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --target "${5:-latest}" --build-arg lang="$4" --build-arg repository="$3" --build-arg data_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
