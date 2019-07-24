@@ -1,7 +1,7 @@
 ARG version=7.3
 ARG major=7
 ARG composer_version=1.8.6
-ARG blackfire_version=1.25.0
+ARG blackfire_version=1.26.3
 
 FROM minidocks/base:3.5 AS v7.0
 
@@ -97,7 +97,7 @@ RUN for module in \
     ; do modules="$modules php${major}-$module"; done \
     && if [ "$version" = "5.6" ]; then modules="$modules php5-mysql php5-xdebug@35"; else modules="$modules php7-mysqlnd php7-session php7-xdebug"; fi \
     && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-redis php7-fileinfo php7-simplexml php7-xmlwriter"; fi \
-    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-mcrypt"; else modules="$modules php7-pecl-mcrypt"; fi \
+    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-mcrypt"; else modules="$modules php7-pecl-mcrypt php7-sodium"; fi \
     && apk --update --force-broken-world add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm${major}" /usr/bin/php-fpm; fi \
     && clean
@@ -128,7 +128,11 @@ RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfi
 
 EXPOSE 9000
 
-FROM latest AS intl
+FROM latest AS nginx
+
+RUN apk --update add nginx nginx-mod-http-lua && clean
+
+FROM nginx AS intl
 
 ARG major
 
