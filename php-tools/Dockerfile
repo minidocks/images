@@ -1,5 +1,7 @@
 ARG php_version=7.3
 
+FROM minidocks/php:7.1 as v7.1
+
 FROM minidocks/php:7.2 as v7.2
 
 FROM minidocks/php:7.3 as v7.3
@@ -7,7 +9,7 @@ FROM minidocks/php:7.3 as v7.3
 FROM v$php_version
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG toolbox_version=1.7.1
+ARG toolbox_version=1.8.0
 ARG php_version
 
 ENV PHP_MEMORY_LIMIT=-1 \
