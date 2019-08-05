@@ -14,6 +14,11 @@ WORKDIR /data
 
 COPY rootfs /
 
+ENV REDIS_PROTECTED__MODE=no \
+    REDIS_BIND=0.0.0.0
+
+RUN /docker-entrypoint.sh
+
 EXPOSE 6379
 
-CMD [ "redis-server" ]
+CMD [ "redis-server", "/etc/redis.conf" ]
