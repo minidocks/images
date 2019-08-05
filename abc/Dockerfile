@@ -20,7 +20,7 @@ RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v$
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2019.06.20
+ARG abc2midi_version=2019.08.02
 
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
@@ -29,7 +29,7 @@ RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2mid
 FROM minidocks/pyinstaller AS abc2xml
 
 ARG xml2abc_version=139
-ARG abc2xml_version=220
+ARG abc2xml_version=221
 
 RUN apk add wget && wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2abc.py-${xml2abc_version}.zip" \
     && wget -O /tmp/abc2xml.zip "https://wim.vree.org/svgParse/abc2xml.py-${abc2xml_version}.zip" \
