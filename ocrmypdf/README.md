@@ -1,6 +1,8 @@
 OCRmyPDF with img2pdf docker image (minidocks/ocrmypdf)
 =======================================================
 
+![](https://raw.githubusercontent.com/jbarlow83/OCRmyPDF/master/docs/images/logo.svg?sanitize=true)
+
 OCRmyPDF adds an OCR text layer to scanned PDF files, allowing them to be searched.
 
 Usage
