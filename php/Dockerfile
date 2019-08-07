@@ -1,6 +1,6 @@
 ARG version=7.3
 ARG major=7
-ARG composer_version=1.8.6
+ARG composer_version=1.9.0
 ARG blackfire_version=1.26.3
 
 FROM minidocks/base:3.5 AS v7.0
@@ -130,7 +130,7 @@ EXPOSE 9000
 
 FROM latest AS nginx
 
-RUN apk --update add nginx nginx-mod-http-lua && clean
+RUN apk --update --force-broken-world add nginx nginx-mod-http-lua && clean
 
 FROM nginx AS intl
 
