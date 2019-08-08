@@ -15,12 +15,13 @@ Enhancements
 - [git-standup](https://github.com/kamranahmedse/git-standup): Recall what you did on the last working day ..or be nosy and find what someone else did.
 - [tomono](https://github.com/unravelin/tomono): Merge multiple repositories into one big monorepository. Migrates every branch in every subrepo to the eponymous branch in the monorepo, with all files (including in the history) rewritten to live under a subdirectory.
 - [splitsh](https://github.com/splitsh/lite/commits/master): splitsh-lite replaces the subtree split Git built-in command to make splitting a monolithic repository to read-only standalone repositories easy and fast.
+- [monorepo-tools](https://github.com/shopsys/monorepo-tools): Tools for building and splitting monolithic repository from existing packages.
 
 Usage
 -----
 
 ```bash
-docker run --rm -it -v "`pwd`:`pwd`" -w "`pwd`" minidocks/git sh
+docker run --rm -it -v "`pwd`:`pwd`" -w "`pwd`" -v ~:/home/user minidocks/git sh
 ```
 
 Tags
