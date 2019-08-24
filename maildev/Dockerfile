@@ -1,7 +1,7 @@
 FROM minidocks/node
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG maildev_version=1.0.0
+ARG maildev_version=1.1.0
 
 RUN npm install -g "maildev@${maildev_version}" && clean
 

@@ -5,7 +5,8 @@ image="${namespace:-minidocks}/maildev"
 versions="
 0.14;0.14.0
 1.0;1.0.0
-latest;1.0.0
+1.1;1.1.0
+latest;1.1.0
 "
 
 build() {
