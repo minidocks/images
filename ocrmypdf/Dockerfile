@@ -1,4 +1,4 @@
-ARG version=9.0.0
+ARG version=9.0.1
 ARG qpdf_version=8.4.2
 
 FROM minidocks/base:build
