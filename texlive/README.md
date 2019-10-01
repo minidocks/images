@@ -10,6 +10,7 @@ Installed utilities
 
 - [pdfjam](http://go.warwick.ac.uk/pdfjam)
 - [pdfcrop](http://pdfcrop.sourceforge.net/)
+- [Gregorio](http://gregorio-project.github.io/)
 
 Usage
 -----
@@ -33,6 +34,7 @@ Tags
  latest, basic | [![](https://images.microbadger.com/badges/image/minidocks/texlive.svg)](https://microbadger.com/images/minidocks/texlive)
  basic         | [![](https://images.microbadger.com/badges/image/minidocks/texlive:basic.svg)](https://microbadger.com/images/minidocks/texlive:basic)
  small         | [![](https://images.microbadger.com/badges/image/minidocks/texlive:small.svg)](https://microbadger.com/images/minidocks/texlive:small)
+ gregorio      | [![](https://images.microbadger.com/badges/image/minidocks/texlive:gregorio.svg)](https://microbadger.com/images/minidocks/texlive:gregorio)
  context       | [![](https://images.microbadger.com/badges/image/minidocks/texlive:context.svg)](https://microbadger.com/images/minidocks/texlive:context)
  medium        | [![](https://images.microbadger.com/badges/image/minidocks/texlive:medium.svg)](https://microbadger.com/images/minidocks/texlive:medium)
  full          | [![](https://images.microbadger.com/badges/image/minidocks/texlive:full.svg)](https://microbadger.com/images/minidocks/texlive:full)

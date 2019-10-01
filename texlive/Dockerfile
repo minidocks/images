@@ -14,7 +14,7 @@ RUN apk add xz && wget -O /tmp/install-tl-unx.tar.gz "http://ftp.math.utah.edu/p
 
 FROM minimal AS basic
 
-RUN tlmgr install scheme-basic pdfpages ms pdfjam pdfcrop pdfbook2 && clean
+RUN tlmgr install scheme-basic latexmk pdfpages ms pdfjam pdfcrop pdfbook2 && clean
 
 FROM minimal AS context
 
@@ -23,6 +23,10 @@ RUN apk add fontconfig freetype libgcc && tlmgr install scheme-context && clean
 FROM basic AS small
 
 RUN apk add fontconfig freetype libgcc && tlmgr install scheme-small pagecolor csquotes xurl adjustbox bidi mdframed sourcecodepro sourcesanspro titling needspace ly1 mweights && clean
+
+FROM small AS gregorio
+
+RUN tlmgr install ctablestack luamplib xstring preprint libertine gregoriotex && clean
 
 FROM small AS medium
 

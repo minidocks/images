@@ -8,6 +8,7 @@ versions="
 2018-context;2018;context
 2018-basic;2018;basic
 2018-small;2018;small
+2018-gregorio;2018;gregorio
 2018-medium;2018;medium
 2018-full;2018;full
 
@@ -16,6 +17,7 @@ versions="
 2019-context;2019;context
 2019-basic;2019;basic
 2019-small;2019;small
+2019-gregorio;2019;gregorio
 2019-medium;2019;medium
 2019-full;2019;full
 
@@ -23,6 +25,7 @@ minimal;2019;minimal
 context;2019;context
 basic;2019;basic
 small;2019;small
+gregorio;2019;gregorio
 medium;2019;medium
 full;2019;full
 
