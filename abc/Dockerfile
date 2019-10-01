@@ -14,13 +14,13 @@ RUN wget -O /tmp/abcpp.tar.gz "https://sourceforge.net/projects/abcplus/files/ab
     && tar -xvzf /tmp/abcpp.tar.gz -C /tmp && cd /tmp/abcpp* \
     && mkdir -p /tmp/build && make && mv abcpp /tmp/build
 
-ARG abcm2ps_version=8.14.4
+ARG abcm2ps_version=8.14.5
 
 RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v${abcm2ps_version}.tar.gz" \
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2019.08.02
+ARG abc2midi_version=2019.08.11
 
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \

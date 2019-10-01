@@ -1,9 +1,9 @@
-ARG version=9.0.1
-ARG qpdf_version=8.4.2
+ARG version=9.0.3
+ARG qpdf_version=9.0.1
 
 FROM minidocks/base:build
 
-RUN apk --update add python3-dev py-defusedxml py-lxml libjpeg-turbo-dev zlib-dev libxml2-dev libxslt-dev py3-pybind11@edge
+RUN apk --update add python3-dev py-defusedxml py-lxml libjpeg-turbo-dev zlib-dev libxml2-dev libxslt-dev py3-pybind11
 
 ARG qpdf_version
 

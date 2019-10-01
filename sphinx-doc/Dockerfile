@@ -1,7 +1,7 @@
 FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=2.0.0
+ARG version=2.2.0
 
 RUN pip install \
       sphinx=="$version" \

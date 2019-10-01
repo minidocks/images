@@ -10,7 +10,10 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 3.4 | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller.svg)](https://microbadger.com/images/minidocks/pyinstaller)
+ latest, 3.5 | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller.svg)](https://microbadger.com/images/minidocks/pyinstaller)
+ 3.5         | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.5.svg)](https://microbadger.com/images/minidocks/pyinstaller:3.5)
+ 3.5-py3     | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.5-py3.svg)](https://microbadger.com/images/minidocks/python:3.5-py3)
+ 3.5-py2     | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.5-py2.svg)](https://microbadger.com/images/minidocks/pyinstaller:3.5-py2)
  3.4         | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.4.svg)](https://microbadger.com/images/minidocks/pyinstaller:3.4)
  3.4-py3     | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.4-py3.svg)](https://microbadger.com/images/minidocks/python:3.4-py3)
  3.4-py2     | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.4-py2.svg)](https://microbadger.com/images/minidocks/pyinstaller:3.4-py2)
