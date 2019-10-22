@@ -1,10 +1,3 @@
-#!/bin/sh
-set -e
-
-if [ "${1:0:1}" = '-' ]; then
-    set -- mysqld "$@"
-fi
-
 # skip setup if they want an option that stops mysqld
 wantHelp=
 for arg; do
@@ -16,29 +9,6 @@ for arg; do
     esac
 done
 
-# usage: file_env VAR [DEFAULT]
-#    ie: file_env 'XYZ_DB_PASSWORD' 'example'
-# (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
-#  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
-file_env() {
-    local var="$1"
-    local fileVar="${var}_FILE"
-    local def="${2:-}"
-
-    if [ "$(eval echo "\${$var}")" ] && [ "$(eval echo "\${$fileVar}")" ]; then
-        echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
-        exit 1
-    fi
-    local val="$def"
-    if [ "$(eval echo "\${$var}")" ]; then
-        val="$(eval echo "\${$var}")"
-    elif [ "$(eval echo "\${$fileVar}")" ]; then
-        val="$(< eval echo "\${$fileVar}")"
-    fi
-    export "$var"="$val"
-    unset "$fileVar"
-}
-
 _check_config() {
     toRun="$@ --verbose --help --log-bin-index="$(mktemp -u)
     if ! errors="$($toRun 2>&1 >/dev/null)"; then
@@ -49,6 +19,16 @@ $errors
 EOM
         exit 1
     fi
+}
+
+# Fetch value from server config
+# We use mysqld --verbose --help instead of my_print_defaults because the
+# latter only show values present in config files, and not server defaults
+_get_config() {
+    local conf="$1"; shift
+    "$@" --verbose --help --log-bin-index="$(mktemp -u)" 2>/dev/null \
+    awk '$1 == "'"$conf"'" && /^[^ \t]/ { sub(/^[^ \t]+[ \t]+/, ""); print; exit }'
+    # match "datadir      /some/path with/spaces in/it here" but not "--xyz=abc\n     datadir (xyz)"
 }
 
 _datadir() {
@@ -118,13 +98,20 @@ EOSQL
             mysql="$mysql -p${MYSQL_ROOT_PASSWORD}"
         fi
 
+        . /bin/file_env
+
+        # one line url configuration
+        file_env 'MYSQL_URL'
+        file_env 'DATABASE_URL'
+
+        file_env 'MYSQL_DATABASE' "$(parse_url "${MYSQL_URL:-$DATABASE_URL}" path)"
         if [ "$MYSQL_DATABASE" ]; then
             echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" | $mysql
             mysql="$mysql $MYSQL_DATABASE"
         fi
 
-        file_env 'MYSQL_USER'
-        file_env 'MYSQL_PASSWORD'
+        file_env 'MYSQL_USER' "$(parse_url "${MYSQL_URL:-$DATABASE_URL}" user)"
+        file_env 'MYSQL_PASSWORD' "$(parse_url "${MYSQL_URL:-$DATABASE_URL}" pass)"
         if [ "$MYSQL_USER" ] && [ "$MYSQL_PASSWORD" ]; then
             echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" | $mysql
 
@@ -154,8 +141,4 @@ EOSQL
         echo 'MySQL init process done. Ready for start up.'
         echo
     fi
-fi
-
-if [ "$1" = 'mysqld' ]; then
-    exec /sbin/tini -s -g -- su-exec mysql "$@"
 fi
