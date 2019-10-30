@@ -5,7 +5,10 @@ image="${namespace:-minidocks}/weasyprint"
 versions="
 46;46
 47;47
-latest;47
+48;48
+49;49
+50;50
+latest;50
 "
 
 build() {

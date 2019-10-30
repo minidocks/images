@@ -1,7 +1,7 @@
 FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=47
+ARG version=50
 
 RUN apk add --update cairo cairo-gobject pango gdk-pixbuf py3-lxml py3-cffi py3-pillow msttcorefonts-installer fontconfig \
     && update-ms-fonts && fc-cache -f \

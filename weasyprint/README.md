@@ -17,8 +17,11 @@ Tags
 
  Tag        | Size
  ---        | ----
- latest, 47 | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint.svg)](https://microbadger.com/images/minidocks/weasyprint)
- 47         | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint:46.svg)](https://microbadger.com/images/minidocks/weasyprint:47)
+ latest, 50 | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint.svg)](https://microbadger.com/images/minidocks/weasyprint)
+ 50         | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint:50.svg)](https://microbadger.com/images/minidocks/weasyprint:50)
+ 49         | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint:49.svg)](https://microbadger.com/images/minidocks/weasyprint:49)
+ 48         | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint:48.svg)](https://microbadger.com/images/minidocks/weasyprint:48)
+ 47         | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint:47.svg)](https://microbadger.com/images/minidocks/weasyprint:47)
  46         | [![](https://images.microbadger.com/badges/image/minidocks/weasyprint:46.svg)](https://microbadger.com/images/minidocks/weasyprint:46)
 
 Related images
