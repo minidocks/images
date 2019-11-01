@@ -1,12 +1,13 @@
 ARG version=3.7
+ARG suffix=""
 
-FROM minidocks/base:3.5 AS base_3.5
+FROM minidocks/base:3.5$suffix AS base_3.5
 
-FROM minidocks/base:3.9 AS base_3.6
+FROM minidocks/base:3.9$suffix AS base_3.6
 
-FROM minidocks/base:3.10 AS base_2.7
+FROM minidocks/base:3.10$suffix AS base_2.7
 
-FROM minidocks/base:3.10 AS base_3.7
+FROM minidocks/base:3.10$suffix AS base_3.7
 
 FROM base_$version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -35,6 +36,12 @@ RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
     && clean
 
 CMD [ "python" ]
+
+FROM latest AS build
+
+ARG version
+
+RUN apk -U add "python${version%%.*}-dev" && clean
 
 FROM latest AS uwsgi
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
