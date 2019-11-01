@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/poppler"
 versions="
-0.56
 latest
 "
 

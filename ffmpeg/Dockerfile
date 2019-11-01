@@ -1,10 +1,10 @@
-ARG base_version=3.9
+ARG version=4
 
-FROM minidocks/base:3.8 AS v3.8
+FROM minidocks/base:3.8 AS v3
 
-FROM minidocks/base:3.9 AS v3.9
+FROM minidocks/base AS v4
 
-FROM v$base_version AS latest
+FROM v$version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add ffmpeg ffmpegthumbnailer && clean

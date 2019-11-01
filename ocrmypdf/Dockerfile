@@ -21,7 +21,6 @@ FROM minidocks/img2pdf
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version
-ENV OCRMYPDF_VERSION=$version
 
 COPY --from=0 /tmp/build /
 
@@ -29,7 +28,6 @@ COPY rootfs /
 
 RUN apk -U add py-cffi py3-defusedxml py3-lxml py3-reportlab libjpeg-turbo zlib pngquant jbig2enc@edge && clean
 
-RUN pip install ocrmypdf==$OCRMYPDF_VERSION && clean \
-    && if [ "${version%%.*}" = 8 ]; then patch "$(pip show ocrmypdf | grep Location | cut -d' ' -f2-)/ocrmypdf/pdfa.py" /root/pdfa.py.patch; fi
+RUN pip install ocrmypdf==$version && clean
 
 CMD [ "ocrmypdf" ]

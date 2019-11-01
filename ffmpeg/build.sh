@@ -3,13 +3,13 @@ set -e
 
 image="${namespace:-minidocks}/ffmpeg"
 versions="
-3;3.8
-4;3.9
-latest;3.9
+3;3
+4;4
+latest;4
 "
 
 build() {
-    docker build $docker_opts --build-arg base_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
