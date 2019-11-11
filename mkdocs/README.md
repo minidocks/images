@@ -30,12 +30,12 @@ Usage
 
 Create a new documentation project in `doc` directory:
 ```bash
-docker run --rm -v `pwd`:/app -w /app minidocks/mkdocs new doc
+docker run --rm -v "`pwd`:/app" -w /app minidocks/mkdocs new doc
 ```
 
 Start documentation server in `doc` directory on port 8000 with material design theme:
 ```bash
-docker run --rm -v `pwd`:/app -w /app/doc -p 8000:8000 minidocks/mkdocs serve -a 0.0.0.0:8000 -t material
+docker run --rm -v "`pwd`:/app" -w /app/doc -p 8000:8000 minidocks/mkdocs serve -a 0.0.0.0:8000 -t material
 ```
 
 Tags
@@ -45,5 +45,10 @@ Tags
  ----------- | ----
  latest, 1.0 | [![](https://images.microbadger.com/badges/image/minidocks/mkdocs.svg)](https://microbadger.com/images/minidocks/mkdocs)
  1.0         | [![](https://images.microbadger.com/badges/image/minidocks/mkdocs:1.0.svg)](https://microbadger.com/images/minidocks/mkdocs:1.0)
- 1.0-pdf     | [![](https://images.microbadger.com/badges/image/minidocks/mkdocs:1.0-pdf.svg)](https://microbadger.com/images/minidocks/mkdocs:1.0-pdf) 
+ 1.0-pdf     | [![](https://images.microbadger.com/badges/image/minidocks/mkdocs:1.0-pdf.svg)](https://microbadger.com/images/minidocks/mkdocs:1.0-pdf)
  0.17        | [![](https://images.microbadger.com/badges/image/minidocks/mkdocs:0.17.svg)](https://microbadger.com/images/minidocks/mkdocs:0.17)
+
+Alternatives
+------------
+
+- https://github.com/raspberryvalley/docker-mkdocs

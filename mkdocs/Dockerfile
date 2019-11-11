@@ -8,16 +8,26 @@ FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG mkdocs_version=1.0.4
-ARG mkdocs_material_version=4.3.1
+ARG mkdocs_material_version=4.4.3
 
 RUN pip install \
+      markdown-include \
       mkdocs==$mkdocs_version \
-      mkdocs-material==$mkdocs_material_version \
       mkdocs-alabaster \
-      mkdocs-cinder \
-      mkdocs-rtd-dropdown \
       mkdocs-awesome-pages-plugin \
+      mkdocs-cinder \
+      mkdocs-exclude \
+      mkdocs-git-committers-plugin \
+      mkdocs-git-revision-date-plugin \
+      mkdocs-ivory \
+      mkdocs-macros-plugin \
+      mkdocs-markdownextradata-plugin \
+      mkdocs-material==$mkdocs_material_version \
       mkdocs-merge \
+      mkdocs-monorepo-plugin \
+      mkdocs-redirects \
+      mkdocs-rtd-dropdown \
+      mkdocs-versioning \
       pygments \
       pymdown-extensions \
     && clean
