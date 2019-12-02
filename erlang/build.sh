@@ -3,15 +3,15 @@ set -e
 
 image="${namespace:-minidocks}/erlang"
 versions="
-19;3.6
-20;3.8
-21;3.9
-22;3.10
-latest;3.10
+19;19
+20;20
+21;21
+22;22
+latest;22
 "
 
 build() {
-    docker build $docker_opts --build-arg base_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg erlang_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

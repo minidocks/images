@@ -1,4 +1,4 @@
-ARG verions=2.7.3
+ARG verions=2.8.0.1
 FROM minidocks/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
