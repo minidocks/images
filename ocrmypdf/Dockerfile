@@ -1,5 +1,5 @@
 ARG version=9.1.1
-ARG qpdf_version=9.0.2
+ARG qpdf_version=9.1.0
 
 FROM minidocks/python:3-build
 
