@@ -14,6 +14,9 @@ versions="
 3.7;3.7
 3.7-uwsgi;3.7;uwsgi
 3.7-build;3.7;build;-build
+3.8;3.8
+3.8-uwsgi;3.8;uwsgi
+3.8-build;3.8;build;-build
 3;3.7
 3-build;3.7;build;-build
 3-uwsgi;3.7;uwsgi
