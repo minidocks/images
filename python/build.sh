@@ -7,7 +7,6 @@ versions="
 2.7-build;2.7;build;-build
 2;2.7
 2-build;2.7;build;-build
-3.5;3.5
 3.6;3.6
 3.6-uwsgi;3.6;uwsgi
 3.6-build;3.6;build;-build
@@ -18,9 +17,9 @@ versions="
 3.8-uwsgi;3.8;uwsgi
 3.8-build;3.8;build;-build
 3;3.7
-3-build;3.7;build;-build
-3-uwsgi;3.7;uwsgi
-latest;3.7
+3-build;3.8;build;-build
+3-uwsgi;3.8;uwsgi
+latest;3.8
 "
 
 build() {

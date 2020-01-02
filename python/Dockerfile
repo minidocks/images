@@ -1,7 +1,5 @@
-ARG version=3.7
+ARG version=3.8
 ARG suffix=""
-
-FROM minidocks/base:3.5$suffix AS base_3.5
 
 FROM minidocks/base:3.9$suffix AS base_3.6
 
@@ -9,7 +7,7 @@ FROM minidocks/base:3.10$suffix AS base_2.7
 
 FROM minidocks/base:3.10$suffix AS base_3.7
 
-FROM minidocks/base:edge$suffix AS base_3.8
+FROM minidocks/base:3.11$suffix AS base_3.8
 
 FROM base_$version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

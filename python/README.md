@@ -12,6 +12,8 @@ Configuration by environment variables
 - `PIP_CACHE_DIR` (default `/pip-cache`) - Path to directory with pip cache.
 - `PIP_NO_COMPILE` (default 1)
 
+// python -m ensurepip --upgrade
+
 Utilities
 ---------
 
@@ -28,8 +30,8 @@ Tags
 
  Tag            | Size
  ---            | ----
- latest, 3, 3.7 | [![](https://images.microbadger.com/badges/image/minidocks/python.svg)](https://microbadger.com/images/minidocks/python)
- 3              | [![](https://images.microbadger.com/badges/image/minidocks/python:3.7.svg)](https://microbadger.com/images/minidocks/python:3.7)
+ latest, 3, 3.8 | [![](https://images.microbadger.com/badges/image/minidocks/python.svg)](https://microbadger.com/images/minidocks/python)
+ 3              | [![](https://images.microbadger.com/badges/image/minidocks/python:3.svg)](https://microbadger.com/images/minidocks/python:3)
  3-build        | [![](https://images.microbadger.com/badges/image/minidocks/python:3-build.svg)](https://microbadger.com/images/minidocks/python:3-build)
  3-uwsgi        | [![](https://images.microbadger.com/badges/image/minidocks/python:3-uwsgi.svg)](https://microbadger.com/images/minidocks/python:3-uwsgi)
  3.8            | [![](https://images.microbadger.com/badges/image/minidocks/python:3.8.svg)](https://microbadger.com/images/minidocks/python:3.8)
@@ -41,7 +43,6 @@ Tags
  3.6            | [![](https://images.microbadger.com/badges/image/minidocks/python:3.6.svg)](https://microbadger.com/images/minidocks/python:3.6)
  3.6-build      | [![](https://images.microbadger.com/badges/image/minidocks/python:3.6-uwsgi.svg)](https://microbadger.com/images/minidocks/python:3.6-uwsgi)
  3.6-uwsgi      | [![](https://images.microbadger.com/badges/image/minidocks/python:3.6-uwsgi.svg)](https://microbadger.com/images/minidocks/python:3.6-uwsgi)
- 3.5            | [![](https://images.microbadger.com/badges/image/minidocks/python:3.5.svg)](https://microbadger.com/images/minidocks/python:3.5)
  2              | [![](https://images.microbadger.com/badges/image/minidocks/python:2.svg)](https://microbadger.com/images/minidocks/python:2)
  2-build        | [![](https://images.microbadger.com/badges/image/minidocks/python:2-build.svg)](https://microbadger.com/images/minidocks/python:2-build)
  2.7            | [![](https://images.microbadger.com/badges/image/minidocks/python:2.7.svg)](https://microbadger.com/images/minidocks/python:2.7)
