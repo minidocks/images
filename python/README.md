@@ -11,8 +11,7 @@ Configuration by environment variables
 - `VENV_PATH` - Path to a virtual environment that will be activated after the start.
 - `PIP_CACHE_DIR` (default `/pip-cache`) - Path to directory with pip cache.
 - `PIP_NO_COMPILE` (default 1)
-
-// python -m ensurepip --upgrade
+- `PIPENV_VENV_IN_PROJECT` (default 1)
 
 Utilities
 ---------

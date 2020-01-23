@@ -14,6 +14,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \
     PIP_CACHE_DIR=/pip-cache \
+    PIPENV_VENV_IN_PROJECT=1 \
     CLEAN="$CLEAN:\$PIP_CACHE_DIR/:pyclean"
 
 COPY rootfs /
@@ -21,6 +22,7 @@ COPY rootfs /
 ARG version
 
 RUN if [ "${version%%.*}" = 2 ]; then apk -U add python2 py2-pip; else apk -U add python3; fi && clean
+# python -m ensurepip --upgrade
 
 # make some useful symlinks that are expected to exist
 RUN if [ "${version%%.*}" = 3 ]; then \
