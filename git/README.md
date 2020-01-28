@@ -16,6 +16,9 @@ Enhancements
 - [tomono](https://github.com/unravelin/tomono): Merge multiple repositories into one big monorepository. Migrates every branch in every subrepo to the eponymous branch in the monorepo, with all files (including in the history) rewritten to live under a subdirectory.
 - [splitsh](https://github.com/splitsh/lite/commits/master): splitsh-lite replaces the subtree split Git built-in command to make splitting a monolithic repository to read-only standalone repositories easy and fast.
 - [monorepo-tools](https://github.com/shopsys/monorepo-tools): Tools for building and splitting monolithic repository from existing packages.
+- [git-quick-stats](https://github.com/arzzen/git-quick-stats): Simple and efficient way to access various statistics in a git repository.
+- [git-extras](https://github.com/tj/git-extras): GIT utilities -- repo summary, repl, changelog population, author commit percentages and more.
+- [git-fame](https://github.com/casperdcl/git-fame): Pretty-print git repository collaborators sorted by contributions.
 
 Usage
 -----
