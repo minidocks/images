@@ -9,9 +9,23 @@ Extensions
 
 All extensions are instaled in `/pandoc` directory. Directory `/home/user/.pandoc` is symlink to `/pandoc`.
 
+### Lua filters
+
+- https://github.com/pandoc/lua-filters
+- https://github.com/pandocker/pandocker-lua-filters
+- https://github.com/PlushBeaver/pandoc-table-filter
+- https://github.com/jgm/select-meta
+- https://github.com/mitinarseny/panpipe
+- https://github.com/tomncooper/pandoc-gls
+- https://github.com/a-vrma/pandoc-filters
+- https://github.com/jzeneto/pandoc-odt-filters
+- https://github.com/hason/pandoc-filters
+
+### Templates
 - [Latex template](https://github.com/Wandmalfarbe/pandoc-latex-template)
 - [Letter template](https://github.com/aaronwolen/pandoc-letter)
 - [Resume template](https://github.com/mszep/pandoc_resume)
+- [Leaflet Template](https://gitlab.com/daamien/pandoc-leaflet-template)
 
 Usage
 -----
@@ -96,3 +110,4 @@ See also
 --------
 
 - https://github.com/alexeygumirov/pandoc-for-pdf-how-to
+- https://github.com/dalibo/pandocker
