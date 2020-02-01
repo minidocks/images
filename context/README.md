@@ -52,8 +52,9 @@ Tags
  latest, beta | [![](https://images.microbadger.com/badges/image/minidocks/context.svg)](https://microbadger.com/images/minidocks/context)
  beta         | [![](https://images.microbadger.com/badges/image/minidocks/context:beta.svg)](https://microbadger.com/images/minidocks/context:beta)
  current      | [![](https://images.microbadger.com/badges/image/minidocks/context:current.svg)](https://microbadger.com/images/minidocks/context:current)
+ lmtx         | [![](https://images.microbadger.com/badges/image/minidocks/context:lmtx.svg)](https://microbadger.com/images/minidocks/context:lmtx)
 
 Related images
 --------------
 
-- [TeXlive](https://github.com/minidocks/texLive)
+- [TeX Live](https://github.com/minidocks/texlive)

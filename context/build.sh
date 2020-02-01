@@ -9,6 +9,9 @@ beta-with-docs;beta;docs
 current;current
 current-with-fonts;current;fonts
 current-with-docs;current;docs
+lmtx;lmtx
+lmtx-with-fonts;lmtx;fonts
+lmtx-with-docs;lmtx;docs
 latest;beta
 "
 
