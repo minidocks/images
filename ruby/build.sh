@@ -5,7 +5,8 @@ image="${namespace:-minidocks}/ruby"
 versions="
 2.4;2.4
 2.5;2.5
-latest;2.5
+2.6;2.6
+latest;2.6
 "
 
 build() {

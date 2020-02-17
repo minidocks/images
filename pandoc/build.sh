@@ -7,8 +7,8 @@ versions="
 2.6;2.6;linux
 2.7;2.7.3;linux
 2.8;2.8.1.1;linux-amd64
-2.9;2.9.1.1;linux-amd64
-latest;2.9.1.1;linux-amd64
+2.9;2.9.2;linux-amd64
+latest;2.9.2;linux-amd64
 "
 
 build() {

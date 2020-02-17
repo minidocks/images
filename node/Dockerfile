@@ -1,13 +1,13 @@
-ARG package=nodejs-current<12
-ARG base_version=3.9
-
-FROM minidocks/base:3.6 AS v3.6
+ARG package=nodejs-current<14
+ARG base_version=3.11
 
 FROM minidocks/base:3.8 AS v3.8
 
 FROM minidocks/base:3.9 AS v3.9
 
 FROM minidocks/base:3.10 AS v3.10
+
+FROM minidocks/base:3.11 AS v3.11
 
 FROM v$base_version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

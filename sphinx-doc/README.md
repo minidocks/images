@@ -3,8 +3,8 @@ Sphinx docker image (minidocks/sphinx-doc)
 
 ![](https://upload.wikimedia.org/wikipedia/en/d/dc/Sphinx_Python_Documentation_Logo.png)
 
-Sphinx is a documentation generator that converts reStructuredText files into HTML websites
-and other formats including PDF, EPub, Texinfo and man.
+[Sphinx](https://www.sphinx-doc.org/) is a documentation generator that converts reStructuredText files
+into HTML websites and other formats including PDF, EPub, Texinfo and man.
 
 reStructuredText is extensible, and Sphinx exploits its extensible nature through a number
 of extensions – for autogenerating documentation from source code, writing mathematical
@@ -15,7 +15,7 @@ Features
 
 - Markdown support included via [recommonmark](https://recommonmark.readthedocs.io) and [m2r](https://github.com/miyakogi/m2r) extensions.
 - Multiple sources support included via [sphinx-multibuild](https://github.com/rowanG077/sphinx-multibuild).
-- Livereload web server provided by [sphinx-autobuild](https://github.com/GaretJax/sphinx-autobuild).
+- Live-reload web server provided by [sphinx-autobuild](https://github.com/GaretJax/sphinx-autobuild).
 - Themes: [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme)
 - Plugins: [Tabbed views](https://github.com/djungelorm/sphinx-tabs)
 
@@ -44,10 +44,17 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 2.2 | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)](https://microbadger.com/images/minidocks/sphinx-doc)
+ latest, 2.4 | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)](https://microbadger.com/images/minidocks/sphinx-doc)
+ 2.4         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:2.4.svg)](https://microbadger.com/images/minidocks/sphinx-doc:2.4)
+ 2.3         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:2.3.svg)](https://microbadger.com/images/minidocks/sphinx-doc:2.3)
  2.2         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:2.2.svg)](https://microbadger.com/images/minidocks/sphinx-doc:2.2)
  2.1         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:2.1.svg)](https://microbadger.com/images/minidocks/sphinx-doc:2.1)
  2.0         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:2.0.svg)](https://microbadger.com/images/minidocks/sphinx-doc:2.0)
  1.8         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.8.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.8)
  1.7         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.7.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.7)
  1.6         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.6.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1.6)
+
+Alternatives
+------------
+
+- https://github.com/keimlink/docker-sphinx-doc

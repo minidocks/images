@@ -1,7 +1,7 @@
 img2pdf docker image (minidocks/img2pdf)
 ========================================
 
-img2pdf is a tool to lossless conversion of raster images to PDF.
+[img2pdf](https://gitlab.mister-muffin.de/josch/img2pdf) is a tool to lossless conversion of raster images to PDF.
 
 Usage
 -----

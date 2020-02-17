@@ -3,7 +3,7 @@ set -e
 
 image="${namespace:-minidocks}/librsvg"
 versions="
-2.40
+2
 latest
 "
 

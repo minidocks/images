@@ -8,7 +8,7 @@ FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG mkdocs_version=1.0.4
-ARG mkdocs_material_version=4.4.3
+ARG mkdocs_material_version=4.6.3
 
 RUN pip install \
       markdown-include \

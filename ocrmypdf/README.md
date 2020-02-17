@@ -3,7 +3,14 @@ OCRmyPDF with img2pdf docker image (minidocks/ocrmypdf)
 
 ![](https://raw.githubusercontent.com/jbarlow83/OCRmyPDF/master/docs/images/logo.svg?sanitize=true)
 
-OCRmyPDF adds an OCR text layer to scanned PDF files, allowing them to be searched.
+[OCRmyPDF](https://ocrmypdf.readthedocs.io/) adds an OCR text layer to scanned PDF files, allowing them to be searched.
+
+Utilities
+---------
+
+- [img2pdf](https://gitlab.mister-muffin.de/josch/img2pdf) is a tool to lossless conversion of raster images to PDF.
+- [pdfminer](https://github.com/pdfminer/pdfminer.six) is a tool for extracting information from PDF documents.
+- [hocr tools](https://github.com/tmbdev/hocr-tools)
 
 Usage
 -----
@@ -60,5 +67,5 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 8   | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)](https://microbadger.com/images/minidocks/ocrmypdf)
- 8           | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:8.svg)](https://microbadger.com/images/minidocks/ocrmypdf:8)
+ latest, 9   | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)](https://microbadger.com/images/minidocks/ocrmypdf)
+ 9           | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:9.svg)](https://microbadger.com/images/minidocks/ocrmypdf:9)

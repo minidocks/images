@@ -22,7 +22,9 @@ Tags
 
  Tag        | Size
 ----------- | ----
- latest, 11 | [![](https://images.microbadger.com/badges/image/minidocks/node.svg)](https://microbadger.com/images/minidocks/node)
+ latest, 13 | [![](https://images.microbadger.com/badges/image/minidocks/node.svg)](https://microbadger.com/images/minidocks/node)
+ 13         | [![](https://images.microbadger.com/badges/image/minidocks/node:13.svg)](https://microbadger.com/images/minidocks/node:13)
+ 12, lts    | [![](https://images.microbadger.com/badges/image/minidocks/node:12.svg)](https://microbadger.com/images/minidocks/node:12)
  11         | [![](https://images.microbadger.com/badges/image/minidocks/node:11.svg)](https://microbadger.com/images/minidocks/node:11)
  10         | [![](https://images.microbadger.com/badges/image/minidocks/node:10.svg)](https://microbadger.com/images/minidocks/node:10)
  9          | [![](https://images.microbadger.com/badges/image/minidocks/node:9.svg)](https://microbadger.com/images/minidocks/node:9)

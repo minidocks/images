@@ -1,7 +1,7 @@
 FROM minidocks/base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=2.9.1.1
+ARG version=2.9.2
 ARG platform=linux-amd64
 ENV XDG_DATA_HOME=/
 
