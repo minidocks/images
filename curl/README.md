@@ -1,17 +1,21 @@
-Curl with jq docker image (minidocks/curl)
-==========================================
+Curl docker image (minidocks/curl)
+==================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Curl-logo.svg/200px-Curl-logo.svg.png)
-![](https://upload.wikimedia.org/wikipedia/commons/1/1a/Jq_logo.png)
 
-Curl is a command-line tool for transferring data specified with URL syntax.
-jq is a lightweight and flexible command-line JSON processor.
+[Curl](https://curl.haxx.se/) is a command-line tool for transferring data specified with URL syntax.
+
+Utilities
+---------
+
+- [jq](https://stedolan.github.io/jq/) is a lightweight and flexible command-line JSON processor.
+- [pup](https://github.com/ericchiang/pup) parsing HTML at the command line.
 
 Usage
 -----
 
 ```bash
-docker run --rm minidocks/curl 
+docker run --rm -it minidocks/curl http://example.com | pup 'h1 text{}'
 ```
 
 Tags
