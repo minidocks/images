@@ -75,10 +75,14 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.10      | [![](https://images.microbadger.com/badges/image/minidocks/base.svg)](https://microbadger.com/images/minidocks/base)
+ latest, 3.12      | [![](https://images.microbadger.com/badges/image/minidocks/base.svg)](https://microbadger.com/images/minidocks/base)
  edge              | [![](https://images.microbadger.com/badges/image/minidocks/base:edge.svg)](https://microbadger.com/images/minidocks/base:edge)
+ 3.12              | [![](https://images.microbadger.com/badges/image/minidocks/base:3.12.svg)](https://microbadger.com/images/minidocks/base:3.12)
+ build, 3.12-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.12-build.svg)](https://microbadger.com/images/minidocks/base:3.12-build)
+ 3.11              | [![](https://images.microbadger.com/badges/image/minidocks/base:3.11.svg)](https://microbadger.com/images/minidocks/base:3.11)
+ 3.11-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.11-build.svg)](https://microbadger.com/images/minidocks/base:3.11-build)
  3.10              | [![](https://images.microbadger.com/badges/image/minidocks/base:3.10.svg)](https://microbadger.com/images/minidocks/base:3.10)
- build, 3.10-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.10-build.svg)](https://microbadger.com/images/minidocks/base:3.10-build)
+ 3.10-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.10-build.svg)](https://microbadger.com/images/minidocks/base:3.10-build)
  3.9               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9.svg)](https://microbadger.com/images/minidocks/base:3.9)
  3.9-build         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9-build.svg)](https://microbadger.com/images/minidocks/base:3.9-build)
  3.8               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.8.svg)](https://microbadger.com/images/minidocks/base:3.8)
