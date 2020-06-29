@@ -228,6 +228,10 @@ task_build()(
 
 # Split monorepository
 task_split()(
+    rm -rf .repo/
+    run_git clone "https://github.com/$GIT_NAMESPACE/images" .repo
+    cd .repo
+
     processed=" "
     for name in ${1:-$(lsdir)}; do
         for dep in $(deps "$name"); do
