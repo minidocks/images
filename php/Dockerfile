@@ -1,17 +1,19 @@
-ARG version=7.3
+ARG version=7.4
 ARG major=7
-ARG composer_version=1.9.0
-ARG blackfire_version=1.26.3
+ARG composer_version=1.10.8
+ARG blackfire_version=1.34.3
+
+FROM minidocks/base:3.8 AS v5.6
 
 FROM minidocks/base:3.5 AS v7.0
 
 FROM minidocks/base:3.7 AS v7.1
 
-FROM minidocks/base:3.8 AS v5.6
-
 FROM minidocks/base:3.9 AS v7.2
 
-FROM minidocks/base:3.10 AS v7.3
+FROM minidocks/base:3.12 AS v7.3
+
+FROM minidocks/base:edge AS v7.4
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -28,7 +30,8 @@ RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$m
     && if echo "7.0" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
     && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-tokenizer"; fi \
     && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-apcu"; else modules="$modules php7-pecl-apcu"; fi \
-    && apk --update add gnu-libiconv@310 "php$major" $modules && clean \
+    && if echo "7.3 7.4" | grep -qv "$version"; then libiconv_version="@312"; fi \
+    && apk --update add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phpize ]; then ln -s "/usr/bin/phpize$major" /usr/bin/phpize; fi
 

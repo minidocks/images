@@ -23,7 +23,11 @@ versions="
 7.3-base;7.3;base
 7.3-nginx;7.3;nginx
 7.3-intl;7.3;intl
-latest;7.3
+7.4;7.4
+7.4-base;7.4;base
+7.4-nginx;7.4;nginx
+7.4-intl;7.4;intl
+latest;7.4
 "
 
 build() {
