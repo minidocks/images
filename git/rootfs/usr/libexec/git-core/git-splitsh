@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# Wrapper for splitsh-lite
+
+set -e
+
+while [ -n "$1" ]; do
+  case $1 in
+    --prune) prune="1";;
+    --prefix=*) prefix="${1#*=}";;
+    --prefix) shift; prefix="$1";;
+    --remote=*) remote="${1#*=}";;
+    --remote) shift; remote="$1";;
+    --name=*) name="${1#*=}";;
+    --name) shift; name="$1";;
+    --force) force="--force";;
+    *) ;;
+  esac
+  shift
+done
+
+if [ -n "$remote" ]; then
+  name="${name:-$(head /dev/urandom | tr -dc a-z | head -c 13)}"
+  git remote add "$name" "$remote"
+fi
+
+if [ -n "$prefix" ]; then
+  SHA1="$(splitsh-lite --prefix="$prefix")"
+
+  if [ -n "$name" ] && [ -n "$remote" ]; then
+    CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+    git push "$name" "$SHA1:$CURRENT_BRANCH" $force
+  fi
+fi
+
+if [ -n "$prune"]; then
+  [ -n "$name" ] && git remote remove "$name" || true
+  git gc --prune=now
+fi

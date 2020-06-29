@@ -3,8 +3,8 @@ Git docker image (minidocks/git)
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Git-logo.svg/150px-Git-logo.svg.png)
 
-Git is a distributed version control system designed to handle everything from small to very large projects with speed 
-and efficiency.
+[Git](https://git-scm.com/) is a distributed version control system designed to handle
+everything from small to very large projects with speed and efficiency.
 
 Enhancements
 ------------
@@ -19,6 +19,7 @@ Enhancements
 - [git-quick-stats](https://github.com/arzzen/git-quick-stats): Simple and efficient way to access various statistics in a git repository.
 - [git-extras](https://github.com/tj/git-extras): GIT utilities -- repo summary, repl, changelog population, author commit percentages and more.
 - [git-fame](https://github.com/casperdcl/git-fame): Pretty-print git repository collaborators sorted by contributions.
+- [git-filter-repo](https://github.com/newren/git-filter-repo/): The versatile tool for rewriting history.
 
 Usage
 -----

@@ -2,7 +2,7 @@
 set -e
 
 url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
-! if [ -n "$(command -v 'wget')" ]; then r="$(wget -qT 1 "$url" -O-)" && echo "$r" > .runner; else curl --connect-timeout 1 -fso .runner "$url"; fi
+[ -f ./.runner ] && [ .runner -nt "$0" ] || wget -q "$url" -O- > .runner || curl -fso .runner "$url"
 . ./.runner
 
 if [ -r $(pwd)'/.env' ]; then
@@ -64,7 +64,7 @@ travis(){
 
 hub(){
     if [ -z "$REGISTRY_TOKEN" ] || [ $(( $(date +"%s") - REGISTRY_TOKEN_TIME )) -gt 300 ]; then
-        response="$(do_request -X "POST" --data "{\"username\": \"$(json_escape "$REGISTRY_LOGIN")\", \"password\": \"$(json_escape "$REGISTRY_PASSWORD")\"}" "$HUB_URL/users/login/")"
+        response="$(do_request -X "POST" --data "{\"username\": \"$(json_escape "$DOCKER_LOGIN")\", \"password\": \"$(json_escape "$DOCKER_PASSWORD")\"}" "$HUB_URL/users/login/")"
         assert_http_code "$response" "200"
         REGISTRY_TOKEN="$(query "$(http_body "$response")" -r '.token')"
         REGISTRY_TOKEN_TIME="$(date +"%s")"
@@ -78,14 +78,14 @@ hub_api()(
 )
 
 lsdir()(
-    if [ -d "${1:-.}" ]; then
-      find "${1:-.}" -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n' | sort
+    if [ -d "." ]; then
+      find "." -mindepth 1 -maxdepth 1 -type d -not -path '*/\.*' -printf '%f\n' | sort
     fi
 )
 
 froms()(
     for namespace in $IMAGE_NAMESPACE; do
-        printf '%s ' "$1" | grep "FROM $namespace/" | cut -d/ -f2 | cut -d' ' -f1 | uniq
+        _print "$1" | grep "FROM $namespace/" | cut -d/ -f2 | cut -d' ' -f1 | uniq
     done
 )
 
@@ -110,8 +110,9 @@ deps()(
 
 split()(
     name="$1"
-    repo="$2"
-    _ansi --yellow --nl "Split $name -> https://github.com/$repo"
+    repo="$GIT_NAMESPACE/$1"
+    url="https://github.com/$repo"
+    _ansi --yellow --nl "Split $name -> $url"
     response="$(github "GET" "/repos/$repo")"
     if [ "$(http_code "$response")" = "404" ]; then
         printf 'Create git repository "%s"\n' "$repo"
@@ -119,7 +120,7 @@ split()(
         assert_http_code "$response" "201"
     fi
 
-    run_git subsplit publish "$name:https://github.com/$repo"
+    run_git splitsh --prefix "$name" --remote "$url" --force
 )
 
 versions()(
@@ -212,7 +213,7 @@ task_build()(
     fi
 
     if [ ! -d "${dir:-$package}" ]; then
-        git clone "https://github.com/$GIT_NAMESPACE/$package"
+        run_git clone "https://github.com/$GIT_NAMESPACE/$package"
     fi
 
     versions="$(versions "${dir:-$package}")"
@@ -227,9 +228,6 @@ task_build()(
 
 # Split monorepository
 task_split()(
-    rm -rf .subsplit/
-    run_git subsplit init "https://github.com/$GIT_NAMESPACE/images"
-
     processed=" "
     for name in ${1:-$(lsdir)}; do
         for dep in $(deps "$name"); do
@@ -237,7 +235,7 @@ task_split()(
                 continue
             fi
 
-            split "$dep" "$GIT_NAMESPACE/$dep"
+            split "$dep"
             processed=" $dep $processed"
         done
 
@@ -245,11 +243,9 @@ task_split()(
             continue
         fi
 
-        split "$name" "$GIT_NAMESPACE/$name"
+        split "$name"
         processed=" $name $processed"
     done
-
-    rm -rf .subsplit/
 )
 
 # Copy environment variables to travis
