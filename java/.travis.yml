@@ -1,3 +1,0 @@
-script:
-  - wget -O run https://raw.githubusercontent.com/minidocks/images/master/run
-  - sh ./run travis:build

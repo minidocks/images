@@ -12,8 +12,8 @@ fi
 IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-minidocks webuni}"
 GIT_NAMESPACE="${GIT_NAMESPACE:-minidocks}"
 HUB_NAMESPACE="${HUB_NAMESPACE:-minidocks webuni}"
-HUB_URL=https://cloud.docker.com/v2
-HUB_API_URL=https://cloud.docker.com/api/build/v1
+HUB_URL=https://hub.docker.com/v2
+HUB_API_URL=https://hub.docker.com/api/build/v1
 
 to_json(){
     printf '{"%s"}' "$(echo "$1" | sed -E 's/\\/\\\\/g; s/"/\\"/g; s/=/": "/g; s/&/", "/g; s/"(true|false)"/\1/g')"
@@ -56,10 +56,6 @@ run_git(){
 
 github(){
     do_request -H "Authorization: token $GITHUB_TOKEN" -X "$1" --data "$3" "https://api.github.com$2"
-}
-
-travis(){
-    do_request -H "Travis-API-Version: 3" -H "Authorization: token $TRAVIS_TOKEN" -X "$1" --data "$3" "https://api.travis-ci.com$2"
 }
 
 hub(){
@@ -228,7 +224,7 @@ task_build()(
 
 # Split monorepository
 task_split()(
-    rm -rf .repo/
+    rm -rf .repo
     run_git clone "https://github.com/$GIT_NAMESPACE/images" .repo
     cd .repo
 
@@ -250,62 +246,9 @@ task_split()(
         split "$name"
         processed=" $name $processed"
     done
-)
 
-# Copy environment variables to travis
-task_travis__env()(
-    force='' dir=''
-    while [ -n "$1" ]; do
-        case "$1" in
-            -f|--force) force=1;;
-            *) dir="$1";;
-        esac
-        shift
-    done
-
-    for name in ${dir:-$(lsdir)}; do
-        repo="${GIT_NAMESPACE}%2F${name}"
-        _ansi --yellow --nl "Sync env: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
-        response="$(travis 'GET' "/repo/${repo}/env_vars")"
-        if [ "$(http_code "$response")" = "200" ]; then
-            vars="$(query "$(http_body "$response")" -r '.env_vars[] | .name+":"+.id')"
-            for var in REGISTRY_LOGIN REGISTRY_PASSWORD; do
-                value="$(eval printf '%s' "\$$var" | sed -E 's/([$&\])/\\\1/g; s/\\/\\\\/g; s/"/\\"/g')"
-                body="{\"env_var.name\": \"${var}\", \"env_var.value\": \"${value}\", \"env_var.public\": false}"
-                varid="$(printf '%s' "$vars" | grep "$var" || true)"
-                if [ -n "$force" ] && [ -n "$varid" ]; then
-                    printf 'Update "%s" variable' "$var"
-                    response="$(travis 'PATCH' "/repo/${repo}/env_var/${varid#*:}" "$body")"
-                    assert_http_code "$response" "200" && _pass || _fail
-                elif [ -z "$varid" ]; then
-                    printf 'Copy "%s" variable' "$var"
-                    response="$(travis 'POST' "/repo/${repo}/env_vars" "$body")"
-                    assert_http_code "$response" "201" && _pass || _fail
-                fi
-            done
-        else
-            printf 'Repository "%s" does not exist\n' "$GIT_NAMESPACE/$name"
-        fi
-    done
-)
-
-# Trigger build on travis
-task_travis__trigger()(
-    for name in ${1:-$(lsdir)}; do
-        repo="${GIT_NAMESPACE}%2F${name}"
-        _ansi --yellow --nl "Build request: $name -> https://travis-ci.com/$GIT_NAMESPACE/$name"
-        response="$(travis 'GET' "/repo/${repo}/builds")"
-        ! state="$(query "$(http_body "$response")" -r '.builds[] | .state' | grep -E '(created|started)')"
-        if [ -n "$state" ]; then
-            continue
-        fi
-
-        response="$(travis 'POST' "/repo/${repo}/requests")"
-        if [ "$(http_code "$response")" != "202" ]; then
-            _ansi --bg-red --nl --black -f 'Error to trigger a build of "%s"' "$name"
-            exit 1
-        fi
-    done
+    cd ..
+    rm -rf .repo
 )
 
 # Push docker image to https://hub.docker.com
@@ -316,28 +259,37 @@ task_push()(
 
             _ansi --yellow --nl "Push docker image $hub_name"
 
-            data="$(to_json "description=Minimal $name images&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false&provider=github&owner=$GIT_NAMESPACE&repository=$name&build_settings=__SETTINGS__")"
+            description="Minimal $name images"
+            base_data="channel=Stable&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&repository=$name&build_settings=__SETTINGS__"
             settings="source_type=Branch&tag=latest&source_name=master&autobuild=true&nocache=true&dockerfile=Dockerfile&build_context=";
             if [ -f "$name/build.sh" ]; then settings="$settings/"; else settings="$settings/.hub"; fi
-            settings="$(to_json "$settings")"
-            data="$(echo "$data" | sed -e "s/\"__SETTINGS__\"/[$(echo "$settings" | sed -e 's/[\/&]/\\&/g')]/")"
 
             response="$(hub "GET" "/repositories/$hub_name/")"
             if [ "$(http_code "$response")" = "404" ]; then
                 printf "Create automatic repository \"%s\"\n" "$hub_name"
+
+                data="$(to_json "description=$description&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false&provider=github&$base_data")"
+                data="$(echo "$data" | sed -e "s/\"__SETTINGS__\"/[$(echo "$(to_json "$settings")" | sed -e 's/[\/&]/\\&/g')]/")"
+
                 response="$(hub "POST" "/repositories/" "$data")"
                 assert_http_code "$response" "201"
+            elif [ "$(query "$(http_body "$response")" -r '.description')" != "$description" ]; then
+                printf "Update automatic repository \"%s\"\n" "$hub_name"
+                response="$(hub "PATCH" "/repositories/$hub_name/" "$(to_json "description=$description")")"
+                assert_http_code "$response" "200"
             fi
 
             response="$(hub_api "GET" "/$namespace/source/?image=$namespace%2F$name")"
             assert_http_code "$response" "200"
             uuid="$(query "$(http_body "$response")" -r ".objects[0].uuid")"
-            printf "Update automatic repository \"%s(%s)\"\n" "$hub_name" "$uuid"
+            printf "Update build settings for automatic repository \"%s(%s)\"\n" "$hub_name" "$uuid"
+
+            data="$(echo "$(to_json "$base_data")" | sed -e "s/\"__SETTINGS__\"/[$(echo "$(to_json "$settings")" | sed -e 's/[\/&]/\\&/g')]/")"
             if [ "$uuid" = "null" ]; then
                 response="$(hub_api "POST" "/$namespace/source/" "$data")"
                 assert_http_code "$response" "201"
             else
-                response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "{\"owner\":\"$GIT_NAMESPACE\",\"repository\":\"$name\",\"build_settings\":[$settings]}")"
+                response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "$data")"
                 assert_http_code "$response" "202"
             fi
 
@@ -349,10 +301,15 @@ task_push()(
     done
 )
 
-# Build image via travis
-task_travis__build()(
-    docker login -u "$REGISTRY_LOGIN" -p "$REGISTRY_PASSWORD"
-    TRAVIS_REPO_NAME="${TRAVIS_REPO_SLUG#*/}"
-    task_build "$TRAVIS_REPO_NAME" --dir "."
-    task_push "$TRAVIS_REPO_NAME"
+# Build image via github actions
+task_github__build()(
+    REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+    task_build "$REPOSITORY_NAME" --dir "."
+)
+
+# Push docker image via github actions
+task_github__push()(
+    docker login -u "$DOCKER_LOGIN" -p "$DOCKER_PASSWORD"
+    REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+    task_push "$REPOSITORY_NAME"
 )

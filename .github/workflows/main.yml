@@ -1,0 +1,11 @@
+name: Split repository
+on: [push]
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - env:
+          GITHUB_TOKEN: ${{ secrets.CI_TOKEN }}
+        run: ./run split
