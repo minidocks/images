@@ -1,15 +1,23 @@
 ARG version=3.8
 ARG suffix=""
 
-FROM minidocks/base:3.9$suffix AS base_3.6
+FROM minidocks/base:3.9 AS base_3.6
 
-FROM minidocks/base:3.10$suffix AS base_2.7
+FROM minidocks/base:3.9-build AS base_3.6-build
 
-FROM minidocks/base:3.10$suffix AS base_3.7
+FROM minidocks/base:3.12 AS base_2.7
 
-FROM minidocks/base:3.11$suffix AS base_3.8
+FROM minidocks/base:3.12-build AS base_2.7-build
 
-FROM base_$version AS latest
+FROM minidocks/base:3.10 AS base_3.7
+
+FROM minidocks/base:3.10-build AS base_3.7-build
+
+FROM minidocks/base:3.12 AS base_3.8
+
+FROM minidocks/base:3.12-build AS base_3.8-build
+
+FROM base_$version$suffix AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \
@@ -21,15 +29,13 @@ COPY rootfs /
 
 ARG version
 
-RUN if [ "${version%%.*}" = 2 ]; then apk -U add python2 py2-pip; else apk -U add python3; fi && clean
-# python -m ensurepip --upgrade
+RUN major="${version%%.*}" && apk -U add "python$major" && "python$major" -m ensurepip --upgrade && clean
 
 # make some useful symlinks that are expected to exist
 RUN if [ "${version%%.*}" = 3 ]; then \
         ln -s /usr/bin/python3 /usr/bin/python; \
         ln -s /usr/bin/pip3 /usr/bin/pip; \
         ln -s /usr/bin/easy_install-$version /usr/bin/easy_install; \
-        ln -s /usr/bin/idle3 /usr/bin/idle; \
         ln -s /usr/bin/pydoc3 /usr/bin/pydoc; \
     fi
 
