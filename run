@@ -261,8 +261,7 @@ task_push()(
 
             description="Minimal $name images"
             base_data="channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&repository=$name&build_settings=__SETTINGS__"
-            settings="source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=";
-            if [ -f "$name/build.sh" ]; then settings="$settings/"; else settings="$settings/.hub"; fi
+            settings="source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=/";
 
             response="$(hub "GET" "/repositories/$hub_name/")"
             if [ "$(http_code "$response")" = "404" ]; then
