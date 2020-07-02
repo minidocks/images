@@ -260,8 +260,8 @@ task_push()(
             _ansi --yellow --nl "Push docker image $hub_name"
 
             description="Minimal $name images"
-            base_data="channel=Stable&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&repository=$name&build_settings=__SETTINGS__"
-            settings="source_type=Branch&tag=latest&source_name=master&autobuild=true&nocache=true&dockerfile=Dockerfile&build_context=";
+            base_data="channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&repository=$name&build_settings=__SETTINGS__"
+            settings="source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=";
             if [ -f "$name/build.sh" ]; then settings="$settings/"; else settings="$settings/.hub"; fi
 
             response="$(hub "GET" "/repositories/$hub_name/")"
@@ -291,6 +291,7 @@ task_push()(
             else
                 response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "$data")"
                 assert_http_code "$response" "202"
+                echo "$response"
             fi
 
             for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
@@ -309,7 +310,7 @@ task_github__build()(
 
 # Push docker image via github actions
 task_github__push()(
-    docker login -u "$DOCKER_LOGIN" -p "$DOCKER_PASSWORD"
+    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
     task_push "$REPOSITORY_NAME"
 )
