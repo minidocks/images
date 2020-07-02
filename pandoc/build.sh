@@ -3,7 +3,7 @@ set -e
 
 image="${namespace:-minidocks}/pandoc"
 versions="
-2.8;2.8.1.1
+2.8;2.8.1
 2.9;2.9.2.1
 2.10;2.10
 latest;2.10
