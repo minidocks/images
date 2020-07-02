@@ -5,8 +5,6 @@ ARG blackfire_version=1.34.3
 
 FROM minidocks/base:3.8 AS v5.6
 
-FROM minidocks/base:3.5 AS v7.0
-
 FROM minidocks/base:3.7 AS v7.1
 
 FROM minidocks/base:3.9 AS v7.2
@@ -30,8 +28,8 @@ RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$m
     && if echo "7.0" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
     && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-tokenizer"; fi \
     && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-apcu"; else modules="$modules php7-pecl-apcu"; fi \
-    && if echo "7.3 7.4" | grep -qv "$version"; then libiconv_version="@312"; fi \
-    && apk --update add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
+    && if echo "7.3 7.4" | grep -qv "$version"; then libiconv_version="@community"; fi \
+    && apk add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phpize ]; then ln -s "/usr/bin/phpize$major" /usr/bin/phpize; fi
 
@@ -101,7 +99,7 @@ RUN for module in \
     && if [ "$version" = "5.6" ]; then modules="$modules php5-mysql php5-xdebug@35"; else modules="$modules php7-mysqlnd php7-session php7-xdebug"; fi \
     && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-redis php7-fileinfo php7-simplexml php7-xmlwriter"; fi \
     && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-mcrypt"; else modules="$modules php7-pecl-mcrypt php7-sodium"; fi \
-    && apk --update --force-broken-world add $modules \
+    && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm${major}" /usr/bin/php-fpm; fi \
     && clean
 
@@ -133,12 +131,12 @@ EXPOSE 9000
 
 FROM latest AS nginx
 
-RUN apk --update --force-broken-world add nginx nginx-mod-http-lua && clean
+RUN apk add nginx nginx-mod-http-lua && clean
 
 FROM nginx AS intl
 
 ARG major
 
-RUN apk --update --force-broken-world add "php${major}-intl" && clean
+RUN apk add "php${major}-intl" && clean
 
 FROM latest

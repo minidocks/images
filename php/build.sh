@@ -7,10 +7,6 @@ versions="
 5.6-base;5.6;base
 5.6-nginx;5.6;nginx
 5.6-intl;5.6;intl
-7.0;7.0
-7.0-base;7.0;base
-7.0-nginx;7.0;nginx
-7.0-intl;7.0;intl
 7.1;7.1
 7.1-base;7.1;base
 7.1-nginx;7.1;nginx
