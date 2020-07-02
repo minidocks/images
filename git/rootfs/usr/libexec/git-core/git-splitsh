@@ -21,6 +21,7 @@ done
 
 if [ -n "$remote" ]; then
   name="${name:-$(head /dev/urandom | tr -dc a-z | head -c 13)}"
+  echo "Add remote $name ($remote)" >2
   git remote add "$name" "$remote"
 fi
 
@@ -29,11 +30,13 @@ if [ -n "$prefix" ]; then
 
   if [ -n "$name" ] && [ -n "$remote" ]; then
     CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-    git push "$name" "$SHA1:$CURRENT_BRANCH" $force
+    echo "Push $SHA1 to $remote:$CURRENT_BRANCH" >2
+    git push "$name" "$SHA1:refs/heads/$CURRENT_BRANCH" $force
   fi
 fi
 
 if [ -n "$prune"]; then
+  echo "Clean repository" >2
   [ -n "$name" ] && git remote remove "$name" || true
   git gc --prune=now
 fi
