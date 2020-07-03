@@ -290,7 +290,6 @@ task_push()(
             else
                 response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "$data")"
                 assert_http_code "$response" "202"
-                echo "$response"
             fi
 
             for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
