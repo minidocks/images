@@ -7,10 +7,11 @@ versions="
 9;3.8;npm nodejs-current<10
 10;3.10;npm nodejs<11
 11;3.9;npm nodejs-current<12
-12;3.11;npm nodejs<13
+12;3.12;npm nodejs<13
 13;3.11;npm nodejs-current<14
-lts;3.11;npm nodejs<13
-latest;3.11;npm nodejs-current<14
+14;3.12;npm nodejs-current<15
+lts;3.12;npm nodejs<13
+latest;3.12;npm nodejs-current<15
 "
 
 build() {
