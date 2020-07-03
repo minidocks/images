@@ -131,7 +131,7 @@ EXPOSE 9000
 
 FROM latest AS nginx
 
-RUN apk add nginx nginx-mod-http-lua && clean
+RUN apk add --force-broken-world nginx nginx-mod-http-lua && clean
 
 FROM nginx AS intl
 
