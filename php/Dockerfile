@@ -137,6 +137,6 @@ FROM nginx AS intl
 
 ARG major
 
-RUN apk add "php${major}-intl" && clean
+RUN apk add --force-broken-world "php${major}-intl" && clean
 
 FROM latest
