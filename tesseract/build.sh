@@ -4,7 +4,6 @@ set -e
 image="${namespace:-minidocks}/tesseract"
 europe="bel bos bul cat ces cym dan deu ell eng est eus fin fra gle grc hrv hun ita lat lav nor pol por ron rus slk slv spa srp swe ukr"
 versions="
-3;3.04.00;38
 4.0;4.0.0;310
 4.1;4.0.0;312
 4;4.0.0;312
