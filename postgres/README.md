@@ -14,9 +14,12 @@ docker run --rm -it minidocks/postgres
 Tags
 ----
 
- Tag      | Size
- ---      | ----
- latest   | [![](https://images.microbadger.com/badges/image/minidocks/postgres.svg)](https://microbadger.com/images/minidocks/postgres)
- 10       | [![](https://images.microbadger.com/badges/image/minidocks/postgres:10.svg)](https://microbadger.com/images/minidocks/postgres:10)
- 10-czech | [![](https://images.microbadger.com/badges/image/minidocks/postgres:10-czech.svg)](https://microbadger.com/images/minidocks/postgres:10-czech)
- 9.6      | [![](https://images.microbadger.com/badges/image/minidocks/postgres:9.6.svg)](https://microbadger.com/images/minidocks/postgres:9.6)
+ Tag        | Size
+ ---        | ----
+ latest, 12 | [![](https://images.microbadger.com/badges/image/minidocks/postgres.svg)](https://microbadger.com/images/minidocks/postgres)
+ 12         | [![](https://images.microbadger.com/badges/image/minidocks/postgres:12.svg)](https://microbadger.com/images/minidocks/postgres:12)
+ 12-czech   | [![](https://images.microbadger.com/badges/image/minidocks/postgres:12-czech.svg)](https://microbadger.com/images/minidocks/postgres:12-czech)
+ 11         | [![](https://images.microbadger.com/badges/image/minidocks/postgres:11.svg)](https://microbadger.com/images/minidocks/postgres:11)
+ 11-czech   | [![](https://images.microbadger.com/badges/image/minidocks/postgres:11-czech.svg)](https://microbadger.com/images/minidocks/postgres:11-czech)
+ 10         | [![](https://images.microbadger.com/badges/image/minidocks/postgres:10.svg)](https://microbadger.com/images/minidocks/postgres:10)
+ 10-czech   | [![](https://images.microbadger.com/badges/image/minidocks/postgres:10-czech.svg)](https://microbadger.com/images/minidocks/postgres:10-czech)

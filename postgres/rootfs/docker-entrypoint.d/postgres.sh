@@ -21,10 +21,8 @@ if [ "$1" = 'postgres' ] && [ "$(id -u)" = '0' ]; then
     fi
     unset _waldir
 
-    export USER_NAME="postgres"
-    export GROUP_NAME="postgres"
-    export USER_ID="$(id -u postgres)"
-    export GROUP_ID="$(getent group postgres | awk -F: '{print $3}')"
+    USER_NAME="postgres" GROUP_NAME="postgres" USER_ID="$(id -u postgres)" GROUP_ID="$(getent group postgres | awk -F: '{print $3}')"
+    export USER_NAME GROUP_NAME USER_ID GROUP_ID
 fi
 
 if [ "$1" = 'postgres' ]; then
@@ -34,7 +32,7 @@ if [ "$1" = 'postgres' ]; then
 
     # look specifically for PG_VERSION, as it is expected in the DB dir
     if [ ! -s "$PGDATA/PG_VERSION" ]; then
-        source /bin/file_env
+        . /bin/file_env
         file_env 'POSTGRES_INITDB_ARGS'
         _waldir="${POSTGRES_INITDB_WALDIR:-$POSTGRES_INITDB_XLOGDIR}"
         if [ "$_waldir" ]; then
@@ -45,7 +43,9 @@ if [ "$1" = 'postgres' ]; then
             fi
         fi
         unset _waldir
-        su-exec "${PGUSER:-postgres}" initdb --username=postgres $POSTGRES_INITDB_ARGS
+        echo "$POSTGRES_PASSWORD" > /tmp/postgres_password && chmod a+r /tmp/postgres_password
+        su-exec "${PGUSER:-postgres}" initdb --username=postgres --pwfile=/tmp/postgres_password $POSTGRES_INITDB_ARGS
+        rm /tmp/postgres_password
 
         # one line url configuration
         file_env 'POSTGRES_URL'
