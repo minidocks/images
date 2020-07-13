@@ -21,15 +21,24 @@ versions="
 2019-medium;2019;medium
 2019-full;2019;full
 
-minimal;2019;minimal
-context;2019;context
-basic;2019;basic
-small;2019;small
-gregorio;2019;gregorio
-medium;2019;medium
-full;2019;full
+2020;2020;basic
+2020-minimal;2020;minimal
+2020-context;2020;context
+2020-basic;2020;basic
+2020-small;2020;small
+2020-gregorio;2020;gregorio
+2020-medium;2020;medium
+2020-full;2020;full
 
-latest;2019;basic;
+minimal;2020;minimal
+context;2020;context
+basic;2020;basic
+small;2020;small
+gregorio;2020;gregorio
+medium;2020;medium
+full;2020;full
+
+latest;2020;basic;
 "
 
 build() {
