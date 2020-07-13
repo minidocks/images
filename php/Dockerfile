@@ -133,6 +133,9 @@ FROM latest AS nginx
 
 RUN apk add --force-broken-world nginx nginx-mod-http-lua && clean
 
+# Fix https://gitlab.alpinelinux.org/alpine/aports/-/issues/9364
+RUN chmod 1777 /var/lib/nginx/tmp
+
 FROM nginx AS intl
 
 ARG major
