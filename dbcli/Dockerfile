@@ -1,6 +1,6 @@
-ARG mycli_version=1.19.0
-ARG pgcli_version=2.1.1
-ARG litecli_version=1.0.0
+ARG mycli_version=1.21.1
+ARG pgcli_version=3.0.0
+ARG litecli_version=1.3.2
 
 FROM minidocks/python AS mycli
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
