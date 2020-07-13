@@ -17,3 +17,9 @@ Tags
  ---         | ----
  latest, 0.3 | [![](https://images.microbadger.com/badges/image/minidocks/img2pdf.svg)](https://microbadger.com/images/minidocks/img2pdf)
  0.3         | [![](https://images.microbadger.com/badges/image/minidocks/img2pdf:0.3.svg)](https://microbadger.com/images/minidocks/img2pdf:0.3)
+
+Related images
+--------------
+
+- [Ghostscript](https://github.com/minidocks/ghostscript)
+- [OCRmyPDF](https://github.com/minidocks/ocrmypdf)

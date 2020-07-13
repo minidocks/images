@@ -21,7 +21,5 @@ Tags
 Related images
 --------------
 
-- [ConTeXt](https://github.com/minidocks/context)
-- [ReLaXed](https://github.com/minidocks/relaxed)
-- [TeXlive](https://github.com/minidocks/texLive)
-- [WeasyPrint](https://github.com/minidocks/weasyprint)
+- [Ghostscript](https://github.com/minidocks/ghostscript)
+- [OCRmyPDF](https://github.com/minidocks/ocrmypdf)
