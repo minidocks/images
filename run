@@ -260,14 +260,14 @@ task_push()(
             _ansi --yellow --nl "Push docker image $hub_name"
 
             description="Minimal $name images"
-            base_data="channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&repository=$name&build_settings=__SETTINGS__"
+            base_data="channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&provider=github&repository=$name&image=$hub_name&build_settings=__SETTINGS__"
             settings="source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=/";
 
             response="$(hub "GET" "/repositories/$hub_name/")"
             if [ "$(http_code "$response")" = "404" ]; then
                 printf "Create automatic repository \"%s\"\n" "$hub_name"
 
-                data="$(to_json "description=$description&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false&provider=github&$base_data")"
+                data="$(to_json "description=$description&namespace=$namespace&name=$name&privacy=public&is_private=false&$base_data")"
                 data="$(echo "$data" | sed -e "s/\"__SETTINGS__\"/[$(echo "$(to_json "$settings")" | sed -e 's/[\/&]/\\&/g')]/")"
 
                 response="$(hub "POST" "/repositories/" "$data")"
