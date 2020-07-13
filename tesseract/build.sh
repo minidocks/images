@@ -6,15 +6,15 @@ europe="bel bos bul cat ces cym dan deu ell eng est eus fin fra gle grc hrv hun 
 versions="
 3;3.04.00;38
 4.0;4.0.0;310
-4.1;4.0.0;edge
-4;4.0.0;edge
-latest;4.0.0;edge
-4-europe;4.0.0;edge;$europe;lang
+4.1;4.0.0;312
+4;4.0.0;312
+latest;4.0.0;312
+4-europe;4.0.0;312;$europe;lang
 "
 
 for lang in $europe; do versions="
 $versions
-4-$lang;4.0.0;edge;$lang;lang
+4-$lang;4.0.0;312;$lang;lang
 "; done
 
 build() {

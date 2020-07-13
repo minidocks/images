@@ -54,3 +54,8 @@ Tags
  4-swe     | [![](https://images.microbadger.com/badges/image/minidocks/tesseract:4-swe.svg)](https://microbadger.com/images/minidocks/tesseract:4-swe)
  4-ukr     | [![](https://images.microbadger.com/badges/image/minidocks/tesseract:4-ukr.svg)](https://microbadger.com/images/minidocks/tesseract:4-ukr)
  3         | [![](https://images.microbadger.com/badges/image/minidocks/tesseract:3.svg)](https://microbadger.com/images/minidocks/tesseract:3)
+
+Related images
+--------------
+
+- [OCRmyPDF](https://github.com/minidocks/ocrmypdf)
