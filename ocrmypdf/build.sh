@@ -3,8 +3,9 @@ set -e
 
 image="${namespace:-minidocks}/ocrmypdf"
 versions="
-9;9.6.0
-latest;9.6.0
+9;9.8.2
+10;10.2.0
+latest;10.2.0
 "
 
 build() {

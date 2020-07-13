@@ -69,3 +69,11 @@ Tags
  ---         | ----
  latest, 9   | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)](https://microbadger.com/images/minidocks/ocrmypdf)
  9           | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:9.svg)](https://microbadger.com/images/minidocks/ocrmypdf:9)
+
+Related images
+--------------
+
+- [Ghostscript](https://github.com/minidocks/ghostscript)
+- [pdftk](https://github.com/minidocks/pdftk)
+- [Tesseract](https://github.com/minidocks/tesseract)
+- [Unpaper](https://github.com/minidocks/unpaper)
