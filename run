@@ -283,8 +283,8 @@ task_push()(
             uuid="$(query "$(http_body "$response")" -r ".objects[0].uuid")"
             printf "Update build settings for automatic repository \"%s(%s)\"\n" "$hub_name" "$uuid"
 
-            $data="$base_data"
-            if [ "$uuid" = "null" ]; then $data="image=$hub_name&$data"; fi
+            data="$base_data"
+            if [ "$uuid" = "null" ]; then data="image=$hub_name&$data"; fi
             data="$(echo "$(to_json "$data")" | sed -e "s/\"__SETTINGS__\"/[$(echo "$(to_json "$settings")" | sed -e 's/[\/&]/\\&/g')]/")"
 
             if [ "$uuid" = "null" ]; then
