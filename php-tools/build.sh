@@ -6,7 +6,8 @@ versions="
 7.1;7.1
 7.2;7.2
 7.3;7.3
-latest;7.3
+7.4;7.4
+latest;7.4
 "
 
 build() {
