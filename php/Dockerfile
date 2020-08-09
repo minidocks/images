@@ -55,9 +55,6 @@ RUN mkdir -p /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:w
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer --version="$composer_version" \
     && php -r "unlink('composer-setup.php');" \
-    && packages="webuni/composer-yaml-plugin webuni/composer-neon-plugin" \
-    && if echo "5.6 7.0" | grep -qv "$version"; then packages="$packages localheinz/composer-normalize"; fi \
-    && su-exec user composer global require $packages \
     && clean
 
 COPY rootfs /
