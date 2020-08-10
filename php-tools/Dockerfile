@@ -1,5 +1,5 @@
 ARG php_version=7.4
-ARG toolbox_version=1.24.2
+ARG toolbox_version=1.25.0
 
 FROM minidocks/php:7.1 as v7.1
 
@@ -26,5 +26,9 @@ RUN wget -O /usr/local/bin/toolbox "https://github.com/jakzal/toolbox/releases/d
     && chmod a+x /usr/local/bin/toolbox && ./docker-entrypoint.sh
 
 RUN apk add curl git && toolbox install --dry-run && toolbox install -vvv && apk del curl git && clean
+
+ENV PHP_AUTO_PREPEND_FILE="$COMPOSER_HOME/vendor/autoload.php"
+
+RUN composer global require webuni/composer-yaml-plugin webuni/composer-neon-plugin symfony/var-dumper && ./docker-entrypoint.sh && clean
 
 CMD ["toolbox", "list-tools"]
