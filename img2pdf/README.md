@@ -15,7 +15,8 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 0.3 | [![](https://images.microbadger.com/badges/image/minidocks/img2pdf.svg)](https://microbadger.com/images/minidocks/img2pdf)
+ latest, 0.4 | [![](https://images.microbadger.com/badges/image/minidocks/img2pdf.svg)](https://microbadger.com/images/minidocks/img2pdf)
+ 0.4         | [![](https://images.microbadger.com/badges/image/minidocks/img2pdf:0.4.svg)](https://microbadger.com/images/minidocks/img2pdf:0.4)
  0.3         | [![](https://images.microbadger.com/badges/image/minidocks/img2pdf:0.3.svg)](https://microbadger.com/images/minidocks/img2pdf:0.3)
 
 Related images
