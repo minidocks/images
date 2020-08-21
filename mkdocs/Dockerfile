@@ -7,38 +7,54 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG mkdocs_version=1.0.4
-ARG mkdocs_material_version=4.6.3
+ARG mkdocs_version=1.1.2
+ARG mkdocs_material_version=5.5.7
 
-RUN pip install \
-      markdown-include \
+RUN apk add py3-regex@edge && pip install \
       mkdocs==$mkdocs_version \
-      mkdocs-alabaster \
+#      mkdocs-autoreflinks-plugin \
+      mkdocs-abs-rel-plugin \
+      mkdocs-add-number-plugin \
+      mkdocs-autolinks-plugin \
       mkdocs-awesome-pages-plugin \
-      mkdocs-cinder \
+      mkdocs-codeinclude-plugin \
+      mkdocs-enumerate-headings-plugin \
       mkdocs-exclude \
+      mkdocs-git-authors-plugin \
       mkdocs-git-committers-plugin \
-      mkdocs-git-revision-date-plugin \
-      mkdocs-ivory \
+      mkdocs-git-revision-date-localized-plugin \
+      mkdocs-img2fig-plugin \
+      mkdocs-localsearch \
       mkdocs-macros-plugin \
       mkdocs-markdownextradata-plugin \
-      mkdocs-material==$mkdocs_material_version \
       mkdocs-merge \
+      mkdocs-minify-plugin \
       mkdocs-monorepo-plugin \
+      mkdocs_pymdownx_material_extras \
+      mkdocs-safe-text-plugin \
+      mkdocs-simple-hooks \
       mkdocs-redirects \
-      mkdocs-rtd-dropdown \
       mkdocs-versioning \
+
+      mkdocs-alabaster \
+      mkdocs-cinder \
+      mkdocs-ivory \
+      mkdocs-kpn \
+      mkdocs-material==$mkdocs_material_version \
+      mkdocs-rtd-dropdown \
+
+      markdown-include \
       pygments \
       pymdown-extensions \
     && clean
 
 COPY rootfs /
 
-CMD [ "mkdocs" ]
+CMD [ "mkdocs", "serve", "--dev-addr", "0.0.0.0:8000" ]
 
 FROM latest AS pdf
 
-RUN pip install mkdocs-pdf-export-plugin && clean
+RUN pip install mkdocs-pdf-export-plugin mkdocs-with-pdf && clean
 
 RUN wget -O /tmp/roboto.zip https://fonts.google.com/download?family=Roboto \
     && unzip /tmp/roboto.zip -d /usr/share/fonts/truetype \

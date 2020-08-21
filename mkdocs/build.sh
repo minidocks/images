@@ -3,13 +3,15 @@ set -e
 
 image="${namespace:-minidocks}/mkdocs"
 versions="
-1.0;1.0.4;4.4.3;
-1.0-pdf;1.0.4;4.4.3;weasyprint;pdf
-latest;1.0.4;4.4.3;
+1.1;1.1.2;
+1;1.1.2
+1.1-pdf;1.1.2;weasyprint;pdf
+1-pdf;1.1.2;weasyprint;pdf
+latest;1.1.2;
 "
 
 build() {
-    docker build $docker_opts --target="${5:-latest}" --build-arg base_image="${4:-python}" --build-arg mkdocs_material_version="$3" --build-arg mkdocs_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --target="${4:-latest}" --build-arg base_image="${3:-python}" --build-arg mkdocs_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
