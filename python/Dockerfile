@@ -21,6 +21,7 @@ FROM base_$version$suffix AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV PIP_NO_COMPILE=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_CACHE_DIR=/pip-cache \
     PIPENV_VENV_IN_PROJECT=1 \
     CLEAN="$CLEAN:\$PIP_CACHE_DIR/:pyclean"
