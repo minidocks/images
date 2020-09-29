@@ -38,6 +38,7 @@ RUN if [ "${version%%.*}" = 3 ]; then \
         ln -s /usr/bin/pip3 /usr/bin/pip; \
         ln -s /usr/bin/easy_install-$version /usr/bin/easy_install; \
         ln -s /usr/bin/pydoc3 /usr/bin/pydoc; \
+        ln -s /usr/bin/python3-config /usr/bin/python-config; \
     fi
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
@@ -50,7 +51,7 @@ FROM latest AS build
 
 ARG version
 
-RUN apk -U add "python${version%%.*}-dev" && clean
+RUN apk -U add "python${version%%.*}-dev" libffi-dev openssl-dev && clean
 
 FROM latest AS uwsgi
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
