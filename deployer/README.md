@@ -1,7 +1,7 @@
 Deployer docker image (minidocks/deployer)
 ==========================================
 
-![](https://i2.wp.com/phpmagazine.net/wp-content/uploads/2018/11/php-deployer.png?fit=120%2C236)
+![](https://i0.wp.com/phpmagazine.net/wp-content/uploads/2018/11/php-deployer.png?resize=292%2C236&ssl=1)
 
 Deployer is a deployment tool for PHP.
 
