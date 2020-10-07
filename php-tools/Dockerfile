@@ -1,5 +1,5 @@
 ARG php_version=7.4
-ARG toolbox_version=1.25.0
+ARG toolbox_version=1.27.3
 
 FROM minidocks/php:7.1 as v7.1
 
@@ -25,7 +25,8 @@ ENV PHP_DATE__TIMEZONE="Europe/Prague" \
 RUN wget -O /usr/local/bin/toolbox "https://github.com/jakzal/toolbox/releases/download/v$([ "$php_version" == "7.1" ] && echo "1.12.0" || echo "$toolbox_version")/toolbox.phar" \
     && chmod a+x /usr/local/bin/toolbox && ./docker-entrypoint.sh
 
-RUN apk add curl git && toolbox install --dry-run && toolbox install -vvv && apk del curl git && clean
+RUN apk add curl git && if [ "$php_version" != "7.1" ]; then apk add php7-pecl-ast; fi \
+    && toolbox install --dry-run && toolbox install -vvv && apk del curl git && clean
 
 ENV PHP_AUTO_PREPEND_FILE="$COMPOSER_HOME/vendor/autoload.php"
 
