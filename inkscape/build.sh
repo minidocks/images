@@ -3,12 +3,13 @@ set -e
 
 image="${namespace:-minidocks}/inkscape"
 versions="
-0.92
+0.92;@3.11
+1
 latest
 "
 
 build() {
-    docker build $docker_opts -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --build-arg repository="${2:-}" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
