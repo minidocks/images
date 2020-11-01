@@ -97,7 +97,6 @@ RUN for module in \
     && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-redis php7-fileinfo php7-simplexml php7-xmlwriter"; fi \
     && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-mcrypt"; else modules="$modules php7-pecl-mcrypt php7-sodium"; fi \
     && apk add $modules \
-    && if [ "$version" = "5.6" ]; then apk add --force-broken-world php5-xdebug@35; fi \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm${major}" /usr/bin/php-fpm; fi \
     && clean
 
