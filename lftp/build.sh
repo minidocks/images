@@ -3,7 +3,7 @@ set -e
 
 image="${namespace:-minidocks}/lftp"
 versions="
-4.8
+4
 latest
 "
 
