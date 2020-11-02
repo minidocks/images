@@ -1,8 +1,6 @@
 ARG php_version=7.4
 ARG toolbox_version=1.27.9
 
-FROM minidocks/php:7.1 as v7.1
-
 FROM minidocks/php:7.2 as v7.2
 
 FROM minidocks/php:7.3 as v7.3
@@ -22,10 +20,10 @@ ENV PHP_DATE__TIMEZONE="Europe/Prague" \
     PATH="$PATH:/usr/local/bin/QualityAnalyzer/bin:/usr/local/bin/DesignPatternDetector/bin:/usr/local/bin/EasyCodingStandard/bin" \
     TOOLBOX_EXCLUDED_TAGS="exclude-php:${php_version}"
 
-RUN wget -O /usr/local/bin/toolbox "https://github.com/jakzal/toolbox/releases/download/v$([ "$php_version" == "7.1" ] && echo "1.12.0" || echo "$toolbox_version")/toolbox.phar" \
+RUN wget -O /usr/local/bin/toolbox "https://github.com/jakzal/toolbox/releases/download/v$toolbox_version/toolbox.phar" \
     && chmod a+x /usr/local/bin/toolbox && ./docker-entrypoint.sh
 
-RUN apk add curl git && if [ "$php_version" != "7.1" ]; then apk add php7-pecl-ast; fi \
+RUN apk add curl git php7-pecl-ast; fi \
     && toolbox install --dry-run && toolbox install -vvv && apk del curl git && clean
 
 ENV PHP_AUTO_PREPEND_FILE="$COMPOSER_HOME/vendor/autoload.php"
