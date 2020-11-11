@@ -20,7 +20,7 @@ RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v$
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2020.08.09
+ARG abc2midi_version=2020.11.07
 
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
@@ -39,14 +39,15 @@ RUN apk add wget && wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2
 RUN mkdir /tmp/final && cp -r /dist/xml2abc/* /tmp/final && cp -r /dist/abc2xml/* /tmp/final \
     && rm /tmp/final/libcrypto*so*
 
-FROM minidocks/node AS latest
+FROM minidocks/node:14-base AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 COPY --from=abcm2ps /tmp/build /
 COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
-ARG abc2svg_version=1.20.12
+ARG abc2svg_version=1.20.15
 
-RUN apk add pango && npm i -g abc2svg@$abc2svg_version jszip && clean
+RUN apk add npm && npm i -g abc2svg@$abc2svg_version jszip \
+    && apk del npm && rm -rf /usr/lib/node_modules/abc2svg/node_modules && clean
 
-CMD [ "abcm2ps" ]
+CMD [ "abc2svg" ]
