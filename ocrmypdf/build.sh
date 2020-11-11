@@ -5,8 +5,8 @@ image="${namespace:-minidocks}/ocrmypdf"
 versions="
 9;9.8.2
 10;10.3.3
-11;11.0.1
-latest;11.0.1
+11;11.3.3
+latest;11.3.3
 "
 
 build() {
