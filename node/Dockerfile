@@ -11,7 +11,16 @@ FROM minidocks/base:3.11 AS v3.11
 
 FROM minidocks/base:3.12 AS v3.12
 
-FROM v$base_version AS latest
+FROM v$base_version AS base
+LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
+
+ARG package
+
+RUN apk --update add $package && clean;
+
+CMD [ "node" ]
+
+FROM base AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV NPM_CONFIG_CACHE=/npm-cache \
@@ -20,11 +29,15 @@ ENV NPM_CONFIG_CACHE=/npm-cache \
 
 ARG package
 
-RUN apk --update add $package \
-    && mkdir -p "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" && chmod 777 "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" \
-    && npm i -g npm@latest npm-check-updates pnpm yarn \
+RUN mkdir -p "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" && chmod 777 "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" \
+    && apk --update add npm \
+    && npm i -g npm@latest npm-check-updates yarn \
     && clean
 
 COPY rootfs /
 
-CMD [ "node" ]
+FROM latest AS pnpm
+
+RUN npm i -g pnpm && clean
+
+FROM latest

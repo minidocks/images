@@ -3,19 +3,27 @@ set -e
 
 image="${namespace:-minidocks}/node"
 versions="
-8;3.8;npm nodejs<9
-9;3.8;npm nodejs-current<10
-10;3.10;npm nodejs<11
-11;3.9;npm nodejs-current<12
-12;3.12;npm nodejs<13
-13;3.11;npm nodejs-current<14
-14;3.12;npm nodejs-current<15
-lts;3.12;npm nodejs<13
-latest;3.12;npm nodejs-current<15
+8-base;3.8;nodejs<9;base
+8;3.8;nodejs<9
+9-base;3.8;nodejs-current<10;base
+9;3.8;nodejs-current<10
+10-base;3.10;nodejs<11;base
+10;3.10;nodejs<11
+11-base;3.9;nodejs-current<12;base
+11;3.9;nodejs-current<12
+12-base;3.12;nodejs<13;base
+12;3.12;nodejs<13
+13-base;3.11;nodejs-current<14;base
+13;3.11;nodejs-current<14
+14-base;3.12;nodejs-current<15;base
+14;3.12;latest;nodejs-current<15
+lts-base;3.12;nodejs<13;base
+lts;3.12;nodejs<13
+latest;3.12;nodejs-current<15
 "
 
 build() {
-    docker build $docker_opts --target=latest --build-arg package="$3" --build-arg base_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts --target=${4:-latest} --build-arg package="$3" --build-arg base_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
