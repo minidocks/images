@@ -9,9 +9,10 @@ FROM minidocks/base:3.11 AS v12
 FROM v$version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN set -eux; addgroup -g 70 -S postgres; \
-    adduser -u 70 -S -D -G postgres -H -h /var/lib/postgresql -s /bin/sh postgres; \
-    mkdir -p /var/lib/postgresql; chown -R postgres:postgres /var/lib/postgresql
+RUN set -eux; if [ ! "$(getent passwd postgres)" ]; then \
+        addgroup -g 70 -S postgres; \
+        adduser -u 70 -S -D -G postgres -H -h /var/lib/postgresql -s /bin/sh postgres; \
+    fi; mkdir -p /var/lib/postgresql; chown -R postgres:postgres /var/lib/postgresql
 
 ENV LANG=en_US.utf8 \
     PGDATA=/var/lib/postgresql/data
