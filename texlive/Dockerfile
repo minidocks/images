@@ -22,7 +22,7 @@ RUN apk add fontconfig freetype libgcc && tlmgr install scheme-context && clean
 
 FROM basic AS small
 
-RUN apk add fontconfig freetype libgcc && tlmgr install scheme-small pagecolor csquotes xurl adjustbox bidi mdframed sourcecodepro sourcesanspro titling needspace ly1 mweights && clean
+RUN apk add fontconfig freetype libgcc && tlmgr install scheme-small adjustbox background bidi csquotes collectbox everypage footmisc footnotebackref framed fvextra ly1 mdframed mweights needspace pagecolor sourcecodepro sourcesanspro titling xurl zref && clean
 
 FROM small AS gregorio
 
