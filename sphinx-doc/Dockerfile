@@ -1,7 +1,7 @@
 FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=3.2.1
+ARG version=3.3.1
 
 RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx=="$version" \
@@ -20,7 +20,9 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinxcontrib.programoutput \
       \
       sphinxcontrib-kroki \
+      sphinxcontrib-scm \
       sphinxcontrib-svg2pdfconverter \
+      sphinx_gherkindoc \
       \
       Pallets-Sphinx-Themes \
       sphinxawesome-theme \
