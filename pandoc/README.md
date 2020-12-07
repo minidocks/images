@@ -20,6 +20,7 @@ All extensions are instaled in `/pandoc` directory. Directory `/home/user/.pando
 - https://github.com/a-vrma/pandoc-filters
 - https://github.com/jzeneto/pandoc-odt-filters
 - https://github.com/hason/pandoc-filters
+- https://github.com/teoric/pandoc-filters
 
 ### Templates
 - [Latex template](https://github.com/Wandmalfarbe/pandoc-latex-template)
@@ -93,7 +94,8 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 2.10 | [![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)](https://microbadger.com/images/minidocks/pandoc)
+ latest, 2.11 | [![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)](https://microbadger.com/images/minidocks/pandoc)
+ 2.11         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.11.svg)](https://microbadger.com/images/minidocks/pandoc:2.11) 
  2.10         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.10.svg)](https://microbadger.com/images/minidocks/pandoc:2.10)
  2.9         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.9.svg)](https://microbadger.com/images/minidocks/pandoc:2.9)
  2.8         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.8.svg)](https://microbadger.com/images/minidocks/pandoc:2.8)

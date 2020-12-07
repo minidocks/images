@@ -1,4 +1,4 @@
-ARG version=11.3.3
+ARG version=11.3.4
 
 FROM minidocks/img2pdf
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
