@@ -1,6 +1,8 @@
 Pandoc docker image (minidocks/pandoc)
 ======================================
 
+![](https://framalibre.org/sites/default/files/styles/thumbnail/public/leslogos/pandoc.png)
+
 [Pandoc](https://pandoc.org) is a document converter, widely used as a writing tool (especially by scholars) and as a basis for publishing
 workflows.
 
