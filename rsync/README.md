@@ -25,4 +25,5 @@ Tags
 Related images
 --------------
 
+- [rclone](https://github.com/minidocks/rclone)
 - [lftp](https://github.com/minidocks/lftp)
