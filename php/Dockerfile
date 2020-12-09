@@ -98,7 +98,7 @@ RUN for module in \
     && if [ "$major" = "5" ]; then modules="$modules php$major-mysql"; else modules="$modules php$major-mysqlnd php$major-session"; fi \
     && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php$major-redis php$major-fileinfo php$major-simplexml php$major-xmlwriter"; fi \
     && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php$major-mcrypt"; else modules="$modules php$major-pecl-mcrypt php$major-sodium"; fi \
-    && if [ "$version" = "7.1" ]; then modules="$modules php$major-xdebug"; elif [ "major" != "5" ]; then modules="$modules php$major-pecl-xdebug"; fi \
+    && if [ "$version" = "7.1" ]; then modules="$modules php$major-xdebug"; elif [ "$major" != "5" ]; then modules="$modules php$major-pecl-xdebug"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$major" /usr/bin/php-fpm; fi \
     && clean
