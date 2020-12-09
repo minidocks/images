@@ -1,7 +1,7 @@
-ARG version=7.4
-ARG major=7
-ARG composer_version=1.10.17
-ARG blackfire_version=1.42.0
+ARG version=8.0
+ARG major=8
+ARG composer_version=1.10.19
+ARG blackfire_version=1.46.4
 
 FROM minidocks/base:3.8 AS v5.6
 
@@ -13,6 +13,8 @@ FROM minidocks/base:3.12 AS v7.3
 
 FROM minidocks/base:edge AS v7.4
 
+FROM minidocks/base:edge AS v8.0
+
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
@@ -23,12 +25,12 @@ ARG major
 RUN addgroup -g 82 -S www-data && adduser -u 82 -S -s /bin/sh -G www-data www-data
 
 RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$modules php$major-$module"; done \
-    && if [ "$version" = "5.6" ]; then modules="$modules php5-cli"; fi \
-    && if [ "$version" != "5.6" ]; then modules="$modules php7-mbstring"; fi \
-    && if echo "7.0" | grep -q "$version"; then modules="$modules php7-zlib"; fi \
-    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-tokenizer"; fi \
-    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-apcu"; else modules="$modules php7-pecl-apcu"; fi \
-    && if echo "7.3 7.4" | grep -qv "$version"; then libiconv_version="@community"; fi \
+    && if [ "$major" = "5" ]; then modules="$modules php$major-cli"; fi \
+    && if [ "$major" != "5" ]; then modules="$modules php$major-mbstring"; fi \
+    && if echo "7.0" | grep -q "$version"; then modules="$modules php$major-zlib"; fi \
+    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php$major-tokenizer"; fi \
+    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php$major-apcu"; else modules="$modules php$major-pecl-apcu"; fi \
+    && if echo "7.3 7.4 8.0" | grep -qv "$version"; then libiconv_version="@community"; fi \
     && apk add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phpize ]; then ln -s "/usr/bin/phpize$major" /usr/bin/phpize; fi
@@ -89,15 +91,16 @@ RUN for module in \
         sqlite3 \
         xml \
         xmlreader \
-        xmlrpc \
         xsl \
         zip \
-    ; do modules="$modules php${major}-$module"; done \
-    && if [ "$version" = "5.6" ]; then modules="$modules php5-mysql"; else modules="$modules php7-mysqlnd php7-session php7-xdebug"; fi \
-    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php7-redis php7-fileinfo php7-simplexml php7-xmlwriter"; fi \
-    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php${major}-mcrypt"; else modules="$modules php7-pecl-mcrypt php7-sodium"; fi \
+    ; do modules="$modules php$major-$module"; done \
+    && if [ "$major" != "8" ]; then modules="$modules php$major-xmlrpc"; fi \
+    && if [ "$major" = "5" ]; then modules="$modules php$major-mysql"; else modules="$modules php$major-mysqlnd php$major-session"; fi \
+    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php$major-redis php$major-fileinfo php$major-simplexml php$major-xmlwriter"; fi \
+    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php$major-mcrypt"; else modules="$modules php$major-pecl-mcrypt php$major-sodium"; fi \
+    && if [ "$version" = "7.1" ]; then modules="$modules php$major-xdebug"; elif [ "major" != "5" ]; then modules="$modules php$major-pecl-xdebug"; fi \
     && apk add $modules \
-    && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm${major}" /usr/bin/php-fpm; fi \
+    && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$major" /usr/bin/php-fpm; fi \
     && clean
 
 ENV PHP_EXT_XDEBUG=0 \
@@ -137,6 +140,6 @@ FROM nginx AS intl
 
 ARG major
 
-RUN apk add "php${major}-intl" && clean
+RUN apk add "php$major-intl" && clean
 
 FROM latest

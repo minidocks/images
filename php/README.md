@@ -35,7 +35,11 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 7.4 | [![](https://images.microbadger.com/badges/image/minidocks/php.svg)](https://microbadger.com/images/minidocks/php)
+ latest, 8.0 | [![](https://images.microbadger.com/badges/image/minidocks/php.svg)](https://microbadger.com/images/minidocks/php)
+ 8.0-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:8.0-base.svg)](https://microbadger.com/images/minidocks/php:8.0-base)
+ 8.0         | [![](https://images.microbadger.com/badges/image/minidocks/php:8.0.svg)](https://microbadger.com/images/minidocks/php:8.0)
+ 8.0-nginx   | [![](https://images.microbadger.com/badges/image/minidocks/php:8.0-nginx.svg)](https://microbadger.com/images/minidocks/php:8.0-nginx)
+ 8.0-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:8.0-intl.svg)](https://microbadger.com/images/minidocks/php:8.0-intl)
   7.4-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-base.svg)](https://microbadger.com/images/minidocks/php:7.4-base)
   7.4         | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4.svg)](https://microbadger.com/images/minidocks/php:7.4)
   7.4-nginx   | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-nginx.svg)](https://microbadger.com/images/minidocks/php:7.4-nginx)
