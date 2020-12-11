@@ -25,7 +25,7 @@ RUN if [ "$version" != "lmtx" ]; then cd /usr/share \
 
 FROM build AS dist
 
-RUN [ -d /usr/share/tex/texmf-modules/doc ] && mv /usr/share/tex/texmf-modules/doc /usr/share/texmf-modules-doc || mkdir -p /usr/share/tex/texmf-modules/doc
+RUN mkdir -p /usr/share/tex/texmf-modules/doc && mv /usr/share/tex/texmf-modules/doc /usr/share/texmf-modules-doc
 RUN mv /usr/share/tex/texmf-context/doc /usr/share/texmf-context-doc
 RUN mkdir -p /usr/share/texmf-fonts && for dir in opentype truetype type1; do mv "/usr/share/tex/texmf/fonts/$dir/" /usr/share/texmf-fonts/; done
 RUN rm -rf /usr/share/tex/texmf-cache/*
