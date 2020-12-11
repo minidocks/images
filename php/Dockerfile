@@ -26,10 +26,8 @@ RUN addgroup -g 82 -S www-data && adduser -u 82 -S -s /bin/sh -G www-data www-da
 
 RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$modules php$major-$module"; done \
     && if [ "$major" = "5" ]; then modules="$modules php$major-cli"; fi \
-    && if [ "$major" != "5" ]; then modules="$modules php$major-mbstring"; fi \
-    && if echo "7.0" | grep -q "$version"; then modules="$modules php$major-zlib"; fi \
-    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php$major-tokenizer"; fi \
-    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php$major-apcu"; else modules="$modules php$major-pecl-apcu"; fi \
+    && if [ "$major" != "5" ]; then modules="$modules php$major-mbstring php$major-tokenizer"; fi \
+    && if echo "5.6 7.1" | grep -q "$version"; then modules="$modules php$major-apcu"; else modules="$modules php$major-pecl-apcu"; fi \
     && if echo "7.3 7.4 8.0" | grep -qv "$version"; then libiconv_version="@community"; fi \
     && apk add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
@@ -96,9 +94,9 @@ RUN for module in \
     ; do modules="$modules php$major-$module"; done \
     && if [ "$major" != "8" ]; then modules="$modules php$major-xmlrpc"; fi \
     && if [ "$major" = "5" ]; then modules="$modules php$major-mysql"; else modules="$modules php$major-mysqlnd php$major-session"; fi \
-    && if echo "5.6 7.0" | grep -qv "$version"; then modules="$modules php$major-redis php$major-fileinfo php$major-simplexml php$major-xmlwriter"; fi \
-    && if echo "5.6 7.0 7.1" | grep -q "$version"; then modules="$modules php$major-mcrypt"; else modules="$modules php$major-pecl-mcrypt php$major-sodium"; fi \
-    && if [ "$version" = "7.1" ]; then modules="$modules php$major-xdebug"; elif [ "$major" != "5" ]; then modules="$modules php$major-pecl-xdebug"; fi \
+    && if [ "$major" != "5" ]; then modules="$modules php$major-fileinfo php$major-simplexml php$major-xmlwriter"; fi \
+    && if echo "5.6 7.1" | grep -q "$version"; then modules="$modules php$major-mcrypt"; else modules="$modules php$major-pecl-mcrypt php$major-sodium"; fi \
+    && if [ "$version" = "7.1" ]; then modules="$modules php$major-redis php$major-xdebug"; elif [ "$major" != "5" ]; then modules="$modules php$major-pecl-redis php$major-pecl-xdebug"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$major" /usr/bin/php-fpm; fi \
     && clean
