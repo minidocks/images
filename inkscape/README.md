@@ -31,3 +31,4 @@ Tags
  ---       | ----
  latest, 1 | [![](https://images.microbadger.com/badges/image/minidocks/inkscape.svg)](https://microbadger.com/images/minidocks/inkscape)
  1         | [![](https://images.microbadger.com/badges/image/minidocks/inkscape:1.svg)](https://microbadger.com/images/minidocks/inkscape:1)
+ 0.92      | [![](https://images.microbadger.com/badges/image/minidocks/inkscape:0.92.svg)](https://microbadger.com/images/minidocks/inkscape:0.92)
