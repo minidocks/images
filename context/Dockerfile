@@ -8,7 +8,7 @@ ARG platform
 
 ENV PATH=$PATH:/usr/share/tex/texmf-$platform/bin:/usr/share/bin
 
-RUN apk --update --no-cache add rsync && clean
+RUN apk --no-cache add rsync && clean
 
 RUN if [ "$version" = "lmtx" ]; then cd /usr/share && wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linux-64.zip && unzip context.zip && rm context.zip \
     && wget -O bin/luametatex http://dl.contextgarden.net/build/luametatex/x86_64-linuxmusl/luametatex && chmod +x bin/luametatex \
@@ -18,10 +18,13 @@ RUN if [ "$version" = "lmtx" ]; then cd /usr/share && wget -O context.zip http:/
     && ./bin/mtxrun --script ./bin/mtx-install.lua --update --server="lmtx.contextgarden.net,lmtx.pragma-ade.com,lmtx.pragma-ade.nl" --instance="install-lmtx" --platform="$platform" --erase --extras="" \
     ; fi
 
+#Bug https://mailman.ntg.nl/pipermail/ntg-context/2019/095184.html
 RUN if [ "$version" != "lmtx" ]; then cd /usr/share \
     && wget http://minimals.contextgarden.net/setup/first-setup.sh \
+    && sed -i '/^rsync.*/a wget -O /tmp/luatex.tar.gz https://github.com/TeX-Live/luatex/releases/download/1.13.0-svn7353/luatex-bin-x86_64-musl.tar.gz\ntar -xzvf /tmp/luatex.tar.gz -C ./bin' first-setup.sh \
     && sh ./first-setup.sh --modules=all --engine=luatex --context="$version" \
-    ;fi
+    && mv /usr/share/bin/* /usr/share/tex/texmf-$platform/bin \
+    ; fi
 
 FROM build AS dist
 
