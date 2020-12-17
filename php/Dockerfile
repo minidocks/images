@@ -1,7 +1,7 @@
 ARG version=8.0
 ARG major=8
 ARG composer_version=1.10.19
-ARG blackfire_version=1.46.4
+ARG blackfire_version=1.48.0
 
 FROM minidocks/base:3.8 AS v5.6
 
