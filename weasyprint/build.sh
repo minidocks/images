@@ -9,7 +9,8 @@ versions="
 49;49
 50;50
 51;51
-latest;51
+52;52.2
+latest;52.2
 "
 
 build() {
