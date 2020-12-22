@@ -52,9 +52,9 @@ FROM latest AS packaging
 
 ARG version
 
-RUN pip install pipenv twine && if [ "${version::1}" = 3 ]; then \
+RUN if [ "${version::1}" = 3 ]; then \
         apk add py3-cryptography && pip install poetry flit; \
-    fi && clean
+    fi && pip install pipenv twine && clean
 
 FROM packaging AS build
 
