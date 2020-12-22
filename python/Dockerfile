@@ -5,9 +5,9 @@ FROM minidocks/base:3.9 AS base_3.6
 
 FROM minidocks/base:3.9-build AS base_3.6-build
 
-FROM minidocks/base:3.12 AS base_2.7
+FROM minidocks/base:3.10 AS base_2.7
 
-FROM minidocks/base:3.12-build AS base_2.7-build
+FROM minidocks/base:3.10-build AS base_2.7-build
 
 FROM minidocks/base:3.10 AS base_3.7
 
@@ -20,6 +20,8 @@ FROM minidocks/base:3.12-build AS base_3.8-build
 FROM base_$version$suffix AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
+ARG version
+
 ENV PIP_NO_COMPILE=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_CACHE_DIR=/pip-cache \
@@ -28,12 +30,8 @@ ENV PIP_NO_COMPILE=1 \
 
 COPY rootfs /
 
-ARG version
-
-RUN major="${version%%.*}" && apk -U add "python$major" && "python$major" -m ensurepip --upgrade && clean
-
 # make some useful symlinks that are expected to exist
-RUN if [ "${version%%.*}" = 3 ]; then \
+RUN if [ "${version::1}" = 3 ]; then \
         ln -s /usr/bin/python3 /usr/bin/python; \
         ln -s /usr/bin/pip3 /usr/bin/pip; \
         ln -s /usr/bin/easy_install-$version /usr/bin/easy_install; \
@@ -42,16 +40,27 @@ RUN if [ "${version%%.*}" = 3 ]; then \
     fi
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
-    && pip install -U pip pipenv wheel && if [ "${version%%.*}" = 3 ]; then pip install flit; fi \
+    && apk -U add "python${version::1}" && "python${version::1}" -m ensurepip --upgrade \
+    && pip install -U pip setuptools wheel \
     && clean
+
+RUN pip install micropipenv && clean
 
 CMD [ "python" ]
 
-FROM latest AS build
+FROM latest AS packaging
 
 ARG version
 
-RUN apk -U add "python${version%%.*}-dev" libffi-dev openssl-dev && clean
+RUN pip install pipenv twine && if [ "${version::1}" = 3 ]; then \
+        apk add py3-cryptography && pip install poetry flit; \
+    fi && clean
+
+FROM packaging AS build
+
+ARG version
+
+RUN apk -U add "python${version::1}-dev" libffi-dev openssl-dev && clean
 
 FROM latest AS uwsgi
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
