@@ -7,7 +7,7 @@ versions="
 2.7-packaging;2.7;packaging
 2.7-build;2.7;build;-build
 2;2.7
-2-packaging;2;packaging
+2-packaging;2.7;packaging
 2-build;2.7;build;-build
 3.6;3.6
 3.6-packaging;3.6;packaging
