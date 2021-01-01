@@ -36,11 +36,11 @@ Installed tools
 * phpca - [Finds usage of non-built-in extensions](https://github.com/wapmorgan/PhpCodeAnalyzer)
 * phpcb - [PHP Code Browser](https://github.com/mayflower/PHP_CodeBrowser)
 * phpcbf - [Automatically corrects coding standard violations](https://github.com/squizlabs/PHP_CodeSniffer)
-* phpcf - [Finds usage of deprecated features](http://wapmorgan.github.io/PhpCodeFixer/)
 * phpcov - [a command-line frontend for the PHP_CodeCoverage library](https://github.com/sebastianbergmann/phpcov)
 * phpcpd - [Copy/Paste Detector](https://github.com/sebastianbergmann/phpcpd)
 * phpcs - [Detects coding standard violations](https://github.com/squizlabs/PHP_CodeSniffer)
 * phpda - [Generates dependency graphs](https://mamuz.github.io/PhpDependencyAnalysis/)
+* phpdd - [Finds usage of deprecated features](http://wapmorgan.github.io/PhpDeprecationDetector)
 * phpdoc-to-typehint - [Automatically adds type hints and return types based on PHPDocs](https://github.com/dunglas/phpdoc-to-typehint)
 * phpinsights - [Analyses code quality, style, architecture and complexity](https://phpinsights.com/)
 * phplint - [Lints php files in parallel](https://github.com/overtrue/phplint)
@@ -52,7 +52,6 @@ Installed tools
 * phpstan - [Static Analysis Tool](https://github.com/phpstan/phpstan)
 * phpstan-deprecation-rules - [PHPStan rules for detecting deprecated code](https://github.com/phpstan/phpstan-deprecation-rules)
 * phpstan-ergebnis-rules - [Additional rules for PHPstan](https://github.com/ergebnis/phpstan-rules)
-* phpstan-localheinz-rules - [Additional rules for PHPstan](https://github.com/localheinz/phpstan-rules)
 * phpstan-strict-rules - [Extra strict and opinionated rules for PHPStan](https://github.com/phpstan/phpstan-strict-rules)
 * phpstan-doctrine - [Doctrine extensions for PHPStan](https://github.com/phpstan/phpstan-doctrine)
 * phpstan-phpunit - [PHPUnit extensions and rules for PHPStan](https://github.com/phpstan/phpstan-phpunit)
@@ -75,7 +74,6 @@ Installed tools
 * twigcs - [The missing checkstyle for twig](https://github.com/friendsoftwig/twigcs)
 * larastan - [PHPStan extension for Laravel](https://github.com/nunomaduro/larastan)
 * yaml-lint - [Compact command line utility for checking YAML file syntax](https://github.com/j13k/yaml-lint)
-* testability - [Analyses and reports testability issues of a php codebase](https://github.com/edsonmedina/php_testability)
 
 
 Usage
@@ -91,7 +89,8 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 7.4 | [![](https://images.microbadger.com/badges/image/minidocks/php-tools.svg)](https://microbadger.com/images/minidocks/php-tools)
+ latest, 8.0 | [![](https://images.microbadger.com/badges/image/minidocks/php-tools.svg)](https://microbadger.com/images/minidocks/php-tools)
+ 8.0         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:8.0.svg)](https://microbadger.com/images/minidocks/php-tools:8.0)
  7.4         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:7.4.svg)](https://microbadger.com/images/minidocks/php-tools:7.4)
  7.3         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:7.3.svg)](https://microbadger.com/images/minidocks/php-tools:7.3)
  7.2         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:7.2.svg)](https://microbadger.com/images/minidocks/php-tools:7.2)
