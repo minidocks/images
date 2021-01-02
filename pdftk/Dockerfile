@@ -1,9 +1,9 @@
 FROM minidocks/glibc
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=3.2.2
+ARG version=924565150
 
-RUN wget -O /tmp/pdftk.zip "https://gitlab.com/pdftk-java/pdftk/-/jobs/artifacts/v${version}/file/build/native-image/pdftk?job=nativeimage" \
+RUN wget -O /tmp/pdftk.zip "https://gitlab.com/pdftk-java/pdftk/-/jobs/${version}/artifacts/raw/build/native-image/pdftk" \
     && unzip /tmp/pdftk.zip -d /tmp && mv /tmp/build/*/pdftk /usr/bin && clean
 
 COPY rootfs /
