@@ -19,7 +19,7 @@ Configuration by environment variables
 Installed applications
 ----------------------
 
-- [Composer](https://getcomposer.org/): Dependency Manager for PHP.
+- [Composer](https://getcomposer.org/): Dependency Manager for PHP `composer1` (alias `composer`) and `composer2`.
 - [PsySH](https://psysh.org/): A runtime developer console, interactive debugger and REPL for PHP.
 
 Usage
@@ -40,10 +40,10 @@ Tags
  8.0         | [![](https://images.microbadger.com/badges/image/minidocks/php:8.0.svg)](https://microbadger.com/images/minidocks/php:8.0)
  8.0-nginx   | [![](https://images.microbadger.com/badges/image/minidocks/php:8.0-nginx.svg)](https://microbadger.com/images/minidocks/php:8.0-nginx)
  8.0-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:8.0-intl.svg)](https://microbadger.com/images/minidocks/php:8.0-intl)
-  7.4-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-base.svg)](https://microbadger.com/images/minidocks/php:7.4-base)
-  7.4         | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4.svg)](https://microbadger.com/images/minidocks/php:7.4)
-  7.4-nginx   | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-nginx.svg)](https://microbadger.com/images/minidocks/php:7.4-nginx)
-  7.4-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-intl.svg)](https://microbadger.com/images/minidocks/php:7.4-intl)
+ 7.4-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-base.svg)](https://microbadger.com/images/minidocks/php:7.4-base)
+ 7.4         | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4.svg)](https://microbadger.com/images/minidocks/php:7.4)
+ 7.4-nginx   | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-nginx.svg)](https://microbadger.com/images/minidocks/php:7.4-nginx)
+ 7.4-intl    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.4-intl.svg)](https://microbadger.com/images/minidocks/php:7.4-intl)
  7.3-base    | [![](https://images.microbadger.com/badges/image/minidocks/php:7.3-base.svg)](https://microbadger.com/images/minidocks/php:7.3-base)
  7.3         | [![](https://images.microbadger.com/badges/image/minidocks/php:7.3.svg)](https://microbadger.com/images/minidocks/php:7.3)
  7.3-nginx   | [![](https://images.microbadger.com/badges/image/minidocks/php:7.3-nginx.svg)](https://microbadger.com/images/minidocks/php:7.3-nginx)
@@ -65,3 +65,4 @@ See also
 --------
 
 - https://github.com/codecasts/php-alpine
+- https://github.com/thecodingmachine/docker-images-php

@@ -1,7 +1,8 @@
 ARG version=8.0
 ARG major=8
-ARG composer_version=1.10.19
-ARG blackfire_version=1.48.0
+ARG composer1_version=1.10.19
+ARG composer2_version=2.0.8
+ARG blackfire_version=1.48.1
 
 FROM minidocks/base:3.8 AS v5.6
 
@@ -46,13 +47,15 @@ ENV PHP_INI_DIR=/etc/php$major \
     COMPOSER_MEMORY_LIMIT=-1 \
     CLEAN="$CLEAN:\$COMPOSER_CACHE_DIR/"
 
-ARG composer_version
+ARG composer1_version
+ARG composer2_version
 
 RUN mkdir -p /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer --version="$composer_version" \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer1 --version="$composer1_version" \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer2 --version="$composer2_version" \
     && php -r "unlink('composer-setup.php');" \
     && clean
 
