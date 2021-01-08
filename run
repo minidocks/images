@@ -173,7 +173,7 @@ build()(
         cp -rfL "$source_dir" "$target_dir"
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
-            docker build $opts -t "$namespace/$package:$version" "$target_dir"
+            DOCKER_BUILDKIT=1 docker build $opts -t "$namespace/$package:$version" "$target_dir"
         done
         if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
         printf "\n"
@@ -281,6 +281,7 @@ task_push()(
             response="$(hub_api "GET" "/$namespace/source/?image=$namespace%2F$name")"
             assert_http_code "$response" "200"
             uuid="$(query "$(http_body "$response")" -r ".objects[0].uuid")"
+            settings_id="$(basename "$(query "$(http_body "$response")" -r ".objects[0].build_settings[0]")")"
             printf "Update build settings for automatic repository \"%s(%s)\"\n" "$hub_name" "$uuid"
 
             data="$base_data"
@@ -292,6 +293,12 @@ task_push()(
                 assert_http_code "$response" "201"
             else
                 response="$(hub_api "PATCH" "/$namespace/source/$uuid/" "$data")"
+                assert_http_code "$response" "202"
+            fi
+
+            if [ -n "$settings_id" ]; then
+                printf "Trigger build for settings(%s) to sync Dockerfile and README.md\n" "$settings_id"
+                response="$(hub_api "POST" "/$namespace/setting/$settings_id/build/" "$(to_json "$settings")")"
                 assert_http_code "$response" "202"
             fi
 
