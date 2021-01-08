@@ -30,8 +30,7 @@ RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$m
     && if echo "5.6 7.1" | grep -q "$version"; then modules="$modules php$major-apcu"; else modules="$modules php$major-pecl-apcu"; fi \
     && if echo "7.3 7.4 8.0" | grep -qv "$version"; then libiconv_version="@community"; fi \
     && apk add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
-    && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
-    && if [ ! -f /usr/bin/phpize ]; then ln -s "/usr/bin/phpize$major" /usr/bin/phpize; fi
+    && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
