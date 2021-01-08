@@ -14,6 +14,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       \
       sphinx-comments \
       sphinx-copybutton \
+      sphinx-multitoc-numbering \
       sphinx-multiversion \
       sphinx-panels \
       sphinx-prompt \
@@ -38,7 +39,9 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx_rtd_theme \
       \
       m2r2 \
+      mdformat \
       myst-parser \
+      linkify-it-py \
       sphinx-markdown-parser \
       pymdown-extensions \
       recommonmark \
