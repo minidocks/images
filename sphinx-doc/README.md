@@ -91,8 +91,6 @@ Tags
  ---       | ----
  latest, 3 | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)](https://microbadger.com/images/minidocks/sphinx-doc)
  3         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:3.svg)](https://microbadger.com/images/minidocks/sphinx-doc:3)
- 2         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:2.svg)](https://microbadger.com/images/minidocks/sphinx-doc:2)
- 1         | [![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:1.svg)](https://microbadger.com/images/minidocks/sphinx-doc:1)
 
 Alternatives
 ------------

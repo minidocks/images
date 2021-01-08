@@ -1,7 +1,7 @@
 FROM minidocks/python
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=3.3.1
+ARG version=3.4.3
 
 RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx=="$version" \
