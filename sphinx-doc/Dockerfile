@@ -8,7 +8,9 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       \
       sphinx-autobuild \
       sphinx-multibuild \
+      \
       sphinx-markdown-builder \
+      sphinxcontrib-confluencebuilder \
       \
       sphinx-comments \
       sphinx-copybutton \
@@ -22,6 +24,8 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinxcontrib-kroki \
       sphinxcontrib-scm \
       sphinxcontrib-svg2pdfconverter \
+      sphinxcontrib-images \
+      sphinxcontrib-programoutput \
       sphinx_gherkindoc \
       \
       Pallets-Sphinx-Themes \
