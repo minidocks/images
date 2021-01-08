@@ -173,7 +173,7 @@ build()(
         cp -rfL "$source_dir" "$target_dir"
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
-            DOCKER_BUILDKIT=1 docker build $opts -t "$namespace/$package:$version" "$target_dir"
+            docker build $opts -t "$namespace/$package:$version" "$target_dir"
         done
         if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
         printf "\n"
