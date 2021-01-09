@@ -1,4 +1,4 @@
-ARG package=nodejs-current<15
+ARG package=nodejs-current<16
 ARG base_version=edge
 
 FROM minidocks/base:3.8 AS v3.8
