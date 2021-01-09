@@ -9,9 +9,9 @@ if [ -r $(pwd)'/.env' ]; then
     . $(pwd)'/.env'
 fi
 
-IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-minidocks webuni}"
+IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-minidocks}"
 GIT_NAMESPACE="${GIT_NAMESPACE:-minidocks}"
-HUB_NAMESPACE="${HUB_NAMESPACE:-minidocks webuni}"
+HUB_NAMESPACE="${HUB_NAMESPACE:-minidocks}"
 HUB_URL=https://hub.docker.com/v2
 HUB_API_URL=https://hub.docker.com/api/build/v1
 
