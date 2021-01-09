@@ -1,5 +1,5 @@
 ARG package=nodejs-current<15
-ARG base_version=3.12
+ARG base_version=edge
 
 FROM minidocks/base:3.8 AS v3.8
 
@@ -10,6 +10,8 @@ FROM minidocks/base:3.10 AS v3.10
 FROM minidocks/base:3.11 AS v3.11
 
 FROM minidocks/base:3.12 AS v3.12
+
+FROM minidocks/base:edge AS vedge
 
 FROM v$base_version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -35,9 +37,3 @@ RUN mkdir -p "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" && chmod 777 "$NPM_CONFIG_
     && clean
 
 COPY rootfs /
-
-FROM latest AS pnpm
-
-RUN npm i -g pnpm && clean
-
-FROM latest
