@@ -259,22 +259,23 @@ task_push()(
 
             _ansi --yellow --nl "Push docker image $hub_name"
 
+            base_data="$(to_json "channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&provider=github&repository=$name")"
+            settings="$(to_json "source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=/")";
+            envvars="$(to_json "key=DOCKER_BUILDKIT&value=1")"
+            base_data="${base_data:0:-1}, \"build_settings\": [$settings], \"envvars\": [$envvars]}"
+
             description="Minimal $name images"
-            base_data="channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&provider=github&repository=$name&build_settings=__SETTINGS__"
-            settings="source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=/";
+            data="$(to_json "description=$description&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false")"
+            data="${data:0:-1}, ${base_data:1:-1}, \"build_settings\": [$settings], \"envvars\": [$envvars]}"
 
             response="$(hub "GET" "/repositories/$hub_name/")"
             if [ "$(http_code "$response")" = "404" ]; then
                 printf "Create automatic repository \"%s\"\n" "$hub_name"
-
-                data="$(to_json "description=$description&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false&$base_data")"
-                data="$(echo "$data" | sed -e "s/\"__SETTINGS__\"/[$(echo "$(to_json "$settings")" | sed -e 's/[\/&]/\\&/g')]/")"
-
                 response="$(hub "POST" "/repositories/" "$data")"
                 assert_http_code "$response" "201"
-            elif [ "$(query "$(http_body "$response")" -r '.description')" != "$description" ]; then
+            else
                 printf "Update automatic repository \"%s\"\n" "$hub_name"
-                response="$(hub "PATCH" "/repositories/$hub_name/" "$(to_json "description=$description")")"
+                response="$(hub "PATCH" "/repositories/$hub_name/" "$data")"
                 assert_http_code "$response" "200"
             fi
 
@@ -285,8 +286,7 @@ task_push()(
             printf "Update build settings for automatic repository \"%s(%s)\"\n" "$hub_name" "$uuid"
 
             data="$base_data"
-            if [ "$uuid" = "null" ]; then data="image=$hub_name&$data"; fi
-            data="$(echo "$(to_json "$data")" | sed -e "s/\"__SETTINGS__\"/[$(echo "$(to_json "$settings")" | sed -e 's/[\/&]/\\&/g')]/")"
+            if [ "$uuid" = "null" ]; then data="${data:0:-1}, \"image\": \"$hub_name\"}"; fi
 
             if [ "$uuid" = "null" ]; then
                 response="$(hub_api "POST" "/$namespace/source/" "$data")"
@@ -298,7 +298,7 @@ task_push()(
 
             if [ -n "$settings_id" ]; then
                 printf "Trigger build for settings(%s) to sync Dockerfile and README.md\n" "$settings_id"
-                response="$(hub_api "POST" "/$namespace/setting/$settings_id/build/" "$(to_json "$settings")")"
+                response="$(hub_api "POST" "/$namespace/setting/$settings_id/build/" "$settings")"
                 assert_http_code "$response" "202"
             fi
 
