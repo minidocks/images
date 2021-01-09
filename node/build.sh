@@ -16,9 +16,9 @@ versions="
 13-base;3.11;nodejs-current<14;base
 13;3.11;nodejs-current<14
 14-base;3.12;nodejs-current<15;base
-14;3.12;latest;nodejs-current<15
+14;3.12;nodejs-current<15
 15-base;edge;nodejs-current<16;base
-15;edge;latest;nodejs-current<16
+15;edge;nodejs-current<16
 lts-base;3.12;nodejs-current<15;base
 lts;3.12;nodejs-current<15
 latest;edge;nodejs-current<16
