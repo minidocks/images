@@ -20,6 +20,8 @@ ARG package
 
 RUN apk --update add $package && clean;
 
+COPY rootfs /
+
 CMD [ "node" ]
 
 FROM base AS latest
@@ -31,9 +33,7 @@ ENV NPM_CONFIG_CACHE=/npm-cache \
 
 ARG package
 
-RUN mkdir -p "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" && chmod 777 "$NPM_CONFIG_CACHE" "$YARN_CACHE_FOLDER" \
-    && apk --update add npm \
-    && npm i -g npm@latest npm-check-updates yarn \
+# Fix https://github.com/npm/uid-number/issues/3#issuecomment-453727058
+RUN /docker-entrypoint.d/10-cache.sh && apk --update add npm \
+    && npm config set unsafe-perm true && npm i -g npm@latest npm-check-updates yarn && npm config set unsafe-perm false \
     && clean
-
-COPY rootfs /
