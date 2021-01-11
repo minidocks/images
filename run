@@ -5,8 +5,8 @@ url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
 [ -f ./.runner ] && [ .runner -nt "$0" ] || wget -q "$url" -O- > .runner || curl -fso .runner "$url"
 . ./.runner
 
-if [ -r $(pwd)'/.env' ]; then
-    . $(pwd)'/.env'
+if [ -r ./.env ]; then
+    . ./.env
 fi
 
 IMAGE_NAMESPACE="${IMAGE_NAMESPACE:-minidocks}"
@@ -262,11 +262,11 @@ task_push()(
             base_data="$(to_json "channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&provider=github&repository=$name")"
             settings="$(to_json "source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=/")";
             envvars="$(to_json "key=DOCKER_BUILDKIT&value=1")"
-            base_data="${base_data:0:-1}, \"build_settings\": [$settings], \"envvars\": [$envvars]}"
+            base_data="${base_data%?}, \"build_settings\": [$settings], \"envvars\": [$envvars]}"
 
             description="Minimal $name images"
             data="$(to_json "description=$description&namespace=$namespace&name=$name&image=$hub_name&privacy=public&is_private=false")"
-            data="${data:0:-1}, ${base_data:1:-1}, \"build_settings\": [$settings], \"envvars\": [$envvars]}"
+            data="${data%?}, ${base_data#?}"
 
             response="$(hub "GET" "/repositories/$hub_name/")"
             if [ "$(http_code "$response")" = "404" ]; then
@@ -286,7 +286,7 @@ task_push()(
             printf "Update build settings for automatic repository \"%s(%s)\"\n" "$hub_name" "$uuid"
 
             data="$base_data"
-            if [ "$uuid" = "null" ]; then data="${data:0:-1}, \"image\": \"$hub_name\"}"; fi
+            if [ "$uuid" = "null" ]; then data="${data%?}, \"image\": \"$hub_name\"}"; fi
 
             if [ "$uuid" = "null" ]; then
                 response="$(hub_api "POST" "/$namespace/source/" "$data")"
@@ -303,7 +303,7 @@ task_push()(
             fi
 
             for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
-                printf " - $hub_name:$version\n"
+                _println " - $hub_name:$version"
                 docker push "$hub_name:$version"
             done
         done
