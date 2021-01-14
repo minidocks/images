@@ -1,5 +1,5 @@
 ARG python_version=3
-ARG pyinstaller_version=3.6
+ARG pyinstaller_version=4.2
 
 FROM minidocks/python:2-build AS b2
 
