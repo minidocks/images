@@ -131,8 +131,7 @@ EXPOSE 9000
 
 FROM latest AS nginx
 
-# Include /etc/nginx/conf.d/*.conf (changed in alpine 3.12+)
-RUN apk add nginx && sed -i 's|#\(include.\+conf\.d.\+\)|\1|' /etc/nginx/nginx.conf && clean
+RUN apk add nginx && clean
 
 # Fix https://gitlab.alpinelinux.org/alpine/aports/-/issues/9364
 RUN chmod 1777 /var/lib/nginx/tmp
