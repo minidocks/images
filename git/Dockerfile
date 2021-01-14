@@ -1,9 +1,9 @@
-ARG fame_version=1.12.0
-ARG filter_version=2.27.1
+ARG fame_version=1.14.0
+ARG filter_version=2.29.0
 ARG git_standup_version=2.3.2
-ARG monorepo_tools_version=8.1.2
-ARG git_extras_version=6.0.0
-ARG git_quick_stats_version=2.1.1
+ARG monorepo_tools_version=9.1.0
+ARG git_extras_version=6.1.0
+ARG git_quick_stats_version=2.1.5
 
 # https://github.com/jderusse/docker-gitsplit/blob/master/Dockerfile
 FROM golang:alpine AS splitsh
@@ -25,6 +25,7 @@ ARG filter_version
 # https://github.com/pyinstaller/pyinstaller/issues/2560
 RUN wget -O /tmp/fame.tar.gz https://github.com/casperdcl/git-fame/archive/v$fame_version.tar.gz \
     && tar -xzf /tmp/fame.tar.gz -C /tmp && cd /tmp/git-fame* && echo "from gitfame._gitfame import main; main()" > ./git-fame.py \
+    && echo "Version: $fame_version" > PKG-INFO \
     && pip install tqdm && pyinstaller -s --clean -F git-fame.py && mv ./dist /tmp
 
 RUN cd /tmp \
@@ -47,10 +48,10 @@ COPY --from=python /tmp/dist/git-filter-repo /usr/libexec/git-core/git-filter-re
 # Reposity icefox/git-hooks does not exist :(
 # && wget -O /usr/libexec/git-core/git-hooks https://raw.githubusercontent.com/icefox/git-hooks/master/git-hooks \
 
-RUN apk --update add git git-subtree git-lfs git-fast-import ncurses less bash file util-linux http-parser libssh2 \
+RUN apk --update add git git-crypt git-subtree git-lfs git-fast-import git-secret@edge git-metafile@edge ncurses less bash file util-linux http-parser libssh2 \
     && wget -O /usr/libexec/git-core/git-standup https://raw.githubusercontent.com/kamranahmedse/git-standup/$git_standup_version/git-standup \
     && wget -O /usr/libexec/git-core/git-quick-stats https://raw.githubusercontent.com/arzzen/git-quick-stats/$git_quick_stats_version/git-quick-stats \
-    && wget -O /usr/local/bin/tomono https://raw.githubusercontent.com/hraban/tomono/master/tomono.sh \
+    && wget -O /usr/local/bin/tomono https://raw.githubusercontent.com/CyberGRX/tomono/master/tomono.sh \
     && wget -O /tmp/git-extras.tar.gz https://github.com/tj/git-extras/archive/$git_extras_version.tar.gz && tar -xzf /tmp/git-extras.tar.gz -C /tmp && mv /tmp/git-extras*/bin/* /usr/libexec/git-core/ \
     && chmod a+x /usr/libexec/git-core/git-* /usr/local/bin/tomono \
     && wget -O /tmp/mt.tar.gz https://github.com/shopsys/monorepo-tools/archive/v$monorepo_tools_version.tar.gz \

@@ -35,7 +35,7 @@ if [ -n "$prefix" ]; then
   fi
 fi
 
-if [ -n "$prune"]; then
+if [ -n "$prune" ]; then
   echo "Clean repository" >2
   [ -n "$name" ] && git remote remove "$name" || true
   git gc --prune=now
