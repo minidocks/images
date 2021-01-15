@@ -1,4 +1,4 @@
-ARG version=3.12
+ARG version=3.13
 
 FROM alpine:$version as latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -15,9 +15,7 @@ COPY rootfs /
 
 RUN sed -i "s/\$ALPINE_RELEASE/$([ 'edge' = "$version" ] && echo "$version" || echo "v$version")/g" /etc/apk/repositories \
     && [ 'edge' = "$version" ] && sed -i 's/@testing //' /etc/apk/repositories || echo "ok" >/dev/null \
-    && apk --update add busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert ca-certificates gettext libintl ttf-inconsolata \
-    && if [ '3.5' = "$version" ]; then apk add wget libressl; fi \
-    && if [ 'edge' = "$version" ] || [ "$(echo "$version" | cut -d. -f2)" -gt 6 ]; then apk add busybox-extras; fi \
+    && apk --update add busybox-extras busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert ca-certificates gettext libintl ttf-inconsolata wait4ports \
     && mv /usr/bin/envsubst /usr/local/bin/ \
     && apk del gettext && clean
 

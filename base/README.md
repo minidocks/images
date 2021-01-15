@@ -1,11 +1,33 @@
-Base image (minidocks/base)
-===========================
+Base image ([minidocks/base](https://hub.docker.com/r/minidocks/base))
+======================================================================
 
-The best docker container for developers. This is a very small container (total 7.5 Mb) based on Alpine image.
+The best docker container for developers. This is a very small container
+(total < 9 MB) based on Alpine image.
 
-Inspiration:
-- https://github.com/CraftDock/alpine-base
-- https://github.com/just-containers/s6-overlay
+Alpine repositories
+-------------------
+
+All images have registered the following apk repositories:
+
+- @edge ([@main](http://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](http://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](http://dl-cdn.alpinelinux.org/alpine/edge/testing))
+- @313 ([@main313](http://dl-cdn.alpinelinux.org/alpine/v3.13/main), [@community313](http://dl-cdn.alpinelinux.org/alpine/v3.13/community))
+- @312 ([@main312](http://dl-cdn.alpinelinux.org/alpine/v3.12/main), [@community312](http://dl-cdn.alpinelinux.org/alpine/v3.12/community))
+- …
+- @37 ([@main37](http://dl-cdn.alpinelinux.org/alpine/v3.7/main), [@community37](http://dl-cdn.alpinelinux.org/alpine/v3.7/community))
+
+Utilities
+---------
+
+All images contain the following extra packages:
+
+- [`tini`](https://github.com/krallin/tini) A tiny but valid init for containers.
+- [`monit`](http://mmonit.com/monit) Managing and monitoring on a UNIX system.
+- [`inotify-tools`](https://github.com/rvoicilas/inotify-tools) CLI tools providing a simple interface to inotify.
+- [`dropbear`](https://matt.ucc.asn.au/dropbear/dropbear.html) Small SSH 2 client/server designed for small memory environments.
+- [`envsubst`](https://linux.die.net/man/1/envsubst) Substitutes environment variables in shell format strings.
+- [`ca-certificates`](https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/) Common CA certificates PEM files.
+- [`su-exec`](https://github.com/ncopa/su-exec) Switch user and group id, setgroups and exec.
+- [`wait4ports`](https://github.com/erikogan/wait4ports) A small utility to wait for network peer availability.
 
 Features
 --------
@@ -75,26 +97,40 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.12      | [![](https://images.microbadger.com/badges/image/minidocks/base.svg)](https://microbadger.com/images/minidocks/base)
- edge              | [![](https://images.microbadger.com/badges/image/minidocks/base:edge.svg)](https://microbadger.com/images/minidocks/base:edge)
- 3.12              | [![](https://images.microbadger.com/badges/image/minidocks/base:3.12.svg)](https://microbadger.com/images/minidocks/base:3.12)
- build, 3.12-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.12-build.svg)](https://microbadger.com/images/minidocks/base:3.12-build)
- 3.11              | [![](https://images.microbadger.com/badges/image/minidocks/base:3.11.svg)](https://microbadger.com/images/minidocks/base:3.11)
- 3.11-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.11-build.svg)](https://microbadger.com/images/minidocks/base:3.11-build)
- 3.10              | [![](https://images.microbadger.com/badges/image/minidocks/base:3.10.svg)](https://microbadger.com/images/minidocks/base:3.10)
- 3.10-build | [![](https://images.microbadger.com/badges/image/minidocks/base:3.10-build.svg)](https://microbadger.com/images/minidocks/base:3.10-build)
- 3.9               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9.svg)](https://microbadger.com/images/minidocks/base:3.9)
- 3.9-build         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.9-build.svg)](https://microbadger.com/images/minidocks/base:3.9-build)
- 3.8               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.8.svg)](https://microbadger.com/images/minidocks/base:3.8)
- 3.8-build         | [![](https://images.microbadger.com/badges/image/minidocks/base:3.8-build.svg)](https://microbadger.com/images/minidocks/base:3.8-build)
- 3.7               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.7.svg)](https://microbadger.com/images/minidocks/base:3.7)
- 3.6               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.6.svg)](https://microbadger.com/images/minidocks/base:3.6)
- 3.5               | [![](https://images.microbadger.com/badges/image/minidocks/base:3.5.svg)](https://microbadger.com/images/minidocks/base:3.5)
+ latest, 3.13      | ![](https://images.microbadger.com/badges/image/minidocks/base.svg)
+ edge              | ![](https://images.microbadger.com/badges/image/minidocks/base:edge.svg)
+ 3.13              | ![](https://images.microbadger.com/badges/image/minidocks/base:3.13.svg)
+ build, 3.13-build | ![](https://images.microbadger.com/badges/image/minidocks/base:3.13-build.svg)
+ 3.12              | ![](https://images.microbadger.com/badges/image/minidocks/base:3.12.svg)
+ 3.12-build        | ![](https://images.microbadger.com/badges/image/minidocks/base:3.12-build.svg)
+ 3.11              | ![](https://images.microbadger.com/badges/image/minidocks/base:3.11.svg)
+ 3.11-build        | ![](https://images.microbadger.com/badges/image/minidocks/base:3.11-build.svg)
+ 3.10              | ![](https://images.microbadger.com/badges/image/minidocks/base:3.10.svg)
+ 3.10-build        | ![](https://images.microbadger.com/badges/image/minidocks/base:3.10-build.svg)
+ 3.9               | ![](https://images.microbadger.com/badges/image/minidocks/base:3.9.svg)
+ 3.9-build         | ![](https://images.microbadger.com/badges/image/minidocks/base:3.9-build.svg)
+ 3.8               | ![](https://images.microbadger.com/badges/image/minidocks/base:3.8.svg)
+ 3.8-build         | ![](https://images.microbadger.com/badges/image/minidocks/base:3.8-build.svg)
+ 3.7               | ![](https://images.microbadger.com/badges/image/minidocks/base:3.7.svg)
+ 3.6               | ![](https://images.microbadger.com/badges/image/minidocks/base:3.6.svg)
+ 3.5               | ![](https://images.microbadger.com/badges/image/minidocks/base:3.5.svg)
 
 Inspiration
 -----------
 
+- https://github.com/just-containers/s6-overlay
+- https://blog.iron.io/microcontainers-tiny-portable-containers/
+- http://www.projectatomic.io/docs/docker-image-author-guidance/
+- https://github.com/nimmis/docker-alpine-micro
+- https://github.com/dockage/alpine
+- https://github.com/docker-suite/alpine-base/
+
+Alternatives
+------------
+- https://github.com/CraftDock/alpine-base
 - https://github.com/thecodingmachine/docker-images-php
+- https://github.com/bash-suite
+- https://github.com/QuantumObject/docker-alpine
 
 
 https://ypereirareis.github.io/blog/2015/12/01/docker-container-external-links-alias-hosts-unavailable/

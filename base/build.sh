@@ -3,9 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/base"
 versions="
-3.5;3.5
-3.5-build;3.5;build
-3.6;3.6
 3.7;3.7
 3.8;3.8
 3.8-build;3.8;build
@@ -17,10 +14,12 @@ versions="
 3.11-build;3.11;build
 3.12;3.12
 3.12-build;3.12;build
+3.13;3.13
+3.13-build;3.13;build
 edge;edge
 edge-build;edge;build
-build;3.12;build
-latest;3.12
+build;3.13;build
+latest;3.13
 "
 
 build() {
