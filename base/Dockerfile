@@ -7,7 +7,8 @@ ARG version
 
 ENV TEMP=/tmp \
     ENV=/etc/profile \
-    CLEAN="/var/cache/apk/:/tmp/"
+    CLEAN="/var/cache/apk/:/tmp/" \
+    RAWEXEC="monit crond supervise sshd"
 
 RUN adduser -u 1000 -S -s /bin/sh -G users user && echo "user:password" | chpasswd 2>/dev/null
 
