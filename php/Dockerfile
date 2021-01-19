@@ -12,9 +12,9 @@ FROM minidocks/base:3.9 AS v7.2
 
 FROM minidocks/base:3.12 AS v7.3
 
-FROM minidocks/base:edge AS v7.4
+FROM minidocks/base:3.13 AS v7.4
 
-FROM minidocks/base:edge AS v8.0
+FROM minidocks/base:3.13 AS v8.0
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -118,7 +118,8 @@ ENV PHP_EXT_XDEBUG=0 \
     PHP_XDEBUG__REMOTE_HOST=172.17.0.1 \
     PHP_XDEBUG__REMOTE_PORT=9000 \
     PHP_XDEBUG__REMOTE_CONNECT_BACK=0 \
-    PHP_XDEBUG__IDEKEY=PHPSTORM
+    PHP_XDEBUG__IDEKEY=PHPSTORM \
+    RAWEXEC="$RAWEXEC php-fpm php-fpm$major"
 
 ARG blackfire_version
 
