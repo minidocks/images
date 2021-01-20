@@ -26,7 +26,7 @@ RUN version="$([ "7.2" == "$php_version" ] && echo "1.30.0" || echo "$toolbox_ve
     && wget -O /usr/local/bin/toolbox "https://github.com/jakzal/toolbox/releases/download/v$version/toolbox.phar" \
     && chmod a+x /usr/local/bin/toolbox && ./docker-entrypoint.sh
 
-RUN apk add curl git "php${php_version%%.*}-pecl-ast" \
+RUN ln -sf composer2 /usr/bin/composer && apk add curl git "php${php_version%%.*}-pecl-ast" \
     && toolbox install --dry-run && toolbox install -vvv && apk del curl git && clean
 
 ENV PHP_AUTO_PREPEND_FILE="$COMPOSER_HOME/vendor/autoload.php"
