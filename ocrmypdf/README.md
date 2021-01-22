@@ -1,24 +1,28 @@
-OCRmyPDF with img2pdf docker image (minidocks/ocrmypdf)
-=======================================================
+OCRmyPDF with img2pdf docker image ([minidocks/ocrmypdf](https://hub.docker.com/r/minidocks/ocrmypdf))
+======================================================================================================
 
 ![](https://raw.githubusercontent.com/jbarlow83/OCRmyPDF/master/docs/images/logo.svg?sanitize=true)
 
-[OCRmyPDF](https://ocrmypdf.readthedocs.io/) adds an OCR text layer to scanned PDF files, allowing them to be searched.
+[OCRmyPDF](https://ocrmypdf.readthedocs.io/) adds an OCR text layer to scanned
+PDF files, allowing them to be searched.
 
 Utilities
 ---------
 
-- [img2pdf](https://gitlab.mister-muffin.de/josch/img2pdf) is a tool to lossless conversion of raster images to PDF.
-- [pdfminer](https://github.com/pdfminer/pdfminer.six) is a tool for extracting information from PDF documents.
-- [hocr tools](https://github.com/tmbdev/hocr-tools)
+-   [img2pdf](https://gitlab.mister-muffin.de/josch/img2pdf) is a tool to
+    lossless conversion of raster images to PDF.
+-   [pdfminer](https://github.com/pdfminer/pdfminer.six) is a tool for
+    extracting information from PDF documents.
+-   [hocr tools](https://github.com/tmbdev/hocr-tools)
 
 Usage
 -----
 
-OCRmyPDF requires ghostscript, tesseract an unpaper. We must connect these containers via the ssh protocol.
-The easiest solution is to use docker compose.
+OCRmyPDF requires ghostscript, tesseract an unpaper. We must connect these
+containers via the ssh protocol. The easiest solution is to use docker compose.
 
 So create a file `docker-compose.yml` with content:
+
 ```yaml
 version: '3.4'
 
@@ -58,24 +62,25 @@ services:
 ```
 
 And in the same directory run command:
+
 ```bash
-docker-compose run --rm ocrmypdf -l eng input.pdf output.pdf
+docker-compose run --rm ocrmypdf -j 2 -l eng --tesseract-pagesegmode input.pdf output.pdf
 ```
 
 Tags
 ----
 
- Tag         | Size
- ---         | ----
- latest, 11  | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)](https://microbadger.com/images/minidocks/ocrmypdf)
- 11          | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:11.svg)](https://microbadger.com/images/minidocks/ocrmypdf:11)
- 10          | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:10.svg)](https://microbadger.com/images/minidocks/ocrmypdf:10)
- 9           | [![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:9.svg)](https://microbadger.com/images/minidocks/ocrmypdf:9)
+| Tag        | Size                                                                       |
+|------------|----------------------------------------------------------------------------|
+| latest, 11 | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)    |
+| 11         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:11.svg) |
+| 10         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:10.svg) |
+| 9          | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:9.svg)  |
 
 Related images
 --------------
 
-- [Ghostscript](https://github.com/minidocks/ghostscript)
-- [pdftk](https://github.com/minidocks/pdftk)
-- [Tesseract](https://github.com/minidocks/tesseract)
-- [Unpaper](https://github.com/minidocks/unpaper)
+-   [Ghostscript](https://github.com/minidocks/ghostscript)
+-   [pdftk](https://github.com/minidocks/pdftk)
+-   [Tesseract](https://github.com/minidocks/tesseract)
+-   [Unpaper](https://github.com/minidocks/unpaper)
