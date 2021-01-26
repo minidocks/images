@@ -1,5 +1,0 @@
-#!/bin/bash
-echo "=> Resolve symlinks"
-dir="$(dirname "$BASH_SOURCE")/../"
-rm -rf "$dir/Dockerfile"
-cp -afLr "$dir/../latest/." "$dir"
