@@ -54,7 +54,7 @@ ARG version
 
 RUN if [ "${version::1}" = 3 ]; then \
         apk add py3-cryptography && pip install poetry flit; \
-    fi && pip install pipenv twine && clean
+    fi && pip install virtualenv pipenv twine && clean
 
 FROM packaging AS build
 
