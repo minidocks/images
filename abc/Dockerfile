@@ -14,13 +14,13 @@ RUN wget -O /tmp/abcpp.tar.gz "https://sourceforge.net/projects/abcplus/files/ab
     && tar -xvzf /tmp/abcpp.tar.gz -C /tmp && cd /tmp/abcpp* \
     && mkdir -p /tmp/build && make && mv abcpp /tmp/build
 
-ARG abcm2ps_version=8.14.9
+ARG abcm2ps_version=8.14.11
 
 RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v${abcm2ps_version}.tar.gz" \
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2020.12.10
+ARG abc2midi_version=2021.01.25
 
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
@@ -45,7 +45,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 COPY --from=abcm2ps /tmp/build /
 COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
-ARG abc2svg_version=1.20.16
+ARG abc2svg_version=1.20.17
 
 RUN apk add npm && npm i -g abc2svg@$abc2svg_version jszip \
     && apk del npm && rm -rf /usr/lib/node_modules/abc2svg/node_modules && clean
