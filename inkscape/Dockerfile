@@ -10,7 +10,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 ARG version
 
 RUN apk del poppler poppler-utils \
-    && if [ "$version" = "0" ]; then apk add 'inkscape@311<1' poppler-utils@311; else apk add inkscape@edge poppler-utils@edge; fi \
+    && if [ "$version" = "0" ]; then apk add 'inkscape@311<1' poppler-utils@311; else apk add inkscape poppler-utils; fi \
     && apk add potrace msttcorefonts-installer fontconfig \
     && update-ms-fonts && fc-cache -f && clean
 
