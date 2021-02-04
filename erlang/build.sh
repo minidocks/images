@@ -3,11 +3,9 @@ set -e
 
 image="${namespace:-minidocks}/erlang"
 versions="
-19;19
-20;20
-21;21
 22;22
-latest;22
+23;23
+latest;23
 "
 
 build() {
