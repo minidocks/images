@@ -9,8 +9,10 @@ versions="
 11-czech;11;czech
 12;12
 12-czech;12;czech
-czech;12;czech
-latest;10
+13;13
+13-czech;13;czech
+czech;13;czech
+latest;13
 "
 
 build() {
