@@ -51,7 +51,3 @@ Tags
 | 11-base    | [![](https://images.microbadger.com/badges/image/minidocks/node:11-base.svg)]() |
 | 10         | [![](https://images.microbadger.com/badges/image/minidocks/node:10.svg)]()      |
 | 10-base    | [![](https://images.microbadger.com/badges/image/minidocks/node:10-base.svg)]() |
-| 9          | [![](https://images.microbadger.com/badges/image/minidocks/node:9.svg)]()       |
-| 9-base     | [![](https://images.microbadger.com/badges/image/minidocks/node:9-base.svg)]()  |
-| 8          | [![](https://images.microbadger.com/badges/image/minidocks/node:8.svg)]()       |
-| 8-base     | [![](https://images.microbadger.com/badges/image/minidocks/node:8-base.svg)]()  |
