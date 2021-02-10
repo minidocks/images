@@ -20,6 +20,7 @@ Installed utilities
 Configuration by environment variables
 --------------------------------------
 
+-   `NODE_PATH` (default `/node_modules`)
 -   `NPM_CONFIG_CACHE` (default `/npm-cache`) - Path to directory with npm
     cache.
 -   `YARN_CACHE_FOLDER` (default `/yarn-cache`) - Path to directory with yarn

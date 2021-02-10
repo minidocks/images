@@ -31,11 +31,13 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV NPM_CONFIG_CACHE=/npm-cache \
     YARN_CACHE_FOLDER=/yarn-cache \
-    CLEAN="$CLEAN:\$NPM_CONFIG_CACHE/:\$YARN_CACHE_FOLDER/:/usr/lib/node_modules/npm/doc:/usr/lib/node_modules/npm/man:/usr/lib/node_modules/npm/html"
+    NODE_PATH=/node_modules \
+    CLEAN="$CLEAN:\$NPM_CONFIG_CACHE/:\$YARN_CACHE_FOLDER/"
 
 ARG package
 
 # Fix https://github.com/npm/uid-number/issues/3#issuecomment-453727058
 RUN /docker-entrypoint.d/10-cache.sh && apk --update add npm \
     && npm config set unsafe-perm true && npm i -g npm@latest npm-check-updates yarn && npm config set unsafe-perm false \
-    && clean
+    && rm -rf /usr/lib/node_modules/npm/docs /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/html && clean \
+    && for pkg in npm npm-check-updates; do cp -ra /usr/lib/node_modules/$pkg/node_modules / && rm -rf /usr/lib/node_modules/$pkg/node_modules; done
