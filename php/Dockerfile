@@ -1,8 +1,8 @@
 ARG version=8.0
 ARG major=8
-ARG composer1_version=1.10.19
-ARG composer2_version=2.0.8
-ARG blackfire_version=1.48.1
+ARG composer1_version=1.10.20
+ARG composer2_version=2.0.9
+ARG blackfire_version=1.50.0
 
 FROM minidocks/base:3.8 AS v5.6
 
@@ -123,6 +123,7 @@ ENV PHP_EXT_XDEBUG=0 \
 
 ARG blackfire_version
 
+# Blackfire
 RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfire.io/binaries/blackfire-php/${blackfire_version}/blackfire-php-alpine_amd64-php-${version/./}.so \
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
