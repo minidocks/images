@@ -1,4 +1,10 @@
-FROM minidocks/python
+ARG base_image=python
+
+FROM minidocks/python AS python
+
+FROM minidocks/weasyprint AS weasyprint
+
+FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version=3.4.3
@@ -18,6 +24,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx-multiversion \
       sphinx-panels \
       sphinx-prompt \
+      sphinx-sitemap \
       sphinx-tabs \
       sphinx-togglebutton \
       sphinxcontrib.programoutput \
@@ -51,3 +58,11 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
 COPY rootfs /
 
 CMD [ "sphinx-build" ]
+
+FROM latest AS pdf
+
+RUN apk add py3-reportlab \
+    && pip install rst2pdf sphinx-business-theme sphinx-weasyprint-builder \
+    && clean
+
+FROM latest
