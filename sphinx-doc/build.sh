@@ -4,7 +4,7 @@ set -e
 image="${namespace:-minidocks}/sphinx-doc"
 versions="
 3;3.4.3
-3-pdf:3.4.3;weasyprint;pdf
+3-pdf;3.4.3;weasyprint;pdf
 pdf;3.4.3;weasyprint;pdf
 latest;3.4.3
 "
