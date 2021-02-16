@@ -3,7 +3,7 @@ ARG filter_version=2.29.0
 ARG git_standup_version=2.3.2
 ARG monorepo_tools_version=9.1.0
 ARG git_extras_version=6.1.0
-ARG git_quick_stats_version=2.1.5
+ARG git_quick_stats_version=2.1.6
 
 # https://github.com/jderusse/docker-gitsplit/blob/master/Dockerfile
 FROM golang:alpine AS splitsh
