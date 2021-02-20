@@ -37,7 +37,7 @@ del_group()(
     done
 
     username="$(delgroup "$group" 2>&1 | awk '{print $2}' | tr -d "'")"
-    if [ -n "$username" ]; then
+    if [ -n "$username" ] && [ "$username" != "unknown" ]; then
         deluser "$username" 2> /dev/null
         delgroup "$group"
     fi
