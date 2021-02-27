@@ -1,5 +1,5 @@
-Ansible docker image ([minidocks/ansible]())
-============================================
+Ansible docker image ([minidocks/ansible](https://hub.docker.com/r/minidocks/ansible))
+======================================================================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Ansible_logo.svg/100px-Ansible_logo.svg.png)
 
@@ -11,7 +11,8 @@ own declarative language to describe system configuration.
 Tags
 ----
 
-| Tag       | Size                                                                       |
-|-----------|----------------------------------------------------------------------------|
-| latest, 2 | ![](https://images.microbadger.com/badges/image/minidocks/ansible.svg)     |
-| 2         | ![](https://images.microbadger.com/badges/image/minidocks/ansible:2.7.svg) |
+| Tag       | Size                                                                     |
+|-----------|--------------------------------------------------------------------------|
+| latest, 3 | ![](https://images.microbadger.com/badges/image/minidocks/ansible.svg)   |
+| 3         | ![](https://images.microbadger.com/badges/image/minidocks/ansible:3.svg) |
+| 2         | ![](https://images.microbadger.com/badges/image/minidocks/ansible:2.svg) |
