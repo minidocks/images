@@ -1,7 +1,7 @@
-FROM minidocks/php:7.4-base
+FROM minidocks/php:8.0-base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=4.7.8
+ARG version=4.8.0
 
 RUN apk --update add \
         php7-mysqli \
