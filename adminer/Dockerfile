@@ -4,13 +4,13 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 ARG version=4.8.0
 
 RUN apk --update add \
-        php7-mysqli \
-        php7-pgsql \
-        php7-pdo_mysql \
-        php7-pdo_pgsql \
-        php7-pdo_sqlite \
-        php7-sqlite3 \
-        php7-session \
+        php8-mysqli \
+        php8-pgsql \
+        php8-pdo_mysql \
+        php8-pdo_pgsql \
+        php8-pdo_sqlite \
+        php8-sqlite3 \
+        php8-session \
     && mkdir -p /var/www \
     && wget -O /var/www/adminer.php https://www.adminer.org/static/download/${version}/adminer-${version}.php \
     && wget -O /tmp/adminer.zip https://github.com/vrana/adminer/archive/v${version}.zip \
