@@ -8,11 +8,11 @@ FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG mkdocs_version=1.1.2
-ARG mkdocs_material_version=5.5.7
+ARG mkdocs_material_version=7.0.4
 
-RUN apk add py3-regex@edge && pip install \
+RUN apk add py3-regex && pip install \
       mkdocs==$mkdocs_version \
-#      mkdocs-autoreflinks-plugin \
+      \
       mkdocs-abs-rel-plugin \
       mkdocs-add-number-plugin \
       mkdocs-autolinks-plugin \
@@ -35,14 +35,14 @@ RUN apk add py3-regex@edge && pip install \
       mkdocs-simple-hooks \
       mkdocs-redirects \
       mkdocs-versioning \
-
+      \
       mkdocs-alabaster \
       mkdocs-cinder \
       mkdocs-ivory \
       mkdocs-kpn \
       mkdocs-material==$mkdocs_material_version \
       mkdocs-rtd-dropdown \
-
+      \
       markdown-include \
       pygments \
       pymdown-extensions \
@@ -54,7 +54,10 @@ CMD [ "mkdocs", "serve", "--dev-addr", "0.0.0.0:8000" ]
 
 FROM latest AS pdf
 
-RUN pip install mkdocs-pdf-export-plugin mkdocs-with-pdf && clean
+RUN apk add libsass && export SYSTEM_SASS=1 && pip install \
+      mkdocs-pdf-export-plugin \
+      mkdocs-with-pdf \
+    && clean
 
 RUN wget -O /tmp/roboto.zip https://fonts.google.com/download?family=Roboto \
     && unzip /tmp/roboto.zip -d /usr/share/fonts/truetype \
