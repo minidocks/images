@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+
+echo "You should run (composer) as soon as possible. This alias (composer2) will be removed." > /dev/stderr
+exec composer "$@"

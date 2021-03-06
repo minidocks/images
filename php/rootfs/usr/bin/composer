@@ -1,5 +1,0 @@
-#!/bin/sh
-set -e
-
-echo "To run composer 1.* version call /usr/bin/composer1 binary. The default composer version will be 2.* as soon as possible." > /dev/stderr
-exec composer1 "$@"

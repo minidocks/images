@@ -47,8 +47,8 @@ RUN mkdir -p /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:w
 
 # Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer1 --version="$composer1_version" \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer2 --version="$composer2_version" \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer1.phar --version="$composer1_version" \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer --version="$composer2_version" \
     && php -r "unlink('composer-setup.php');" \
     && clean
 

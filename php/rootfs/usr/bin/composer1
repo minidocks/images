@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+
+echo "You should use Composer 2.* (composer) as soon as possible. Composer version 1.* will be removed." > /dev/stderr
+exec composer1.phar "$@"
