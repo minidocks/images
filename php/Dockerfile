@@ -1,12 +1,8 @@
 ARG version=8.0
 ARG major=8
 ARG composer1_version=1.10.20
-ARG composer2_version=2.0.9
-ARG blackfire_version=1.50.0
-
-FROM minidocks/base:3.8 AS v5.6
-
-FROM minidocks/base:3.7 AS v7.1
+ARG composer2_version=2.0.11
+ARG blackfire_version=1.51.0
 
 FROM minidocks/base:3.9 AS v7.2
 
@@ -25,11 +21,8 @@ ARG major
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN addgroup -g 82 -S www-data && adduser -u 82 -S -s /bin/sh -G www-data www-data
 
-RUN for module in ctype curl iconv json openssl pcntl phar posix; do modules="$modules php$major-$module"; done \
-    && if [ "$major" = "5" ]; then modules="$modules php$major-cli"; fi \
-    && if [ "$major" != "5" ]; then modules="$modules php$major-mbstring php$major-tokenizer"; fi \
-    && if echo "5.6 7.1" | grep -q "$version"; then modules="$modules php$major-apcu"; else modules="$modules php$major-pecl-apcu"; fi \
-    && if echo "7.3 7.4 8.0" | grep -qv "$version"; then libiconv_version="@community"; fi \
+RUN for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$major-$module"; done \
+    && if [ "$version" == "7.2" ]; then libiconv_version="@community"; fi \
     && apk add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi
 
@@ -74,6 +67,7 @@ RUN for module in \
         cgi \
         dom \
         exif \
+        fileinfo \
         fpm \
         ftp \
         gd \
@@ -81,24 +75,28 @@ RUN for module in \
         gmp \
         ldap \
         mysqli \
+        mysqlnd \
         opcache \
+        pecl-mcrypt \
+        pecl-redis \
+        pecl-xdebug \
         pdo_mysql \
         pdo_pgsql \
         pdo_sqlite \
         pgsql \
+        session \
+        simplexml \
         soap \
         sockets \
+        sodium \
         sqlite3 \
         xml \
         xmlreader \
+        xmlwriter \
         xsl \
         zip \
     ; do modules="$modules php$major-$module"; done \
     && if [ "$major" != "8" ]; then modules="$modules php$major-xmlrpc"; fi \
-    && if [ "$major" = "5" ]; then modules="$modules php$major-mysql"; else modules="$modules php$major-mysqlnd php$major-session"; fi \
-    && if [ "$major" != "5" ]; then modules="$modules php$major-fileinfo php$major-simplexml php$major-xmlwriter"; fi \
-    && if echo "5.6 7.1" | grep -q "$version"; then modules="$modules php$major-mcrypt"; else modules="$modules php$major-pecl-mcrypt php$major-sodium"; fi \
-    && if [ "$version" = "7.1" ]; then modules="$modules php$major-redis php$major-xdebug"; elif [ "$major" != "5" ]; then modules="$modules php$major-pecl-redis php$major-pecl-xdebug"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$major" /usr/bin/php-fpm; fi \
     && clean

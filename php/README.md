@@ -60,14 +60,6 @@ Tags
 | 7.2         | ![](https://images.microbadger.com/badges/image/minidocks/php:7.2.svg)       |
 | 7.2-nginx   | ![](https://images.microbadger.com/badges/image/minidocks/php:7.2-nginx.svg) |
 | 7.2-intl    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.2-intl.svg)  |
-| 7.1-base    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.1-base.svg)  |
-| 7.1         | ![](https://images.microbadger.com/badges/image/minidocks/php:7.1.svg)       |
-| 7.1-nginx   | ![](https://images.microbadger.com/badges/image/minidocks/php:7.1-nginx.svg) |
-| 7.1-intl    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.1-intl.svg)  |
-| 5.6-base    | ![](https://images.microbadger.com/badges/image/minidocks/php:5.6-base.svg)  |
-| 5.6         | ![](https://images.microbadger.com/badges/image/minidocks/php:5.6.svg)       |
-| 5.6-nginx   | ![](https://images.microbadger.com/badges/image/minidocks/php:5.6-nginx.svg) |
-| 5.6-intl    | ![](https://images.microbadger.com/badges/image/minidocks/php:5.6-intl.svg)  |
 
 See also
 --------
