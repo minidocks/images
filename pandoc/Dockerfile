@@ -1,7 +1,7 @@
 FROM minidocks/lua
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=2.11.4
+ARG version=2.12
 ENV XDG_DATA_HOME=/
 
 RUN wget -O /tmp/pandoc.tar.gz "https://github.com/jgm/pandoc/releases/download/${version}/pandoc-${version}-linux-amd64.tar.gz" \

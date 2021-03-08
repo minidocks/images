@@ -1,34 +1,36 @@
-Pandoc docker image (minidocks/pandoc)
-======================================
+Pandoc docker image ([minidocks/pandoc](https://hub.docker.com/r/minidocks/pandoc))
+===================================================================================
 
 ![](https://framalibre.org/sites/default/files/styles/thumbnail/public/leslogos/pandoc.png)
 
-[Pandoc](https://pandoc.org) is a document converter, widely used as a writing tool (especially by scholars) and as a basis for publishing
-workflows.
+[Pandoc](https://pandoc.org) is a document converter, widely used as a writing
+tool (especially by scholars) and as a basis for publishing workflows.
 
 Extensions
 ----------
 
-All extensions are instaled in `/pandoc` directory. Directory `/home/user/.pandoc` is symlink to `/pandoc`.
+All extensions are instaled in `/pandoc` directory. Directory
+`/home/user/.pandoc` is symlink to `/pandoc`.
 
 ### Lua filters
 
-- https://github.com/pandoc/lua-filters
-- https://github.com/pandocker/pandocker-lua-filters
-- https://github.com/PlushBeaver/pandoc-table-filter
-- https://github.com/jgm/select-meta
-- https://github.com/mitinarseny/panpipe
-- https://github.com/tomncooper/pandoc-gls
-- https://github.com/a-vrma/pandoc-filters
-- https://github.com/jzeneto/pandoc-odt-filters
-- https://github.com/hason/pandoc-filters
-- https://github.com/teoric/pandoc-filters
+-   https://github.com/pandoc/lua-filters
+-   https://github.com/pandocker/pandocker-lua-filters
+-   https://github.com/PlushBeaver/pandoc-table-filter
+-   https://github.com/jgm/select-meta
+-   https://github.com/mitinarseny/panpipe
+-   https://github.com/tomncooper/pandoc-gls
+-   https://github.com/a-vrma/pandoc-filters
+-   https://github.com/jzeneto/pandoc-odt-filters
+-   https://github.com/hason/pandoc-filters
+-   https://github.com/teoric/pandoc-filters
 
 ### Templates
-- [Latex template](https://github.com/Wandmalfarbe/pandoc-latex-template)
-- [Letter template](https://github.com/aaronwolen/pandoc-letter)
-- [Resume template](https://github.com/mszep/pandoc_resume)
-- [Leaflet Template](https://gitlab.com/daamien/pandoc-leaflet-template)
+
+-   [Latex template](https://github.com/Wandmalfarbe/pandoc-latex-template)
+-   [Letter template](https://github.com/aaronwolen/pandoc-letter)
+-   [Resume template](https://github.com/mszep/pandoc_resume)
+-   [Leaflet Template](https://gitlab.com/daamien/pandoc-leaflet-template)
 
 Usage
 -----
@@ -39,8 +41,9 @@ docker run --rm -v `pwd`:/app -w /app minidocks/pandoc http://pandoc.org/MANUAL.
 
 ### Creating a PDF
 
-To produce a pdf pandoc requires a pdf engine (LaTeX, ConTeXt, Weasyprint etc.). We must connect
-containers via the ssh protocol. The easiest solution is to use docker compose.
+To produce a pdf pandoc requires a pdf engine (LaTeX, ConTeXt, Weasyprint etc.).
+We must connect containers via the ssh protocol. The easiest solution is to use
+docker compose.
 
 So create a file `docker-compose.yml` with content:
 ```yaml
@@ -80,7 +83,8 @@ docker-compose run --rm pandoc https://raw.githubusercontent.com/jgm/pandoc/mast
 docker-compose run --rm pandoc https://raw.githubusercontent.com/jgm/pandoc/master/MANUAL.txt -t context -o manual-context.pdf
 ```
 
-It is possible to use custom LaTeX template: 
+It is possible to use custom LaTeX template:
+
 ```bash
 docker-compose run --rm pandoc https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/examples/custom-titlepage/custom-titlepage.md --template eisvogel -o custom-titlepage.pdf
 ```
@@ -94,24 +98,24 @@ docker-compose run --rm pandoc https://raw.githubusercontent.com/mszep/pandoc_re
 Tags
 ----
 
- Tag         | Size
- ----------- | ----
- latest, 2.11 | [![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)](https://microbadger.com/images/minidocks/pandoc)
- 2.11         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.11.svg)](https://microbadger.com/images/minidocks/pandoc:2.11) 
- 2.10         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.10.svg)](https://microbadger.com/images/minidocks/pandoc:2.10)
- 2.9         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.9.svg)](https://microbadger.com/images/minidocks/pandoc:2.9)
- 2.8         | [![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.8.svg)](https://microbadger.com/images/minidocks/pandoc:2.8)
+| Tag             | Size                                                                       |
+|-----------------|----------------------------------------------------------------------------|
+| latest, 2, 2.12 | ![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)      |
+| 2               | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.svg)    |
+| 2.12            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.12.svg) |
+| 2.11            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.11.svg) |
+| 2.10            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.10.svg) |
 
 Related images
 --------------
 
-- [ConTeXt](https://github.com/minidocks/context)
-- [ReLaXed](https://github.com/minidocks/relaxed)
-- [TeXlive](https://github.com/minidocks/texLive)
-- [WeasyPrint](https://github.com/minidocks/weasyprint)
+-   [ConTeXt](https://github.com/minidocks/context)
+-   [ReLaXed](https://github.com/minidocks/relaxed)
+-   [TeXlive](https://github.com/minidocks/texLive)
+-   [WeasyPrint](https://github.com/minidocks/weasyprint)
 
 See also
 --------
 
-- https://github.com/alexeygumirov/pandoc-for-pdf-how-to
-- https://github.com/dalibo/pandocker
+-   https://github.com/alexeygumirov/pandoc-for-pdf-how-to
+-   https://github.com/dalibo/pandocker
