@@ -3,6 +3,7 @@ ARG major=8
 ARG composer1_version=1.10.20
 ARG composer2_version=2.0.11
 ARG blackfire_version=1.51.0
+ARG newrelic_version=9.16.0.295
 
 FROM minidocks/base:3.9 AS v7.2
 
@@ -126,6 +127,16 @@ RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfi
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
     && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
+
+ARG newrelic_version
+
+# NewRelic
+RUN if [ "$major" != "8" ]; then \
+      wget -O /tmp/nr.tar.gz "http://download.newrelic.com/php_agent/archive/${newrelic_version}/newrelic-php5-${newrelic_version}-linux-musl.tar.gz" \
+      && tar -xzf /tmp/nr.tar.gz -C /tmp \
+      && NR_INSTALL_SILENT=1 NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_INITFILE=/tmp/nr NR_INSTALL_DAEMONPATH=/tmp/nr-daemon /tmp/newrelic*/newrelic-install install \
+      && rm -rf /etc/newrelic && clean; \
+    fi
 
 EXPOSE 9000
 
