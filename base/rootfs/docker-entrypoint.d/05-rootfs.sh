@@ -2,7 +2,7 @@
 #
 # Copy rootfs
 #
-# (c) 2018 Martin Hasoň <martin.hason@gmail.com>
+# (c) 2018, 2021 Martin Hasoň <martin.hason@gmail.com>
 
 set -e
 
@@ -12,5 +12,5 @@ if [ -d /mnt/rootfs ]; then
         return
     fi
 
-    cp -rf /mnt/rootfs/. /
+    cp -af /mnt/rootfs/. /
 fi
