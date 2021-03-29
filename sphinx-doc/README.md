@@ -16,12 +16,13 @@ Installed extensions
 
 ### Themes
 
--   [Awesome](https://sphinxawesome.xyz/)
--   [Book](https://sphinx-book-theme.readthedocs.io/en/latest/)
+-   [Awesome](https://sphinxawesome.xyz)
+-   [Book](https://sphinx-book-theme.readthedocs.io/en/latest)
 -   [Documatt](https://gitlab.com/documatt/sphinx-themes)
+-   [Furo](https://pradyunsg.me/furo)
 -   [Material](https://github.com/bashtage/sphinx-material)
 -   [Pallets](https://github.com/pallets/pallets-sphinx-themes)
--   [Press](https://schettino72.github.io/sphinx_press_site/)
+-   [Press](https://schettino72.github.io/sphinx_press_site)
 -   [PyData](https://pydata-sphinx-theme.readthedocs.io/en/latest/index.html)
 -   [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme)
 
@@ -34,6 +35,7 @@ More themes on https://sphinx-themes.org/.
 
 -   [Comments](https://sphinx-comments.readthedocs.io/en/latest/)
 -   [Copy button](https://sphinx-copybutton.readthedocs.io/en/latest/)
+-   [Inline tabs](https://sphinx-inline-tabs.readthedocs.io)
 -   [Kroki](https://github.com/sphinx-contrib/kroki)
 -   [Multiversion](https://github.com/Holzhaus/sphinx-multiversion)
 -   [Panels](https://sphinx-panels.readthedocs.io/en/latest/)

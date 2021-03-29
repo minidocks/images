@@ -20,6 +20,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       \
       sphinx-comments \
       sphinx-copybutton \
+      sphinx-inline-tabs \
       sphinx-multitoc-numbering \
       sphinx-multiversion \
       sphinx-panels \
@@ -36,6 +37,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinxcontrib-programoutput \
       sphinx_gherkindoc \
       \
+      furo \
       Pallets-Sphinx-Themes \
       sphinxawesome-theme \
       sphinx-book-theme \
