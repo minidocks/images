@@ -10,12 +10,12 @@ FreeBSD, Solaris and AIX.
 Tags
 ----
 
-| Tag       | Size                                                                                 |
-|-----------|--------------------------------------------------------------------------------------|
-| latest, 4 | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller.svg)]()       |
-| 3         | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.svg)]()     |
-| 3-py3     | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3-py3.svg)]() |
-| 3-py2     | [![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3-py2.svg)]() |
+| Tag       | Size                                                                             |
+|-----------|----------------------------------------------------------------------------------|
+| latest, 4 | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller.svg)       |
+| 3         | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.svg)     |
+| 3-py3     | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3-py3.svg) |
+| 3-py2     | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3-py2.svg) |
 
 Related images
 --------------

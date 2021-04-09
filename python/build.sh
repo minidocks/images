@@ -21,6 +21,10 @@ versions="
 3.8-packaging;3.8;packaging
 3.8-uwsgi;3.8;uwsgi
 3.8-build;3.8;build;-build
+3.9;3.9
+3.9-packaging;3.9;packaging
+3.9-uwsgi;3.9;uwsgi
+3.9-build;3.9;build;-build
 3;3.8
 3-packaging;3.8;packaging
 3-build;3.8;build;-build
