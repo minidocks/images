@@ -3,14 +3,11 @@ set -e
 
 image="${namespace:-minidocks}/maildev"
 versions="
-0.14;0.14.0
-1.0;1.0.0
-1.1;1.1.0
-latest;1.1.0
+latest
 "
 
 build() {
-    docker build $docker_opts --build-arg maildev_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

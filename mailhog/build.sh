@@ -3,12 +3,11 @@ set -e
 
 image="${namespace:-minidocks}/mailhog"
 versions="
-1.0;1.0.0
-latest;1.0.0
+latest
 "
 
 build() {
-    docker build $docker_opts --build-arg mailhog_version="${2:-python}" -t "$image:$1" "$(dirname $0)"
+    docker build $docker_opts -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

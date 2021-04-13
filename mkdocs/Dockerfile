@@ -8,7 +8,6 @@ FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG mkdocs_version=1.1.2
-ARG mkdocs_material_version=7.0.4
 
 RUN apk add py3-regex && pip install \
       mkdocs==$mkdocs_version \
@@ -40,7 +39,7 @@ RUN apk add py3-regex && pip install \
       mkdocs-cinder \
       mkdocs-ivory \
       mkdocs-kpn \
-      mkdocs-material==$mkdocs_material_version \
+      mkdocs-material \
       mkdocs-rtd-dropdown \
       \
       markdown-include \
