@@ -1,8 +1,0 @@
-# Fulltext index updates
-*/5 * * * * weblate update_index
-
-# Cleanup stale objects
-0 0 * * 0   weblate cleanuptrans
-
-# Commit pending changes
-0 * * * *   weblate commit_pending --all
