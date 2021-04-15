@@ -18,7 +18,7 @@ docker run --rm -v "`pwd`:/app" -w /app minidocks/unpaper --help
 Tags
 ----
 
-| Tag       | Size                                                                         |
-|-----------|------------------------------------------------------------------------------|
-| latest, 6 | [![](https://images.microbadger.com/badges/image/minidocks/unpaper.svg)]()   |
-| 6         | [![](https://images.microbadger.com/badges/image/minidocks/unpaper:6.svg)]() |
+| Tag       | Size                                                                     |
+|-----------|--------------------------------------------------------------------------|
+| latest, 6 | ![](https://images.microbadger.com/badges/image/minidocks/unpaper.svg)   |
+| 6         | ![](https://images.microbadger.com/badges/image/minidocks/unpaper:6.svg) |
