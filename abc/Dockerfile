@@ -47,7 +47,6 @@ COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
 ARG abc2svg_version=1.20.18
 
-RUN apk add npm && npm i -g abc2svg@$abc2svg_version jszip \
-    && apk del npm && rm -rf /usr/lib/node_modules/abc2svg/node_modules && clean
+RUN apk add npm && npm i -g abc2svg@$abc2svg_version jszip && apk del npm && clean
 
 CMD [ "abc2svg" ]

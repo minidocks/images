@@ -9,7 +9,7 @@ CSS that can export to PDF. It aims to support web standards for printing.
 Usage
 -----
 
-```bash
+```shell
 docker run --rm -v `pwd`:/app -w /app minidocks/weasyprint https://weasyprint.org/ weasyprint.pdf
 ```
 
@@ -26,7 +26,7 @@ Tags
 Related images
 --------------
 
-- [MkDocs](https://github.com/minidocks/mkdocs)
-- [Puppeteer](https://github.com/minidocks/puppeteer)
-- [Sphinx](https://github.com/minidocks/sphinx-doc)
-- [Wkhtmltopdf](https://github.com/minidocks/wkhtmltopdf)
+-   [MkDocs](https://github.com/minidocks/mkdocs)
+-   [Puppeteer](https://github.com/minidocks/puppeteer)
+-   [Sphinx](https://github.com/minidocks/sphinx-doc)
+-   [Wkhtmltopdf](https://github.com/minidocks/wkhtmltopdf)
