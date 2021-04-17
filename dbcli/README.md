@@ -1,39 +1,51 @@
-DBCLI docker image (minidocks/dbcli)
-====================================
+DBCLI docker image ([minidocks/dbcli](https://hub.docker.com/r/minidocks/dbcli))
+================================================================================
 
 ![](https://www.dbcli.com/images/avatar.png)
 
-[DBCLI](https://www.dbcli.com/) is Commandline Database Clients with Autocompletion and Syntax Highlighting.
+[DBCLI](https://www.dbcli.com/) is Commandline Database Clients with
+Autocompletion and Syntax Highlighting.
 
 Usage
 -----
 
 Run `pgcli`:
-```bash
+
+```shell
 docker run --rm -it -v `pwd`:/app -w /app minidocks/dbcli:pgcli --help
 ```
 
 Run `mycli`:
-```bash
+
+```shell
 docker run --rm -it -v `pwd`:/app -w /app minidocks/dbcli:mycli --help
 ```
 
 Run `litecli`:
-```bash
+
+```shell
 docker run --rm -it -v `pwd`:/app -w /app minidocks/dbcli:litecli --help
 ```
 
+Run `iredis`:
+
+```shell
+docker run --rm -it -v `pwd`:/app -w /app minidocks/dbcli:iredis --help
+```
+
 Run container with `pgcli`, `mycli` and `litecli`:
-```bash
+
+```shell
 docker run --rm -it -v `pwd`:/app -w /app minidocks/dbcli sh
 ```
 
 Tags
 ----
 
- Tag       | Size
- ---       | ----
- latest    | [![](https://images.microbadger.com/badges/image/minidocks/dbcli.svg)](https://microbadger.com/images/minidocks/dbcli)
- pgcli     | [![](https://images.microbadger.com/badges/image/minidocks/dbcli:pgcli.svg)](https://microbadger.com/images/minidocks/dbcli:pgcli)
- mycli     | [![](https://images.microbadger.com/badges/image/minidocks/dbcli:mycli.svg)](https://microbadger.com/images/minidocks/dbcli:mycli)
- litecli   | [![](https://images.microbadger.com/badges/image/minidocks/dbcli:litecli.svg)](https://microbadger.com/images/minidocks/dbcli:litecli)
+| Tag     | Size                                                                         |
+|---------|------------------------------------------------------------------------------|
+| latest  | ![](https://images.microbadger.com/badges/image/minidocks/dbcli.svg)         |
+| pgcli   | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:pgcli.svg)   |
+| mycli   | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:mycli.svg)   |
+| litecli | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:litecli.svg) |
+| iredis  | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:iredis.svg)  |

@@ -8,4 +8,6 @@ elif [ "${1:0:1}" = '-' ] && type "pgcli" &> /dev/null; then
     set -- pgcli "$@"
 elif [ "${1:0:1}" = '-' ] && type "litecli" &> /dev/null; then
     set -- litecli "$@"
+elif [ "${1:0:1}" = '-' ] && type "iredis" &> /dev/null; then
+    set -- iredis "$@"
 fi
