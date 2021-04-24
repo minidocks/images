@@ -25,7 +25,8 @@ RUN addgroup -g 82 -S www-data && adduser -u 82 -S -s /bin/sh -G www-data www-da
 RUN for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$major-$module"; done \
     && if [ "$version" == "7.2" ]; then libiconv_version="@community"; fi \
     && apk add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
-    && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi
+    && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
+    && if [ ! -f /usr/bin/phar ]; then ln -s "/usr/bin/phar$major" /usr/bin/phar; fi
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
