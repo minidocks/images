@@ -72,7 +72,8 @@ Tags
 
 | Tag        | Size                                                                       |
 |------------|----------------------------------------------------------------------------|
-| latest, 11 | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)    |
+| latest, 12 | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)    |
+| 12         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:12.svg) |
 | 11         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:11.svg) |
 | 10         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:10.svg) |
 | 9          | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:9.svg)  |
