@@ -1,9 +1,9 @@
 ARG version=8.0
 ARG major=8
-ARG composer1_version=1.10.20
-ARG composer2_version=2.0.11
-ARG blackfire_version=1.51.0
-ARG newrelic_version=9.16.0.295
+ARG composer1_version=1.10.22
+ARG composer2_version=2.0.14
+ARG blackfire_version=1.58.0
+ARG newrelic_version=9.17.1.301
 
 FROM minidocks/base:3.9 AS v7.2
 
@@ -99,6 +99,7 @@ RUN for module in \
         zip \
     ; do modules="$modules php$major-$module"; done \
     && if [ "$major" != "8" ]; then modules="$modules php$major-xmlrpc"; fi \
+    && if [ "$major" == "8" ] || [ "$version" == "7.4" ]; then modules="$modules php$major-ffi"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$major" /usr/bin/php-fpm; fi \
     && clean
@@ -132,12 +133,10 @@ RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfi
 ARG newrelic_version
 
 # NewRelic
-RUN if [ "$major" != "8" ]; then \
-      wget -O /tmp/nr.tar.gz "http://download.newrelic.com/php_agent/archive/${newrelic_version}/newrelic-php5-${newrelic_version}-linux-musl.tar.gz" \
-      && tar -xzf /tmp/nr.tar.gz -C /tmp \
-      && NR_INSTALL_SILENT=1 NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_INITFILE=/tmp/nr NR_INSTALL_DAEMONPATH=/tmp/nr-daemon /tmp/newrelic*/newrelic-install install \
-      && rm -rf /etc/newrelic && clean; \
-    fi
+RUN wget -O /tmp/nr.tar.gz "http://download.newrelic.com/php_agent/archive/${newrelic_version}/newrelic-php5-${newrelic_version}-linux-musl.tar.gz" \
+    && tar -xzf /tmp/nr.tar.gz -C /tmp \
+    && NR_INSTALL_SILENT=1 NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_INITFILE=/tmp/nr NR_INSTALL_DAEMONPATH=/tmp/nr-daemon /tmp/newrelic*/newrelic-install install \
+    && rm -rf /etc/newrelic && clean;
 
 EXPOSE 9000
 

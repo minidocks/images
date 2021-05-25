@@ -43,6 +43,7 @@ Modules
 | curl        | ✓   | ✓   | base   |
 | dom         | ✓   | ✓   | latest |
 | exif        | ✓   | ✓   | latest |
+| ffi         |     | ✓   | latest |
 | fileinfo    | ✓   | ✓   | latest |
 | fpm         | ✓   | ✓   | latest |
 | ftp         | ✓   | ✓   | latest |
