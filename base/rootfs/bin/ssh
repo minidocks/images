@@ -18,7 +18,7 @@ load_dropbear_keys()(
         return
     fi
 
-    for type in dss rsa ecdsa; do
+    for type in dss rsa ecdsa ed25519; do
         file="/etc/dropbear/dropbear_${type}_host_key.pub"
         if [ -r "$file" ]; then
             sed "s/^/$1 /" "$file" >> "$HOME/.ssh/known_hosts"

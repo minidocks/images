@@ -23,21 +23,33 @@ get_home()(
     printf '%s' "$home"
 )
 
-if [ -n "$SSH_ID_DROPBEAR" ]; then
+register_id_dropbear()(
+  if [ -n "$SSH_ID_DROPBEAR" ]; then
     su_exec touch "$(get_home)/.ssh/id_dropbear"
     printf '%s\n' "$SSH_ID_DROPBEAR" | tr -d '\r' > "$(get_home)/.ssh/id_dropbear"
-fi
+  fi
+)
 
-if [ -n "$SSH_ID_RSA" ]; then
+register_id_rsa()(
+  if [ -n "$SSH_ID_RSA" ]; then
     su_exec touch "$(get_home)/.ssh/id_rsa"
     printf '%s\n' "$SSH_ID_RSA" | tr -d '\r' > "$(get_home)/.ssh/id_rsa"
     chmod 600 "$(get_home)/.ssh/id_rsa"
     ! su_exec dropbearconvert openssh dropbear "$(get_home)/.ssh/id_rsa" "$(get_home)/.ssh/id_dropbear" 2>/dev/null
-fi
+  fi
+)
 
-su_exec touch "$(get_home)/.ssh/known_hosts"
-if [ -r "/etc/dropbear/ssh_known_hosts" ]; then
-    cat "/etc/dropbear/ssh_known_hosts" >> "$(get_home)/.ssh/known_hosts"
-fi
+register_known_hosts()(
+  if [ -r "/etc/dropbear/ssh_known_hosts" ]; then
+    su_exec touch "$(get_home)/.ssh/known_hosts"
+    if [ -w "$(get_home)/.ssh/known_hosts" ]; then
+        cat "/etc/dropbear/ssh_known_hosts" >> "$(get_home)/.ssh/known_hosts"
+    fi
+  fi
+)
 
-unset -f su_exec get_home
+! register_id_dropbear
+! register_id_rsa
+! register_known_hosts
+
+unset -f su_exec get_home register_id_dropbear register_id_rsa register_known_hosts
