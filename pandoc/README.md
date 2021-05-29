@@ -100,12 +100,11 @@ Tags
 
 | Tag             | Size                                                                       |
 |-----------------|----------------------------------------------------------------------------|
-| latest, 2, 2.13 | ![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)      |
+| latest, 2, 2.14 | ![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)      |
 | 2               | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.svg)    |
+| 2.14            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.14.svg) |
 | 2.13            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.13.svg) |
 | 2.12            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.12.svg) |
-| 2.11            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.11.svg) |
-| 2.10            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.10.svg) |
 
 Related images
 --------------

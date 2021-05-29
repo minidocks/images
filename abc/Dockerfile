@@ -20,7 +20,7 @@ RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v$
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2021.03.30
+ARG abc2midi_version=2021.05.25
 
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
@@ -45,7 +45,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 COPY --from=abcm2ps /tmp/build /
 COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
-ARG abc2svg_version=1.20.19
+ARG abc2svg_version=1.21.0
 
 RUN apk add npm && npm i -g abc2svg@$abc2svg_version jszip && apk del npm && clean
 
