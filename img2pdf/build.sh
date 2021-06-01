@@ -4,8 +4,8 @@ set -e
 image="${namespace:-minidocks}/img2pdf"
 versions="
 0.3;0.3.6
-0.4;0.4.0
-latest;0.4.0
+0.4;0.4.1
+latest;0.4.1
 "
 
 build() {
