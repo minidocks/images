@@ -102,8 +102,10 @@ Tags
 
 | Tag       | Size                                                                            |
 |-----------|---------------------------------------------------------------------------------|
-| latest, 3 | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)       |
+| latest, 4 | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)       |
 | pdf       | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:pdf.svg)   |
+| 4         | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:4.svg)       |
+| 4-pdf     | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:4-pdf.svg)   |
 | 3         | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:3.svg)     |
 | 3-pdf     | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:3-pdf.svg) |
 
