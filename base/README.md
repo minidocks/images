@@ -10,6 +10,7 @@ Alpine repositories
 All images have registered the following apk repositories:
 
 - @edge ([@main](http://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](http://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](http://dl-cdn.alpinelinux.org/alpine/edge/testing))
+- @314 ([@main314](http://dl-cdn.alpinelinux.org/alpine/v3.14/main), [@community314](http://dl-cdn.alpinelinux.org/alpine/v3.14/community))
 - @313 ([@main313](http://dl-cdn.alpinelinux.org/alpine/v3.13/main), [@community313](http://dl-cdn.alpinelinux.org/alpine/v3.13/community))
 - @312 ([@main312](http://dl-cdn.alpinelinux.org/alpine/v3.12/main), [@community312](http://dl-cdn.alpinelinux.org/alpine/v3.12/community))
 - …
@@ -97,8 +98,10 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.13      | ![](https://images.microbadger.com/badges/image/minidocks/base.svg)
+ latest, 3.14      | ![](https://images.microbadger.com/badges/image/minidocks/base.svg)
  edge              | ![](https://images.microbadger.com/badges/image/minidocks/base:edge.svg)
+ 3.14              | ![](https://images.microbadger.com/badges/image/minidocks/base:3.14.svg)
+ build, 3.14-build | ![](https://images.microbadger.com/badges/image/minidocks/base:3.14-build.svg)
  3.13              | ![](https://images.microbadger.com/badges/image/minidocks/base:3.13.svg)
  build, 3.13-build | ![](https://images.microbadger.com/badges/image/minidocks/base:3.13-build.svg)
  3.12              | ![](https://images.microbadger.com/badges/image/minidocks/base:3.12.svg)
