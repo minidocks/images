@@ -4,8 +4,8 @@ set -e
 image="${namespace:-minidocks}/adminer"
 versions="
 4.7;4.7.9
-4;4.8.0
-latest;4.8.0
+4;4.8.1
+latest;4.8.1
 "
 
 build() {
