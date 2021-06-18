@@ -43,9 +43,9 @@ servers Nginx, which offer direct support for uWSGI’s native uwsgi protocol.
 Tags
 ----
 
-| Tag            | Size                                                                                |
-|----------------|-------------------------------------------------------------------------------------|
-| latest, 3, 3.8 | ![](https://img.shields.io/docker/image-size/minidocks/python/latest?style=flat-square&logo=docker&label=size)               |
+| Tag            | Size                                                                                                                  |
+|----------------|-----------------------------------------------------------------------------------------------------------------------|
+| latest, 3, 3.8 | ![](https://img.shields.io/docker/image-size/minidocks/python/latest?style=flat-square&logo=docker&label=size)        |
 | 3, 3.8         | ![](https://img.shields.io/docker/image-size/minidocks/python/3?style=flat-square&logo=docker&label=size)             |
 | 3-packaging    | ![](https://img.shields.io/docker/image-size/minidocks/python/3-packaging?style=flat-square&logo=docker&label=size)   |
 | 3-build        | ![](https://img.shields.io/docker/image-size/minidocks/python/3-build?style=flat-square&logo=docker&label=size)       |
