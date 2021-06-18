@@ -11,6 +11,8 @@ FROM minidocks/base:3.12 AS v3.12
 
 FROM minidocks/base:3.13 AS v3.13
 
+FROM minidocks/base:3.14 AS v3.14
+
 FROM minidocks/base:edge AS vedge
 
 FROM v$base_version AS base
