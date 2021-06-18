@@ -20,7 +20,7 @@ to_json(){
 }
 
 json_escape()(
-    printf "%s" "$1" | sed 's/"/\\"/g'
+    printf "%s" "$1" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g'
 )
 
 http_code(){
@@ -182,6 +182,14 @@ build()(
     fi
 )
 
+# Format Markdown
+#
+# Argument
+# $1: Markdown file
+task_format__markdown()(
+  _docker_run minidocks/pandoc --columns 80 --markdown-headings=setext -t commonmark-smart+pipe_tables -s -o "$1" "$1" && sed -i 's/``` /```/g' "$1" && _pass || _fail
+)
+
 # Build docker image
 #
 # Argument
@@ -270,13 +278,13 @@ task_push()(
 
             response="$(hub "GET" "/repositories/$hub_name/")"
             if [ "$(http_code "$response")" = "404" ]; then
-                printf "Create automatic repository \"%s\"\n" "$hub_name"
+                printf "Create automatic repository \"%s\"" "$hub_name"
                 response="$(hub "POST" "/repositories/" "$data")"
-                assert_http_code "$response" "201"
+                assert_http_code "$response" "201" && _pass || _fail
             else
-                printf "Update automatic repository \"%s\"\n" "$hub_name"
+                printf "Update automatic repository \"%s\"" "$hub_name"
                 response="$(hub "PATCH" "/repositories/$hub_name/" "$data")"
-                assert_http_code "$response" "200"
+                assert_http_code "$response" "200" && _pass || _fail
             fi
 
             response="$(hub_api "GET" "/$namespace/source/?image=$namespace%2F$name")"
@@ -296,10 +304,23 @@ task_push()(
                 assert_http_code "$response" "202"
             fi
 
-            if [ -n "$settings_id" ]; then
-                printf "Trigger build for settings(%s) to sync Dockerfile and README.md\n" "$settings_id"
-                response="$(hub_api "POST" "/$namespace/setting/$settings_id/build/" "$settings")"
-                assert_http_code "$response" "202"
+#            if [ -n "$settings_id" ]; then
+#                printf "Trigger build for settings(%s) to sync Dockerfile and README.md\n" "$settings_id"
+#                response="$(hub_api "POST" "/$namespace/setting/$settings_id/build/" "$settings")"
+#                assert_http_code "$response" "202"
+#            fi
+
+            readme=""
+            if [ -r "$name/README.md" ]; then
+              readme="$(cat "$name/README.md")"
+            elif [ -r "README.md" ]; then
+              readme="$(cat "README.md")"
+            fi
+
+            if [ -n "$readme" ]; then
+              printf "Update README"
+              response="$(hub "PATCH" "/repositories/$hub_name/" "{\"registry\":\"registry-1.docker.io\",\"full_description\":\"$(json_escape "$readme")\"}")"
+              assert_http_code "$response" "200" && _pass || _fail
             fi
 
             for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
