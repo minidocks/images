@@ -19,12 +19,12 @@ Tags
 
 | Tag        | Size                                                                             |
 |------------|----------------------------------------------------------------------------------|
-| latest, 13 | ![](https://images.microbadger.com/badges/image/minidocks/postgres.svg)          |
-| 13         | ![](https://images.microbadger.com/badges/image/minidocks/postgres:12.svg)       |
-| 13-czech   | ![](https://images.microbadger.com/badges/image/minidocks/postgres:12-czech.svg) |
-| 12         | ![](https://images.microbadger.com/badges/image/minidocks/postgres:12.svg)       |
-| 12-czech   | ![](https://images.microbadger.com/badges/image/minidocks/postgres:12-czech.svg) |
-| 11         | ![](https://images.microbadger.com/badges/image/minidocks/postgres:11.svg)       |
-| 11-czech   | ![](https://images.microbadger.com/badges/image/minidocks/postgres:11-czech.svg) |
-| 10         | ![](https://images.microbadger.com/badges/image/minidocks/postgres:10.svg)       |
-| 10-czech   | ![](https://images.microbadger.com/badges/image/minidocks/postgres:10-czech.svg) |
+| latest, 13 | ![](https://img.shields.io/docker/image-size/minidocks/postgres/latest?style=flat-square&logo=docker&label=size)          |
+| 13         | ![](https://img.shields.io/docker/image-size/minidocks/postgres/12?style=flat-square&logo=docker&label=size)       |
+| 13-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/12-czech?style=flat-square&logo=docker&label=size) |
+| 12         | ![](https://img.shields.io/docker/image-size/minidocks/postgres/12?style=flat-square&logo=docker&label=size)       |
+| 12-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/12-czech?style=flat-square&logo=docker&label=size) |
+| 11         | ![](https://img.shields.io/docker/image-size/minidocks/postgres/11?style=flat-square&logo=docker&label=size)       |
+| 11-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/11-czech?style=flat-square&logo=docker&label=size) |
+| 10         | ![](https://img.shields.io/docker/image-size/minidocks/postgres/10?style=flat-square&logo=docker&label=size)       |
+| 10-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/10-czech?style=flat-square&logo=docker&label=size) |

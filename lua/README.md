@@ -25,13 +25,13 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 5.3 | [![](https://images.microbadger.com/badges/image/minidocks/lua.svg)](https://microbadger.com/images/minidocks/lua)
- 5.3         | [![](https://images.microbadger.com/badges/image/minidocks/lua:5.3.svg)](https://microbadger.com/images/minidocks/lua:5.3)
- 5.3-build   | [![](https://images.microbadger.com/badges/image/minidocks/lua:5.3-build.svg)](https://microbadger.com/images/minidocks/lua:5.3-build)
- 5.2         | [![](https://images.microbadger.com/badges/image/minidocks/lua:5.2.svg)](https://microbadger.com/images/minidocks/lua:5.2)
- 5.2-build   | [![](https://images.microbadger.com/badges/image/minidocks/lua:5.2-build.svg)](https://microbadger.com/images/minidocks/lua:5.2-build)
- 5.1         | [![](https://images.microbadger.com/badges/image/minidocks/lua:5.1.svg)](https://microbadger.com/images/minidocks/lua:5.1)
- 5.1-build   | [![](https://images.microbadger.com/badges/image/minidocks/lua:5.1-build.svg)](https://microbadger.com/images/minidocks/lua:5.1-build)
+ latest, 5.3 | ![](https://img.shields.io/docker/image-size/minidocks/lua/latest?style=flat-square&logo=docker&label=size)
+ 5.3         | ![](https://img.shields.io/docker/image-size/minidocks/lua/5.3?style=flat-square&logo=docker&label=size)
+ 5.3-build   | ![](https://img.shields.io/docker/image-size/minidocks/lua/5.3-build?style=flat-square&logo=docker&label=size)
+ 5.2         | ![](https://img.shields.io/docker/image-size/minidocks/lua/5.2?style=flat-square&logo=docker&label=size)
+ 5.2-build   | ![](https://img.shields.io/docker/image-size/minidocks/lua/5.2-build?style=flat-square&logo=docker&label=size)
+ 5.1         | ![](https://img.shields.io/docker/image-size/minidocks/lua/5.1?style=flat-square&logo=docker&label=size)
+ 5.1-build   | ![](https://img.shields.io/docker/image-size/minidocks/lua/5.1-build?style=flat-square&logo=docker&label=size)
 
 Inspiration
 -----------

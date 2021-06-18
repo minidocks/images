@@ -29,6 +29,6 @@ Tags
 
  Tag       | Size
  ---       | ----
- latest, 1 | [![](https://images.microbadger.com/badges/image/minidocks/inkscape.svg)](https://microbadger.com/images/minidocks/inkscape)
- 1         | [![](https://images.microbadger.com/badges/image/minidocks/inkscape:1.svg)](https://microbadger.com/images/minidocks/inkscape:1)
- 0.92      | [![](https://images.microbadger.com/badges/image/minidocks/inkscape:0.92.svg)](https://microbadger.com/images/minidocks/inkscape:0.92)
+ latest, 1 | ![](https://img.shields.io/docker/image-size/minidocks/inkscape/latest?style=flat-square&logo=docker&label=size)
+ 1         | ![](https://img.shields.io/docker/image-size/minidocks/inkscape/1?style=flat-square&logo=docker&label=size)
+ 0.92      | ![](https://img.shields.io/docker/image-size/minidocks/inkscape/0.92?style=flat-square&logo=docker&label=size)

@@ -10,6 +10,6 @@ Tags
 
  Tag         | Size
  ----------- | ----
- latest, 3.7 | [![](https://images.microbadger.com/badges/image/minidocks/rabbitmq.svg)](https://microbadger.com/images/minidocks/rabbitmq)
- 3.7         | [![](https://images.microbadger.com/badges/image/minidocks/rabbitmq:3.7.svg)](https://microbadger.com/images/minidocks/rabbitmq:3.7)
- 3.6         | [![](https://images.microbadger.com/badges/image/minidocks/rabbitmq:3.6.svg)](https://microbadger.com/images/minidocks/rabbitmq:3.6)
+ latest, 3.7 | ![](https://img.shields.io/docker/image-size/minidocks/rabbitmq/latest?style=flat-square&logo=docker&label=size)
+ 3.7         | ![](https://img.shields.io/docker/image-size/minidocks/rabbitmq/3.7?style=flat-square&logo=docker&label=size)
+ 3.6         | ![](https://img.shields.io/docker/image-size/minidocks/rabbitmq/3.6?style=flat-square&logo=docker&label=size)

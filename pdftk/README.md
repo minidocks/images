@@ -15,8 +15,8 @@ Tags
 
  Tag       | Size
  --------- | ----
- latest, 3 | [![](https://images.microbadger.com/badges/image/minidocks/pdftk.svg)](https://microbadger.com/images/minidocks/pdftk)
- 3         | [![](https://images.microbadger.com/badges/image/minidocks/pdftk:3.svg)](https://microbadger.com/images/minidocks/pdftk:3)
+ latest, 3 | ![](https://img.shields.io/docker/image-size/minidocks/pdftk/latest?style=flat-square&logo=docker&label=size)
+ 3         | ![](https://img.shields.io/docker/image-size/minidocks/pdftk/3?style=flat-square&logo=docker&label=size)
 
 Related images
 --------------

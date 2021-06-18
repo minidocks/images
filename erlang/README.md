@@ -11,6 +11,6 @@ Tags
 
 | Tag        | Size                                                                     |
 |------------|--------------------------------------------------------------------------|
-| latest, 23 | ![](https://images.microbadger.com/badges/image/minidocks/erlang.svg)    |
-| 23         | ![](https://images.microbadger.com/badges/image/minidocks/erlang:23.svg) |
-| 22         | ![](https://images.microbadger.com/badges/image/minidocks/erlang:22.svg) |
+| latest, 23 | ![](https://img.shields.io/docker/image-size/minidocks/erlang/latest?style=flat-square&logo=docker&label=size)    |
+| 23         | ![](https://img.shields.io/docker/image-size/minidocks/erlang/23?style=flat-square&logo=docker&label=size) |
+| 22         | ![](https://img.shields.io/docker/image-size/minidocks/erlang/22?style=flat-square&logo=docker&label=size) |

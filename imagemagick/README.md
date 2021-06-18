@@ -19,6 +19,6 @@ Tags
 
  Tag       | Size
  ---       | ----
- latest, 7 | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick.svg)](https://microbadger.com/images/minidocks/imagemagick)
- 7         | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:7.svg)](https://microbadger.com/images/minidocks/imagemagick:7)
- 6         | [![](https://images.microbadger.com/badges/image/minidocks/imagemagick:6.svg)](https://microbadger.com/images/minidocks/imagemagick:6)
+ latest, 7 | ![](https://img.shields.io/docker/image-size/minidocks/imagemagick/latest?style=flat-square&logo=docker&label=size)
+ 7         | ![](https://img.shields.io/docker/image-size/minidocks/imagemagick/7?style=flat-square&logo=docker&label=size)
+ 6         | ![](https://img.shields.io/docker/image-size/minidocks/imagemagick/6?style=flat-square&logo=docker&label=size)

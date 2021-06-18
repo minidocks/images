@@ -18,10 +18,10 @@ Tags
 
 | Tag        | Size                                                                         |
 |------------|------------------------------------------------------------------------------|
-| latest, 52 | ![](https://images.microbadger.com/badges/image/minidocks/weasyprint.svg)    |
-| 52         | ![](https://images.microbadger.com/badges/image/minidocks/weasyprint:52.svg) |
-| 51         | ![](https://images.microbadger.com/badges/image/minidocks/weasyprint:51.svg) |
-| 50         | ![](https://images.microbadger.com/badges/image/minidocks/weasyprint:50.svg) |
+| latest, 52 | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/latest?style=flat-square&logo=docker&label=size)    |
+| 52         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/52?style=flat-square&logo=docker&label=size) |
+| 51         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/51?style=flat-square&logo=docker&label=size) |
+| 50         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/50?style=flat-square&logo=docker&label=size) |
 
 Related images
 --------------

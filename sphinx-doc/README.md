@@ -102,12 +102,12 @@ Tags
 
 | Tag       | Size                                                                            |
 |-----------|---------------------------------------------------------------------------------|
-| latest, 4 | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc.svg)       |
-| pdf       | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:pdf.svg)   |
-| 4         | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:4.svg)       |
-| 4-pdf     | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:4-pdf.svg)   |
-| 3         | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:3.svg)     |
-| 3-pdf     | ![](https://images.microbadger.com/badges/image/minidocks/sphinx-doc:3-pdf.svg) |
+| latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/latest?style=flat-square&logo=docker&label=size)       |
+| pdf       | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/pdf?style=flat-square&logo=docker&label=size)   |
+| 4         | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/4?style=flat-square&logo=docker&label=size)       |
+| 4-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/4-pdf?style=flat-square&logo=docker&label=size)   |
+| 3         | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/3?style=flat-square&logo=docker&label=size)     |
+| 3-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/3-pdf?style=flat-square&logo=docker&label=size) |
 
 Alternatives
 ------------

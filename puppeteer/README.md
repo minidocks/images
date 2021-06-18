@@ -55,8 +55,8 @@ Tags
 
  Tag       | Size
 ---------- | ----
- latest    | [![](https://images.microbadger.com/badges/image/minidocks/puppeteer.svg)](https://microbadger.com/images/minidocks/puppeteer)
- 1.12    | [![](https://images.microbadger.com/badges/image/minidocks/puppeteer:1.12.svg)](https://microbadger.com/images/minidocks/puppeteer:1.12)
+ latest    | ![](https://img.shields.io/docker/image-size/minidocks/puppeteer/latest?style=flat-square&logo=docker&label=size)
+ 1.12    | ![](https://img.shields.io/docker/image-size/minidocks/puppeteer/1.12?style=flat-square&logo=docker&label=size)
 
 Related images
 --------------

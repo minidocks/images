@@ -20,7 +20,7 @@ Tags
 
  Tag    | Size
  ---    | ----
- latest | [![](https://images.microbadger.com/badges/image/minidocks/rclone.svg)](https://microbadger.com/images/minidocks/rclone)
+ latest | ![](https://img.shields.io/docker/image-size/minidocks/rclone/latest?style=flat-square&logo=docker&label=size)
 
 Related images
 --------------

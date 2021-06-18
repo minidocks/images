@@ -44,8 +44,8 @@ Tags
 
 | Tag     | Size                                                                         |
 |---------|------------------------------------------------------------------------------|
-| latest  | ![](https://images.microbadger.com/badges/image/minidocks/dbcli.svg)         |
-| pgcli   | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:pgcli.svg)   |
-| mycli   | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:mycli.svg)   |
-| litecli | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:litecli.svg) |
-| iredis  | ![](https://images.microbadger.com/badges/image/minidocks/dbcli:iredis.svg)  |
+| latest  | ![](https://img.shields.io/docker/image-size/minidocks/dbcli/latest?style=flat-square&logo=docker&label=size)         |
+| pgcli   | ![](https://img.shields.io/docker/image-size/minidocks/dbcli/pgcli?style=flat-square&logo=docker&label=size)   |
+| mycli   | ![](https://img.shields.io/docker/image-size/minidocks/dbcli/mycli?style=flat-square&logo=docker&label=size)   |
+| litecli | ![](https://img.shields.io/docker/image-size/minidocks/dbcli/litecli?style=flat-square&logo=docker&label=size) |
+| iredis  | ![](https://img.shields.io/docker/image-size/minidocks/dbcli/iredis?style=flat-square&logo=docker&label=size)  |

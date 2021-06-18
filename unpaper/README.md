@@ -20,5 +20,5 @@ Tags
 
 | Tag       | Size                                                                     |
 |-----------|--------------------------------------------------------------------------|
-| latest, 6 | ![](https://images.microbadger.com/badges/image/minidocks/unpaper.svg)   |
-| 6         | ![](https://images.microbadger.com/badges/image/minidocks/unpaper:6.svg) |
+| latest, 6 | ![](https://img.shields.io/docker/image-size/minidocks/unpaper/latest?style=flat-square&logo=docker&label=size)   |
+| 6         | ![](https://img.shields.io/docker/image-size/minidocks/unpaper/6?style=flat-square&logo=docker&label=size) |

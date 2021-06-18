@@ -19,5 +19,5 @@ Tags
 
  Tag    | Size
  ---    | ----
- latest | [![](https://images.microbadger.com/badges/image/minidocks/ghostscript.svg)](https://microbadger.com/images/minidocks/ghostscript)
- 9      | [![](https://images.microbadger.com/badges/image/minidocks/ghostscript:9.svg)](https://microbadger.com/images/minidocks/ghostscript:9)
+ latest | ![](https://img.shields.io/docker/image-size/minidocks/ghostscript/latest?style=flat-square&logo=docker&label=size)
+ 9      | ![](https://img.shields.io/docker/image-size/minidocks/ghostscript/9?style=flat-square&logo=docker&label=size)

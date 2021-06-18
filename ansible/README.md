@@ -13,6 +13,6 @@ Tags
 
 | Tag       | Size                                                                     |
 |-----------|--------------------------------------------------------------------------|
-| latest, 3 | ![](https://images.microbadger.com/badges/image/minidocks/ansible.svg)   |
-| 3         | ![](https://images.microbadger.com/badges/image/minidocks/ansible:3.svg) |
-| 2         | ![](https://images.microbadger.com/badges/image/minidocks/ansible:2.svg) |
+| latest, 3 | ![](https://img.shields.io/docker/image-size/minidocks/ansible/latest?style=flat-square&logo=docker&label=size)   |
+| 3         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/3?style=flat-square&logo=docker&label=size) |
+| 2         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/2?style=flat-square&logo=docker&label=size) |

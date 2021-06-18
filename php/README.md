@@ -98,23 +98,23 @@ Tags
 
 | Tag         | Size                                                                         |
 |-------------|------------------------------------------------------------------------------|
-| latest, 8.0 | ![](https://images.microbadger.com/badges/image/minidocks/php.svg)           |
-| 8.0-base    | ![](https://images.microbadger.com/badges/image/minidocks/php:8.0-base.svg)  |
-| 8.0         | ![](https://images.microbadger.com/badges/image/minidocks/php:8.0.svg)       |
-| 8.0-nginx   | ![](https://images.microbadger.com/badges/image/minidocks/php:8.0-nginx.svg) |
-| 8.0-intl    | ![](https://images.microbadger.com/badges/image/minidocks/php:8.0-intl.svg)  |
-| 7.4-base    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.4-base.svg)  |
-| 7.4         | ![](https://images.microbadger.com/badges/image/minidocks/php:7.4.svg)       |
-| 7.4-nginx   | ![](https://images.microbadger.com/badges/image/minidocks/php:7.4-nginx.svg) |
-| 7.4-intl    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.4-intl.svg)  |
-| 7.3-base    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.3-base.svg)  |
-| 7.3         | ![](https://images.microbadger.com/badges/image/minidocks/php:7.3.svg)       |
-| 7.3-nginx   | ![](https://images.microbadger.com/badges/image/minidocks/php:7.3-nginx.svg) |
-| 7.3-intl    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.3-intl.svg)  |
-| 7.2-base    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.2-base.svg)  |
-| 7.2         | ![](https://images.microbadger.com/badges/image/minidocks/php:7.2.svg)       |
-| 7.2-nginx   | ![](https://images.microbadger.com/badges/image/minidocks/php:7.2-nginx.svg) |
-| 7.2-intl    | ![](https://images.microbadger.com/badges/image/minidocks/php:7.2-intl.svg)  |
+| latest, 8.0 | ![](https://img.shields.io/docker/image-size/minidocks/php/latest?style=flat-square&logo=docker&label=size)           |
+| 8.0-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0-base?style=flat-square&logo=docker&label=size)  |
+| 8.0         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0?style=flat-square&logo=docker&label=size)       |
+| 8.0-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0-nginx?style=flat-square&logo=docker&label=size) |
+| 8.0-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0-intl?style=flat-square&logo=docker&label=size)  |
+| 7.4-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.4-base?style=flat-square&logo=docker&label=size)  |
+| 7.4         | ![](https://img.shields.io/docker/image-size/minidocks/php/7.4?style=flat-square&logo=docker&label=size)       |
+| 7.4-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/7.4-nginx?style=flat-square&logo=docker&label=size) |
+| 7.4-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.4-intl?style=flat-square&logo=docker&label=size)  |
+| 7.3-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3-base?style=flat-square&logo=docker&label=size)  |
+| 7.3         | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3?style=flat-square&logo=docker&label=size)       |
+| 7.3-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3-nginx?style=flat-square&logo=docker&label=size) |
+| 7.3-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3-intl?style=flat-square&logo=docker&label=size)  |
+| 7.2-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.2-base?style=flat-square&logo=docker&label=size)  |
+| 7.2         | ![](https://img.shields.io/docker/image-size/minidocks/php/7.2?style=flat-square&logo=docker&label=size)       |
+| 7.2-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/7.2-nginx?style=flat-square&logo=docker&label=size) |
+| 7.2-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.2-intl?style=flat-square&logo=docker&label=size)  |
 
 See also
 --------

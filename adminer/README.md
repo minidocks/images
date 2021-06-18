@@ -10,8 +10,8 @@ Tags
 
 | Tag       | Size                                                                     |
 |-----------|--------------------------------------------------------------------------|
-| latest, 4 | ![](https://images.microbadger.com/badges/image/minidocks/adminer.svg)   |
-| 4         | ![](https://images.microbadger.com/badges/image/minidocks/adminer:4.svg) |
+| latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/adminer/latest?style=flat-square&logo=docker&label=size)   |
+| 4         | ![](https://img.shields.io/docker/image-size/minidocks/adminer/4?style=flat-square&logo=docker&label=size) |
 
 
 

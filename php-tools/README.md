@@ -89,11 +89,11 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 8.0 | [![](https://images.microbadger.com/badges/image/minidocks/php-tools.svg)](https://microbadger.com/images/minidocks/php-tools)
- 8.0         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:8.0.svg)](https://microbadger.com/images/minidocks/php-tools:8.0)
- 7.4         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:7.4.svg)](https://microbadger.com/images/minidocks/php-tools:7.4)
- 7.3         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:7.3.svg)](https://microbadger.com/images/minidocks/php-tools:7.3)
- 7.2         | [![](https://images.microbadger.com/badges/image/minidocks/php-tools:7.2.svg)](https://microbadger.com/images/minidocks/php-tools:7.2)
+ latest, 8.0 | ![](https://img.shields.io/docker/image-size/minidocks/php-tools/latest?style=flat-square&logo=docker&label=size)
+ 8.0         | ![](https://img.shields.io/docker/image-size/minidocks/php-tools/8.0?style=flat-square&logo=docker&label=size)
+ 7.4         | ![](https://img.shields.io/docker/image-size/minidocks/php-tools/7.4?style=flat-square&logo=docker&label=size)
+ 7.3         | ![](https://img.shields.io/docker/image-size/minidocks/php-tools/7.3?style=flat-square&logo=docker&label=size)
+ 7.2         | ![](https://img.shields.io/docker/image-size/minidocks/php-tools/7.2?style=flat-square&logo=docker&label=size)
 
 Alternatives
 ------------

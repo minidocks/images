@@ -35,4 +35,4 @@ Tags
 
 | Tag    | Size                                                                   |
 |--------|------------------------------------------------------------------------|
-| latest | ![](https://images.microbadger.com/badges/image/minidocks/poppler.svg) |
+| latest | ![](https://img.shields.io/docker/image-size/minidocks/poppler/latest?style=flat-square&logo=docker&label=size) |

@@ -15,5 +15,5 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 0.9 | [![](https://images.microbadger.com/badges/image/minidocks/svgcleaner.svg)](https://microbadger.com/images/minidocks/svgcleaner)
- 0.9         | [![](https://images.microbadger.com/badges/image/minidocks/svgcleaner:0.9.svg)](https://microbadger.com/images/minidocks/svgcleaner:0.9)
+ latest, 0.9 | ![](https://img.shields.io/docker/image-size/minidocks/svgcleaner/latest?style=flat-square&logo=docker&label=size)
+ 0.9         | ![](https://img.shields.io/docker/image-size/minidocks/svgcleaner/0.9?style=flat-square&logo=docker&label=size)

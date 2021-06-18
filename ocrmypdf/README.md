@@ -72,11 +72,11 @@ Tags
 
 | Tag        | Size                                                                       |
 |------------|----------------------------------------------------------------------------|
-| latest, 12 | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf.svg)    |
-| 12         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:12.svg) |
-| 11         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:11.svg) |
-| 10         | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:10.svg) |
-| 9          | ![](https://images.microbadger.com/badges/image/minidocks/ocrmypdf:9.svg)  |
+| latest, 12 | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/latest?style=flat-square&logo=docker&label=size)    |
+| 12         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/12?style=flat-square&logo=docker&label=size) |
+| 11         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/11?style=flat-square&logo=docker&label=size) |
+| 10         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/10?style=flat-square&logo=docker&label=size) |
+| 9          | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/9?style=flat-square&logo=docker&label=size)  |
 
 Related images
 --------------

@@ -49,6 +49,6 @@ Tags
 
  Tag          | Size
  ---          | ----
- latest, 2.10 | [![](https://images.microbadger.com/badges/image/minidocks/gimp.svg)](https://microbadger.com/images/minidocks/gimp)
- 2.10         | [![](https://images.microbadger.com/badges/image/minidocks/gimp:2.10.svg)](https://microbadger.com/images/minidocks/gimp:2.10)
- 2.8          | [![](https://images.microbadger.com/badges/image/minidocks/gimp:2.8.svg)](https://microbadger.com/images/minidocks/gimp:2.8)
+ latest, 2.10 | ![](https://img.shields.io/docker/image-size/minidocks/gimp/latest?style=flat-square&logo=docker&label=size)
+ 2.10         | ![](https://img.shields.io/docker/image-size/minidocks/gimp/2.10?style=flat-square&logo=docker&label=size)
+ 2.8          | ![](https://img.shields.io/docker/image-size/minidocks/gimp/2.8?style=flat-square&logo=docker&label=size)

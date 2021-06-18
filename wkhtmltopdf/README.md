@@ -20,8 +20,8 @@ Tags
 
 | Tag          | Size                                                                            |
 |--------------|---------------------------------------------------------------------------------|
-| latest, 0.12 | ![](https://images.microbadger.com/badges/image/minidocks/wkhtmltopdf.svg)      |
-| 0.12         | ![](https://images.microbadger.com/badges/image/minidocks/wkhtmltopdf:0.12.svg) |
+| latest, 0.12 | ![](https://img.shields.io/docker/image-size/minidocks/wkhtmltopdf/latest?style=flat-square&logo=docker&label=size)      |
+| 0.12         | ![](https://img.shields.io/docker/image-size/minidocks/wkhtmltopdf/0.12?style=flat-square&logo=docker&label=size) |
 
 Related images
 --------------

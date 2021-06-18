@@ -18,5 +18,5 @@ Tags
 
  Tag       | Size
  ---       | ----
- latest, 2 | [![](https://images.microbadger.com/badges/image/minidocks/graphviz.svg)](https://microbadger.com/images/minidocks/graphviz)
- 2         | [![](https://images.microbadger.com/badges/image/minidocks/graphviz:2.svg)](https://microbadger.com/images/minidocks/graphviz:2)
+ latest, 2 | ![](https://img.shields.io/docker/image-size/minidocks/graphviz/latest?style=flat-square&logo=docker&label=size)
+ 2         | ![](https://img.shields.io/docker/image-size/minidocks/graphviz/2?style=flat-square&logo=docker&label=size)

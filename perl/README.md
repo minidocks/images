@@ -10,5 +10,5 @@ Tags
 
  Tag    | Size
  ---    | ----
- latest | [![](https://images.microbadger.com/badges/image/minidocks/perl.svg)](https://microbadger.com/images/minidocks/perl)
- 5      | [![](https://images.microbadger.com/badges/image/minidocks/perl:5.svg)](https://microbadger.com/images/minidocks/perl:5)
+ latest | ![](https://img.shields.io/docker/image-size/minidocks/perl/latest?style=flat-square&logo=docker&label=size)
+ 5      | ![](https://img.shields.io/docker/image-size/minidocks/perl/5?style=flat-square&logo=docker&label=size)

@@ -12,10 +12,10 @@ Tags
 
 | Tag       | Size                                                                             |
 |-----------|----------------------------------------------------------------------------------|
-| latest, 4 | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller.svg)       |
-| 3         | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3.svg)     |
-| 3-py3     | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3-py3.svg) |
-| 3-py2     | ![](https://images.microbadger.com/badges/image/minidocks/pyinstaller:3-py2.svg) |
+| latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/latest?style=flat-square&logo=docker&label=size)       |
+| 3         | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/3?style=flat-square&logo=docker&label=size)     |
+| 3-py3     | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/3-py3?style=flat-square&logo=docker&label=size) |
+| 3-py2     | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/3-py2?style=flat-square&logo=docker&label=size) |
 
 Related images
 --------------

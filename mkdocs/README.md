@@ -106,11 +106,11 @@ Tags
 
 | Tag         | Size                                                                          |
 |-------------|-------------------------------------------------------------------------------|
-| latest, 1.1 | ![](https://images.microbadger.com/badges/image/minidocks/mkdocs.svg)         |
-| 1           | ![](https://images.microbadger.com/badges/image/minidocks/mkdocs:1.svg)       |
-| 1-pdf       | ![](https://images.microbadger.com/badges/image/minidocks/mkdocs:1-pdf.svg)   |
-| 1.1         | ![](https://images.microbadger.com/badges/image/minidocks/mkdocs:1.1.svg)     |
-| 1.1-pdf     | ![](https://images.microbadger.com/badges/image/minidocks/mkdocs:1.1-pdf.svg) |
+| latest, 1.1 | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/latest?style=flat-square&logo=docker&label=size)         |
+| 1           | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1?style=flat-square&logo=docker&label=size)       |
+| 1-pdf       | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1-pdf?style=flat-square&logo=docker&label=size)   |
+| 1.1         | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1.1?style=flat-square&logo=docker&label=size)     |
+| 1.1-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1.1-pdf?style=flat-square&logo=docker&label=size) |
 
 Alternatives
 ------------

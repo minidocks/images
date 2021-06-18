@@ -20,4 +20,4 @@ Tags
 
  Tag    | Size
  ---    | ----
- latest | [![](https://images.microbadger.com/badges/image/minidocks/htmldiff.svg)](https://microbadger.com/images/minidocks/htmldiff)
+ latest | ![](https://img.shields.io/docker/image-size/minidocks/htmldiff/latest?style=flat-square&logo=docker&label=size)

@@ -13,6 +13,6 @@ Tags
 
  Tag       | Size
  ---       | ----
- latest, 5 | [![](https://images.microbadger.com/badges/image/minidocks/redis.svg)](https://microbadger.com/images/minidocks/redis)
- 5         | [![](https://images.microbadger.com/badges/image/minidocks/redis:5.svg)](https://microbadger.com/images/minidocks/redis:5)
- 4         | [![](https://images.microbadger.com/badges/image/minidocks/redis:4.svg)](https://microbadger.com/images/minidocks/redis:4)
+ latest, 5 | ![](https://img.shields.io/docker/image-size/minidocks/redis/latest?style=flat-square&logo=docker&label=size)
+ 5         | ![](https://img.shields.io/docker/image-size/minidocks/redis/5?style=flat-square&logo=docker&label=size)
+ 4         | ![](https://img.shields.io/docker/image-size/minidocks/redis/4?style=flat-square&logo=docker&label=size)

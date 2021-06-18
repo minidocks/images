@@ -20,4 +20,4 @@ Tags
 
 | Tag    | Size                                                                |
 |--------|---------------------------------------------------------------------|
-| latest | ![](https://images.microbadger.com/badges/image/minidocks/lftp.svg) |
+| latest | ![](https://img.shields.io/docker/image-size/minidocks/lftp/latest?style=flat-square&logo=docker&label=size) |

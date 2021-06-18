@@ -52,8 +52,8 @@ Tags
 
 | Tag       | Size                                                                     |
 |-----------|--------------------------------------------------------------------------|
-| latest, 2 | [![](https://images.microbadger.com/badges/image/minidocks/git.svg)]()   |
-| 2         | [![](https://images.microbadger.com/badges/image/minidocks/git:2.svg)]() |
+| latest, 2 | ![](https://img.shields.io/docker/image-size/minidocks/git/latest?style=flat-square&logo=docker&label=size)   |
+| 2         | ![](https://img.shields.io/docker/image-size/minidocks/git/2?style=flat-square&logo=docker&label=size) |
 
 Alternatives
 ------------

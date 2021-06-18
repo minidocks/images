@@ -100,11 +100,11 @@ Tags
 
 | Tag             | Size                                                                       |
 |-----------------|----------------------------------------------------------------------------|
-| latest, 2, 2.14 | ![](https://images.microbadger.com/badges/image/minidocks/pandoc.svg)      |
-| 2               | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.svg)    |
-| 2.14            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.14.svg) |
-| 2.13            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.13.svg) |
-| 2.12            | ![](https://images.microbadger.com/badges/image/minidocks/pandoc:2.12.svg) |
+| latest, 2, 2.14 | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/latest?style=flat-square&logo=docker&label=size)      |
+| 2               | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2?style=flat-square&logo=docker&label=size)    |
+| 2.14            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.14?style=flat-square&logo=docker&label=size) |
+| 2.13            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.13?style=flat-square&logo=docker&label=size) |
+| 2.12            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.12?style=flat-square&logo=docker&label=size) |
 
 Related images
 --------------

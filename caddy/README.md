@@ -10,4 +10,4 @@ Tags
 
  Tag    | Size
  ---    | ----
- latest | [![](https://images.microbadger.com/badges/image/minidocks/caddy.svg)](https://microbadger.com/images/minidocks/caddy)
+ latest | ![](https://img.shields.io/docker/image-size/minidocks/caddy/latest?style=flat-square&logo=docker&label=size)

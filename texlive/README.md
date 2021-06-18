@@ -32,17 +32,17 @@ Tags
 
 | Tag           | Size                                                                            |
 |---------------|---------------------------------------------------------------------------------|
-| latest, basic | ![](https://images.microbadger.com/badges/image/minidocks/texlive.svg)          |
-| basic         | ![](https://images.microbadger.com/badges/image/minidocks/texlive:basic.svg)    |
-| small         | ![](https://images.microbadger.com/badges/image/minidocks/texlive:small.svg)    |
-| gregorio      | ![](https://images.microbadger.com/badges/image/minidocks/texlive:gregorio.svg) |
-| context       | ![](https://images.microbadger.com/badges/image/minidocks/texlive:context.svg)  |
-| medium        | ![](https://images.microbadger.com/badges/image/minidocks/texlive:medium.svg)   |
-| full          | ![](https://images.microbadger.com/badges/image/minidocks/texlive:full.svg)     |
-| 2021          | ![](https://images.microbadger.com/badges/image/minidocks/texlive:2021.svg)     |
-| 2020          | ![](https://images.microbadger.com/badges/image/minidocks/texlive:2020.svg)     |
-| 2019          | ![](https://images.microbadger.com/badges/image/minidocks/texlive:2019.svg)     |
-| 2018          | ![](https://images.microbadger.com/badges/image/minidocks/texlive:2018.svg)     |
+| latest, basic | ![](https://img.shields.io/docker/image-size/minidocks/texlive/latest?style=flat-square&logo=docker&label=size)          |
+| basic         | ![](https://img.shields.io/docker/image-size/minidocks/texlive/basic?style=flat-square&logo=docker&label=size)    |
+| small         | ![](https://img.shields.io/docker/image-size/minidocks/texlive/small?style=flat-square&logo=docker&label=size)    |
+| gregorio      | ![](https://img.shields.io/docker/image-size/minidocks/texlive/gregorio?style=flat-square&logo=docker&label=size) |
+| context       | ![](https://img.shields.io/docker/image-size/minidocks/texlive/context?style=flat-square&logo=docker&label=size)  |
+| medium        | ![](https://img.shields.io/docker/image-size/minidocks/texlive/medium?style=flat-square&logo=docker&label=size)   |
+| full          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/full?style=flat-square&logo=docker&label=size)     |
+| 2021          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2021?style=flat-square&logo=docker&label=size)     |
+| 2020          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2020?style=flat-square&logo=docker&label=size)     |
+| 2019          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2019?style=flat-square&logo=docker&label=size)     |
+| 2018          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2018?style=flat-square&logo=docker&label=size)     |
 
 Related images
 --------------

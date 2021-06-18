@@ -19,8 +19,8 @@ Tags
 
  Tag       | Size
  ---       | ----
- latest, 3 | [![](https://images.microbadger.com/badges/image/minidocks/rsync.svg)](https://microbadger.com/images/minidocks/rsync)
- 3         | [![](https://images.microbadger.com/badges/image/minidocks/rsync:3.svg)](https://microbadger.com/images/minidocks/rsync:3)
+ latest, 3 | ![](https://img.shields.io/docker/image-size/minidocks/rsync/latest?style=flat-square&logo=docker&label=size)
+ 3         | ![](https://img.shields.io/docker/image-size/minidocks/rsync/3?style=flat-square&logo=docker&label=size)
 
 Related images
 --------------

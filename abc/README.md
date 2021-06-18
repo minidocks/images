@@ -19,7 +19,7 @@ Installed programs
 Usage
 -----
 
-```
+```shell
 docker run --rm -it -v "`pwd`:/app" -w /app minidocks/abc abc2svg /usr/local/share/doc/abcm2ps/examples/sample.abc
 ```
 
@@ -28,4 +28,4 @@ Tags
 
  Tag    | Size
  ---    | ----
- latest | [![](https://images.microbadger.com/badges/image/minidocks/abc.svg)](https://microbadger.com/images/minidocks/abc)
+ latest | ![](https://img.shields.io/docker/image-size/minidocks/abc/latest?style=flat-square&logo=docker&label=size)

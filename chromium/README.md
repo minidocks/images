@@ -18,8 +18,8 @@ Tags
 
  Tag       | Size
  ---       | ----
- latest    | [![](https://images.microbadger.com/badges/image/minidocks/chromium.svg)](https://microbadger.com/images/minidocks/chromium)
- webdriver | [![](https://images.microbadger.com/badges/image/minidocks/chromium:webdriver.svg)](https://microbadger.com/images/minidocks/chromium:webdriver)
+ latest    | ![](https://img.shields.io/docker/image-size/minidocks/chromium/latest?style=flat-square&logo=docker&label=size)
+ webdriver | ![](https://img.shields.io/docker/image-size/minidocks/chromium/webdriver?style=flat-square&logo=docker&label=size)
 
 Related images
 --------------

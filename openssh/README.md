@@ -19,7 +19,7 @@ Tags
 
  Tag          | Size
  ---          | ----
- latest, 8    | [![](https://images.microbadger.com/badges/image/minidocks/openssh.svg)](https://microbadger.com/images/minidocks/openssh)
- 8            | [![](https://images.microbadger.com/badges/image/minidocks/openssh:8.svg)](https://microbadger.com/images/minidocks/openssh:8)
- 7            | [![](https://images.microbadger.com/badges/image/minidocks/openssh:7.svg)](https://microbadger.com/images/minidocks/openssh:7)
+ latest, 8    | ![](https://img.shields.io/docker/image-size/minidocks/openssh/latest?style=flat-square&logo=docker&label=size)
+ 8            | ![](https://img.shields.io/docker/image-size/minidocks/openssh/8?style=flat-square&logo=docker&label=size)
+ 7            | ![](https://img.shields.io/docker/image-size/minidocks/openssh/7?style=flat-square&logo=docker&label=size)
 

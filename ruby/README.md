@@ -11,8 +11,8 @@ Tags
 
  Tag         | Size
  ---         | ----
- latest, 2.6 | [![](https://images.microbadger.com/badges/image/minidocks/ruby.svg)](https://microbadger.com/images/minidocks/ruby)
- 2.6         | [![](https://images.microbadger.com/badges/image/minidocks/ruby:2.6.svg)](https://microbadger.com/images/minidocks/ruby:2.6)
- 2.5         | [![](https://images.microbadger.com/badges/image/minidocks/ruby:2.5.svg)](https://microbadger.com/images/minidocks/ruby:2.5)
- 2.4         | [![](https://images.microbadger.com/badges/image/minidocks/ruby:2.4.svg)](https://microbadger.com/images/minidocks/ruby:2.4)
+ latest, 2.6 | ![](https://img.shields.io/docker/image-size/minidocks/ruby/latest?style=flat-square&logo=docker&label=size)
+ 2.6         | ![](https://img.shields.io/docker/image-size/minidocks/ruby/2.6?style=flat-square&logo=docker&label=size)
+ 2.5         | ![](https://img.shields.io/docker/image-size/minidocks/ruby/2.5?style=flat-square&logo=docker&label=size)
+ 2.4         | ![](https://img.shields.io/docker/image-size/minidocks/ruby/2.4?style=flat-square&logo=docker&label=size)
 

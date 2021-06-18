@@ -49,10 +49,10 @@ Tags
 
  Tag          | Size
  ---          | ----
- latest, beta | [![](https://images.microbadger.com/badges/image/minidocks/context.svg)](https://microbadger.com/images/minidocks/context)
- beta         | [![](https://images.microbadger.com/badges/image/minidocks/context:beta.svg)](https://microbadger.com/images/minidocks/context:beta)
- current      | [![](https://images.microbadger.com/badges/image/minidocks/context:current.svg)](https://microbadger.com/images/minidocks/context:current)
- lmtx         | [![](https://images.microbadger.com/badges/image/minidocks/context:lmtx.svg)](https://microbadger.com/images/minidocks/context:lmtx)
+ latest, beta | ![](https://img.shields.io/docker/image-size/minidocks/context/latest?style=flat-square&logo=docker&label=size)
+ beta         | ![](https://img.shields.io/docker/image-size/minidocks/context/beta?style=flat-square&logo=docker&label=size)
+ current      | ![](https://img.shields.io/docker/image-size/minidocks/context/current?style=flat-square&logo=docker&label=size)
+ lmtx         | ![](https://img.shields.io/docker/image-size/minidocks/context/lmtx?style=flat-square&logo=docker&label=size)
 
 Related images
 --------------

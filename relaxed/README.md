@@ -53,7 +53,7 @@ Tags
 
  Tag       | Size
  ---       | ----
- latest    | [![](https://images.microbadger.com/badges/image/minidocks/relaxed.svg)](https://microbadger.com/images/minidocks/relaxed)
+ latest    | ![](https://img.shields.io/docker/image-size/minidocks/relaxed/latest?style=flat-square&logo=docker&label=size)
 
 Related images
 --------------
