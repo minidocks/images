@@ -334,12 +334,12 @@ task_push()(
 # Build image via github actions
 task_github__build()(
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
-    task_build "$REPOSITORY_NAME" --dir "."
+    task_build "$REPOSITORY_NAME" --dir "." $@
 )
 
 # Push docker image via github actions
 task_github__push()(
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
-    task_push "$REPOSITORY_NAME"
+    task_push "$REPOSITORY_NAME" $@
 )
