@@ -7,7 +7,7 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG mkdocs_version=1.1.2
+ARG mkdocs_version=1.2.1
 
 RUN apk add py3-regex && pip install \
       mkdocs==$mkdocs_version \
