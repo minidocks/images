@@ -343,3 +343,11 @@ task_github__push()(
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
     task_push "$REPOSITORY_NAME" $@
 )
+
+# Build and push docker multi-platform image via github actions
+task_github__build_and_push()(
+    echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
+    REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+    task_push "$REPOSITORY_NAME"
+    task_build "$REPOSITORY_NAME" --dir "." --push --platform=linux/amd64,linux/arm64
+)
