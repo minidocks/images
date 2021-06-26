@@ -9,7 +9,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG mkdocs_version=1.2.1
 
-RUN apk add py3-regex && pip install \
+RUN apk add py3-regex py3-pynacl && pip install \
       mkdocs==$mkdocs_version \
       \
       mkdocs-abs-rel-plugin \
