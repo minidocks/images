@@ -33,6 +33,7 @@ latest;3.9
 "
 
 build() {
+    IFS=" "
     docker buildx build $docker_opts --target "${3:-latest}" --build-arg suffix="${4:-}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 

@@ -259,13 +259,13 @@ task_split()(
     rm -rf .repo
 )
 
-# Push docker image to https://hub.docker.com
-task_push()(
+# Sync docker hub https://hub.docker.com with repository
+task_sync()(
     for name in ${1:-$(lsdir)}; do
         for namespace in $HUB_NAMESPACE; do
             hub_name="$namespace/$name"
 
-            _ansi --yellow --nl "Push docker image $hub_name"
+            _ansi --yellow --nl "Synchronize docker hub $hub_name"
 
             base_data="$(to_json "channel=Stable&autotests=SOURCE_ONLY&build_in_farm=true&repo_links=false&owner=$GIT_NAMESPACE&provider=github&repository=$name")"
             settings="$(to_json "source_type=Branch&tag=latest&source_name=master&autobuild=false&nocache=true&dockerfile=Dockerfile&build_context=/")";
@@ -322,13 +322,21 @@ task_push()(
               response="$(hub "PATCH" "/repositories/$hub_name/" "{\"registry\":\"registry-1.docker.io\",\"full_description\":\"$(json_escape "$readme")\"}")"
               assert_http_code "$response" "200" && _pass || _fail
             fi
-
-            for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
-                _println " - $hub_name:$version"
-                docker push "$hub_name:$version"
-            done
         done
     done
+)
+
+# Push docker image to https://hub.docker.com
+task_push()(
+  for name in ${1:-$(lsdir)}; do
+    for namespace in $HUB_NAMESPACE; do
+      hub_name="$namespace/$name"
+      for version in $(docker image ls --format "{{.Tag}}" "$hub_name" | grep -v 'none'); do
+          _println " - $hub_name:$version"
+          docker push "$hub_name:$version"
+      done
+    done
+  done
 )
 
 # Build image via github actions
@@ -341,6 +349,7 @@ task_github__build()(
 task_github__push()(
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
+    task_sync "$REPOSITORY_NAME" $@
     task_push "$REPOSITORY_NAME" $@
 )
 
@@ -348,6 +357,6 @@ task_github__push()(
 task_github__build_and_push()(
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
-    task_push "$REPOSITORY_NAME"
+    task_sync "$REPOSITORY_NAME"
     task_build "$REPOSITORY_NAME" --dir "." --push --platform=linux/amd64,linux/arm64
 )
