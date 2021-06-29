@@ -23,7 +23,8 @@ latest;8.0
 "
 
 build() {
-    docker build $docker_opts --target="${3:-latest}" --build-arg major="${2%%.*}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    IFS=" "
+    docker buildx $docker_opts --target="${3:-latest}" --build-arg major="${2%%.*}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

@@ -1,8 +1,8 @@
 ARG version=8.0
 ARG major=8
 ARG composer1_version=1.10.22
-ARG composer2_version=2.0.14
-ARG blackfire_version=1.58.0
+ARG composer2_version=2.1.3
+ARG blackfire_version=1.62.0
 ARG newrelic_version=9.17.1.301
 
 FROM minidocks/base:3.9 AS v7.2
@@ -122,10 +122,11 @@ ENV PHP_EXT_XDEBUG=0 \
     PHP_XDEBUG__IDEKEY=PHPSTORM \
     RAWEXEC="$RAWEXEC php-fpm php-fpm$major"
 
+ARG TARGETARCH
 ARG blackfire_version
 
 # Blackfire
-RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfire.io/binaries/blackfire-php/${blackfire_version}/blackfire-php-alpine_amd64-php-${version/./}.so \
+RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfire.io/binaries/blackfire-php/${blackfire_version}/blackfire-php-alpine_${TARGETARCH}-php-${version/./}.so \
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
     && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
