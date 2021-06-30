@@ -1,11 +1,12 @@
-ConTeXt standalone docker image (minidocks/context)
-===================================================
+ConTeXt standalone docker image ([minidocks/context](https://hub.docker.com/r/minidocks/python))
+================================================================================================
 
 ![](https://wiki.contextgarden.net/skins/common/images/context/context_logo_inv.png?6c748)
 
-[ConTeXt](https://wiki.contextgarden.net) is a document engineering system based on TeX,
-a typesetting system and programming language to typeset and produce documents. This
-system is easy to use and enables you to make complex paper and electronic documents.
+[ConTeXt](https://wiki.contextgarden.net) is a document engineering system based
+on TeX, a typesetting system and programming language to typeset and produce
+documents. This system is easy to use and enables you to make complex paper and
+electronic documents.
 
 Usage
 -----
@@ -14,10 +15,12 @@ Usage
 docker run --rm -v `pwd`:/app -w /app minidocks/context --help
 ```
 
-If we want to use an another tool (e.g. Inkscape for convert svg image to pdf), we must connect
-two containers via the ssh protocol. The easiest solution is to use docker compose.
+If we want to use an another tool (e.g. Inkscape for convert svg image to pdf),
+we must connect two containers via the ssh protocol. The easiest solution is to
+use docker compose.
 
 So create a file `docker-compose.yml` with content:
+
 ```yaml
 version: '3.1'
 services:
@@ -40,6 +43,7 @@ services:
 ```
 
 And in the same directory run command:
+
 ```bash
 docker-compose run --rm context --help
 ```
@@ -47,14 +51,20 @@ docker-compose run --rm context --help
 Tags
 ----
 
- Tag          | Size
- ---          | ----
- latest, beta | ![](https://img.shields.io/docker/image-size/minidocks/context/latest?style=flat-square&logo=docker&label=size)
- beta         | ![](https://img.shields.io/docker/image-size/minidocks/context/beta?style=flat-square&logo=docker&label=size)
- current      | ![](https://img.shields.io/docker/image-size/minidocks/context/current?style=flat-square&logo=docker&label=size)
- lmtx         | ![](https://img.shields.io/docker/image-size/minidocks/context/lmtx?style=flat-square&logo=docker&label=size)
+| Tag                | Size                                                                                                                        |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| latest, lmtx       | ![](https://img.shields.io/docker/image-size/minidocks/context/latest?style=flat-square&logo=docker&label=size)             |
+| lmtx               | ![](https://img.shields.io/docker/image-size/minidocks/context/lmtx?style=flat-square&logo=docker&label=size)               |
+| lmtx-with-fonts    | ![](https://img.shields.io/docker/image-size/minidocks/context/lmtx-with-fonts?style=flat-square&logo=docker&label=size)    |
+| lmtx-with-docs     | ![](https://img.shields.io/docker/image-size/minidocks/context/lmtx-with-docs?style=flat-square&logo=docker&label=size)     |
+| beta               | ![](https://img.shields.io/docker/image-size/minidocks/context/beta?style=flat-square&logo=docker&label=size)               |
+| beta-with-fonts    | ![](https://img.shields.io/docker/image-size/minidocks/context/beta-with-fonts?style=flat-square&logo=docker&label=size)    |
+| beta-with-docs     | ![](https://img.shields.io/docker/image-size/minidocks/context/beta-with-docs?style=flat-square&logo=docker&label=size)     |
+| current            | ![](https://img.shields.io/docker/image-size/minidocks/context/current?style=flat-square&logo=docker&label=size)            |
+| current-with-fonts | ![](https://img.shields.io/docker/image-size/minidocks/context/current-with-fonts?style=flat-square&logo=docker&label=size) |
+| current-with-docs  | ![](https://img.shields.io/docker/image-size/minidocks/context/current-with-docs?style=flat-square&logo=docker&label=size)  |
 
 Related images
 --------------
 
-- [TeX Live](https://github.com/minidocks/texlive)
+-   [TeX Live](https://github.com/minidocks/texlive)
