@@ -9,6 +9,7 @@ latest;1.2.1;
 "
 
 build() {
+    IFS=" "
     docker buildx build $docker_opts --target="${4:-latest}" --build-arg base_image="${3:-python}" --build-arg mkdocs_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 

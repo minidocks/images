@@ -17,7 +17,8 @@ $versions
 "; done
 
 build() {
-    docker build $docker_opts --target "${5:-latest}" --build-arg lang="$4" --build-arg repository="$3" --build-arg data_version="$2" -t "$image:$1" "$(dirname $0)"
+    IFS=" "
+    docker buildx build $docker_opts --target "${5:-latest}" --build-arg lang="$4" --build-arg repository="$3" --build-arg data_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

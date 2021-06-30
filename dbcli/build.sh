@@ -10,7 +10,8 @@ latest
 "
 
 build() {
-    docker build $docker_opts --target "${2:-latest}" -t "$image:$1" "$(dirname $0)"
+    IFS=" "
+    docker buildx build $docker_opts --target "${2:-latest}" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

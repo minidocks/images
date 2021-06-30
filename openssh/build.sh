@@ -9,7 +9,8 @@ latest;8
 "
 
 build() {
-    docker build $docker_opts --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    IFS=" "
+    docker buildx build $docker_opts --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

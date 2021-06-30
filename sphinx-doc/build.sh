@@ -12,7 +12,8 @@ latest;4.0.2
 "
 
 build() {
-    docker build $docker_opts --target="${4:-latest}" --build-arg base_image="${3:-python}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    IFS=" "
+    docker buildx build $docker_opts --target="${4:-latest}" --build-arg base_image="${3:-python}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
