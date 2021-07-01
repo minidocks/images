@@ -12,4 +12,4 @@ jobs:
       - env:
           DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        run: sh ./run github:build_and_push
+        run: bash ./run github:build_and_push
