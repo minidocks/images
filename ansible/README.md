@@ -11,8 +11,9 @@ own declarative language to describe system configuration.
 Tags
 ----
 
-| Tag       | Size                                                                     |
-|-----------|--------------------------------------------------------------------------|
-| latest, 3 | ![](https://img.shields.io/docker/image-size/minidocks/ansible/latest?style=flat-square&logo=docker&label=size)   |
-| 3         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/3?style=flat-square&logo=docker&label=size) |
-| 2         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/2?style=flat-square&logo=docker&label=size) |
+| Tag       | Size                                                                                                            |
+|-----------|-----------------------------------------------------------------------------------------------------------------|
+| latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/ansible/latest?style=flat-square&logo=docker&label=size) |
+| 4         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/4?style=flat-square&logo=docker&label=size)      |
+| 3         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/3?style=flat-square&logo=docker&label=size)      |
+| 2         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/2?style=flat-square&logo=docker&label=size)      |
