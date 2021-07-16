@@ -76,7 +76,6 @@ Tags
 | 12         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/12?style=flat-square&logo=docker&label=size) |
 | 11         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/11?style=flat-square&logo=docker&label=size) |
 | 10         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/10?style=flat-square&logo=docker&label=size) |
-| 9          | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/9?style=flat-square&logo=docker&label=size)  |
 
 Related images
 --------------
