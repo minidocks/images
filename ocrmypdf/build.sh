@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/ocrmypdf"
 versions="
-10;10.3.3
 11;11.7.3
 12;12.3.0
 latest;12.3.0

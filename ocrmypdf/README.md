@@ -70,12 +70,11 @@ docker-compose run --rm ocrmypdf -j 2 -l eng --tesseract-pagesegmode input.pdf o
 Tags
 ----
 
-| Tag        | Size                                                                       |
-|------------|----------------------------------------------------------------------------|
-| latest, 12 | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/latest?style=flat-square&logo=docker&label=size)    |
-| 12         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/12?style=flat-square&logo=docker&label=size) |
-| 11         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/11?style=flat-square&logo=docker&label=size) |
-| 10         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/10?style=flat-square&logo=docker&label=size) |
+| Tag        | Size                                                                                                             |
+|------------|------------------------------------------------------------------------------------------------------------------|
+| latest, 12 | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/latest?style=flat-square&logo=docker&label=size) |
+| 12         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/12?style=flat-square&logo=docker&label=size)     |
+| 11         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/11?style=flat-square&logo=docker&label=size)     |
 
 Related images
 --------------
