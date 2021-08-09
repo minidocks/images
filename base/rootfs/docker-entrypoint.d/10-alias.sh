@@ -10,10 +10,10 @@ set -e
 
 register_aliases()(
     for name in $(printenv | grep -E "^ALIAS_" | cut -d= -f1); do
-        alias="$(echo "${name#*_}" | tr '[:upper:]' '[:lower:]')"
+        alias="$(echo "${name#*_}" | tr '[:upper:]' '[:lower:]' | sed -e 's|__|-|g')"
 
         if [ -f "/bin/$alias" ]; then
-            printf "\033[30;41mCommand \"/bin/%s\" for environment variable \"%s\" already exists\033[0m\n" "$alias" "$name" >&2
+            printf "\033[33mCommand \"/bin/%s\" for environment variable \"%s\" already exists\033[0m\n" "$alias" "$name" >&2
             continue
         fi
 
