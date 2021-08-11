@@ -43,7 +43,7 @@ Enhancements
 Usage
 -----
 
-``` bash
+```bash
 docker run --rm -it -v "`pwd`:`pwd`" -w "`pwd`" -v ~:/home/user minidocks/git sh
 ```
 
