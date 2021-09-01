@@ -16,12 +16,13 @@ docker run --rm -v `pwd`:/app -w /app minidocks/weasyprint https://weasyprint.or
 Tags
 ----
 
-| Tag        | Size                                                                         |
-|------------|------------------------------------------------------------------------------|
-| latest, 52 | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/latest?style=flat-square&logo=docker&label=size)    |
-| 52         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/52?style=flat-square&logo=docker&label=size) |
-| 51         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/51?style=flat-square&logo=docker&label=size) |
-| 50         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/50?style=flat-square&logo=docker&label=size) |
+| Tag        | Size                                                                                                               |
+|------------|--------------------------------------------------------------------------------------------------------------------|
+| latest, 53 | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/latest?style=flat-square&logo=docker&label=size) |
+| 53         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/53?style=flat-square&logo=docker&label=size)     |
+| 52         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/52?style=flat-square&logo=docker&label=size)     |
+| 51         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/51?style=flat-square&logo=docker&label=size)     |
+| 50         | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/50?style=flat-square&logo=docker&label=size)     |
 
 Related images
 --------------

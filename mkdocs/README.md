@@ -109,8 +109,11 @@ Tags
 | latest, 1 | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/latest?style=flat-square&logo=docker&label=size)  |
 | 1         | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1?style=flat-square&logo=docker&label=size)       |
 | 1-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1-pdf?style=flat-square&logo=docker&label=size)   |
-| 1.1       | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1.1?style=flat-square&logo=docker&label=size)     |
-| 1.1-pdf   | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1.1-pdf?style=flat-square&logo=docker&label=size) |
+
+Related images
+--------------
+
+-   [Sphinx](https://github.com/minidocks/sphinx-doc)
 
 Alternatives
 ------------
