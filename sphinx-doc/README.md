@@ -34,7 +34,9 @@ More themes on https://sphinx-themes.org/.
 ### Extensions
 
 -   [Comments](https://sphinx-comments.readthedocs.io/en/latest/)
+-   [Confluence Builder](https://github.com/sphinx-contrib/confluencebuilder)
 -   [Copy button](https://sphinx-copybutton.readthedocs.io/en/latest/)
+-   [Design](https://sphinx-design.readthedocs.io/en/latest/)
 -   [Inline tabs](https://sphinx-inline-tabs.readthedocs.io)
 -   [Kroki](https://github.com/sphinx-contrib/kroki)
 -   [Multiversion](https://github.com/Holzhaus/sphinx-multiversion)
@@ -49,10 +51,10 @@ More themes on https://sphinx-themes.org/.
 
 More extensions on
 
-- https://sphinxext-survey.readthedocs.io/en/latest/
-- https://github.com/sphinx-contrib
-- https://sphinx-extensions.readthedocs.io/en/latest/
-- https://github.com/yoloseem/awesome-sphinxdoc
+-   https://sphinxext-survey.readthedocs.io/en/latest/
+-   https://github.com/sphinx-contrib
+-   https://sphinx-extensions.readthedocs.io/en/latest/
+-   https://github.com/yoloseem/awesome-sphinxdoc
 
 ### Tools
 
@@ -100,14 +102,19 @@ RUN pip install sphinx_rtd_theme && clean
 Tags
 ----
 
-| Tag       | Size                                                                            |
-|-----------|---------------------------------------------------------------------------------|
-| latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/latest?style=flat-square&logo=docker&label=size)       |
-| pdf       | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/pdf?style=flat-square&logo=docker&label=size)   |
-| 4         | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/4?style=flat-square&logo=docker&label=size)       |
-| 4-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/4-pdf?style=flat-square&logo=docker&label=size)   |
-| 3         | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/3?style=flat-square&logo=docker&label=size)     |
-| 3-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/3-pdf?style=flat-square&logo=docker&label=size) |
+| Tag       | Size                                                                                                               |
+|-----------|--------------------------------------------------------------------------------------------------------------------|
+| latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/latest?style=flat-square&logo=docker&label=size) |
+| pdf       | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/pdf?style=flat-square&logo=docker&label=size)    |
+| 4         | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/4?style=flat-square&logo=docker&label=size)      |
+| 4-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/4-pdf?style=flat-square&logo=docker&label=size)  |
+| 3         | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/3?style=flat-square&logo=docker&label=size)      |
+| 3-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/sphinx-doc/3-pdf?style=flat-square&logo=docker&label=size)  |
+
+Related images
+--------------
+
+-   [MkDocs](https://github.com/minidocks/mkdocs)
 
 Alternatives
 ------------

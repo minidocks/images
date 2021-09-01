@@ -7,7 +7,7 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=4.0.2
+ARG version=4.1.2
 
 RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx=="$version" \
@@ -20,6 +20,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       \
       sphinx-comments \
       sphinx-copybutton \
+      sphinx-design \
       sphinx-inline-tabs \
       sphinx-multitoc-numbering \
       sphinx-multiversion \
