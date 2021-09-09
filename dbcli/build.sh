@@ -6,6 +6,7 @@ versions="
 pgcli;pgcli
 mycli;mycli
 litecli;litecli
+iredis;iredis
 latest
 "
 

@@ -12,7 +12,7 @@ RUN apk --no-cache add rsync && clean
 
 RUN if [ "$version" = "lmtx" ]; then cd /usr/share \
     && wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linuxmusl.zip && unzip context.zip && rm context.zip \
-    && chmod a+x install.sh bin/mtxrun && sed -i 's/\["linuxmusl-64"\]   = "linuxmusl"/["linuxmusl-64"]   = "linuxmusl-64"/' bin/mtx-install.lua \
+    && chmod a+x install.sh bin/mtxrun && mkdir -p tex && ln -s texmf-linuxmusl "tex/texmf-$platform" \
     && ./install.sh \
     ; fi
 

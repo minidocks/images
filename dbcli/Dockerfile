@@ -1,7 +1,7 @@
 ARG mycli_version=1.24.1
-ARG pgcli_version=3.1.0
+ARG pgcli_version=3.2.0
 ARG litecli_version=1.6.0
-ARG iredis_version=1.9.1
+ARG iredis_version=1.9.4
 
 FROM minidocks/python AS mycli
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -18,7 +18,7 @@ FROM minidocks/python AS pgcli
 
 ARG pgcli_version
 
-RUN apk --update add py3-psycopg2 py3-setproctitle && pip install pgcli==$pgcli_version && clean
+RUN apk --update add py3-psycopg2 py3-setproctitle && pip install pg_activity pgcli==$pgcli_version && clean
 
 COPY rootfs /
 
@@ -49,8 +49,9 @@ FROM minidocks/python AS latest
 ARG mycli_version
 ARG pgcli_version
 ARG litecli_version
+ARG iredis_version
 
 RUN apk --update add py3-cryptography py3-psycopg2 py3-setproctitle \
-    && pip install pgcli==$pgcli_version mycli==$mycli_version litecli==$litecli_version && clean
+    && pip install pg_activity pgcli==$pgcli_version mycli==$mycli_version litecli==$litecli_version iredis==$iredis_versio && clean
 
 COPY rootfs /

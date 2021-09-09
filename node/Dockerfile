@@ -39,5 +39,8 @@ ARG package
 # Fix https://github.com/npm/uid-number/issues/3#issuecomment-453727058
 RUN /docker-entrypoint.d/10-cache.sh && apk --update add npm \
     && npm config set unsafe-perm true && npm i -g npm@latest npm-check-updates yarn && npm config set unsafe-perm false \
-    && rm -rf /usr/lib/node_modules/npm/docs /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/html && clean \
-    && for pkg in npm npm-check-updates; do cp -ra /usr/lib/node_modules/$pkg/node_modules / && rm -rf /usr/lib/node_modules/$pkg/node_modules; done
+    && if [ -d /usr/local/lib/node_modules ]; then local="local/"; apk del npm && rm -rf /usr/lib/node_modules; fi \
+    && rm -rf "/usr/${local}lib/node_modules/npm/docs" "/usr/${local}lib/node_modules/npm/html" clean \
+    && for pkg in npm npm-check-updates; do \
+         cp -ra "/usr/${local}lib/node_modules/$pkg/node_modules" / && rm -rf "/usr/${local}lib/node_modules/$pkg/node_modules"; \
+       done
