@@ -13,6 +13,7 @@ Tags
 | Tag       | Size                                                                                                                |
 |-----------|---------------------------------------------------------------------------------------------------------------------|
 | latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/latest?style=flat-square&logo=docker&label=size) |
+| 4         | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/4?style=flat-square&logo=docker&label=size) |
 | 3         | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/3?style=flat-square&logo=docker&label=size)      |
 | 3-py3     | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/3-py3?style=flat-square&logo=docker&label=size)  |
 | 3-py2     | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/3-py2?style=flat-square&logo=docker&label=size)  |

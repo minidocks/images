@@ -6,8 +6,8 @@ versions="
 3;3.6
 3-py2;3.6;2
 3-py3;3.6
-4;4.3
-latest;4.3
+4;4.5.1
+latest;4.5.1
 "
 
 build() {
