@@ -1,21 +1,22 @@
-ARG fame_version=1.14.0
-ARG filter_version=2.29.0
+ARG fame_version=1.15.0
+ARG filter_version=2.33.0
 ARG git_standup_version=2.3.2
-ARG monorepo_tools_version=9.1.0
+ARG monorepo_tools_version=9.1.2
 ARG git_extras_version=6.2.0
 ARG git_quick_stats_version=2.3.0
+ARG meta_version=2.2.25
 
 # https://github.com/jderusse/docker-gitsplit/blob/master/Dockerfile
-FROM golang:alpine AS splitsh
-
-RUN apk add --no-cache git make cmake g++ openssl-dev libssh2-dev libgit2-dev
-
-RUN go get -d github.com/libgit2/git2go
-RUN cd $GOPATH/src/github.com/libgit2/git2go && git checkout v28.4.0 && git submodule update --init
-RUN cd $GOPATH/src/github.com/libgit2/git2go && make install-static
-
-RUN go get --tags static github.com/splitsh/lite
-RUN go build --tags static -o splitsh-lite github.com/splitsh/lite
+#FROM golang:alpine AS splitsh
+#
+#RUN apk add --no-cache git make cmake g++ openssl-dev libssh2-dev libgit2-dev
+#
+#RUN go get -d github.com/libgit2/git2go
+#RUN cd $GOPATH/src/github.com/libgit2/git2go && git checkout v28.4.0 && git submodule update --init
+#RUN cd $GOPATH/src/github.com/libgit2/git2go && make install-static
+#
+#RUN go get --tags static github.com/splitsh/lite
+#RUN go build --tags static -o splitsh-lite github.com/splitsh/lite
 
 FROM minidocks/pyinstaller AS python
 
@@ -41,7 +42,7 @@ ARG monorepo_tools_version
 ARG git_extras_version
 ARG git_quick_stats_version
 
-COPY --from=splitsh /go/splitsh-lite /usr/local/bin/splitsh-lite
+#COPY --from=splitsh /go/splitsh-lite /usr/local/bin/splitsh-lite
 COPY --from=python /tmp/dist/git-fame /usr/libexec/git-core/git-fame
 COPY --from=python /tmp/dist/git-filter-repo /usr/libexec/git-core/git-filter-repo
 
