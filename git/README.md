@@ -26,9 +26,9 @@ Enhancements
     into one big monorepository. Migrates every branch in every subrepo to the
     eponymous branch in the monorepo, with all files (including in the history)
     rewritten to live under a subdirectory.
-<!---   [splitsh](https://github.com/splitsh/lite/commits/master): splitsh-lite
-    replaces the subtree split Git built-in command to make splitting a
-    monolithic repository to read-only standalone repositories easy and fast.-->
+    <!---   [splitsh](https://github.com/splitsh/lite/commits/master): splitsh-lite
+        replaces the subtree split Git built-in command to make splitting a
+        monolithic repository to read-only standalone repositories easy and fast.-->
 -   [monorepo-tools](https://github.com/shopsys/monorepo-tools): Tools for
     building and splitting monolithic repository from existing packages.
 -   [git-quick-stats](https://github.com/arzzen/git-quick-stats): Simple and
@@ -39,6 +39,10 @@ Enhancements
     repository collaborators sorted by contributions.
 -   [git-filter-repo](https://github.com/newren/git-filter-repo/): The versatile
     tool for rewriting history.
+-   [git-interactive-rebase-tool](https://gitrebasetool.mitmaro.ca): An improved
+    sequence editor for Git
+-   [git-sizer](https://github.com/github/git-sizer): Compute various size
+    metrics for a Git repository, flagging those that might cause problems
 
 Usage
 -----
@@ -50,10 +54,10 @@ docker run --rm -it -v "`pwd`:`pwd`" -w "`pwd`" -v ~:/home/user minidocks/git sh
 Tags
 ----
 
-| Tag       | Size                                                                     |
-|-----------|--------------------------------------------------------------------------|
-| latest, 2 | ![](https://img.shields.io/docker/image-size/minidocks/git/latest?style=flat-square&logo=docker&label=size)   |
-| 2         | ![](https://img.shields.io/docker/image-size/minidocks/git/2?style=flat-square&logo=docker&label=size) |
+| Tag       | Size                                                                                                        |
+|-----------|-------------------------------------------------------------------------------------------------------------|
+| latest, 2 | ![](https://img.shields.io/docker/image-size/minidocks/git/latest?style=flat-square&logo=docker&label=size) |
+| 2         | ![](https://img.shields.io/docker/image-size/minidocks/git/2?style=flat-square&logo=docker&label=size)      |
 
 Alternatives
 ------------

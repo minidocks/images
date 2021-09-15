@@ -50,7 +50,7 @@ COPY --from=python /tmp/dist/git-filter-repo /usr/libexec/git-core/git-filter-re
 # && wget -O /usr/libexec/git-core/git-hooks https://raw.githubusercontent.com/icefox/git-hooks/master/git-hooks \
 
 RUN if [ "$(arch)" == "x86_64" ]; then metafile="git-metafile"; fi \
-    && apk --update add git git-crypt git-subtree git-lfs git-fast-import git-secret@edge $metafile ncurses less bash file util-linux http-parser libssh2 \
+    && apk --update add git git-crypt git-subtree git-lfs git-fast-import git-secret@edge git-sizer@edge $metafile git-interactive-rebase-tool ncurses less bash file util-linux http-parser libssh2 \
     && wget -O /usr/libexec/git-core/git-standup https://raw.githubusercontent.com/kamranahmedse/git-standup/$git_standup_version/git-standup \
     && wget -O /usr/libexec/git-core/git-quick-stats https://raw.githubusercontent.com/arzzen/git-quick-stats/$git_quick_stats_version/git-quick-stats \
     && wget -O /usr/local/bin/tomono https://raw.githubusercontent.com/CyberGRX/tomono/master/tomono.sh \
