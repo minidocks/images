@@ -116,7 +116,8 @@ split()(
         assert_http_code "$response" "201"
     fi
 
-    run_git splitsh --prefix "$name" --remote "$url" --force
+    #run_git splitsh --prefix "$name" --remote "$url" --force
+    run_git subsplit publish "$name:$url"
 )
 
 versions()(
