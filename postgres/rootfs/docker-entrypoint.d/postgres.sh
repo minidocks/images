@@ -11,8 +11,7 @@ esceval() {
 
 # used to create initial postgres directories and if run as root, ensure ownership to the "postgres" user
 docker_create_db_directories() {
-  local user; user="$(id -u)"
-
+  local user="$(id -u)"
   mkdir -p "$PGDATA"
   chmod 700 "$PGDATA"
 
@@ -144,8 +143,13 @@ docker_process_sql() {
 # create initial database
 # uses environment variables for input: POSTGRES_DB
 docker_setup_db() {
-  if [ "$POSTGRES_DB" != 'postgres' ]; then
-    docker_process_sql --dbname postgres --set db="$POSTGRES_DB" <<EOSQL
+  local dbAlreadyExists="$(docker_process_sql --dbname postgres --set db="$(esceval "$POSTGRES_DB")" --tuples-only <<EOSQL
+SELECT 1 FROM pg_database WHERE datname = :'db';
+EOSQL
+  )"
+
+  if [ -z "$dbAlreadyExists" ] && [ "$POSTGRES_DB" != 'postgres' ]; then
+    docker_process_sql --dbname postgres --set db="$(esceval "$POSTGRES_DB")" <<EOSQL
 CREATE DATABASE :"db";
 EOSQL
     echo
@@ -199,6 +203,16 @@ pg_setup_hba_conf() {
   } >> "$PGDATA/pg_hba.conf"
 }
 
+pg_setup_postgresql_conf() {
+  if [ "${POSTGRES_RUNTIME_CONF:-1}" != '1' ]; then
+      return
+  fi
+
+  echo 'PostgreSQL runtime configuration.'
+
+  conf_env POSTGRES_ --pattern='!/^POSTGRES_(URL|USER|PASSWORD|DATABASE|DB|HOST_AUTH_METHOD|INITDB_ARGS|INITDB_WALDIR|RUNTIME_CONF)$/' --file="$PGDATA/postgresql.conf"
+}
+
 # start socket-only postgresql server for setting up or running scripts
 # all arguments will be passed along as arguments to `postgres` (via pg_ctl)
 docker_temp_server_start() {
@@ -248,8 +262,11 @@ _main() {
     # setup data directories and permissions (when run as root)
     docker_create_db_directories
     if [ "$(id -u)" = '0' ]; then
-      # then restart script as postgres user
-      exec su-exec postgres /docker-entrypoint.d/postgres.sh "$@"
+      # restart script as postgres user
+      su-exec postgres /docker-entrypoint.d/postgres.sh "$@"
+      USER_NAME="postgres" GROUP_NAME="postgres" USER_ID="$(id -u postgres)" GROUP_ID="$(getent group postgres | awk -F: '{print $3}')"
+      export USER_NAME GROUP_NAME USER_ID GROUP_ID
+      return
     else
       # only run initialization on an empty data directory
       if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
@@ -284,7 +301,7 @@ _main() {
     fi
   fi
 
-  exec "$@"
+  pg_setup_postgresql_conf
 }
 
 _main "$@"

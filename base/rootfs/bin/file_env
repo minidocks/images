@@ -7,6 +7,8 @@
 #
 # (c) 2018 Martin Hasoň <martin.hason@gmail.com>
 
+set -e
+
 file_env() {
     local var="$1" fileVar="${var}_FILE" val arg
     shift
@@ -16,10 +18,9 @@ file_env() {
         exit 1
     fi
 
-    val="$(eval printf '%s' "\${$var}")"
-
-    if [ -z "$val" ] && [ -r "$(eval printf '%s' "\${$fileVar}")" ]; then
-        val="$(eval cat "\${$fileVar}")"
+    val="$(printenv "$var" || echo "")"
+    if [ -z "$val" ] && [ -r "$(printenv "$fileVar" || echo "")" ]; then
+        val="$(cat "$(printenv "$fileVar")")"
     fi
 
     if [ -z "$val" ]; then
@@ -38,4 +39,6 @@ file_env() {
     fi
 }
 
-file_env "$@"
+if [ "$(basename "$0")" = 'file_env' ]; then
+  file_env "$@"
+fi

@@ -1,0 +1,53 @@
+#!/bin/sh
+#
+# usage: conf_env PREFIX
+#
+# (c) 2021 Martin Hasoň <martin.hason@gmail.com>
+
+set -e
+
+conf_env() {
+  local pattern="//" separator="=" comment="#"
+  while [ -n "$1" ]; do
+    case "$1" in
+      --file=*) file="${1#*=}";;
+      --file) shift; file="$1";;
+      --separator=*) separator="${1#*=}";;
+      --separator) shift; separator="$1";;
+      --comment=*) comment="${1#*=}";;
+      --comment) shift; comment="$1";;
+      --prefix=*) prefix="${1#*=}";;
+      --prefix) shift; prefix="$1";;
+      --pattern=*) pattern="${1#*=}";;
+      --pattern) shift; pattern="$1";;
+      *) prefix="$1";;
+    esac
+    shift
+  done
+
+  local length="${#prefix}"
+  for name in $(printenv | awk -F= '{print $1}' | awk "/^$prefix/" | awk "$pattern"); do
+    key="$(echo "${name:$length}" | sed -e 's|__|\.|g' | tr '[:upper:]' '[:lower:]')"
+    value="$(/bin/file_env "$name")"
+
+    if [ -z "$file" ]; then
+      echo "$key" "$value"
+      continue
+    fi
+
+    local filepath="$(printf "$file" "$key")"
+    if [ -n "$filepath" ] && ([ ! -f "$filepath" ] || [ ! -w "$filepath" ]); then
+      continue
+    fi
+
+    if grep -E "${key} *=" "$filepath" > /dev/null; then
+      sed -i "s|^[$comment ]*\($key *$separator *\).*|\1$value|" "$filepath"
+    else
+      echo "${key} ${separator} ${value}" >> "$filepath"
+    fi
+  done
+}
+
+if [ "$(basename "$0")" = 'conf_env' ]; then
+  conf_env "$@"
+fi
