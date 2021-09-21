@@ -118,6 +118,7 @@ split()(
 
     #run_git splitsh --prefix "$name" --remote "$url" --force
     run_git subsplit publish "$name:$url"
+    run_git subsplit update
 )
 
 versions()(
@@ -236,6 +237,7 @@ task_split()(
     rm -rf .repo
     run_git clone "https://github.com/$GIT_NAMESPACE/images" .repo
     cd .repo
+    git_run subsplit init "https://github.com/$GIT_NAMESPACE/images"
 
     processed=" "
     for name in ${1:-$(lsdir)}; do
