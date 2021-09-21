@@ -6,7 +6,7 @@ FROM minidocks/base:3.10 AS v11
 
 FROM minidocks/base:3.12 AS v12
 
-FROM minidocks/base:3.13 AS v13
+FROM minidocks/base:3.14 AS v13
 
 FROM v$version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -19,7 +19,11 @@ RUN set -eux; if [ ! "$(getent passwd postgres)" ]; then \
 ENV LANG=en_US.utf8 \
     PGDATA=/var/lib/postgresql/data
 
-RUN apk --update add postgresql postgresql-contrib && clean
+ARG version
+
+RUN apk add postgresql postgresql-contrib \
+    && rm -rf /usr/lib/libLLVM* /usr/lib/llvm* \
+    && clean
 
 # make the sample config easier to munge (and "correct by default")
 RUN sed -ri "s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" /usr/share/postgresql/postgresql.conf.sample
