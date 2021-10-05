@@ -3,8 +3,8 @@ set -e
 
 image="${namespace:-minidocks}/chromium"
 versions="
-latest;chromium@edge harfbuzz@edge
-webdriver;chromium-chromedriver@edge
+latest;chromium
+webdriver;chromedriver
 "
 
 build() {

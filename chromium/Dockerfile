@@ -1,10 +1,14 @@
-FROM minidocks/ffmpeg
+FROM minidocks/ffmpeg AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG package="chromium@edge harfbuzz@edge"
-
-RUN apk --update add $package mesa-egl mesa-gles freetype@edge nss@edge ttf-freefont@edge && clean
+RUN apk add chromium mesa-egl mesa-gles ttf-freefont && clean
 
 COPY rootfs /
 
 CMD ["chromium-browser", "--headless", "--disable-gpu", "--disable-software-rasterizer", "--disable-dev-shm-usage"]
+
+FROM latest AS webdriver
+
+RUN apk add chromium-chromedriver && clean
+
+FROM latest
