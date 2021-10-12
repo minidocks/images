@@ -11,7 +11,12 @@ files.
 Tags
 ----
 
-| Tag       | Size                                                                                                              |
-|-----------|-------------------------------------------------------------------------------------------------------------------|
-| latest, 1 | ![](https://img.shields.io/docker/image-size/minidocks/terraform/latest?style=flat-square&logo=docker&label=size) |
-| 1         | ![](https://img.shields.io/docker/image-size/minidocks/terraform/1?style=flat-square&logo=docker&label=size)      |
+| Tag                    | Size                                                                                                                              |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| latest, 1              | ![](https://img.shields.io/docker/image-size/minidocks/terraform/latest?style=flat-square&logo=docker&label=size)                 |
+| 1                      | ![](https://img.shields.io/docker/image-size/minidocks/terraform/1?style=flat-square&logo=docker&label=size)                      |
+| terragrunt             | ![](https://img.shields.io/docker/image-size/minidocks/terraform/terragrunt?style=flat-square&logo=docker&label=size)             |
+| terraformer-azure      | ![](https://img.shields.io/docker/image-size/minidocks/terraform/terraformer-azure?style=flat-square&logo=docker&label=size)      |
+| terraformer-aws        | ![](https://img.shields.io/docker/image-size/minidocks/terraform/terraformer-aws?style=flat-square&logo=docker&label=size)        |
+| terraformer-google     | ![](https://img.shields.io/docker/image-size/minidocks/terraform/terraformer-google?style=flat-square&logo=docker&label=size)     |
+| terraformer-kubernetes | ![](https://img.shields.io/docker/image-size/minidocks/terraform/terraformer-kubernetes?style=flat-square&logo=docker&label=size) |
