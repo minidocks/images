@@ -7,7 +7,7 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=4.1.2
+ARG version=4.2.0
 
 RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx=="$version" \
@@ -35,6 +35,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinxcontrib-scm \
       sphinxcontrib-svg2pdfconverter \
       sphinxcontrib-images \
+      sphinxcontrib-openapi \
       sphinxcontrib-programoutput \
       sphinx_gherkindoc \
       \
@@ -50,12 +51,14 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       \
       m2r2 \
       mdformat \
+      mdformat-myst \
       myst-parser \
       linkify-it-py \
       sphinx-markdown-parser \
       pymdown-extensions \
       recommonmark \
       rstvalidator \
+      rst-to-myst \
     && clean
 
 COPY rootfs /

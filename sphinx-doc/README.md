@@ -26,28 +26,31 @@ Installed extensions
 -   [PyData](https://pydata-sphinx-theme.readthedocs.io/en/latest/index.html)
 -   [Read the Docs](https://github.com/rtfd/sphinx_rtd_theme)
 
--   [Business](https://github.com/Nekmo/sphinx-business-theme) (only
-    *minidocks/sphinx-doc:\*-pdf*)
+#### Pdf themes (only *minidocks/sphinx-doc:\*-pdf*)
+
+-   [Business](https://github.com/Nekmo/sphinx-business-theme)
 
 More themes on https://sphinx-themes.org/.
 
 ### Extensions
 
--   [Comments](https://sphinx-comments.readthedocs.io/en/latest/)
+-   [Comments](https://sphinx-comments.readthedocs.io)
 -   [Confluence Builder](https://github.com/sphinx-contrib/confluencebuilder)
--   [Copy button](https://sphinx-copybutton.readthedocs.io/en/latest/)
--   [Design](https://sphinx-design.readthedocs.io/en/latest/)
+-   [Copy button](https://sphinx-copybutton.readthedocs.io)
+-   [Design](https://sphinx-design.readthedocs.io)
 -   [Inline tabs](https://sphinx-inline-tabs.readthedocs.io)
 -   [Kroki](https://github.com/sphinx-contrib/kroki)
 -   [Multiversion](https://github.com/Holzhaus/sphinx-multiversion)
--   [Panels](https://sphinx-panels.readthedocs.io/en/latest/)
+-   [OpenAPI](https://sphinxcontrib-openapi.readthedocs.io)
+-   [Panels](https://sphinx-panels.readthedocs.io)
 -   [Prompt](http://sbrunner.github.io/sphinx-prompt/)
 -   [Sitemap](https://github.com/jdillard/sphinx-sitemap)
 -   [Tabs](https://github.com/executablebooks/sphinx-tabs)
 
--   [rst2pdf](https://rst2pdf.org/) (only *minidocks/sphinx-doc:\*-pdf*)
+#### Pdf extensions (only *minidocks/sphinx-doc:\*-pdf*)
+
+-   [rst2pdf](https://rst2pdf.org/)
 -   [WeasyPrint](https://procrastinator.nerv-project.eu/nerv-project/sphinx_weasyprint_builder)
-    (only *minidocks/sphinx-doc:\*-pdf*)
 
 More extensions on
 
@@ -64,6 +67,8 @@ More extensions on
     [sphinx-autobuild](https://github.com/GaretJax/sphinx-autobuild).
 -   ReStructuredText validator
     [rstvalidator](https://github.com/andrewp-as-is/rstvalidator.py).
+-   A tool for converting ReStructuredText to MyST Markdown
+    [rst-to-myst](https://rst-to-myst.readthedocs.io)
 
 ### Markdown support
 
