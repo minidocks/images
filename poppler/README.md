@@ -11,6 +11,8 @@ Utilities
 
 -   [pdf2svg](https://github.com/dawbarton/pdf2svg) - A simple PDF to SVG
     converter using the Poppler and Cairo libraries.
+-   [pdfgrep](https://pdfgrep.org/) - A commandline utility to search text in
+    PDF files
 -   pdftotext
 -   pdfunite
 -   pdftops
@@ -33,6 +35,6 @@ docker run --rm  -v "`pwd`:/app" -w /app minidocks/poppler pdftotext --help
 Tags
 ----
 
-| Tag    | Size                                                                   |
-|--------|------------------------------------------------------------------------|
+| Tag    | Size                                                                                                            |
+|--------|-----------------------------------------------------------------------------------------------------------------|
 | latest | ![](https://img.shields.io/docker/image-size/minidocks/poppler/latest?style=flat-square&logo=docker&label=size) |
