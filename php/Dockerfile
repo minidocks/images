@@ -1,17 +1,17 @@
 ARG version=8.0
 ARG major=8
 ARG composer1_version=1.10.22
-ARG composer2_version=2.1.3
-ARG blackfire_version=1.62.0
-ARG newrelic_version=9.17.1.301
+ARG composer2_version=2.1.9
+ARG blackfire_version=1.68.1
+ARG newrelic_version=9.18.1.303
 
 FROM minidocks/base:3.9 AS v7.2
 
 FROM minidocks/base:3.12 AS v7.3
 
-FROM minidocks/base:3.13 AS v7.4
+FROM minidocks/base:3.14 AS v7.4
 
-FROM minidocks/base:3.13 AS v8.0
+FROM minidocks/base:3.14 AS v8.0
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -20,7 +20,7 @@ ARG version
 ARG major
 
 # 82 is the standard uid/gid for "www-data" in Alpine
-RUN addgroup -g 82 -S www-data && adduser -u 82 -S -s /bin/sh -G www-data www-data
+RUN getent group www-data >/dev/null || addgroup -g 82 -S www-data; getent passwd www-date >/dev/null || adduser -u 82 -S -s /bin/sh -G www-data www-data
 
 RUN for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$major-$module"; done \
     && if [ "$version" == "7.2" ]; then libiconv_version="@community"; fi \
@@ -48,7 +48,7 @@ ARG composer2_version
 RUN mkdir -p /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
 
 # Composer
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+RUN php --version && wget -O composer-setup.php https://getcomposer.org/installer \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer1.phar --version="$composer1_version" \
     && php composer-setup.php --install-dir=/usr/bin --filename=composer2.phar --version="$composer2_version" \
     && php -r "unlink('composer-setup.php');" \
