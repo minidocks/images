@@ -100,11 +100,11 @@ Tags
 
 | Tag             | Size                                                                       |
 |-----------------|----------------------------------------------------------------------------|
-| latest, 2, 2.14 | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/latest?style=flat-square&logo=docker&label=size)      |
+| latest, 2, 2.15 | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/latest?style=flat-square&logo=docker&label=size)      |
 | 2               | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2?style=flat-square&logo=docker&label=size)    |
+| 2.15            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.15?style=flat-square&logo=docker&label=size) |
 | 2.14            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.14?style=flat-square&logo=docker&label=size) |
 | 2.13            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.13?style=flat-square&logo=docker&label=size) |
-| 2.12            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.12?style=flat-square&logo=docker&label=size) |
 
 Related images
 --------------
