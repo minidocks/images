@@ -29,6 +29,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx-sitemap \
       sphinx-tabs \
       sphinx-togglebutton \
+      sphinx-toolbox \
       sphinxcontrib.programoutput \
       \
       sphinxcontrib-kroki \
@@ -38,6 +39,7 @@ RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinxcontrib-openapi \
       sphinxcontrib-programoutput \
       sphinx_gherkindoc \
+      sphinxext-opengraph \
       \
       furo \
       Pallets-Sphinx-Themes \

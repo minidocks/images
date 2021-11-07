@@ -46,6 +46,7 @@ More themes on https://sphinx-themes.org/.
 -   [Prompt](http://sbrunner.github.io/sphinx-prompt/)
 -   [Sitemap](https://github.com/jdillard/sphinx-sitemap)
 -   [Tabs](https://github.com/executablebooks/sphinx-tabs)
+-   [Toolbox](https://sphinx-toolbox.readthedocs.io)
 
 #### Pdf extensions (only *minidocks/sphinx-doc:\*-pdf*)
 
