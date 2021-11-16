@@ -6,7 +6,7 @@ RUN apk add zopfli-dev \
 FROM minidocks/python:3 AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=53.3
+ARG version=53.4
 
 RUN apk add --update cairo cairo-gobject pango gdk-pixbuf py3-brotli py3-lxml py3-cffi py3-pillow msttcorefonts-installer fontconfig zopfli \
     && update-ms-fonts && fc-cache -f && clean

@@ -1,5 +1,5 @@
 ARG php_version=8.0
-ARG toolbox_version=1.45.4
+ARG toolbox_version=1.49.0
 
 FROM minidocks/php:7.2 as v7.2
 
