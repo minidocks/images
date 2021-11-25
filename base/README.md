@@ -2,7 +2,7 @@ Base image ([minidocks/base](https://hub.docker.com/r/minidocks/base))
 ======================================================================
 
 The best docker container for developers. This is a very small container
-(total < 9 MB) based on Alpine image.
+(total < 5 MB) based on Alpine image.
 
 Alpine repositories
 -------------------
@@ -10,11 +10,10 @@ Alpine repositories
 All images have registered the following apk repositories:
 
 - @edge ([@main](http://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](http://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](http://dl-cdn.alpinelinux.org/alpine/edge/testing))
+- @315 ([@main315](http://dl-cdn.alpinelinux.org/alpine/v3.15/main), [@community315](http://dl-cdn.alpinelinux.org/alpine/v3.15/community))
 - @314 ([@main314](http://dl-cdn.alpinelinux.org/alpine/v3.14/main), [@community314](http://dl-cdn.alpinelinux.org/alpine/v3.14/community))
-- @313 ([@main313](http://dl-cdn.alpinelinux.org/alpine/v3.13/main), [@community313](http://dl-cdn.alpinelinux.org/alpine/v3.13/community))
-- @312 ([@main312](http://dl-cdn.alpinelinux.org/alpine/v3.12/main), [@community312](http://dl-cdn.alpinelinux.org/alpine/v3.12/community))
 - …
-- @37 ([@main37](http://dl-cdn.alpinelinux.org/alpine/v3.7/main), [@community37](http://dl-cdn.alpinelinux.org/alpine/v3.7/community))
+- @310 ([@main37](http://dl-cdn.alpinelinux.org/alpine/v3.10/main), [@community310](http://dl-cdn.alpinelinux.org/alpine/v3.10/community))
 
 Utilities
 ---------
@@ -28,6 +27,7 @@ All images contain the following extra packages:
 - [`envsubst`](https://linux.die.net/man/1/envsubst) Substitutes environment variables in shell format strings.
 - [`ca-certificates`](https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/) Common CA certificates PEM files.
 - [`su-exec`](https://github.com/ncopa/su-exec) Switch user and group id, setgroups and exec.
+- [`wait-for`](https://github.com/eficode/wait-for)  Wait for another service to become available.
 - [`wait4ports`](https://github.com/erikogan/wait4ports) A small utility to wait for network peer availability.
 
 Features
@@ -98,23 +98,21 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.14      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
+ latest, 3.15      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
  edge              | ![](https://img.shields.io/docker/image-size/minidocks/base/edge?style=flat-square&logo=docker&label=size)
+ edge-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/edge-build?style=flat-square&logo=docker&label=size)
+ 3.15              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.15?style=flat-square&logo=docker&label=size)
+ build, 3.15-build | ![](https://img.shields.io/docker/image-size/minidocks/base/3.15-build?style=flat-square&logo=docker&label=size)
  3.14              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.14?style=flat-square&logo=docker&label=size)
- build, 3.14-build | ![](https://img.shields.io/docker/image-size/minidocks/base/3.14-build?style=flat-square&logo=docker&label=size)
+ 3.14-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.14-build?style=flat-square&logo=docker&label=size)
  3.13              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.13?style=flat-square&logo=docker&label=size)
- build, 3.13-build | ![](https://img.shields.io/docker/image-size/minidocks/base/3.13-build?style=flat-square&logo=docker&label=size)
+ 3.13-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.13-build?style=flat-square&logo=docker&label=size)
  3.12              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.12?style=flat-square&logo=docker&label=size)
  3.12-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.12-build?style=flat-square&logo=docker&label=size)
  3.11              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.11?style=flat-square&logo=docker&label=size)
  3.11-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.11-build?style=flat-square&logo=docker&label=size)
  3.10              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.10?style=flat-square&logo=docker&label=size)
  3.10-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.10-build?style=flat-square&logo=docker&label=size)
- 3.9               | ![](https://img.shields.io/docker/image-size/minidocks/base/3.9?style=flat-square&logo=docker&label=size)
- 3.9-build         | ![](https://img.shields.io/docker/image-size/minidocks/base/3.9-build?style=flat-square&logo=docker&label=size)
- 3.8               | ![](https://img.shields.io/docker/image-size/minidocks/base/3.8?style=flat-square&logo=docker&label=size)
- 3.8-build         | ![](https://img.shields.io/docker/image-size/minidocks/base/3.8-build?style=flat-square&logo=docker&label=size)
- 3.7               | ![](https://img.shields.io/docker/image-size/minidocks/base/3.7?style=flat-square&logo=docker&label=size)
 
 Inspiration
 -----------

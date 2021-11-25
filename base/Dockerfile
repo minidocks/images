@@ -1,4 +1,4 @@
-ARG version=3.14
+ARG version=3.15
 
 FROM alpine:$version as latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
