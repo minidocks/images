@@ -8,7 +8,7 @@ RUN wget -O /tmp/abc2prt.tar.gz "https://sourceforge.net/projects/abcplus/files/
     && tar -xvzf /tmp/abc2prt.tar.gz -C /tmp && cd /tmp/abc2prt* \
     && mkdir -p /tmp/build && make && mv abc2prt /tmp/build
 
-ARG abcpp_version=1.4.5
+ARG abcpp_version=1.4.6
 
 RUN wget -O /tmp/abcpp.tar.gz "https://sourceforge.net/projects/abcplus/files/abcpp/abcpp-${abcpp_version}.tar.gz" \
     && tar -xvzf /tmp/abcpp.tar.gz -C /tmp && cd /tmp/abcpp* \
@@ -20,7 +20,7 @@ RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v$
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2021.06.27
+ARG abc2midi_version=2021.11.25
 
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
@@ -29,7 +29,7 @@ RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2mid
 FROM minidocks/pyinstaller AS abc2xml
 
 ARG xml2abc_version=143
-ARG abc2xml_version=232
+ARG abc2xml_version=234
 
 RUN apk add wget && wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2abc.py-${xml2abc_version}.zip" \
     && wget -O /tmp/abc2xml.zip "https://wim.vree.org/svgParse/abc2xml.py-${abc2xml_version}.zip" \
@@ -39,14 +39,16 @@ RUN apk add wget && wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2
 RUN mkdir /tmp/final && cp -r /dist/xml2abc/* /tmp/final && cp -r /dist/abc2xml/* /tmp/final \
     && rm /tmp/final/libcrypto*so*
 
-FROM minidocks/node:14-base AS latest
+FROM minidocks/node:lts-base AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 COPY --from=abcm2ps /tmp/build /
 COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
-ARG abc2svg_version=1.21.3
+ARG abc2svg_version=1.21.5
 
 RUN apk add pango npm && npm i -g abc2svg@$abc2svg_version jszip && apk del npm && clean
+
+COPY rootfs /
 
 CMD [ "abc2svg" ]

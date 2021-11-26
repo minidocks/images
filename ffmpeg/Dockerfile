@@ -1,7 +1,5 @@
 ARG version=4
 
-FROM minidocks/base:3.8 AS v3
-
 FROM minidocks/base AS v4
 
 FROM v$version AS latest

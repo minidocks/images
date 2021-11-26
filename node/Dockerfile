@@ -1,9 +1,5 @@
-ARG package=nodejs-current<16
+ARG package=nodejs-current<18
 ARG base_version=edge
-
-FROM minidocks/base:3.9 AS v3.9
-
-FROM minidocks/base:3.10 AS v3.10
 
 FROM minidocks/base:3.11 AS v3.11
 
@@ -12,6 +8,8 @@ FROM minidocks/base:3.12 AS v3.12
 FROM minidocks/base:3.13 AS v3.13
 
 FROM minidocks/base:3.14 AS v3.14
+
+FROM minidocks/base:3.15 AS v3.15
 
 FROM minidocks/base:edge AS vedge
 

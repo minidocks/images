@@ -22,6 +22,11 @@ Tags
  latest, 3 | ![](https://img.shields.io/docker/image-size/minidocks/rsync/latest?style=flat-square&logo=docker&label=size)
  3         | ![](https://img.shields.io/docker/image-size/minidocks/rsync/3?style=flat-square&logo=docker&label=size)
 
+Alternatives
+------------
+
+- https://github.com/dprim/rsync-docker
+
 Related images
 --------------
 

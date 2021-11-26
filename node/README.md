@@ -38,18 +38,16 @@ Tags
 
 | Tag                   | Size                                                                                                              |
 |-----------------------|-------------------------------------------------------------------------------------------------------------------|
-| latest, 16            | [![](https://img.shields.io/docker/image-size/minidocks/node/latest?style=flat-square&logo=docker&label=size)]()  |
-| 16, current           | [![](https://img.shields.io/docker/image-size/minidocks/node/16?style=flat-square&logo=docker&label=size)]()      |
-| 16-base, current-base | [![](https://img.shields.io/docker/image-size/minidocks/node/16-base?style=flat-square&logo=docker&label=size)]() |
+| latest, 17            | [![](https://img.shields.io/docker/image-size/minidocks/node/latest?style=flat-square&logo=docker&label=size)]()  |
+| 17, current           | [![](https://img.shields.io/docker/image-size/minidocks/node/17?style=flat-square&logo=docker&label=size)]()      |
+| 17-base, current-base | [![](https://img.shields.io/docker/image-size/minidocks/node/17-base?style=flat-square&logo=docker&label=size)]() |
+| 16, lts               | [![](https://img.shields.io/docker/image-size/minidocks/node/16?style=flat-square&logo=docker&label=size)]()      |
+| 16-base, lts-base     | [![](https://img.shields.io/docker/image-size/minidocks/node/16-base?style=flat-square&logo=docker&label=size)]() |
 | 15                    | [![](https://img.shields.io/docker/image-size/minidocks/node/15?style=flat-square&logo=docker&label=size)]()      |
 | 15-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/15-base?style=flat-square&logo=docker&label=size)]() |
-| 14, lts               | [![](https://img.shields.io/docker/image-size/minidocks/node/14?style=flat-square&logo=docker&label=size)]()      |
+| 14                    | [![](https://img.shields.io/docker/image-size/minidocks/node/14?style=flat-square&logo=docker&label=size)]()      |
 | 14-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/14-base?style=flat-square&logo=docker&label=size)]() |
 | 13                    | [![](https://img.shields.io/docker/image-size/minidocks/node/13?style=flat-square&logo=docker&label=size)]()      |
 | 13-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/13-base?style=flat-square&logo=docker&label=size)]() |
 | 12                    | [![](https://img.shields.io/docker/image-size/minidocks/node/12?style=flat-square&logo=docker&label=size)]()      |
 | 12-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/12-base?style=flat-square&logo=docker&label=size)]() |
-| 11                    | [![](https://img.shields.io/docker/image-size/minidocks/node/11?style=flat-square&logo=docker&label=size)]()      |
-| 11-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/11-base?style=flat-square&logo=docker&label=size)]() |
-| 10                    | [![](https://img.shields.io/docker/image-size/minidocks/node/10?style=flat-square&logo=docker&label=size)]()      |
-| 10-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/10-base?style=flat-square&logo=docker&label=size)]() |

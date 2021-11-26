@@ -13,7 +13,7 @@ Usage
 ```bash
 docker container run -it --rm -v "`pwd`:/app" -w /app \
   --cap-add=SYS_ADMIN minidocks/chromium \
-  --headless --screenshot --hide-scrollbars https://www.google.com
+  --disable-gpu --headless --screenshot --hide-scrollbars https://www.google.com
 ```
 
 Tags

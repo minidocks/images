@@ -3,9 +3,9 @@ set -e
 
 image="${namespace:-minidocks}/mkdocs"
 versions="
-1;1.2.2
-1-pdf;1.2.2;weasyprint;pdf
-latest;1.2.2;
+1;1.2.3
+1-pdf;1.2.3;weasyprint;pdf
+latest;1.2.3;
 "
 
 build() {

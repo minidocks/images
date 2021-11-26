@@ -1,7 +1,7 @@
 FROM minidocks/ffmpeg AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk add chromium mesa-egl mesa-gles ttf-freefont && clean
+RUN apk add chromium mesa-egl mesa-gles ttf-freefont font-noto-emoji && clean
 
 COPY rootfs /
 

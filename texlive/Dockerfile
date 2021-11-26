@@ -14,7 +14,7 @@ RUN apk add xz && wget -O /tmp/install-tl-unx.tar.gz "http://ftp.math.utah.edu/p
 
 FROM minimal AS basic
 
-RUN tlmgr install scheme-basic latexmk pdfpages ms pdfjam pdfcrop pdfbook2 && clean
+RUN tlmgr install scheme-basic latexmk pdfpages pdflscape ms pdfjam pdfcrop pdfbook2 && clean
 
 FROM minimal AS context
 

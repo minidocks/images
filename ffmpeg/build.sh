@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/ffmpeg"
 versions="
-3;3
 4;4
 latest;4
 "
