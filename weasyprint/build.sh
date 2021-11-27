@@ -3,10 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/weasyprint"
 versions="
-50;50
-51;51
-52;52.5
-53;53.4
 latest;53.4
 "
 

@@ -51,9 +51,17 @@ COPY rootfs /
 
 CMD [ "mkdocs", "serve", "--dev-addr", "0.0.0.0:8000" ]
 
+FROM minidocks/python:3-build AS build
+
+RUN apk add libsass-dev \
+    && pip3 wheel --wheel-dir=/tmp libsass
+
 FROM latest AS pdf
 
-RUN apk add libsass && export SYSTEM_SASS=1 && pip install \
+COPY --from=build /tmp/libsass* /tmp
+
+RUN apk add libsass && pip install \
+      /tmp/libsass* \
       mkdocs-pdf-export-plugin \
       mkdocs-with-pdf \
     && clean
