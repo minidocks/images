@@ -7,7 +7,7 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=4.3.0
+ARG version=4.3.1
 
 RUN apk add py3-lxml py3-beautifulsoup4 && pip install \
       sphinx=="$version" \
