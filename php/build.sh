@@ -3,10 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/php"
 versions="
-7.2;7.2
-7.2-base;7.2;base
-7.2-nginx;7.2;nginx
-7.2-intl;7.2;intl
 7.3;7.3
 7.3-base;7.3;base
 7.3-nginx;7.3;nginx
@@ -19,7 +15,11 @@ versions="
 8.0-base;8.0;base
 8.0-nginx;8.0;nginx
 8.0-intl;8.0;intl
-latest;8.0
+8.1;8.1
+8.1-base;8.1;base
+8.1-nginx;8.1;nginx
+8.1-intl;8.1;intl
+latest;8.1
 "
 
 build() {

@@ -1,17 +1,17 @@
-ARG version=8.0
+ARG version=8.1
 ARG major=8
-ARG composer1_version=1.10.22
-ARG composer2_version=2.1.9
-ARG blackfire_version=1.68.1
+ARG composer1_version=1.10.24
+ARG composer2_version=2.1.14
+ARG blackfire_version=1.72.0
 ARG newrelic_version=9.18.1.303
-
-FROM minidocks/base:3.9 AS v7.2
 
 FROM minidocks/base:3.12 AS v7.3
 
-FROM minidocks/base:3.14 AS v7.4
+FROM minidocks/base:3.15 AS v7.4
 
-FROM minidocks/base:3.14 AS v8.0
+FROM minidocks/base:3.15 AS v8.0
+
+FROM minidocks/base:edge AS v8.1
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -22,11 +22,14 @@ ARG major
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN getent group www-data >/dev/null || addgroup -g 82 -S www-data; getent passwd www-date >/dev/null || adduser -u 82 -S -s /bin/sh -G www-data www-data
 
-RUN for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$major-$module"; done \
+RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
+    && for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$suffix-$module"; done \
     && if [ "$version" == "7.2" ]; then libiconv_version="@community"; fi \
-    && apk add "gnu-libiconv$libiconv_version" "php$major" $modules && clean \
-    && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$major" /usr/bin/php; fi \
-    && if [ ! -f /usr/bin/phar ]; then ln -s "/usr/bin/phar$major" /usr/bin/phar; fi
+    && apk add "gnu-libiconv$libiconv_version" "php$suffix" $modules && clean \
+    && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$suffix" /usr/bin/php; fi \
+    && if [ ! -f /usr/bin/phar ]; then ln -s "/usr/bin/phar$suffix" /usr/bin/phar; fi \
+    && if [ ! -d /etc/php$major ]; then ln -s "/etc/php$suffix" "/etc/php$major"; fi \
+    && if [ ! -d /usr/lib/php$major ]; then ln -s "/usr/lib/php$suffix" "/usr/lib/php$major"; fi
 
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
@@ -63,7 +66,8 @@ FROM base AS latest
 ARG version
 ARG major
 
-RUN for module in \
+RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
+    && for module in \
         bcmath \
         calendar \
         cgi \
@@ -79,7 +83,6 @@ RUN for module in \
         mysqli \
         mysqlnd \
         opcache \
-        pecl-mcrypt \
         pecl-redis \
         pecl-xdebug \
         pdo_mysql \
@@ -97,9 +100,11 @@ RUN for module in \
         xmlwriter \
         xsl \
         zip \
-    ; do modules="$modules php$major-$module"; done \
-    && if [ "$major" != "8" ]; then modules="$modules php$major-xmlrpc"; fi \
-    && if [ "$major" == "8" ] || [ "$version" == "7.4" ]; then modules="$modules php$major-ffi"; fi \
+    ; do modules="$modules php$suffix-$module"; done \
+    && if [ "$major" != "8" ]; then modules="$modules php$suffix-xmlrpc"; fi \
+    && if [ "$major" = "8" ] || [ "$version" = "7.4" ]; then modules="$modules php$suffix-ffi"; fi \
+    && if [ "$version" != "7.2" ]; then modules="$modules php$suffix-pecl-uploadprogress"; fi \
+    && if [ "$version" != "8.1" ]; then modules="$modules php$suffix-pecl-mcrypt"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$major" /usr/bin/php-fpm; fi \
     && clean
@@ -150,8 +155,10 @@ RUN chmod 1777 /var/lib/nginx/tmp
 
 FROM nginx AS intl
 
+ARG version
 ARG major
 
-RUN apk add "php$major-intl" && clean
+RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
+    && apk add "php$suffix-intl" && clean
 
 FROM latest
