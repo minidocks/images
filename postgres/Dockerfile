@@ -75,7 +75,7 @@ FROM latest AS czech
 
 ENV LANG cs_CZ.UTF-8
 
-RUN apk add postgresql-tsearch-czech@edge && clean
+RUN apk add postgresql-tsearch-czech@314 && clean
 
 RUN wget -O /tmp/czech.tar.gz https://github.com/freaz/docker-postgres-czech-unaccent/raw/master/czech_unaccent.tar.gz && cd /tmp && tar -xzf czech.tar.gz -C /tmp/ \
     && mv /tmp/fulltext_dicts/czech* /usr/share/postgresql/tsearch_data/ && clean
