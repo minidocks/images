@@ -106,7 +106,7 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
     && if [ "$version" != "7.2" ]; then modules="$modules php$suffix-pecl-uploadprogress"; fi \
     && if [ "$version" != "8.1" ]; then modules="$modules php$suffix-pecl-mcrypt"; fi \
     && apk add $modules \
-    && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$major" /usr/bin/php-fpm; fi \
+    && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$([ "$version" = "8.1" ] && echo "81" || echo $major)" /usr/bin/php-fpm; fi \
     && clean
 
 ENV PHP_EXT_XDEBUG=0 \
