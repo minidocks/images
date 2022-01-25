@@ -9,11 +9,11 @@ Alpine repositories
 
 All images have registered the following apk repositories:
 
-- @edge ([@main](http://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](http://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](http://dl-cdn.alpinelinux.org/alpine/edge/testing))
-- @315 ([@main315](http://dl-cdn.alpinelinux.org/alpine/v3.15/main), [@community315](http://dl-cdn.alpinelinux.org/alpine/v3.15/community))
-- @314 ([@main314](http://dl-cdn.alpinelinux.org/alpine/v3.14/main), [@community314](http://dl-cdn.alpinelinux.org/alpine/v3.14/community))
+- @edge ([@main](https://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](https://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](https://dl-cdn.alpinelinux.org/alpine/edge/testing))
+- @315 ([@main315](https://dl-cdn.alpinelinux.org/alpine/v3.15/main), [@community315](https://dl-cdn.alpinelinux.org/alpine/v3.15/community))
+- @314 ([@main314](https://dl-cdn.alpinelinux.org/alpine/v3.14/main), [@community314](https://dl-cdn.alpinelinux.org/alpine/v3.14/community))
 - …
-- @310 ([@main37](http://dl-cdn.alpinelinux.org/alpine/v3.10/main), [@community310](http://dl-cdn.alpinelinux.org/alpine/v3.10/community))
+- @312 ([@main37](https://dl-cdn.alpinelinux.org/alpine/v3.12/main), [@community312](https://dl-cdn.alpinelinux.org/alpine/v3.12/community))
 
 Utilities
 ---------

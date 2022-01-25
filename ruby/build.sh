@@ -3,10 +3,9 @@ set -e
 
 image="${namespace:-minidocks}/ruby"
 versions="
-2.4;2.4
-2.5;2.5
-2.6;2.6
-latest;2.6
+2.7;2.7
+3.0;3.0
+latest;3.0
 "
 
 build() {

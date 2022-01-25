@@ -24,7 +24,3 @@ Tags
 | 13-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/12-czech?style=flat-square&logo=docker&label=size) |
 | 12         | ![](https://img.shields.io/docker/image-size/minidocks/postgres/12?style=flat-square&logo=docker&label=size)       |
 | 12-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/12-czech?style=flat-square&logo=docker&label=size) |
-| 11         | ![](https://img.shields.io/docker/image-size/minidocks/postgres/11?style=flat-square&logo=docker&label=size)       |
-| 11-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/11-czech?style=flat-square&logo=docker&label=size) |
-| 10         | ![](https://img.shields.io/docker/image-size/minidocks/postgres/10?style=flat-square&logo=docker&label=size)       |
-| 10-czech   | ![](https://img.shields.io/docker/image-size/minidocks/postgres/10-czech?style=flat-square&logo=docker&label=size) |

@@ -9,10 +9,6 @@ versions="
 2;2.7
 2-packaging;2.7;packaging
 2-build;2.7;build;-build
-3.7;3.7
-3.7-packaging;3.7;packaging
-3.7-uwsgi;3.7;uwsgi
-3.7-build;3.7;build;-build
 3.8;3.8
 3.8-packaging;3.8;packaging
 3.8-uwsgi;3.8;uwsgi

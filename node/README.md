@@ -47,7 +47,3 @@ Tags
 | 15-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/15-base?style=flat-square&logo=docker&label=size)]() |
 | 14                    | [![](https://img.shields.io/docker/image-size/minidocks/node/14?style=flat-square&logo=docker&label=size)]()      |
 | 14-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/14-base?style=flat-square&logo=docker&label=size)]() |
-| 13                    | [![](https://img.shields.io/docker/image-size/minidocks/node/13?style=flat-square&logo=docker&label=size)]()      |
-| 13-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/13-base?style=flat-square&logo=docker&label=size)]() |
-| 12                    | [![](https://img.shields.io/docker/image-size/minidocks/node/12?style=flat-square&logo=docker&label=size)]()      |
-| 12-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/12-base?style=flat-square&logo=docker&label=size)]() |

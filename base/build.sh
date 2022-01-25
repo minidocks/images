@@ -3,10 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/base"
 versions="
-3.10;3.10
-3.10-build;3.10;build
-3.11;3.11
-3.11-build;3.11;build
 3.12;3.12
 3.12-build;3.12;build
 3.13;3.13

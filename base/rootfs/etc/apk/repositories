@@ -1,46 +1,34 @@
-http://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE/main
-http://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE/community
+https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE/main
+https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE/community
 
-@main http://dl-cdn.alpinelinux.org/alpine/edge/main
-@community http://dl-cdn.alpinelinux.org/alpine/edge/community
-@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing
+@main https://dl-cdn.alpinelinux.org/alpine/edge/main
+@community https://dl-cdn.alpinelinux.org/alpine/edge/community
+@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing
 
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/main
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/community
-@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing
+@edge https://dl-cdn.alpinelinux.org/alpine/edge/main
+@edge https://dl-cdn.alpinelinux.org/alpine/edge/community
+@edge https://dl-cdn.alpinelinux.org/alpine/edge/testing
 
-@main315 http://dl-cdn.alpinelinux.org/alpine/v3.15/main
-@community315 http://dl-cdn.alpinelinux.org/alpine/v3.15/community
+@main315 https://dl-cdn.alpinelinux.org/alpine/v3.15/main
+@community315 https://dl-cdn.alpinelinux.org/alpine/v3.15/community
 
-@315 http://dl-cdn.alpinelinux.org/alpine/v3.15/main
-@315 http://dl-cdn.alpinelinux.org/alpine/v3.15/community
+@315 https://dl-cdn.alpinelinux.org/alpine/v3.15/main
+@315 https://dl-cdn.alpinelinux.org/alpine/v3.15/community
 
-@main314 http://dl-cdn.alpinelinux.org/alpine/v3.14/main
-@community314 http://dl-cdn.alpinelinux.org/alpine/v3.14/community
+@main314 https://dl-cdn.alpinelinux.org/alpine/v3.14/main
+@community314 https://dl-cdn.alpinelinux.org/alpine/v3.14/community
 
-@314 http://dl-cdn.alpinelinux.org/alpine/v3.14/main
-@314 http://dl-cdn.alpinelinux.org/alpine/v3.14/community
+@314 https://dl-cdn.alpinelinux.org/alpine/v3.14/main
+@314 https://dl-cdn.alpinelinux.org/alpine/v3.14/community
 
-@main313 http://dl-cdn.alpinelinux.org/alpine/v3.13/main
-@community313 http://dl-cdn.alpinelinux.org/alpine/v3.13/community
+@main313 https://dl-cdn.alpinelinux.org/alpine/v3.13/main
+@community313 https://dl-cdn.alpinelinux.org/alpine/v3.13/community
 
-@313 http://dl-cdn.alpinelinux.org/alpine/v3.13/main
-@313 http://dl-cdn.alpinelinux.org/alpine/v3.13/community
+@313 https://dl-cdn.alpinelinux.org/alpine/v3.13/main
+@313 https://dl-cdn.alpinelinux.org/alpine/v3.13/community
 
-@main312 http://dl-cdn.alpinelinux.org/alpine/v3.12/main
-@community312 http://dl-cdn.alpinelinux.org/alpine/v3.12/community
+@main312 https://dl-cdn.alpinelinux.org/alpine/v3.12/main
+@community312 https://dl-cdn.alpinelinux.org/alpine/v3.12/community
 
-@312 http://dl-cdn.alpinelinux.org/alpine/v3.12/main
-@312 http://dl-cdn.alpinelinux.org/alpine/v3.12/community
-
-@main311 http://dl-cdn.alpinelinux.org/alpine/v3.11/main
-@community311 http://dl-cdn.alpinelinux.org/alpine/v3.11/community
-
-@311 http://dl-cdn.alpinelinux.org/alpine/v3.11/main
-@311 http://dl-cdn.alpinelinux.org/alpine/v3.11/community
-
-@main310 http://dl-cdn.alpinelinux.org/alpine/v3.10/main
-@community310 http://dl-cdn.alpinelinux.org/alpine/v3.10/community
-
-@310 http://dl-cdn.alpinelinux.org/alpine/v3.10/main
-@310 http://dl-cdn.alpinelinux.org/alpine/v3.10/community
+@312 https://dl-cdn.alpinelinux.org/alpine/v3.12/main
+@312 https://dl-cdn.alpinelinux.org/alpine/v3.12/community

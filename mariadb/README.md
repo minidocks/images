@@ -35,6 +35,3 @@ Tags
  latest, 10.4 | ![](https://img.shields.io/docker/image-size/minidocks/mariadb/latest?style=flat-square&logo=docker&label=size)
  10.5         | ![](https://img.shields.io/docker/image-size/minidocks/mariadb/10.5?style=flat-square&logo=docker&label=size)
  10.4         | ![](https://img.shields.io/docker/image-size/minidocks/mariadb/10.4?style=flat-square&logo=docker&label=size)
- 10.3         | ![](https://img.shields.io/docker/image-size/minidocks/mariadb/10.3?style=flat-square&logo=docker&label=size)
- 10.2         | ![](https://img.shields.io/docker/image-size/minidocks/mariadb/10.2?style=flat-square&logo=docker&label=size)
- 10.1         | ![](https://img.shields.io/docker/image-size/minidocks/mariadb/10.1?style=flat-square&logo=docker&label=size)

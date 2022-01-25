@@ -3,12 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/mariadb"
 versions="
-10.1;10.1
-10.1-sphinx;10.1;sphinx
-10.2;10.2
-10.2-sphinx;10.2;sphinx
-10.3;10.3
-10.3-sphinx;10.3;sphinx
 10.4;10.4
 10.4-sphinx;10.4;sphinx
 10.5;10.5

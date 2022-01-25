@@ -2,11 +2,6 @@
 
 ARG version=10.4
 
-FROM minidocks/base:3.7 AS v10.1
-
-FROM minidocks/base:3.8 AS v10.2
-
-FROM minidocks/base:3.10 AS v10.3
 
 FROM minidocks/base:3.12 AS v10.4
 

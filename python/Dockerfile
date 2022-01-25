@@ -5,9 +5,6 @@ FROM minidocks/base:3.15 AS base_2.7
 
 FROM minidocks/base:3.15-build AS base_2.7-build
 
-FROM minidocks/base:3.10 AS base_3.7
-
-FROM minidocks/base:3.10-build AS base_3.7-build
 
 FROM minidocks/base:3.13 AS base_3.8
 

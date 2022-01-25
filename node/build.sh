@@ -3,10 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/node"
 versions="
-12-base;3.12;nodejs<13;base
-12;3.12;nodejs<13
-13-base;3.11;nodejs-current<14;base
-13;3.11;nodejs-current<14
 14-base;3.14;nodejs<15;base
 14;3.14;nodejs<15
 15-base;3.13;nodejs-current<16;base

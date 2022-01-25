@@ -1,4 +1,4 @@
-ARG version=3.14
+ARG version=3.15
 ARG glibc_version="2.34-r0"
 ARG prefix="https://github.com/sgerrand/alpine-pkg-glibc/releases/download/"
 

@@ -9,8 +9,8 @@ programming language, as well as a garbage-collected runtime system.
 Tags
 ----
 
-| Tag        | Size                                                                     |
-|------------|--------------------------------------------------------------------------|
-| latest, 23 | ![](https://img.shields.io/docker/image-size/minidocks/erlang/latest?style=flat-square&logo=docker&label=size)    |
-| 23         | ![](https://img.shields.io/docker/image-size/minidocks/erlang/23?style=flat-square&logo=docker&label=size) |
-| 22         | ![](https://img.shields.io/docker/image-size/minidocks/erlang/22?style=flat-square&logo=docker&label=size) |
+| Tag        | Size                                                                                                           |
+|------------|----------------------------------------------------------------------------------------------------------------|
+| latest, 24 | ![](https://img.shields.io/docker/image-size/minidocks/erlang/latest?style=flat-square&logo=docker&label=size) |
+| 24         | ![](https://img.shields.io/docker/image-size/minidocks/erlang/24?style=flat-square&logo=docker&label=size)     |
+| 23         | ![](https://img.shields.io/docker/image-size/minidocks/erlang/23?style=flat-square&logo=docker&label=size)     |

@@ -1,7 +1,5 @@
 ARG version=3.0
 
-FROM minidocks/base:3.11 AS v2.6
-
 FROM minidocks/base:3.14 AS v2.7
 
 FROM minidocks/base:3.15 AS v3.0

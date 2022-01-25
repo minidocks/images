@@ -3,10 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/postgres"
 versions="
-10;10
-10-czech;10;czech
-11;11
-11-czech;11;czech
 12;12
 12-czech;12;czech
 13;13
