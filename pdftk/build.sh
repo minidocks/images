@@ -3,8 +3,8 @@ set -e
 
 image="${namespace:-minidocks}/pdftk"
 versions="
-3;1353200062
-latest;1353200062
+3;3.3.2
+latest;3.3.2
 "
 
 build() {

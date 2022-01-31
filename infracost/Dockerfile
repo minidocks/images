@@ -1,4 +1,4 @@
-ARG INFRACOST_VERSION=0.9.12
+ARG INFRACOST_VERSION=0.9.16
 
 FROM minidocks/curl
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

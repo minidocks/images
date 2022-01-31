@@ -99,14 +99,14 @@ docker-compose run --rm pandoc https://raw.githubusercontent.com/mszep/pandoc_re
 Tags
 ----
 
-| Tag             | Size                                                                       |
-|-----------------|----------------------------------------------------------------------------|
-| latest, 2, 2.16 | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/latest?style=flat-square&logo=docker&label=size)      |
-| 2               | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2?style=flat-square&logo=docker&label=size)    |
-| 2.16            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.16?style=flat-square&logo=docker&label=size) |
-| 2.15            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.15?style=flat-square&logo=docker&label=size) |
-| 2.14            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.14?style=flat-square&logo=docker&label=size) |
-| 2.13            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.13?style=flat-square&logo=docker&label=size) |
+| Tag             | Size                                                                                                           |
+|-----------------|----------------------------------------------------------------------------------------------------------------|
+| latest, 2, 2.17 | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/latest?style=flat-square&logo=docker&label=size) |
+| 2               | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2?style=flat-square&logo=docker&label=size)      |
+| 2.17            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.17?style=flat-square&logo=docker&label=size)   |
+| 2.16            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.16?style=flat-square&logo=docker&label=size)   |
+| 2.15            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.15?style=flat-square&logo=docker&label=size)   |
+| 2.14            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.14?style=flat-square&logo=docker&label=size)   |
 
 Related images
 --------------

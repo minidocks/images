@@ -2,40 +2,21 @@
 set -e
 
 image="${namespace:-minidocks}/java"
+java_versions="8 11 17"
+
 versions="
-7-jre-nogui;7;headless
-7-jre-headless;7;headless
-7-jre;7;gui
-7-jre-gui;7;gui
-7;7;headless
-7-gui;7;gui
-8-jre-nogui;8;headless
-8-jre-headless;8;headless
-8-jre;8;gui
-8-jre-gui;8;gui
-8;8;headless
-8-gui;8;gui
-8-gradle;8;gradle
-9-jre-nogui;9;headless
-9-jre-headless;9;headless
-9-jre;9;gui
-9-jre-gui;9;gui
-9;9;headless
-9-gui;9;gui
-10-jre-nogui;10;headless
-10-jre-headless;10;headless
-10-jre;10;gui
-10-jre-gui;10;gui
-10;10;headless
-10-gui;10;gui
-11-jre-nogui;11;headless
-11-jre-headless;11;headless
-11-jre;11;gui
-11-jre-gui;11;gui
-11;11;headless
-11-gui;11;gui
-latest;11;headless
+latest;17;headless
+gradle;17;gradle
 "
+for version in $java_versions; do versions="
+$versions
+$version-jre-nogui;$version;headless
+$version-jre-headless;$version;headless
+$version-jre;$version;gui
+$version-jre-gui;$version;gui
+$version;$version;headless
+$version-gui;$version;gui
+"; done
 
 build() {
     IFS=" "

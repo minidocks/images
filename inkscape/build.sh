@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/inkscape"
 versions="
-0.92;0
 1
 latest
 "

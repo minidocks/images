@@ -1,10 +1,9 @@
-FROM minidocks/python:3.9
+FROM minidocks/python:3
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=0.4.1
+ARG version=0.4.3
 
-RUN if [ ! "${version%.*}" = "0.3" ]; then packages="py3-pikepdf qpdf qpdf-fix-qdf"; fi \
-    && apk --update add py3-pillow $packages && pip install img2pdf==$version && clean
+RUN apk --update add py3-pillow py3-pikepdf qpdf qpdf-fix-qdf && pip install img2pdf==$version && clean
 
 COPY rootfs /
 

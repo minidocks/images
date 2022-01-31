@@ -18,6 +18,14 @@ versions="
 3.9-uwsgi;3.9;uwsgi
 3.9-build;3.9;build;-build
 3;3.9
+3.10;3.10
+3.10-packaging;3.10;packaging
+3.10-uwsgi;3.10;uwsgi
+3.10-build;3.10;build;-build
+edge;3.10
+edge-packaging;3.10;packaging
+edge-uwsgi;3.10;uwsgi
+edge-build;3.10;build;-build
 3-packaging;3.9;packaging
 3-build;3.9;build;-build
 3-uwsgi;3.9;uwsgi

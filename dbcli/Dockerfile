@@ -1,7 +1,7 @@
-ARG mycli_version=1.24.1
-ARG pgcli_version=3.2.0
-ARG litecli_version=1.6.0
-ARG iredis_version=1.9.4
+ARG mycli_version=1.24.3
+ARG pgcli_version=3.3.1
+ARG litecli_version=1.7.0
+ARG iredis_version=1.11.0
 
 FROM minidocks/python AS mycli
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
