@@ -18,7 +18,7 @@ FROM minidocks/python AS pgcli
 
 ARG pgcli_version
 
-RUN apk --update add py3-psycopg2 py3-setproctitle && pip install pg_activity pgcli==$pgcli_version && clean
+RUN apk --update add py3-psutil py3-psycopg2 py3-setproctitle && pip install pg_activity pgcli==$pgcli_version && clean
 
 COPY rootfs /
 
@@ -51,7 +51,7 @@ ARG pgcli_version
 ARG litecli_version
 ARG iredis_version
 
-RUN apk --update add py3-cryptography py3-psycopg2 py3-setproctitle \
-    && pip install pg_activity pgcli==$pgcli_version mycli==$mycli_version litecli==$litecli_version iredis==$iredis_versio && clean
+RUN apk --update add py3-cryptography py3-psutil py3-psycopg2 py3-setproctitle \
+    && pip install pg_activity pgcli==$pgcli_version mycli==$mycli_version litecli==$litecli_version iredis==$iredis_version && clean
 
 COPY rootfs /

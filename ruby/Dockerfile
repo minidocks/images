@@ -21,8 +21,6 @@ RUN mkdir -p "$GEM_HOME" && chmod 777 "$GEM_HOME" && mkdir -p "$BUNDLE_CACHE_PAT
 
 COPY rootfs /
 
-RUN apk --update add ruby ruby-irb \
-    && gem install bundler \
-    && clean
+RUN apk add ruby ruby-irb && gem install bundler && clean
 
 CMD [ "irb" ]

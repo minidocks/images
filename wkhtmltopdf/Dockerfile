@@ -1,4 +1,4 @@
-FROM minidocks/base
+FROM minidocks/base:3.14
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk --update add wkhtmltopdf xvfb ttf-freefont fontconfig dbus \

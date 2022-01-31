@@ -40,7 +40,7 @@ RUN if [ "${version::1}" = 3 ]; then \
     fi
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
-    && apk -U add "python${version::1}" && "python${version::1}" -m ensurepip --upgrade \
+    && apk add "python${version::1}" && "python${version::1}" -m ensurepip --upgrade \
     && pip install -U pip setuptools wheel \
     && clean
 

@@ -1,11 +1,12 @@
 FROM minidocks/base AS headless
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
+ARG TARGETARCH
 ARG version
 
-RUN if echo "7 8" | grep -q "$version"; then headless='base'; else headless='headless'; fi \
+RUN if echo "8" | grep -q "$version"; then headless='base'; else headless='headless'; fi \
     && apk --update add "openjdk${version}-jre-${headless}" \
-    && if [ "8" = "$version" ]; then apk add java-jna-native; fi \
+    && if [ "17" = "$version" && "$TARGETARCH" != "arm64" ]; then apk add java-jna-native; fi \
     && clean
 
 FROM headless AS gui

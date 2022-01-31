@@ -1,26 +1,31 @@
-ARG version=beta
-ARG platform=linuxmusl-64
+ARG version=latest
 
 FROM minidocks/base AS build
 
+ARG TARGETARCH
 ARG version
-ARG platform
 
-ENV PATH=$PATH:/usr/share/tex/texmf-$platform/bin:/usr/share/bin
+ENV PATH=$PATH:/usr/share/tex/texmf-bin:/usr/share/bin
 
 RUN apk --no-cache add rsync && clean
 
 RUN if [ "$version" = "lmtx" ]; then cd /usr/share \
-    && wget -O context.zip http://lmtx.pragma-ade.nl/install-lmtx/context-linuxmusl.zip && unzip context.zip && rm context.zip \
-    && chmod a+x install.sh bin/mtxrun && mkdir -p tex && ln -s texmf-linuxmusl "tex/texmf-$platform" \
+    && export platform="$([ "$TARGETARCH" == "arm64" ] && echo "osx-arm64" || echo "linuxmusl")" \
+    && wget -O context.zip https://lmtx.pragma-ade.nl/install-lmtx/context-$platform.zip && unzip context.zip && rm context.zip \
+    && chmod a+x install.sh bin/mtxrun && mkdir -p tex \
+    && if [ "$TARGETARCH" == "amd64" ]; then ln -s texmf-linuxmusl "tex/texmf-linuxmusl-64"; fi \
     && ./install.sh \
     ; fi
 
 RUN if [ "$version" != "lmtx" ]; then cd /usr/share \
-    && wget http://minimals.contextgarden.net/setup/first-setup.sh \
+    && export platform="$([ "$TARGETARCH" == "arm64" ] && echo "osx-arm64" || echo "linuxmusl-64")" \
+    && wget https://distribution.contextgarden.net/setup/first-setup.sh \
     && sh ./first-setup.sh --modules=all --engine=luatex --context="$version" \
-    && mv /usr/share/bin/* /usr/share/tex/texmf-$platform/bin \
+    && mv /usr/share/bin/* "/usr/share/tex/texmf-$platform/bin" \
     ; fi
+
+RUN export platform="$([ "$TARGETARCH" == "arm64" ] && echo "osx-arm64" || echo "linuxmusl-64")" \
+    && cd /usr/share && ln -s "texmf-$platform/bin" tex/texmf-bin
 
 FROM build AS dist
 
@@ -32,10 +37,10 @@ RUN rm -rf /usr/share/tex/texmf-cache/*
 FROM minidocks/base AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG platform
+ARG TARGETARCH
 
 ENV CONTEXT_HOME=/usr/share \
-    PATH=$PATH:/usr/share/tex/texmf-$platform/bin:/usr/share/bin \
+    PATH=$PATH:/usr/share/tex/texmf-bin:/usr/share/bin \
     TEXMFCACHE=/usr/share/tex/texmf-cache \
     MTX_FONTS_AUTOLOAD=yes
 

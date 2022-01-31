@@ -3,16 +3,18 @@ set -e
 
 image="${namespace:-minidocks}/context"
 versions="
-beta;beta
-beta-with-fonts;beta;fonts
-beta-with-docs;beta;docs
+beta;latest
+beta-with-fonts;latest;fonts
+beta-with-docs;latest;docs
 current;current
 current-with-fonts;current;fonts
 current-with-docs;current;docs
 lmtx;lmtx
 lmtx-with-fonts;lmtx;fonts
 lmtx-with-docs;lmtx;docs
-latest;beta
+latest;latest
+latest-with-fonts;latest;fonts
+latest-with-docs;latest;docs
 "
 
 build() {

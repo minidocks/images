@@ -15,4 +15,5 @@ jobs:
       - env:
           DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_PLATFORM: linux/amd64
         run: bash ./run github:build_and_push

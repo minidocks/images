@@ -166,7 +166,8 @@ build()(
     if [ -f "$source_dir/build.sh" ]; then
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
-            namespace="$namespace" docker_opts="$(echo "$opts" | xargs)" "$source_dir/build.sh" "$version"
+            if ! namespace="$namespace" docker_opts="$(echo "$opts" | xargs)" "$source_dir/build.sh" "$version";
+            then exit 1; fi
         done
         printf "\n"
     elif [ ! -d "$target_dir" ] || [ "$no_clear" != 1 ]; then
@@ -174,7 +175,8 @@ build()(
         cp -rfL "$source_dir" "$target_dir"
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
-            docker buildx build $opts -t "$namespace/$package:$version" "$target_dir"
+            if ! docker buildx build $opts -t "$namespace/$package:$version" "$target_dir"
+            then exit 1; fi
         done
         if [ "$no_clear" != 1 ]; then rm -rf "$target_dir"; fi
         printf "\n"
@@ -223,10 +225,12 @@ task_build()(
 
     versions="$(versions "${dir:-$package}")"
     if [ -n "$version" ] && echo "$versions" | grep -qx "$version"; then
-        build "$package" "$version" --dir "$dir" $opts
+        if ! build "$package" "$version" --dir "$dir" $opts
+        then exit 1; fi
     else
         for version in $versions; do
-            build "$package" "$version" --dir "$dir" $opts
+            if ! build "$package" "$version" --dir "$dir" $opts
+            then exit 1; fi
         done
     fi
 )
@@ -334,5 +338,5 @@ task_github__build_and_push()(
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
     task_sync "$REPOSITORY_NAME"
-    task_build "$REPOSITORY_NAME" --dir "." --push --platform=linux/amd64,linux/arm64
+    task_build "$REPOSITORY_NAME" --dir "." --push --platform="${DOCKER_PLATFORM:-linux/amd64,linux/arm64}"
 )

@@ -23,6 +23,6 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG lang
 
-RUN for l in "$lang"; do apk add "tesseract-ocr-data-$l" ; done && clean
+RUN for l in $lang; do apk add "tesseract-ocr-data-$l" ; done && clean
 
 FROM latest
