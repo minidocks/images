@@ -1,4 +1,4 @@
-name: Build and publish docker image
+name: docker
 on:
   push:
   schedule:
