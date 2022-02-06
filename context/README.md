@@ -8,6 +8,21 @@ on TeX, a typesetting system and programming language to typeset and produce
 documents. This system is easy to use and enables you to make complex paper and
 electronic documents.
 
+Additional modules
+------------------
+
+-   [Lua widow control](https://github.com/gucci-on-fleek/lua-widow-control):
+    Automatically remove widows and orphans from any document.
+-   [Markdown](https://github.com/Witiko/markdown): A package for converting and
+    rendering markdown documents in TeX.
+
+Fonts
+-----
+
+-   [Quivira](http://quivira-font.com/) is a proportional Unicode serif font
+    that contains more than the standard characters for some western European
+    languages.
+
 Usage
 -----
 
@@ -22,7 +37,7 @@ use docker compose.
 So create a file `docker-compose.yml` with content:
 
 ```yaml
-version: '3.1'
+version: '3.4'
 services:
   context:
     image: minidocks/context
@@ -68,3 +83,8 @@ Related images
 --------------
 
 -   [TeX Live](https://github.com/minidocks/texlive)
+
+Alternatives
+------------
+
+-   https://github.com/islandoftex/context
