@@ -3,15 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/texlive"
 versions="
-2018;2018;basic
-2018-minimal;2018;minimal
-2018-context;2018;context
-2018-basic;2018;basic
-2018-small;2018;small
-2018-gregorio;2018;gregorio
-2018-medium;2018;medium
-2018-full;2018;full
-
 2019;2019;basic
 2019-minimal;2019;minimal
 2019-context;2019;context

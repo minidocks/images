@@ -44,7 +44,7 @@ RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
     && pip install -U pip setuptools wheel \
     && clean
 
-RUN pip install micropipenv && clean
+RUN if [ "${version::1}" = 2 ]; then pip install micropipenv==1.2.0; else pip install micropipenv; fi && clean
 
 CMD [ "python" ]
 

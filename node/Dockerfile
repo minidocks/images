@@ -26,6 +26,7 @@ FROM base AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ENV NPM_CONFIG_CACHE=/npm-cache \
+    NPM_CONFIG_UPDATE_NOTIFIER=false \
     YARN_CACHE_FOLDER=/yarn-cache \
     NODE_PATH=/node_modules \
     CLEAN="$CLEAN:\$NPM_CONFIG_CACHE/:\$YARN_CACHE_FOLDER/"

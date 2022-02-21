@@ -2,8 +2,12 @@ FROM minidocks/perl AS minimal
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version=2021
+ARG TARGETARCH
 
-ENV PATH="$PATH:/usr/local/texlive/bin/x86_64-linuxmusl"
+RUN export bindir="$([ "$TARGETARCH" = "arm64" ] && echo "aarch64" || echo "x86_64")" \
+    && mkdir -p /usr/local/texlive/bin && ln -s "/usr/local/texlive/bin/$bindir-linuxmusl" /usr/local/texlive/bin/linuxmusl
+
+ENV PATH="$PATH:/usr/local/texlive/bin/linuxmusl"
 
 COPY rootfs /
 

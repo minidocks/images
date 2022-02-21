@@ -20,6 +20,7 @@ Installed extensions
 -   [Book](https://sphinx-book-theme.readthedocs.io/en/latest)
 -   [Documatt](https://gitlab.com/documatt/sphinx-themes)
 -   [Furo](https://pradyunsg.me/furo)
+-   [Immaterial](https://jbms.github.io/sphinx-immaterial/)
 -   [Material](https://github.com/bashtage/sphinx-material)
 -   [Pallets](https://github.com/pallets/pallets-sphinx-themes)
 -   [Press](https://schettino72.github.io/sphinx_press_site)
@@ -66,18 +67,15 @@ More extensions on
     [sphinx-multibuild](https://github.com/rowanG077/sphinx-multibuild).
 -   Live-reload web server provided by
     [sphinx-autobuild](https://github.com/GaretJax/sphinx-autobuild).
--   ReStructuredText validator
-    [rstvalidator](https://github.com/andrewp-as-is/rstvalidator.py).
 -   A tool for converting ReStructuredText to MyST Markdown
     [rst-to-myst](https://rst-to-myst.readthedocs.io)
 
 ### Markdown support
 
--   [m2r2](https://github.com/crossnox/m2r2)
 -   [Markdown parser](https://github.com/codejamninja/sphinx-markdown-parser)
--   [MyST](https://myst-parser.readthedocs.io/en/latest/index.html)
--   [recommonmark](https://recommonmark.readthedocs.io)
+-   [MInclude](https://github.com/jreese/sphinx-mdinclude)
 -   [Markdown builder](https://github.com/codejamninja/sphinx-markdown-builder)
+-   [MyST](https://myst-parser.readthedocs.io/en/latest/index.html)
 
 Usage
 -----

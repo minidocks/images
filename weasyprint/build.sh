@@ -3,7 +3,7 @@ set -e
 
 image="${namespace:-minidocks}/weasyprint"
 versions="
-latest;54.0
+latest;54.1
 "
 
 build() {

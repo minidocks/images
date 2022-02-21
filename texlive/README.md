@@ -42,7 +42,6 @@ Tags
 | 2021          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2021?style=flat-square&logo=docker&label=size)     |
 | 2020          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2020?style=flat-square&logo=docker&label=size)     |
 | 2019          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2019?style=flat-square&logo=docker&label=size)     |
-| 2018          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2018?style=flat-square&logo=docker&label=size)     |
 
 Related images
 --------------

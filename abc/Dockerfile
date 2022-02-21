@@ -1,6 +1,6 @@
 FROM minidocks/base:build AS abcm2ps
 
-RUN apk add pango-dev
+RUN apk add -u pango-dev
 
 ARG abc2prt_version=1.0.2
 
@@ -20,7 +20,7 @@ RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v$
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2022.01.28
+ARG abc2midi_version=2022.02.18
 
 RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
@@ -31,7 +31,7 @@ FROM minidocks/pyinstaller AS abc2xml
 ARG xml2abc_version=143
 ARG abc2xml_version=236
 
-RUN apk add wget && wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2abc.py-${xml2abc_version}.zip" \
+RUN wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2abc.py-${xml2abc_version}.zip" \
     && wget -O /tmp/abc2xml.zip "https://wim.vree.org/svgParse/abc2xml.py-${abc2xml_version}.zip" \
     && unzip /tmp/xml2abc.zip -d /tmp && unzip /tmp/abc2xml.zip -d /tmp \
     && pyinstaller -s /tmp/xml2abc*/xml2abc.py && pyinstaller -s /tmp/abc2xml*/abc2xml.py
@@ -45,9 +45,9 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 COPY --from=abcm2ps /tmp/build /
 COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
-ARG abc2svg_version=1.21.5
+ARG abc2svg_version=1.21.6
 
-RUN apk add pango npm && npm i -g abc2svg@$abc2svg_version jszip && apk del npm && clean
+RUN apk add -u pango npm && npm i -g abc2svg@$abc2svg_version jszip && apk del npm && clean
 
 COPY rootfs /
 

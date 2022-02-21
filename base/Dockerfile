@@ -16,7 +16,7 @@ COPY rootfs /
 
 RUN sed -i "s/\$ALPINE_RELEASE/$([ 'edge' = "$version" ] && echo "$version" || echo "v$version")/g" /etc/apk/repositories \
     && [ 'edge' = "$version" ] && sed -i 's/@testing //' /etc/apk/repositories || echo "ok" >/dev/null \
-    && apk --update add busybox-extras busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert ca-certificates gettext libintl ttf-inconsolata wait4ports \
+    && apk add -u busybox-extras busybox-suid su-exec tini monit inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert ca-certificates gettext libintl ttf-inconsolata wait4ports \
     && mv /usr/bin/envsubst /usr/local/bin/ \
     && apk del gettext \
     && wget -O /bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/v2.1.3/wait-for && chmod a+x /bin/wait-for \
@@ -32,6 +32,6 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 ARG version
 
 RUN apk --update upgrade \
-    && apk add build-base make cmake automake autoconf libtool && clean
+    && apk add -u build-base make cmake automake autoconf libtool && clean
 
 FROM latest

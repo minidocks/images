@@ -12,7 +12,7 @@ RUN apk add zlib-dev \
 FROM minidocks/python:3 AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk add binutils py3-cryptodome && clean
+RUN apk add binutils py3-pycryptodome && clean
 
 COPY --from=build /tmp/pyinstaller/ /usr/
 COPY rootfs /
