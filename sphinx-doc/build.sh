@@ -3,12 +3,10 @@ set -e
 
 image="${namespace:-minidocks}/sphinx-doc"
 versions="
-3;3.5.4
-3-pdf;3.5.4;weasyprint;pdf
-4;4.4.0
-4-pdf;4.4.0;weasyprint;pdf
-pdf;4.4.0;weasyprint;pdf
-latest;4.4.0
+4;4.5.0
+4-pdf;4.5.0;weasyprint;pdf
+pdf;4.5.0;weasyprint;pdf
+latest;4.5.0
 "
 
 build() {

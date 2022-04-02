@@ -9,7 +9,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk add -u py3-lxml py3-beautifulsoup4 py3-ruamel.yaml && clean
 
-ARG version=4.4.0
+ARG version=4.5.0
 
 RUN pip install \
       sphinx=="$version" \
@@ -40,7 +40,6 @@ RUN pip install \
       sphinxcontrib-images \
       sphinxcontrib-openapi \
       sphinxcontrib-programoutput \
-      sphinx_gherkindoc \
       sphinxext-opengraph \
       \
       furo \
