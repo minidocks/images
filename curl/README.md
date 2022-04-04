@@ -10,6 +10,7 @@ Utilities
 
 - [jq](https://stedolan.github.io/jq/) is a lightweight and flexible command-line JSON processor.
 - [pup](https://github.com/ericchiang/pup) parsing HTML at the command line.
+- [xmllint](https://gnome.pages.gitlab.gnome.org/libxml2/xmllint.html) command line XML tool.
 
 Usage
 -----
