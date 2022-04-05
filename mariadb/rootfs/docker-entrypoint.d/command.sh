@@ -2,10 +2,10 @@
 set -e
 
 if [ "${1:0:1}" = '-' ]; then
-    set -- mysqld "$@"
+    set -- mariadbd "$@"
 fi
 
-if [ "$1" = 'mysqld' ]; then
+if [ "$1" = 'mariadbd' ] || [ "$1" = 'mysqld' ]; then
     export USER_NAME="mysql"
     export GROUP_NAME="mysql"
     export USER_ID="$(id -u mysql)"

@@ -7,7 +7,9 @@ versions="
 10.4-sphinx;10.4;sphinx
 10.5;10.5
 10.5-sphinx;10.5;sphinx
-latest;10.4
+10.6;10.6
+10.6-sphinx;10.6;sphinx
+latest;10.6
 "
 
 build() {

@@ -1,36 +1,41 @@
-# https://github.com/docker-library/mariadb/blob/master/10.4/Dockerfile
+# https://github.com/docker-library/mariadb/blob/master/10.6/Dockerfile
 
-ARG version=10.4
-
+ARG version=10.6
 
 FROM minidocks/base:3.12 AS v10.4
 
-FROM minidocks/base:edge AS v10.5
+FROM minidocks/base:3.14 AS v10.5
+
+FROM minidocks/base:3.15 AS v10.6
 
 FROM v$version AS mariadb
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN addgroup -S mysql && adduser -S -G mysql mysql
 
-RUN apk --update add tzdata pwgen mariadb mariadb-client && clean
+RUN apk add tzdata pwgen mariadb mariadb-client mariadb-backup mariadb-server-utils zstd && clean
 
 RUN \
-# comment out any "user" entires in the MySQL config ("docker-entrypoint.sh" or "--user" will handle user switching)
-    sed -ri 's/^user\s/#&/' /etc/mysql/my.cnf /etc/mysql/conf.d/*; \
-# purge and re-create /var/lib/mysql with appropriate ownership
+    # Temporary work around for MDEV-27980, closes #417
+    sed -i -e 's/--loose-disable-plugin-file-key-management//' /usr/bin/mysql_install_db ; \
+    rm -rf /var/lib/apt/lists/*; \
+    # purge and re-create /var/lib/mysql with appropriate ownership
     rm -rf /var/lib/mysql; \
-    mkdir -p /var/lib/mysql /var/run/mysqld; \
-    chown -R mysql:mysql /var/lib/mysql /var/run/mysqld; \
-# ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
-    chmod 777 /var/run/mysqld; \
-# comment out a few problematic configuration values
-    find /etc/mysql/ -name '*.cnf' -print0 \
-        | xargs -0 grep -lZE '^(bind-address|log)' \
-        | xargs -rt -0 sed -Ei 's/^(bind-address|log)/#&/'; \
-# don't reverse lookup hostnames, they are usually another container
-    echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
+    mkdir -p /var/lib/mysql /run/mysqld; \
+    chown -R mysql:mysql /var/lib/mysql /run/mysqld; \
+    # ensure that /run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
+    chmod 777 /run/mysqld; \
+    # comment out a few problematic configuration values
+    find /etc/my.cnf /etc/my.cnf.d/ -name '*.cnf' -print0 \
+      | xargs -rt -0 sed -Ei 's/^(skip-networking|bind-address|log|user\s)/#&/'; \
+    # don't reverse lookup hostnames, they are usually another container
+    # Issue #327 Correct order of reading directories /etc/mysql/mariadb.conf.d before /etc/mysql/conf.d (mount-point per documentation)
+    sed -i -e '/includedir/i[mariadb]\nskip-host-cache\nskip-name-resolve\n' /etc/my.cnf;
 
-RUN rm -rf /var/lib/mysql; mkdir -p /var/lib/mysql /run/mysqld; chown -R mysql:mysql /var/lib/mysql /run/mysqld; chmod 777 /run/mysqld;
+ENV MARIADB_BIND__ADDRESS=0.0.0.0 \
+    MARIADB_SKIP__NETWORKING=0 \
+    MARIADB_LOG_ERROR=/dev/stderr.pipe \
+    MARIADB_GENERAL_LOG_FILE=/dev/stdout.pipe
 
 RUN mkdir /docker-entrypoint-initdb.d
 
@@ -40,12 +45,12 @@ COPY rootfs /
 
 EXPOSE 3306
 
-CMD [ "mysqld" ]
+CMD [ "mariadbd" ]
 
 FROM mariadb AS sphinx
 
 RUN apk --update add sphinx && clean
 
-CMD [ "supervise", "mysqld", "searchd" ]
+CMD [ "supervise", "mariadbd", "searchd" ]
 
 FROM mariadb AS latest
