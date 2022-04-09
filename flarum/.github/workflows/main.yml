@@ -1,0 +1,18 @@
+name: docker
+on:
+  push:
+  schedule:
+    - cron: '0 12 * * *'
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker/setup-qemu-action@v1
+      - uses: docker/setup-buildx-action@v1
+      - run: wget -O run https://raw.githubusercontent.com/minidocks/images/master/run
+      - env:
+          DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: bash ./run github:build_and_push

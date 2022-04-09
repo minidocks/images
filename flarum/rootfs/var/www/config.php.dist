@@ -1,0 +1,28 @@
+<?php return [
+    'debug' => (bool) getenv('FLARUM_DEBUG') ?: false,
+    'offline' => (bool) getenv('FLARUM_OFFLINE') ?: false,
+    'database' => [
+        'driver' => 'mysql',
+        'host' => getenv('MYSQL_HOST'),
+        'database' => getenv('MYSQL_DATABASE'),
+        'username' => getenv('MYSQL_USER'),
+        'password' => getenv('MYSQL_PASSWORD'),
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix' => getenv('FLARUM_TABLE_PREFIX'),
+        'port' => getenv('MYSQL_PORT'),
+        'strict' => false,
+    ],
+    'url' => getenv('FLARUM_BASE_URL'),
+    'paths' => [
+        'api' => getenv('FLARUM_API_PATH') ?: 'api',
+        'admin' => getenv('FLARUM_ADMIN_PATH') ?: 'admin',
+    ],
+    'headers' => [
+        'poweredByHeader' => getenv('FLARUM_POWEREDBY_HEADER') ?: '',
+        'referrerPolicy' => getenv('FLARUM_REFERRER_POLICY') ?: '',
+    ],
+    'cookie' => [
+        'samesite' => getenv('FLARUM_COOKIE_SAMESITE') ?: 'lax',
+    ],
+];
