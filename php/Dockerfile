@@ -1,9 +1,9 @@
 ARG version=8.1
 ARG major=8
-ARG composer1_version=1.10.24
-ARG composer2_version=2.1.14
-ARG blackfire_version=1.72.0
-ARG newrelic_version=9.18.1.303
+ARG composer1_version=1.10.25
+ARG composer2_version=2.3.4
+ARG blackfire_version=1.76.0
+ARG newrelic_version=9.20.0.310
 
 FROM minidocks/base:3.12 AS v7.3
 
@@ -101,7 +101,7 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
-    && if [ "$major" != "8" ]; then modules="$modules php$suffix-xmlrpc"; fi \
+    && if [ "$major" != "8" ]; then modules="$modules php$suffix-xmlrpc"; else modules="$modules php$suffix-pecl-xmlrpc$([ "$version" = "8.0" ] && echo "@edge" || echo "")"; fi \
     && if [ "$major" = "8" ] || [ "$version" = "7.4" ]; then modules="$modules php$suffix-ffi"; fi \
     && if [ "$version" != "7.2" ]; then modules="$modules php$suffix-pecl-uploadprogress"; fi \
     && if [ "$version" != "8.1" ]; then modules="$modules php$suffix-pecl-mcrypt"; fi \
@@ -149,6 +149,8 @@ EXPOSE 9000
 FROM latest AS nginx
 
 RUN apk add nginx && clean
+
+COPY rootfs-nginx /
 
 # Fix https://gitlab.alpinelinux.org/alpine/aports/-/issues/9364
 RUN chmod 1777 /var/lib/nginx/tmp

@@ -32,57 +32,57 @@ Installed applications
 Modules
 -------
 
-| module      | 7.x | 8.x | tag    |
-|-------------|-----|-----|--------|
-| apcu        | ✓   | ✓   | base   |
-| bcmath      | ✓   | ✓   | latest |
-| blackfire   | ✓   | ✓   | latest |
-| calendar    | ✓   | ✓   | latest |
-| cgi         | ✓   | ✓   | latest |
-| ctype       | ✓   | ✓   | base   |
-| curl        | ✓   | ✓   | base   |
-| dom         | ✓   | ✓   | latest |
-| exif        | ✓   | ✓   | latest |
-| ffi         |     | ✓   | latest |
-| fileinfo    | ✓   | ✓   | latest |
-| fpm         | ✓   | ✓   | latest |
-| ftp         | ✓   | ✓   | latest |
-| gd          | ✓   | ✓   | latest |
-| gettext     | ✓   | ✓   | latest |
-| gmp         | ✓   | ✓   | latest |
-| iconv       | ✓   | ✓   | base   |
-| intl        | ✓   | ✓   | intl   |
-| json        | ✓   | ✓   | base   |
-| ldap        | ✓   | ✓   | latest |
-| mbstring    | ✓   | ✓   | base   |
-| mcrypt      | ✓   | ✓   | latest |
-| mysqli      | ✓   | ✓   | latest |
-| mysqlnd     | ✓   | ✓   | latest |
-| newrelic    | ✓   |     | latest |
-| opcache     | ✓   | ✓   | latest |
-| openssl     | ✓   | ✓   | base   |
-| pcntl       | ✓   | ✓   | base   |
-| pdo_mysql   | ✓   | ✓   | latest |
-| pdo_pgsq    | ✓   | ✓   | latest |
-| pdo_sqlite  | ✓   | ✓   | latest |
-| pgsql       | ✓   | ✓   | latest |
-| phar        | ✓   | ✓   | base   |
-| posix       | ✓   | ✓   | base   |
-| redis       | ✓   | ✓   | latest |
-| session     | ✓   | ✓   | latest |
-| simplexml   | ✓   | ✓   | latest |
-| soap        | ✓   | ✓   | latest |
-| sockets     | ✓   | ✓   | latest |
-| sodium      | ✓   | ✓   | latest |
-| sqlite3     | ✓   | ✓   | latest |
-| tokenizer   | ✓   | ✓   | base   |
-| xdebug      | ✓   | ✓   | latest |
-| xml         | ✓   | ✓   | latest |
-| xmlreader   | ✓   | ✓   | latest |
-| xmlrpc      | ✓   |     | latest |
-| xmlwriter   | ✓   | ✓   | latest |
-| xsl         | ✓   | ✓   | latest |
-| zip         | ✓   | ✓   | latest |
+| module     | 7.x | 8.x | tag    |
+|------------|-----|-----|--------|
+| apcu       | ✓   | ✓   | base   |
+| bcmath     | ✓   | ✓   | latest |
+| blackfire  | ✓   | ✓   | latest |
+| calendar   | ✓   | ✓   | latest |
+| cgi        | ✓   | ✓   | latest |
+| ctype      | ✓   | ✓   | base   |
+| curl       | ✓   | ✓   | base   |
+| dom        | ✓   | ✓   | latest |
+| exif       | ✓   | ✓   | latest |
+| ffi        |     | ✓   | latest |
+| fileinfo   | ✓   | ✓   | latest |
+| fpm        | ✓   | ✓   | latest |
+| ftp        | ✓   | ✓   | latest |
+| gd         | ✓   | ✓   | latest |
+| gettext    | ✓   | ✓   | latest |
+| gmp        | ✓   | ✓   | latest |
+| iconv      | ✓   | ✓   | base   |
+| intl       | ✓   | ✓   | intl   |
+| json       | ✓   | ✓   | base   |
+| ldap       | ✓   | ✓   | latest |
+| mbstring   | ✓   | ✓   | base   |
+| mcrypt     | ✓   | ✓   | latest |
+| mysqli     | ✓   | ✓   | latest |
+| mysqlnd    | ✓   | ✓   | latest |
+| newrelic   | ✓   | ✓   | latest |
+| opcache    | ✓   | ✓   | latest |
+| openssl    | ✓   | ✓   | base   |
+| pcntl      | ✓   | ✓   | base   |
+| pdo_mysql  | ✓   | ✓   | latest |
+| pdo_pgsq   | ✓   | ✓   | latest |
+| pdo_sqlite | ✓   | ✓   | latest |
+| pgsql      | ✓   | ✓   | latest |
+| phar       | ✓   | ✓   | base   |
+| posix      | ✓   | ✓   | base   |
+| redis      | ✓   | ✓   | latest |
+| session    | ✓   | ✓   | latest |
+| simplexml  | ✓   | ✓   | latest |
+| soap       | ✓   | ✓   | latest |
+| sockets    | ✓   | ✓   | latest |
+| sodium     | ✓   | ✓   | latest |
+| sqlite3    | ✓   | ✓   | latest |
+| tokenizer  | ✓   | ✓   | base   |
+| xdebug     | ✓   | ✓   | latest |
+| xml        | ✓   | ✓   | latest |
+| xmlreader  | ✓   | ✓   | latest |
+| xmlrpc     | ✓   | ✓   | latest |
+| xmlwriter  | ✓   | ✓   | latest |
+| xsl        | ✓   | ✓   | latest |
+| zip        | ✓   | ✓   | latest |
 
 Usage
 -----
@@ -121,3 +121,4 @@ See also
 
 -   https://github.com/codecasts/php-alpine
 -   https://github.com/thecodingmachine/docker-images-php
+-   https://github.com/joseluisq/alpine-php-fpm
