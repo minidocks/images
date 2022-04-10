@@ -10,24 +10,26 @@ Configuration
 
 Database credentials
 
-- `DATABASE_URL` or `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_PORT` (default 3306)
+-   `DATABASE_URL` or `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`,
+    `MYSQL_DATABASE`, `MYSQL_PORT` (default 3306)
 
 Flarum
 
-- `FLARUM_BASE_URL`
-- `FLARUM_FORUM_TITLE`
-- `FLARUM_DEBUG` (default false)
-- `FLARUM_OFFLINE` (default false)
-- `FLARUM_API_PATH` (default api)
-- `FLARUM_ADMIN_PATH` (default admin)
-- `FLARUM_POWEREDBY_HEADER` (default empty)
-- `FLARUM_REFERRER_POLICY` (default empty)
-- `FLARUM_COOKIE_SAMESITE` (default lax)
+-   `FLARUM_BASE_URL`
+-   `FLARUM_FORUM_TITLE`
+-   `FLARUM_DEBUG` (default false)
+-   `FLARUM_OFFLINE` (default false)
+-   `FLARUM_API_PATH` (default api)
+-   `FLARUM_ADMIN_PATH` (default admin)
+-   `FLARUM_POWEREDBY_HEADER` (default empty)
+-   `FLARUM_REFERRER_POLICY` (default empty)
+-   `FLARUM_COOKIE_SAMESITE` (default lax)
 
 Admin user
-- `FLARUM_ADMIN_NAME` (default flarum)
-- `FLARUM_ADMIN_PASSWORD` (default flarum)
-- `FLARUM_ADMIN_EMAIL`
+
+-   `FLARUM_ADMIN_NAME` (default flarum)
+-   `FLARUM_ADMIN_PASSWORD` (default flarum)
+-   `FLARUM_ADMIN_EMAIL`
 
 Usage
 -----
@@ -46,5 +48,5 @@ Tags
 Alternatives
 ------------
 
-- https://github.com/crazy-max/docker-flarum
-- https://github.com/mondediefr/docker-flarum
+-   https://github.com/crazy-max/docker-flarum
+-   https://github.com/mondediefr/docker-flarum
