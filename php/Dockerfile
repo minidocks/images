@@ -139,10 +139,10 @@ RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfi
 ARG newrelic_version
 
 # NewRelic
-RUN wget -O /tmp/nr.tar.gz "http://download.newrelic.com/php_agent/archive/${newrelic_version}/newrelic-php5-${newrelic_version}-linux-musl.tar.gz" \
+RUN if [ "$TARGETARCH" = amd64 ]; then wget -O /tmp/nr.tar.gz "http://download.newrelic.com/php_agent/archive/${newrelic_version}/newrelic-php5-${newrelic_version}-linux-musl.tar.gz" \
     && tar -xzf /tmp/nr.tar.gz -C /tmp \
     && NR_INSTALL_SILENT=1 NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_INITFILE=/tmp/nr NR_INSTALL_DAEMONPATH=/tmp/nr-daemon /tmp/newrelic*/newrelic-install install \
-    && rm -rf /etc/newrelic && clean;
+    && rm -rf /etc/newrelic && clean; fi
 
 EXPOSE 9000
 
