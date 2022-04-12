@@ -44,6 +44,7 @@ Tags
 | Tag    | Size                                                                                                           |
 |--------|----------------------------------------------------------------------------------------------------------------|
 | latest | ![](https://img.shields.io/docker/image-size/minidocks/flarum/latest?style=flat-square&logo=docker&label=size) |
+| base   | ![](https://img.shields.io/docker/image-size/minidocks/flarum/base?style=flat-square&logo=docker&label=size)   |
 
 Alternatives
 ------------

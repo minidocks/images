@@ -92,8 +92,6 @@ if [ -w /var/www/config.php ]; then
     -Ee "s/('samesite' => ).+$/\\1'$(escape "${FLARUM_COOKIE_SAMESITE:-lax}")',/g" /var/www/config.php
 fi
 
-cat /var/www/config.php
-
 chown www-data:www-data -R /var/www
 
 su-exec www-data:www-data flarum migrate
