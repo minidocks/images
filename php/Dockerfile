@@ -134,7 +134,7 @@ ARG blackfire_version
 RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfire.io/binaries/blackfire-php/${blackfire_version}/blackfire-php-alpine_${TARGETARCH}-php-${version/./}.so \
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
-    && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
+    && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8307" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
 
 ARG newrelic_version
 

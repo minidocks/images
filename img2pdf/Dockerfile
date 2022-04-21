@@ -1,9 +1,9 @@
 FROM minidocks/python:3
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=0.4.3
+ARG version=0.4.4
 
-RUN apk --update add py3-pillow py3-pikepdf qpdf qpdf-fix-qdf && pip install img2pdf==$version && clean
+RUN apk add -u py3-pillow py3-pikepdf@edge qpdf qpdf-fix-qdf && pip install img2pdf==$version && clean
 
 COPY rootfs /
 

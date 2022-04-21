@@ -45,7 +45,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 COPY --from=abcm2ps /tmp/build /
 COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
-ARG abc2svg_version=1.21.6
+ARG abc2svg_version=1.21.7
 
 RUN apk add -u pango npm && npm i -g abc2svg@$abc2svg_version jszip && apk del npm && clean
 

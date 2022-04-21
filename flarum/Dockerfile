@@ -1,4 +1,4 @@
-FROM minidocks/php:8.1-nginx AS base
+FROM minidocks/php:8.0-nginx AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 WORKDIR /var/www
