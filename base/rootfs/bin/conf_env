@@ -2,12 +2,12 @@
 #
 # usage: conf_env PREFIX
 #
-# (c) 2021 Martin Hasoň <martin.hason@gmail.com>
+# (c) 2021,2022 Martin Hasoň <martin.hason@gmail.com>
 
 set -e
 
 conf_env() {
-  local pattern="//" separator="=" comment="#"
+  local pattern="//" separator="=" comment="#" twounderscore="." transform="lower"
   while [ -n "$1" ]; do
     case "$1" in
       --file=*) file="${1#*=}";;
@@ -20,6 +20,10 @@ conf_env() {
       --prefix) shift; prefix="$1";;
       --pattern=*) pattern="${1#*=}";;
       --pattern) shift; pattern="$1";;
+      --twounderscore=*) twounderscore="${1#*=}";;
+      --twounderscore) shift; twounderscore="$1";;
+      --transform=*) transform="${1#*=}";;
+      --transform) shift; transform="$1";;
       *) prefix="$1";;
     esac
     shift
@@ -27,7 +31,12 @@ conf_env() {
 
   local length="${#prefix}"
   for name in $(printenv | awk -F= '{print $1}' | awk "/^$prefix/" | awk "$pattern"); do
-    key="$(echo "${name:$length}" | sed -e 's|__|\.|g' | tr '[:upper:]' '[:lower:]')"
+    key="$(echo "${name:$length}" | sed "s'__'$twounderscore'g")"
+    if [ "$transform" = "lower" ]; then
+      key="$(echo "$key" | tr '[:upper:]' '[:lower:]')"
+    elif [ "$transfrom" = "upper" ]; then
+      key="$(echo "$key" | tr '[:lower:]' '[:upper:]')"
+    fi
     value="$(/bin/file_env "$name")"
 
     if [ -z "$file" ]; then
@@ -37,7 +46,8 @@ conf_env() {
 
     local filepath="$(printf "$file" "$key")"
     if [ -n "$filepath" ] && ([ ! -f "$filepath" ] || [ ! -w "$filepath" ]); then
-      continue
+      echo "Unable to write configuration to $filepath" >&2
+      exit 1
     fi
 
     if grep -E "${key} *=" "$filepath" > /dev/null; then

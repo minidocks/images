@@ -2,7 +2,7 @@
 #
 # ssh wrapper for dropbear with support for environment variables, working directory and password
 #
-# (c) 2016,2018 Martin Hasoň <martin.hason@gmail.com>
+# (c) 2016,2018,2022 Martin Hasoň <martin.hason@gmail.com>
 
 set -e
 
@@ -13,6 +13,10 @@ ssh_help()(
 load_dropbear_keys()(
     mkdir -p "$HOME/.ssh"
     touch "$HOME/.ssh/known_hosts"
+
+    if echo "$1" | grep -q "\." ; then
+        return
+    fi
 
     if [ -n "$(grep "^$1" "$HOME/.ssh/known_hosts")" ]; then
         return
