@@ -11,4 +11,6 @@ ENV MH_SMTP_BIND_ADDR=0.0.0.0:25 \
     MH_UI_BIND_ADDR=0.0.0.0:80 \
     MH_API_BIND_ADDR=0.0.0.0:80
 
+COPY rootfs /
+
 CMD [ "mailhog" ]

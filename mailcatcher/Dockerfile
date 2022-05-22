@@ -8,4 +8,6 @@ RUN apk --update add ruby-json ruby-bigdecimal libstdc++ sqlite-libs \
 
 EXPOSE 25 80
 
+COPY rootfs /
+
 CMD ["mailcatcher", "-f", "--ip=0.0.0.0"]

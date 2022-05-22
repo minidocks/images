@@ -3,6 +3,11 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN npm install -g maildev && clean
 
+ENV MAILDEV_WEB_PORT=80 \
+    MAILDEV_SMTP_PORT=25
+
 EXPOSE 25 80
 
-CMD ["maildev", "--web", "80", "--smtp", "25"]
+COPY rootfs /
+
+CMD [ "maildev" ]

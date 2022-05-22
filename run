@@ -2,7 +2,7 @@
 set -e
 
 url="https://raw.githubusercontent.com/webuni/shell-task-runner/master/runner"
-[ -f ./.runner ] && [ .runner -nt "$0" ] || wget -q "$url" -O- > .runner || curl -fso .runner "$url"
+[ -f ./.runner ] && [ .runner -nt "$0" ] || wget -q "$url" -O- > .runner 2> /dev/null || curl -fso .runner "$url"
 . ./.runner
 
 if [ -r ./.env ]; then

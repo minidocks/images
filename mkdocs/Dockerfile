@@ -7,7 +7,7 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG mkdocs_version=1.2.3
+ARG mkdocs_version=1.3.0
 
 RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs==$mkdocs_version \
