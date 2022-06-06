@@ -111,10 +111,6 @@ Tags
 | 7.4         | ![](https://img.shields.io/docker/image-size/minidocks/php/7.4?style=flat-square&logo=docker&label=size)       |
 | 7.4-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/7.4-nginx?style=flat-square&logo=docker&label=size) |
 | 7.4-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.4-intl?style=flat-square&logo=docker&label=size)  |
-| 7.3-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3-base?style=flat-square&logo=docker&label=size)  |
-| 7.3         | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3?style=flat-square&logo=docker&label=size)       |
-| 7.3-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3-nginx?style=flat-square&logo=docker&label=size) |
-| 7.3-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/7.3-intl?style=flat-square&logo=docker&label=size)  |
 
 See also
 --------
