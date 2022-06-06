@@ -6,7 +6,7 @@ FROM minidocks/base:3.12 AS v10.4
 
 FROM minidocks/base:3.14 AS v10.5
 
-FROM minidocks/base:3.15 AS v10.6
+FROM minidocks/base:3.16 AS v10.6
 
 FROM v$version AS mariadb
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

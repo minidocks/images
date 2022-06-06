@@ -1,4 +1,8 @@
-<?php return [
+<?php
+ini_set('post_max_size', getenv('PHP_POST_MAX_SIZE') ?: getenv('UPLOAD_MAX_SIZE') ?: '10M');
+ini_set('upload_max_filesize', getenv('PHP_UPLOAD_MAX_FILESIZE') ?: getenv('UPLOAD_MAX_SIZE') ?: '10M');
+
+return [
     'debug' => (bool) getenv('FLARUM_DEBUG') ?: false,
     'offline' => (bool) getenv('FLARUM_OFFLINE') ?: false,
     'database' => [

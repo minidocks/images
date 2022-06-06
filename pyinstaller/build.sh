@@ -4,8 +4,9 @@ set -e
 image="${namespace:-minidocks}/pyinstaller"
 versions="
 3;3.6
-4;4.8
-latest;4.8
+4;4.10
+5;5.1
+latest;5.1
 "
 
 build() {

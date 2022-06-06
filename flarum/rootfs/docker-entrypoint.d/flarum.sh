@@ -33,12 +33,13 @@ echo "Database ready!"
 counttables=$(php -r 'echo (new mysqli($_SERVER["MYSQL_HOST"], $_SERVER["MYSQL_USER"], $_SERVER["MYSQL_PASSWORD"], $_SERVER["MYSQL_DATABASE"], $_SERVER["MYSQL_PORT"]))->query("SHOW TABLES")->num_rows;')
 
 if [ "${counttables}" -eq "0" ]; then
-  echo "First install detected..."
+  echo "Installation ..."
 
   file_env 'FLARUM_ADMIN_NAME' 'flarum'
   file_env 'FLARUM_ADMIN_PASSWORD' 'flarum'
   file_env 'FLARUM_ADMIN_EMAIL' "${FLARUM_ADMIN_NAME}@example.org"
 
+  echo "Creating installation config ..."
   su-exec www-data:www-data cat >/tmp/config.yml <<EOL
 debug: ${FLARUM_DEBUG}
 baseUrl: ${FLARUM_BASE_URL}
@@ -58,7 +59,9 @@ adminUser:
 settings:
   forum_title: "${FLARUM_FORUM_TITLE}"
 EOL
-  su-exec www-data:www-data flarum install --file=/tmp/config.yml
+
+  echo "Installing flarum in $(pwd) ..."
+  su-exec www-data:www-data flarum install -vvv --file=/tmp/config.yml
   echo ">>"
   if [ "${FLARUM_ADMIN_NAME}" = 'flarum' ] && [ "${FLARUM_ADMIN_PASSWORD}" = 'flarum' ]; then
     echo ">> WARNING: Flarum has been installed with the default credentials (flarum/flarum)"
@@ -68,10 +71,12 @@ EOL
 fi
 
 if [ -f /var/www/config.php.dist ]; then
+  echo "Creating /var/www/config.php ..."
   cp /var/www/config.php.dist /var/www/config.php
 fi
 
 if [ -w /var/www/config.php ]; then
+  echo "Updating /var/www/config.php ..."
   escape() {
     echo "$1" | sed 's|/|\\/|g' | sed "s/'/\\\'/g"
   }
@@ -89,7 +94,10 @@ if [ -w /var/www/config.php ]; then
     -Ee "s/('admin' => ).+$/\\1'$(escape "${FLARUM_ADMIN_PATH:-admin}")',/g" \
     -Ee "s/('poweredByHeader' => ).+$/\\1'$(escape "${FLARUM_POWEREDBY_HEADER:-}")',/g" \
     -Ee "s/('referrerPolicy' => ).+$/\\1'$(escape "${FLARUM_REFERRER_POLICY:-}")',/g" \
-    -Ee "s/('samesite' => ).+$/\\1'$(escape "${FLARUM_COOKIE_SAMESITE:-lax}")',/g" /var/www/config.php
+    -Ee "s/('samesite' => ).+$/\\1'$(escape "${FLARUM_COOKIE_SAMESITE:-lax}")',/g" \
+    -Ee "s/('post_max_size', ).+$/\\1'$(escape "${PHP_POST_MAX_SIZE:-${UPLOAD_MAX_SIZE:-10M}}")');/g" \
+    -Ee "s/('upload_max_filesize', ).+$/\\1'$(escape "${PHP_UPLOAD_MAX_FILESIZE:-${UPLOAD_MAX_SIZE:-10M}}")');/g" \
+    /var/www/config.php
 fi
 
 chown www-data:www-data -R /var/www

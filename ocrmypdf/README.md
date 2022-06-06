@@ -72,7 +72,8 @@ Tags
 
 | Tag        | Size                                                                                                             |
 |------------|------------------------------------------------------------------------------------------------------------------|
-| latest, 12 | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/latest?style=flat-square&logo=docker&label=size) |
+| latest, 13 | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/latest?style=flat-square&logo=docker&label=size) |
+| 13         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/13?style=flat-square&logo=docker&label=size)     |
 | 12         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/12?style=flat-square&logo=docker&label=size)     |
 | 11         | ![](https://img.shields.io/docker/image-size/minidocks/ocrmypdf/11?style=flat-square&logo=docker&label=size)     |
 

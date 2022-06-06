@@ -1,8 +1,6 @@
 ARG package=nodejs-current<18
 ARG base_version=edge
 
-FROM minidocks/base:3.12 AS v3.12
-
 FROM minidocks/base:3.13 AS v3.13
 
 FROM minidocks/base:3.14 AS v3.14

@@ -31,6 +31,11 @@ Admin user
 -   `FLARUM_ADMIN_PASSWORD` (default flarum)
 -   `FLARUM_ADMIN_EMAIL`
 
+Server
+
+-   `PHP_UPLOAD_MAX_FILESIZE` or `UPLOAD_MAX_SIZE` (default 10M)
+-   `PHP_POST_MAX_SIZE` or `UPLOAD_MAX_SIZE` (default 10M)
+
 Usage
 -----
 

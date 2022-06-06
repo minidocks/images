@@ -1,17 +1,15 @@
 ARG version=8.1
 ARG major=8
-ARG composer1_version=1.10.25
-ARG composer2_version=2.3.4
-ARG blackfire_version=1.76.0
-ARG newrelic_version=9.20.0.310
-
-FROM minidocks/base:3.12 AS v7.3
+ARG composer1_version=1.10.26
+ARG composer2_version=2.3.6
+ARG blackfire_version=1.78.0
+ARG newrelic_version=9.21.0.311
 
 FROM minidocks/base:3.15 AS v7.4
 
-FROM minidocks/base:3.15 AS v8.0
+FROM minidocks/base:3.16 AS v8.0
 
-FROM minidocks/base:edge AS v8.1
+FROM minidocks/base:3.16 AS v8.1
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -101,10 +99,10 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
-    && if [ "$major" != "8" ]; then modules="$modules php$suffix-xmlrpc"; else modules="$modules php$suffix-pecl-xmlrpc$([ "$version" = "8.0" ] && echo "@edge" || echo "")"; fi \
+    && if [ "$major" != "8" ]; then modules="$modules php$suffix-xmlrpc"; else modules="$modules php$suffix-pecl-xmlrpc@edge"; fi \
     && if [ "$major" = "8" ] || [ "$version" = "7.4" ]; then modules="$modules php$suffix-ffi"; fi \
     && if [ "$version" != "7.2" ]; then modules="$modules php$suffix-pecl-uploadprogress"; fi \
-    && if [ "$version" != "8.1" ]; then modules="$modules php$suffix-pecl-mcrypt"; fi \
+    && if [ "$version" != "8.1" ]; then modules="$modules php$suffix-pecl-mcrypt"; else modules="$modules php$suffix-pecl-mcrypt@edge"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$([ "$version" = "8.1" ] && echo "81" || echo $major)" /usr/bin/php-fpm; fi \
     && clean
