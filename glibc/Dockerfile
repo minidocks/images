@@ -1,5 +1,5 @@
-ARG version=3.15
-ARG glibc_version="2.34-r0"
+ARG version=3.16
+ARG glibc_version="2.35-r0"
 ARG prefix="https://github.com/sgerrand/alpine-pkg-glibc/releases/download/"
 
 FROM minidocks/base:$version as latest

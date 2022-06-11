@@ -29,7 +29,7 @@ All images contain the following extra packages:
 - [`ca-certificates`](https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/) Common CA certificates PEM files.
 - [`su-exec`](https://github.com/ncopa/su-exec) Switch user and group id, setgroups and exec.
 - [`wait-for`](https://github.com/eficode/wait-for)  Wait for another service to become available.
-- [`wait4ports`](https://github.com/erikogan/wait4ports) A small utility to wait for network peer availability.
+- [`libc6-compat`](https://musl.libc.org/) Compatibility libraries for glibc.
 
 Features
 --------
@@ -110,10 +110,6 @@ Tags
  3.13-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.13-build?style=flat-square&logo=docker&label=size)
  3.12              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.12?style=flat-square&logo=docker&label=size)
  3.12-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.12-build?style=flat-square&logo=docker&label=size)
- 3.11              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.11?style=flat-square&logo=docker&label=size)
- 3.11-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.11-build?style=flat-square&logo=docker&label=size)
- 3.10              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.10?style=flat-square&logo=docker&label=size)
- 3.10-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.10-build?style=flat-square&logo=docker&label=size)
 
 Inspiration
 -----------
