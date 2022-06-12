@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/php-tools"
 versions="
-7.3;7.3
 7.4;7.4
 8.0;8.0
 8.1;8.1
