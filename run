@@ -129,11 +129,12 @@ versions()(
 )
 
 build()(
-    package="" version="" source_dir="" opts=""
+    package="" version="" source_dir="" output="" opts=""
     while [ -n "$1" ]; do
         case "$1" in
             --force) opts="$opts --no-cache";;
             --no-clear) no_clear="1";;
+            --push) output="--push";;
             --dir*) source_dir="$2"; shift;;
             -*) opts="$opts $1";;
             *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
@@ -159,14 +160,14 @@ build()(
     froms="$(froms "$(cat "$source_dir/Dockerfile")")"
     for from in $froms; do
         tag="$(echo "$from" | cut -d: -f2 -s)"
-        task_build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}"
+        task_build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" $opts $output
     done
 
     target_dir="/tmp/${package}-${version}"
     if [ -f "$source_dir/build.sh" ]; then
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
-            if ! namespace="$namespace" docker_opts="$(echo "$opts" | xargs)" "$source_dir/build.sh" "$version";
+            if ! namespace="$namespace" docker_opts="$(echo "$opts $output" | xargs)" "$source_dir/build.sh" "$version";
             then exit 1; fi
         done
         printf "\n"
@@ -338,5 +339,6 @@ task_github__build_and_push()(
     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_LOGIN" --password-stdin
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
     task_sync "$REPOSITORY_NAME"
-    task_build "$REPOSITORY_NAME" --dir "." --push --platform="${DOCKER_PLATFORM:-linux/amd64,linux/arm64}"
+    mkdir -p /tmp/docker-cache
+    task_build "$REPOSITORY_NAME" --dir "." --push --platform="${DOCKER_PLATFORM:-linux/amd64,linux/arm64}" --no-cache
 )
