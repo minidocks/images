@@ -1,4 +1,4 @@
-ARG ALLURE_VERSION=2.17.2
+ARG ALLURE_VERSION=2.18.1
 FROM minidocks/java
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 

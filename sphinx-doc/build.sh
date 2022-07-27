@@ -5,8 +5,10 @@ image="${namespace:-minidocks}/sphinx-doc"
 versions="
 4;4.5.0
 4-pdf;4.5.0;weasyprint;pdf
-pdf;4.5.0;weasyprint;pdf
-latest;4.5.0
+5;5.0.2
+5-pdf;5.0.2;weasyprint;pdf
+pdf;5.0.2;weasyprint;pdf
+latest;5.0.2
 "
 
 build() {

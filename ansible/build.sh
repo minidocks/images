@@ -3,11 +3,10 @@ set -e
 
 image="${namespace:-minidocks}/ansible"
 versions="
-2;2.10.7
-3;3.4.0
 4;4.10.0
-5;5.6.0
-latest;5.6.0
+5;5.10.0
+6;6.1.0
+latest;6.1.0
 "
 
 build() {

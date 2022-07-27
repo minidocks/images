@@ -1,8 +1,8 @@
 ARG version=8.1
 ARG major=8
 ARG composer1_version=1.10.26
-ARG composer2_version=2.3.7
-ARG blackfire_version=1.78.0
+ARG composer2_version=2.3.10
+ARG blackfire_version=1.80.0
 ARG newrelic_version=9.21.0.311
 
 FROM minidocks/base:3.15 AS v7.4
