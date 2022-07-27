@@ -158,7 +158,7 @@ FROM nginx AS intl
 ARG version
 ARG major
 
-RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
-    && apk add "php$suffix-intl" && clean
+RUN if [ "$version" = "8.1" ]; then apk add icu-data-full php81-intl; else apk add "php${major}-intl"; fi \
+    && clean
 
 FROM latest
