@@ -9,7 +9,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 RUN apk add -u py3-lxml py3-beautifulsoup4 py3-ruamel.yaml && clean
 
-ARG version=5.0.2
+ARG version=5.1.1
 
 RUN pip install \
       sphinx=="$version" \

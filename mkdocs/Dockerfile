@@ -7,7 +7,7 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG mkdocs_version=1.3.0
+ARG mkdocs_version=1.3.1
 
 RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs==$mkdocs_version \
@@ -15,6 +15,7 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-abs-rel-plugin \
       mkdocs-add-number-plugin \
       mkdocs-autolinks-plugin \
+      mkdocs-autorefs \
       mkdocs-awesome-pages-plugin \
       mkdocs-codeinclude-plugin \
       mkdocs-enumerate-headings-plugin \
@@ -23,17 +24,21 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-git-committers-plugin \
       mkdocs-git-revision-date-localized-plugin \
       mkdocs-img2fig-plugin \
+      mkdocs-include-markdown-plugin \
+      mkdocs-kroki-plugin \
       mkdocs-localsearch \
       mkdocs-macros-plugin \
       mkdocs-markdownextradata-plugin \
       mkdocs-merge \
       mkdocs-minify-plugin \
       mkdocs-monorepo-plugin \
+      mkdocs-multirepo-plugin \
       mkdocs_pymdownx_material_extras \
       mkdocs-safe-text-plugin \
       mkdocs-simple-hooks \
       mkdocs-redirects \
       mkdocs-versioning \
+      mkdocstrings \
       \
       mkdocs-alabaster \
       mkdocs-cinder \
@@ -64,6 +69,7 @@ RUN apk add libsass && pip install \
       /tmp/libsass* \
       mkdocs-pdf-export-plugin \
       mkdocs-with-pdf \
+      mkpdfs-mkdocs \
     && clean
 
 RUN wget -O /tmp/roboto.zip https://fonts.google.com/download?family=Roboto \

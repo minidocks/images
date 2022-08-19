@@ -3,9 +3,10 @@ MkDocs docker image ([minidocks/mkdocs](https://hub.docker.com/r/minidocks/mkdoc
 
 ![](https://www.fullstackpython.com/img/logos/mkdocs.jpg)
 
-MkDocs is a fast, simple and downright gorgeous static site generator that’s
-geared towards building project documentation. Documentation source files are
-written in Markdown, and configured with a single YAML configuration file.
+[MkDocs](https://www.mkdocs.org/) is a fast, simple and downright gorgeous
+static site generator that’s geared towards building project documentation.
+Documentation source files are written in Markdown, and configured with a single
+YAML configuration file.
 
 Installed extensions
 --------------------
@@ -30,6 +31,8 @@ Installed extensions
     nav.
 -   [Autolinks](https://github.com/midnightprioriem/mkdocs-autolinks-plugin/)
     simplifies relative linking between documents.
+-   [Autorefs](https://github.com/mkdocstrings/autorefs) automatically link
+    across pages.
 -   [Awesome Pages
     plugin](https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin) allows
     you to customize how your pages show up the navigation of your MkDocs
@@ -57,8 +60,11 @@ Installed extensions
     the mkdocs.yml extra variables into the markdown template.
 -   [Minify](https://github.com/byrnereese/mkdocs-minify-plugin) to minify HTML
     and/or JS files prior to being written to disk.
+-   [Mkdocstrings](https://mkdocstrings.github.io/) automatic documentation from
+    sources.
 -   [Monorepo](https://github.com/spotify/mkdocs-monorepo-plugin) Build multiple
     documentation in a single Mkdocs. Designed for large codebases.
+-   [Multirepo](https://github.com/jdoiro3/mkdocs-multirepo-plugin) Build documentation in multiple repos into one site.
 -   [Pymdownx Material
     Extras](https://github.com/facelessuser/mkdocs_pymdownx_material_extras)
 -   [Safe text](https://github.com/raimon49/mkdocs-safe-text-plugin) for safe
@@ -104,11 +110,11 @@ docker run --rm -v "`pwd`:/app" -w /app/doc -p 8000:8000 minidocks/mkdocs serve 
 Tags
 ----
 
-| Tag       | Size                                                                                                            |
-|-----------|-----------------------------------------------------------------------------------------------------------------|
-| latest, 1 | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/latest?style=flat-square&logo=docker&label=size)  |
-| 1         | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1?style=flat-square&logo=docker&label=size)       |
-| 1-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1-pdf?style=flat-square&logo=docker&label=size)   |
+| Tag       | Size                                                                                                           |
+|-----------|----------------------------------------------------------------------------------------------------------------|
+| latest, 1 | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/latest?style=flat-square&logo=docker&label=size) |
+| 1         | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1?style=flat-square&logo=docker&label=size)      |
+| 1-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1-pdf?style=flat-square&logo=docker&label=size)  |
 
 Related images
 --------------
