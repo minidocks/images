@@ -118,6 +118,8 @@ split()(
 
     #run_git splitsh --prefix "$name" --remote "$url" --force
     run_git subsplit publish "$name:$url"
+    response="$(github "PUT" "/repos/$repo/actions/workflows/main.yml/enable")"
+    assert_http_code "$response" "204"
 )
 
 versions()(
@@ -167,6 +169,7 @@ build()(
     if [ -f "$source_dir/build.sh" ]; then
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
+            echo namespace="$namespace" docker_opts="$(echo "$opts $output" | xargs)" "$source_dir/build.sh" "$version"
             if ! namespace="$namespace" docker_opts="$(echo "$opts $output" | xargs)" "$source_dir/build.sh" "$version";
             then exit 1; fi
         done
