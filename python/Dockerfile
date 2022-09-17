@@ -52,8 +52,9 @@ FROM latest AS packaging
 
 ARG version
 
+# TODO https://github.com/jelmer/dulwich/issues/1007
 RUN if [ "${version::1}" = 3 ]; then \
-        apk add py3-cryptography && pip install poetry flit; \
+      apk add py3-cryptography && pip install flit poetry==1.1.14; \
     fi && pip install virtualenv pipenv twine && clean
 
 FROM packaging AS build
