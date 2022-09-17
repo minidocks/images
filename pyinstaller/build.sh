@@ -5,8 +5,8 @@ image="${namespace:-minidocks}/pyinstaller"
 versions="
 3;3.6
 4;4.10
-5;5.1
-latest;5.1
+5;5.4.1
+latest;5.4.1
 "
 
 build() {

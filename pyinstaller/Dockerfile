@@ -1,4 +1,4 @@
-ARG pyinstaller_version=5.1
+ARG pyinstaller_version=5.4.1
 
 FROM minidocks/python:3-build AS build
 
