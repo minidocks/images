@@ -5,8 +5,8 @@ image="${namespace:-minidocks}/ansible"
 versions="
 4;4.10.0
 5;5.10.0
-6;6.1.0
-latest;6.1.0
+6;6.4.0
+latest;6.4.0
 "
 
 build() {

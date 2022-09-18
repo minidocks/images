@@ -13,7 +13,8 @@ Tags
 
 | Tag       | Size                                                                                                            |
 |-----------|-----------------------------------------------------------------------------------------------------------------|
-| latest, 5 | ![](https://img.shields.io/docker/image-size/minidocks/ansible/latest?style=flat-square&logo=docker&label=size) |
+| latest, 6 | ![](https://img.shields.io/docker/image-size/minidocks/ansible/latest?style=flat-square&logo=docker&label=size) |
+| 6         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/6?style=flat-square&logo=docker&label=size)      |
 | 5         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/5?style=flat-square&logo=docker&label=size)      |
 | 4         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/4?style=flat-square&logo=docker&label=size)      |
 | 3         | ![](https://img.shields.io/docker/image-size/minidocks/ansible/3?style=flat-square&logo=docker&label=size)      |

@@ -100,8 +100,6 @@ if [ -w /var/www/config.php ]; then
     /var/www/config.php
 fi
 
-chown www-data:www-data -R /var/www
-
 su-exec www-data:www-data flarum migrate
 su-exec www-data:www-data flarum cache:clear
 su-exec www-data:www-data flarum assets:publish

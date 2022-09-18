@@ -35,6 +35,7 @@ RUN su-exec www-data:www-data composer require \
         blomstra/user-filter \
         clarkwinkelmann/flarum-ext-author-change \
         clarkwinkelmann/flarum-ext-bookmarks \
+        clarkwinkelmann/flarum-ext-composer-page \
         clarkwinkelmann/flarum-ext-follow-tags-prompt \
         clarkwinkelmann/flarum-ext-group-invitation \
         clarkwinkelmann/flarum-ext-group-list \
@@ -50,6 +51,7 @@ RUN su-exec www-data:www-data composer require \
         fof/custom-footer \
         fof/default-group \
         fof/doorman \
+        fof/drafts \
         fof/follow-tags \
         fof/formatting \
         fof/forum-statistics-widget \
@@ -77,6 +79,7 @@ RUN su-exec www-data:www-data composer require \
         justoverclock/user-statistics \
         kyrne/whisper \
         'league/flysystem-aws-s3-v3:^1.0' \
+        luceos/flarum-ext-dofollow \
         nearata/flarum-ext-no-self-likes \
         nearata/flarum-ext-tags-color-generator \
         sycho/flarum-move-posts \
