@@ -72,7 +72,7 @@ fi
 
 if [ -f /var/www/config.php.dist ]; then
   echo "Creating /var/www/config.php ..."
-  cp /var/www/config.php.dist /var/www/config.php
+  su-exec www-data:www-data cp /var/www/config.php.dist /var/www/config.php
 fi
 
 if [ -w /var/www/config.php ]; then
@@ -81,7 +81,7 @@ if [ -w /var/www/config.php ]; then
     echo "$1" | sed 's|/|\\/|g' | sed "s/'/\\\'/g"
   }
 
-  sed -i -Ee "s/('debug' => ).+$/\\1\(bool\) $(escape "${FLARUM_DEBUG:-false}"),/g" \
+  su-exec www-data:www-data sed -i -Ee "s/('debug' => ).+$/\\1\(bool\) $(escape "${FLARUM_DEBUG:-false}"),/g" \
     -Ee "s/('offline' => ).+$/\\1\(bool\) $(escape "${FLARUM_OFFLINE:-false}"),/g" \
     -Ee "s/('host' => ).+$/\\1'$(escape "${MYSQL_HOST}")',/g" \
     -Ee "s/(        'database' => ).+$/\\1'$(escape "${MYSQL_DATABASE}")',/g" \
@@ -100,6 +100,8 @@ if [ -w /var/www/config.php ]; then
     /var/www/config.php
 fi
 
+mkdir -p /var/www/storage && chown www-data:www-data /var/www/storage
+su-exec www-data:www-data mkdir -p /var/www/storage/cache /var/www/storage/formatter /var/www/storage/sessions
 su-exec www-data:www-data flarum migrate
 su-exec www-data:www-data flarum cache:clear
 su-exec www-data:www-data flarum assets:publish
