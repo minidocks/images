@@ -118,11 +118,11 @@ ENV PHP_EXT_XDEBUG=0 \
     FPM_WWW_LISTEN="[::]:9000" \
     FPM_WWW_USER=www-data \
     FPM_WWW_SLOWLOG=/dev/stdout.pipe \
-    PHP_XDEBUG__REMOTE_ENABLE=1 \
-    PHP_XDEBUG__REMOTE_HOST=172.17.0.1 \
-    PHP_XDEBUG__REMOTE_PORT=9000 \
-    PHP_XDEBUG__REMOTE_CONNECT_BACK=0 \
-    PHP_XDEBUG__IDEKEY=PHPSTORM \
+    PHP_XDEBUG__LOG=/dev/stdout.pipe \
+    PHP_XDEBUG__DISCOVER_CLIENT_HOST=true \
+    PHP_XDEBUG__CLIENT_HOST=172.17.0.1 \
+    PHP_XDEBUG__CLIENT_PORT=9003 \
+    XDEBUG_MODE=develop,debug \
     RAWEXEC="$RAWEXEC php-fpm php-fpm$major"
 
 ARG TARGETARCH
@@ -141,8 +141,6 @@ RUN if [ "$TARGETARCH" = amd64 ]; then wget -O /tmp/nr.tar.gz "http://download.n
     && tar -xzf /tmp/nr.tar.gz -C /tmp \
     && NR_INSTALL_SILENT=1 NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_INITFILE=/tmp/nr NR_INSTALL_DAEMONPATH=/tmp/nr-daemon /tmp/newrelic*/newrelic-install install \
     && rm -rf /etc/newrelic && clean; fi
-
-EXPOSE 9000
 
 FROM latest AS nginx
 
