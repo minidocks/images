@@ -12,6 +12,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG php_version
 ARG toolbox_version
+ARG GITHUB_AUTH_TOKEN
 
 ENV PHP_DATE__TIMEZONE="Europe/Prague" \
     PHP_MEMORY_LIMIT=-1 \

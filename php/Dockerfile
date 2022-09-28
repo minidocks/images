@@ -1,7 +1,7 @@
 ARG version=8.1
 ARG major=8
 ARG composer1_version=1.10.26
-ARG composer2_version=2.3.10
+ARG composer2_version=2.4.2
 ARG blackfire_version=1.80.0
 ARG newrelic_version=9.21.0.311
 

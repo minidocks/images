@@ -11,7 +11,7 @@ latest;8.1
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --build-arg php_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts --build-arg GITHUB_AUTH_TOKEN="$GITHUB_TOKEN" --build-arg php_version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
