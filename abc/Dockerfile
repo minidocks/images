@@ -20,21 +20,21 @@ RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v$
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
-ARG abc2midi_version=2022.09.01
-
-RUN wget -O /tmp/abc2midi.zip "https://ifdo.ca/~seymour/runabc/abcMIDI-${abc2midi_version}.zip" \
+RUN wget -O /tmp/abc2midi.zip "https://github.com/sshlien/abcmidi/archive/refs/heads/master.zip" \
     && unzip /tmp/abc2midi.zip -d /tmp && cd /tmp/abcmidi* \
     && mkdir -p /tmp/build && ./configure && make DESTDIR=/tmp/build install
 
 FROM minidocks/pyinstaller AS abc2xml
 
-ARG xml2abc_version=143
-ARG abc2xml_version=237
+RUN apk add pup
 
-RUN wget -O /tmp/xml2abc.zip "https://wim.vree.org/svgParse/xml2abc.py-${xml2abc_version}.zip" \
-    && wget -O /tmp/abc2xml.zip "https://wim.vree.org/svgParse/abc2xml.py-${abc2xml_version}.zip" \
-    && unzip /tmp/xml2abc.zip -d /tmp && unzip /tmp/abc2xml.zip -d /tmp \
-    && pyinstaller -s /tmp/xml2abc*/xml2abc.py && pyinstaller -s /tmp/abc2xml*/abc2xml.py
+RUN url="https://wim.vree.org/svgParse" \
+    && wget -O /tmp/xml2abc.zip "$url/$(wget -qO - "$url/xml2abc.html" | pup 'a[href*=zip] attr{href}' | head -1)" \
+    && wget -O /tmp/abc2xml.zip "$url/$(wget -qO - "$url/abc2xml.html" | pup 'a[href*=zip] attr{href}' | head -1)"
+
+RUN unzip /tmp/xml2abc.zip -d /tmp && unzip /tmp/abc2xml.zip -d /tmp
+
+RUN pyinstaller -s /tmp/xml2abc*/xml2abc.py && pyinstaller -s /tmp/abc2xml*/abc2xml.py
 
 RUN mkdir /tmp/final && cp -r /dist/xml2abc/* /tmp/final && cp -r /dist/abc2xml/* /tmp/final \
     && rm /tmp/final/libcrypto*so*
@@ -45,9 +45,7 @@ LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 COPY --from=abcm2ps /tmp/build /
 COPY --from=abc2xml /tmp/final/* /usr/local/bin/
 
-ARG abc2svg_version=1.22.1
-
-RUN apk add -u pango npm && npm i -g abc2svg@$abc2svg_version jszip && apk del npm && clean
+RUN apk add -u pango npm && npm i -g abc2svg jszip && apk del npm && clean
 
 COPY rootfs /
 
