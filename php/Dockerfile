@@ -2,7 +2,6 @@ ARG version=8.1
 ARG major=8
 ARG composer1_version=1.10.26
 ARG composer2_version=2.4.2
-ARG blackfire_version=1.80.0
 ARG newrelic_version=9.21.0.311
 
 FROM minidocks/base:3.15 AS v7.4
@@ -22,7 +21,6 @@ RUN getent group www-data >/dev/null || addgroup -g 82 -S www-data; getent passw
 
 RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
     && for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$suffix-$module"; done \
-    && if [ "$version" == "7.2" ]; then libiconv_version="@community"; fi \
     && apk add "gnu-libiconv$libiconv_version" "php$suffix" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$suffix" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phar ]; then ln -s "/usr/bin/phar$suffix" /usr/bin/phar; fi \
@@ -81,6 +79,7 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
         mysqli \
         mysqlnd \
         opcache \
+        pecl-uploadprogress \
         pecl-redis \
         pecl-xdebug \
         pdo_mysql \
@@ -101,7 +100,6 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
     ; do modules="$modules php$suffix-$module"; done \
     && if [ "$major" != "8" ]; then modules="$modules php$suffix-xmlrpc"; else modules="$modules php$suffix-pecl-xmlrpc@edge"; fi \
     && if [ "$major" = "8" ] || [ "$version" = "7.4" ]; then modules="$modules php$suffix-ffi"; fi \
-    && if [ "$version" != "7.2" ]; then modules="$modules php$suffix-pecl-uploadprogress"; fi \
     && if [ "$version" != "8.1" ]; then modules="$modules php$suffix-pecl-mcrypt"; else modules="$modules php$suffix-pecl-mcrypt@edge"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$([ "$version" = "8.1" ] && echo "81" || echo $major)" /usr/bin/php-fpm; fi \
@@ -126,10 +124,10 @@ ENV PHP_EXT_XDEBUG=0 \
     RAWEXEC="$RAWEXEC php-fpm php-fpm$major"
 
 ARG TARGETARCH
-ARG blackfire_version
 
 # Blackfire
-RUN wget -O "/usr/lib/php${major}/modules/blackfire.so" https://packages.blackfire.io/binaries/blackfire-php/${blackfire_version}/blackfire-php-alpine_${TARGETARCH}-php-${version/./}.so \
+RUN wget -O "/tmp/blackfire.tar.gz" https://blackfire.io/api/v1/releases/probe/php/linux/${TARGETARCH}/${version/./} \
+    && tar -xzf /tmp/blackfire.tar.gz -C /tmp && mv /tmp/blackfire*.so /usr/lib/php${major}/modules/blackfire.so && clean \
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
     && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8307" > "${PHP_INI_DIR}/conf.d/blackfire.ini"

@@ -29,6 +29,8 @@ RUN apk add curl gpg gpgme gnupg-dirmngr git "php$([ "8.1" == "$php_version" ] &
 
 ENV PHP_AUTO_PREPEND_FILE="$COMPOSER_HOME/vendor/autoload.php"
 
-RUN composer global require symfony/var-dumper && ./docker-entrypoint.sh && clean
+RUN composer global require symfony/var-dumper \
+    && chown www-data:www-data -R "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && ./docker-entrypoint.sh \
+    && chmod a+r "$COMPOSER_HOME/config.json" && clean
 
 CMD ["toolbox", "list-tools"]
