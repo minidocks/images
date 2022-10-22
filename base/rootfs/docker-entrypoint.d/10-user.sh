@@ -49,7 +49,7 @@ fix_user_group()(
     if [ "$exists_group_id" != "$3" ] || [ "$exists_group_name" != "$4" ]; then
         del_group "$exists_group_name"
         del_group "$4"
-        addgroup -g "$3" -S "$4"
+        echo "$4:x:$3:$2" >> /etc/group
     fi
 
     exists_user_id="$(getent passwd "$2" | cut -d: -s -f3)"
@@ -68,7 +68,7 @@ fix_user_group()(
     fi
 
     if [ -z "$(getent passwd "$1")" ]; then
-        adduser -u "$1" -S -s /bin/sh -G "$4" "$2"
+        echo "$2:x:$1:$3::/home/$2:/bin/sh" >> /etc/passwd
     fi
 
     echo "$2:password" | chpasswd 2>/dev/null
