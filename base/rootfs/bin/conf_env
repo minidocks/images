@@ -7,7 +7,7 @@
 set -e
 
 conf_env() {
-  local pattern="//" separator="=" comment="#" twounderscore="." transform="lower"
+  local comment="#" pattern="//" separator="=" template="%s" transform="lower" twounderscore="."
   while [ -n "$1" ]; do
     case "$1" in
       --file=*) file="${1#*=}";;
@@ -16,6 +16,8 @@ conf_env() {
       --separator) shift; separator="$1";;
       --comment=*) comment="${1#*=}";;
       --comment) shift; comment="$1";;
+      --template=*) template="${1#*=}";;
+      --template) shift; template="$1";;
       --prefix=*) prefix="${1#*=}";;
       --prefix) shift; prefix="$1";;
       --pattern=*) pattern="${1#*=}";;
@@ -31,10 +33,10 @@ conf_env() {
 
   local length="${#prefix}"
   for name in $(printenv | awk -F= '{print $1}' | awk "/^$prefix/" | awk "$pattern"); do
-    key="$(echo "${name:$length}" | sed "s'__'$twounderscore'g")"
+    key="$(printf "$template" "${name:$length}" | sed "s'__'$twounderscore'g")"
     if [ "$transform" = "lower" ]; then
       key="$(echo "$key" | tr '[:upper:]' '[:lower:]')"
-    elif [ "$transfrom" = "upper" ]; then
+    elif [ "$transform" = "upper" ]; then
       key="$(echo "$key" | tr '[:lower:]' '[:upper:]')"
     fi
     value="$(/bin/file_env "$name")"
