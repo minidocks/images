@@ -7,7 +7,7 @@ PHP docker image ([minidocks/php](https://hub.docker.com/r/minidocks/php))
 especially suited to web development. Fast, flexible and pragmatic, PHP powers
 everything from your blog to the most popular websites in the world.
 
-These images solves [problem with iconv
+These images solve [problem with iconv
 library](https://github.com/docker-library/php/issues/240#issuecomment-506651614).
 
 Configuration by environment variables
@@ -20,6 +20,8 @@ Configuration by environment variables
     (e.g. `FPM_ERROR_LOG=/dev/stderr.pipe`)
 -   `FPM_WWW_*=value` - set PHP FPM configuration in `php-fpm.d/www.conf`
     (e.g. `FPM_WWW_ACCESS__LOG=/dev/stdout.pipe`)
+-   `NEWRELIC_*=value` - set New Relic configuration in `newrelic.ini`
+-   `BLACKFIRE_*=value` - set Blackfire configuration in `blackfire.ini`
 
 Installed applications
 ----------------------
@@ -56,6 +58,8 @@ Modules
 | ldap             | ✓   | ✓   | latest |
 | mbstring         | ✓   | ✓   | base   |
 | mcrypt           | ✓   | ✓   | latest |
+| memcached        | ✓   | ✓   | latest |
+| mongodb          | ✓   | ✓   | latest |
 | mysqli           | ✓   | ✓   | latest |
 | mysqlnd          | ✓   | ✓   | latest |
 | newrelic (amd64) | ✓   | ✓   | latest |

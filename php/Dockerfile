@@ -1,8 +1,8 @@
 ARG version=8.1
 ARG major=8
 ARG composer1_version=1.10.26
-ARG composer2_version=2.4.2
-ARG newrelic_version=9.21.0.311
+ARG composer2_version=2.4.3
+ARG newrelic_version=10.2.0.314
 
 FROM minidocks/base:3.15 AS v7.4
 
@@ -79,6 +79,9 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
         mysqli \
         mysqlnd \
         opcache \
+        pecl-apcu \
+        pecl-memcached \
+        pecl-mongodb \
         pecl-uploadprogress \
         pecl-redis \
         pecl-xdebug \
@@ -105,10 +108,10 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$([ "$version" = "8.1" ] && echo "81" || echo $major)" /usr/bin/php-fpm; fi \
     && clean
 
-ENV PHP_EXT_XDEBUG=0 \
-    FPM_PID=run/php-fpm.pid \
+ENV BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307 \
     FPM_DAEMONIZE=no \
     FPM_ERROR_LOG=/dev/stderr.pipe \
+    FPM_PID=run/php-fpm.pid \
     FPM_WWW_ACCESS__LOG=/dev/stdout.pipe \
     FPM_WWW_CATCH_WORKERS_OUTPUT=yes \
     FPM_WWW_CLEAR_ENV=no \
@@ -116,6 +119,9 @@ ENV PHP_EXT_XDEBUG=0 \
     FPM_WWW_LISTEN="[::]:9000" \
     FPM_WWW_USER=www-data \
     FPM_WWW_SLOWLOG=/dev/stdout.pipe \
+    PHP_EXT_XDEBUG=0 \
+    NEWRELIC_DAEMON__ADDRESS=newrelic:31339 \
+    NEWRELIC_ENABLED=no \
     PHP_XDEBUG__LOG=/dev/stdout.pipe \
     PHP_XDEBUG__DISCOVER_CLIENT_HOST=true \
     PHP_XDEBUG__CLIENT_HOST=172.17.0.1 \
@@ -130,7 +136,7 @@ RUN wget -O "/tmp/blackfire.tar.gz" https://blackfire.io/api/v1/releases/probe/p
     && tar -xzf /tmp/blackfire.tar.gz -C /tmp && mv /tmp/blackfire*.so /usr/lib/php${major}/modules/blackfire.so && clean \
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
-    && echo -e "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8307" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
+    && echo -e "extension=blackfire.so\n" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
 
 ARG newrelic_version
 
@@ -139,6 +145,8 @@ RUN if [ "$TARGETARCH" = amd64 ]; then wget -O /tmp/nr.tar.gz "http://download.n
     && tar -xzf /tmp/nr.tar.gz -C /tmp \
     && NR_INSTALL_SILENT=1 NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_INITFILE=/tmp/nr NR_INSTALL_DAEMONPATH=/tmp/nr-daemon /tmp/newrelic*/newrelic-install install \
     && rm -rf /etc/newrelic && clean; fi
+
+RUN /docker-entrypoint.sh
 
 FROM latest AS nginx
 
