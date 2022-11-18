@@ -74,6 +74,7 @@ Images
 | [Unpaper](https://github.com/minidocks/unpaper)         | ![](https://img.shields.io/docker/image-size/minidocks/unpaper/latest?style=flat-square&logo=docker&label=minidocks/unpaper)         | ![](https://img.shields.io/github/workflow/status/minidocks/unpaper/docker?label=&logo=github&style=flat-square)     |
 | [WeasyPrint](https://github.com/minidocks/weasyprint)   | ![](https://img.shields.io/docker/image-size/minidocks/weasyprint/latest?style=flat-square&logo=docker&label=minidocks/weasyprint)   | ![](https://img.shields.io/github/workflow/status/minidocks/weasyprint/docker?label=&logo=github&style=flat-square)  |
 | [wkhtmltopdf](https://github.com/minidocks/wkhtmltopdf) | ![](https://img.shields.io/docker/image-size/minidocks/wkhtmltopdf/latest?style=flat-square&logo=docker&label=minidocks/wkhtmltopdf) | ![](https://img.shields.io/github/workflow/status/minidocks/wkhtmltopdf/docker?label=&logo=github&style=flat-square) |
+| [zint](https://github.com/minidocks/zint)               | ![](https://img.shields.io/docker/image-size/minidocks/zint/latest?style=flat-square&logo=docker&label=minidocks/wkhtmltopdf)        | ![](https://img.shields.io/github/workflow/status/minidocks/zint/docker?label=&logo=github&style=flat-square)        |
 
 Alternatives
 ------------
