@@ -13,9 +13,9 @@ FROM minidocks/base:3.15 AS base_3.9
 
 FROM minidocks/base:3.15-build AS base_3.9-build
 
-FROM minidocks/base:3.16 AS base_3.10
+FROM minidocks/base:3.17 AS base_3.10
 
-FROM minidocks/base:3.16-build AS base_3.10-build
+FROM minidocks/base:3.17-build AS base_3.10-build
 
 FROM base_$version$suffix AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

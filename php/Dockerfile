@@ -8,7 +8,7 @@ FROM minidocks/base:3.15 AS v7.4
 
 FROM minidocks/base:3.16 AS v8.0
 
-FROM minidocks/base:3.16 AS v8.1
+FROM minidocks/base:3.17 AS v8.1
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

@@ -9,7 +9,9 @@ FROM minidocks/base:3.16 AS v16
 
 FROM minidocks/base:3.15 AS v17
 
-FROM minidocks/base:3.16 AS v18
+FROM minidocks/base:3.17 AS v18
+
+FROM minidocks/base:3.17 AS v19
 
 FROM minidocks/base:edge AS vedge
 
@@ -38,6 +40,6 @@ ARG package
 # Fix https://github.com/npm/uid-number/issues/3#issuecomment-453727058
 # Fix https://bobbyhadz.com/blog/javascript-chalk-error-err-require-esm-of-es-module
 RUN /docker-entrypoint.d/10-cache.sh && apk --update add npm \
-    && npm config set unsafe-perm true && npm i -g npm@latest npm-check-updates yarn && npm config set unsafe-perm false \
+    && npm i -g npm@latest npm-check-updates yarn \
     && if [ -d /usr/local/lib/node_modules ]; then local="local/"; apk del npm && rm -rf /usr/lib/node_modules; fi \
     && rm -rf "/usr/${local}lib/node_modules/npm/docs" "/usr/${local}lib/node_modules/npm/html" && clean

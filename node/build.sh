@@ -11,13 +11,15 @@ versions="
 16;16;nodejs<17
 17-base;17;nodejs-current<18;base
 17;17;nodejs-current<18
-18-base;18;nodejs-current<19;base
-18;18;nodejs-current<19
-lts-base;16;nodejs<17;base
-lts;16;nodejs<17
-current-base;18;nodejs-current<19;base
-current;18;nodejs-current<19
-latest;18;nodejs-current<19
+18-base;18;nodejs<19;base
+18;18;nodejs<19
+19-base;19;nodejs-current<20;base
+19;19;nodejs-current<20
+lts-base;18;nodejs<19;base
+lts;18;nodejs<19
+current-base;19;nodejs-current<20;base
+current;19;nodejs-current<20
+latest;19;nodejs-current<20
 "
 
 build() {

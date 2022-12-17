@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/imagemagick"
 versions="
-6;imagemagick6
 7;imagemagick
 latest;imagemagick
 "
