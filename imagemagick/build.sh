@@ -3,13 +3,13 @@ set -e
 
 image="${namespace:-minidocks}/imagemagick"
 versions="
-7;imagemagick
-latest;imagemagick
+7
+latest
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --target "${3:-latest}" --build-arg package="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts --target "${3:-latest}" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

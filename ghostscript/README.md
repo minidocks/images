@@ -21,4 +21,3 @@ Tags
 | Tag    | Size                                                                                                                |
 |--------|---------------------------------------------------------------------------------------------------------------------|
 | latest | ![](https://img.shields.io/docker/image-size/minidocks/ghostscript/latest?style=flat-square&logo=docker&label=size) |
-| 9      | ![](https://img.shields.io/docker/image-size/minidocks/ghostscript/9?style=flat-square&logo=docker&label=size)      |

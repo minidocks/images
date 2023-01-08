@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/ghostscript"
 versions="
-9
 latest
 "
 
