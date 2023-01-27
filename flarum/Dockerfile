@@ -31,6 +31,7 @@ RUN su-exec www-data:www-data composer require \
         askvortsov/flarum-markdown-tables \
         askvortsov/flarum-pwa \
         askvortsov/flarum-rich-text \
+        blomstra/fontawesome    \
         blomstra/mark-unread \
         blomstra/user-filter \
         clarkwinkelmann/flarum-ext-author-change \
@@ -42,8 +43,12 @@ RUN su-exec www-data:www-data composer require \
         clarkwinkelmann/flarum-ext-mailing \
         clarkwinkelmann/flarum-ext-mass-actions \
         clarkwinkelmann/flarum-ext-post-bookmarks \
+        clarkwinkelmann/flarum-ext-post-stream-search \
+        clarkwinkelmann/flarum-ext-scout \
         clarkwinkelmann/flarum-ext-who-read \
+        club-1/flarum-ext-cross-references \
         datlechin/flarum-copy-links \
+        datlechin/flarum-discussion-overview \
         datlechin/flarum-landing-page \
         flarumite/simple-discussion-views \
         fof/best-answer \
@@ -73,7 +78,6 @@ RUN su-exec www-data:www-data composer require \
         fof/user-directory \
         fof/webhooks \
         ianm/follow-users \
-        itnt/flarum-uitab \
         justoverclock/flarum-ext-hashtag \
         justoverclock/thread-read-time \
         justoverclock/user-statistics \
@@ -82,6 +86,7 @@ RUN su-exec www-data:www-data composer require \
         luceos/flarum-ext-dofollow \
         nearata/flarum-ext-no-self-likes \
         nearata/flarum-ext-tags-color-generator \
+        romanshul/flarum-editor \
         sycho/flarum-move-posts \
         sycho/flarum-profile-cover \
         the-turk/flarum-diff \
