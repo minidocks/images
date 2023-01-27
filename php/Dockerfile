@@ -135,7 +135,8 @@ ARG TARGETARCH
 
 # Blackfire
 RUN wget -O "/tmp/blackfire.tar.gz" https://blackfire.io/api/v1/releases/probe/php/alpine/${TARGETARCH}/${version/./} \
-    && tar -xzf /tmp/blackfire.tar.gz -C /tmp && mv /tmp/blackfire*.so /usr/lib/php${major}/modules/blackfire.so && clean \
+    && mkdir /tmp/bf && tar -xzf /tmp/blackfire.tar.gz -C /tmp/bf && chown -R root:root /tmp/bf \
+    && mv /tmp/bf/blackfire*.so /usr/lib/php${major}/modules/blackfire.so && clean \
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
     && echo -e "extension=blackfire.so\n" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
