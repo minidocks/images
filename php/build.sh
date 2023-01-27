@@ -3,24 +3,28 @@ set -e
 
 image="${namespace:-minidocks}/php"
 versions="
-7.4;7.4
-7.4-base;7.4;base
-7.4-nginx;7.4;nginx
-7.4-intl;7.4;intl
-8.0;8.0
-8.0-base;8.0;base
-8.0-nginx;8.0;nginx
-8.0-intl;8.0;intl
-8.1;8.1
-8.1-base;8.1;base
-8.1-nginx;8.1;nginx
-8.1-intl;8.1;intl
-latest;8.1
+7.4;7.4;7
+7.4-base;7.4;7;base
+7.4-nginx;7.4;7;nginx
+7.4-intl;7.4;7;intl
+8.0;8.0;8
+8.0-base;8.0;8;base
+8.0-nginx;8.0;8;nginx
+8.0-intl;8.0;8;intl
+8.1;8.1;81
+8.1-base;8.1;81;base
+8.1-nginx;8.1;81;nginx
+8.1-intl;8.1;81;intl
+8.2;8.2;82
+8.2-base;8.2;82;base
+8.2-nginx;8.2;82;nginx
+8.2-intl;8.2;82;intl
+latest;8.1;81
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --target="${3:-latest}" --build-arg major="${2%%.*}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts --target="${4:-latest}" --build-arg suffix="${3}" --build-arg major="${2%%.*}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

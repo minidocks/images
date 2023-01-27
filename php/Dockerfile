@@ -1,8 +1,9 @@
 ARG version=8.1
 ARG major=8
+ARG suffix=81
 ARG composer1_version=1.10.26
-ARG composer2_version=2.4.3
-ARG newrelic_version=10.2.0.314
+ARG composer2_version=2.5.1
+ARG newrelic_version=10.5.0.317
 
 FROM minidocks/base:3.15 AS v7.4
 
@@ -10,17 +11,19 @@ FROM minidocks/base:3.16 AS v8.0
 
 FROM minidocks/base:3.17 AS v8.1
 
+FROM minidocks/base:edge AS v8.2
+
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version
 ARG major
+ARG suffix
 
 # 82 is the standard uid/gid for "www-data" in Alpine
 RUN getent group www-data >/dev/null || addgroup -g 82 -S www-data; getent passwd www-date >/dev/null || adduser -u 82 -S -s /bin/sh -G www-data www-data
 
-RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
-    && for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$suffix-$module"; done \
+RUN for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$suffix-$module"; done \
     && apk add "gnu-libiconv$libiconv_version" "php$suffix" $modules && clean \
     && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$suffix" /usr/bin/php; fi \
     && if [ ! -f /usr/bin/phar ]; then ln -s "/usr/bin/phar$suffix" /usr/bin/phar; fi \
@@ -61,14 +64,15 @@ FROM base AS latest
 
 ARG version
 ARG major
+ARG suffix
 
-RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
-    && for module in \
+RUN for module in \
         bcmath \
         calendar \
         cgi \
         dom \
         exif \
+        ffi \
         fileinfo \
         fpm \
         ftp \
@@ -83,6 +87,7 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
         pecl-memcached \
         pecl-mongodb \
         pecl-uploadprogress \
+        pecl-protobuf \
         pecl-redis \
         pecl-xdebug \
         pdo_mysql \
@@ -101,11 +106,8 @@ RUN if [ "$version" = "8.1" ]; then suffix="81"; else suffix="$major"; fi \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
-    && if [ "$major" != "8" ]; then modules="$modules php$suffix-xmlrpc"; else modules="$modules php$suffix-pecl-xmlrpc@edge"; fi \
-    && if [ "$major" = "8" ] || [ "$version" = "7.4" ]; then modules="$modules php$suffix-ffi"; fi \
-    && if [ "$version" != "8.1" ]; then modules="$modules php$suffix-pecl-mcrypt"; else modules="$modules php$suffix-pecl-mcrypt@edge"; fi \
     && apk add $modules \
-    && if [ ! -f /usr/bin/php-fpm ]; then ln -s "/usr/sbin/php-fpm$([ "$version" = "8.1" ] && echo "81" || echo $major)" /usr/bin/php-fpm; fi \
+    && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \
     && clean
 
 ENV BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307 \
@@ -132,7 +134,7 @@ ENV BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307 \
 ARG TARGETARCH
 
 # Blackfire
-RUN wget -O "/tmp/blackfire.tar.gz" https://blackfire.io/api/v1/releases/probe/php/linux/${TARGETARCH}/${version/./} \
+RUN wget -O "/tmp/blackfire.tar.gz" https://blackfire.io/api/v1/releases/probe/php/alpine/${TARGETARCH}/${version/./} \
     && tar -xzf /tmp/blackfire.tar.gz -C /tmp && mv /tmp/blackfire*.so /usr/lib/php${major}/modules/blackfire.so && clean \
     && mkdir /var/run/blackfire \
     && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
@@ -161,8 +163,8 @@ FROM nginx AS intl
 
 ARG version
 ARG major
+ARG suffix
 
-RUN if [ "$version" = "8.1" ]; then apk add icu-data-full php81-intl; else apk add "php${major}-intl"; fi \
-    && clean
+RUN apk add "php${suffix}-intl" && if [ "$version" != "7.4" ]; then apk add icu-data-full; fi && clean
 
 FROM latest

@@ -27,14 +27,14 @@ Installed applications
 ----------------------
 
 -   [Composer](https://getcomposer.org/): Dependency Manager for PHP `composer1`
-    (alias `composer`) and `composer2`.
+    and `composer2` (alias `composer`).
 -   [PsySH](https://psysh.org/): A runtime developer console, interactive
     debugger and REPL for PHP.
 
 Modules
 -------
 
-| module           | 7.x | 8.x | tag    |
+| module           | 7.4 | 8.x | tag    |
 |------------------|-----|-----|--------|
 | apcu             | ✓   | ✓   | base   |
 | bcmath           | ✓   | ✓   | latest |
@@ -45,7 +45,7 @@ Modules
 | curl             | ✓   | ✓   | base   |
 | dom              | ✓   | ✓   | latest |
 | exif             | ✓   | ✓   | latest |
-| ffi              |     | ✓   | latest |
+| ffi              | ✓   | ✓   | latest |
 | fileinfo         | ✓   | ✓   | latest |
 | fpm              | ✓   | ✓   | latest |
 | ftp              | ✓   | ✓   | latest |
@@ -57,7 +57,6 @@ Modules
 | json             | ✓   | ✓   | base   |
 | ldap             | ✓   | ✓   | latest |
 | mbstring         | ✓   | ✓   | base   |
-| mcrypt           | ✓   | ✓   | latest |
 | memcached        | ✓   | ✓   | latest |
 | mongodb          | ✓   | ✓   | latest |
 | mysqli           | ✓   | ✓   | latest |
@@ -72,6 +71,7 @@ Modules
 | pgsql            | ✓   | ✓   | latest |
 | phar             | ✓   | ✓   | base   |
 | posix            | ✓   | ✓   | base   |
+| protobuf         | ✓   | ✓   | latest |
 | redis            | ✓   | ✓   | latest |
 | session          | ✓   | ✓   | latest |
 | simplexml        | ✓   | ✓   | latest |
@@ -83,7 +83,6 @@ Modules
 | xdebug           | ✓   | ✓   | latest |
 | xml              | ✓   | ✓   | latest |
 | xmlreader        | ✓   | ✓   | latest |
-| xmlrpc           | ✓   | ✓   | latest |
 | xmlwriter        | ✓   | ✓   | latest |
 | xsl              | ✓   | ✓   | latest |
 | zip              | ✓   | ✓   | latest |
@@ -103,6 +102,10 @@ Tags
 | Tag         | Size                                                                                                           |
 |-------------|----------------------------------------------------------------------------------------------------------------|
 | latest, 8.1 | ![](https://img.shields.io/docker/image-size/minidocks/php/latest?style=flat-square&logo=docker&label=size)    |
+| 8.2-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.8-base?style=flat-square&logo=docker&label=size)  |
+| 8.2         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.8?style=flat-square&logo=docker&label=size)       |
+| 8.2-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.8-nginx?style=flat-square&logo=docker&label=size) |
+| 8.2-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.8-intl?style=flat-square&logo=docker&label=size)  |
 | 8.1-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1-base?style=flat-square&logo=docker&label=size)  |
 | 8.1         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1?style=flat-square&logo=docker&label=size)       |
 | 8.1-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1-nginx?style=flat-square&logo=docker&label=size) |
