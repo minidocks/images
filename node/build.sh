@@ -5,8 +5,6 @@ image="${namespace:-minidocks}/node"
 versions="
 14-base;14;nodejs<15;base
 14;14;nodejs<15
-15-base;15;nodejs-current<16;base
-15;15;nodejs-current<16
 16-base;16;nodejs<17;base
 16;16;nodejs<17
 17-base;17;nodejs-current<18;base

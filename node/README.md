@@ -46,7 +46,5 @@ Tags
 | 17-base,              | [![](https://img.shields.io/docker/image-size/minidocks/node/17-base?style=flat-square&logo=docker&label=size)]() |
 | 16                    | [![](https://img.shields.io/docker/image-size/minidocks/node/16?style=flat-square&logo=docker&label=size)]()      |
 | 16-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/16-base?style=flat-square&logo=docker&label=size)]() |
-| 15                    | [![](https://img.shields.io/docker/image-size/minidocks/node/15?style=flat-square&logo=docker&label=size)]()      |
-| 15-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/15-base?style=flat-square&logo=docker&label=size)]() |
 | 14                    | [![](https://img.shields.io/docker/image-size/minidocks/node/14?style=flat-square&logo=docker&label=size)]()      |
 | 14-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/14-base?style=flat-square&logo=docker&label=size)]() |
