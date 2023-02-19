@@ -5,6 +5,7 @@ WORKDIR /var/www
 
 RUN rm -rf * && chown www-data:www-data /var/www
 RUN su-exec www-data:www-data composer create-project flarum/flarum . && chmod a+x flarum && clean
+RUN su-exec www-data:www-data composer config --no-plugins allow-plugins.php-http/discovery true
 RUN su-exec www-data:www-data mkdir -p assets
 RUN wget -O public/favicon.ico https://flarum.org/favicon.ico
 

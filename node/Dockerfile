@@ -5,8 +5,6 @@ FROM minidocks/base:3.14 AS v14
 
 FROM minidocks/base:3.16 AS v16
 
-FROM minidocks/base:3.15 AS v17
-
 FROM minidocks/base:3.17 AS v18
 
 FROM minidocks/base:3.17 AS v19
