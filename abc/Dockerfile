@@ -14,7 +14,7 @@ RUN wget -O /tmp/abcpp.tar.gz "https://sourceforge.net/projects/abcplus/files/ab
     && tar -xvzf /tmp/abcpp.tar.gz -C /tmp && cd /tmp/abcpp* \
     && mkdir -p /tmp/build && make && mv abcpp /tmp/build
 
-ARG abcm2ps_version=8.14.13
+ARG abcm2ps_version=8.14.14
 
 RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v${abcm2ps_version}.tar.gz" \
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \

@@ -30,18 +30,18 @@ RUN tlmgr install cm-super
 Tags
 ----
 
-| Tag           | Size                                                                            |
-|---------------|---------------------------------------------------------------------------------|
-| latest, basic | ![](https://img.shields.io/docker/image-size/minidocks/texlive/latest?style=flat-square&logo=docker&label=size)          |
+| Tag           | Size                                                                                                              |
+|---------------|-------------------------------------------------------------------------------------------------------------------|
+| latest, basic | ![](https://img.shields.io/docker/image-size/minidocks/texlive/latest?style=flat-square&logo=docker&label=size)   |
 | basic         | ![](https://img.shields.io/docker/image-size/minidocks/texlive/basic?style=flat-square&logo=docker&label=size)    |
 | small         | ![](https://img.shields.io/docker/image-size/minidocks/texlive/small?style=flat-square&logo=docker&label=size)    |
 | gregorio      | ![](https://img.shields.io/docker/image-size/minidocks/texlive/gregorio?style=flat-square&logo=docker&label=size) |
 | context       | ![](https://img.shields.io/docker/image-size/minidocks/texlive/context?style=flat-square&logo=docker&label=size)  |
 | medium        | ![](https://img.shields.io/docker/image-size/minidocks/texlive/medium?style=flat-square&logo=docker&label=size)   |
 | full          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/full?style=flat-square&logo=docker&label=size)     |
+| 2022          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2022?style=flat-square&logo=docker&label=size)     |
 | 2021          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2021?style=flat-square&logo=docker&label=size)     |
 | 2020          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2020?style=flat-square&logo=docker&label=size)     |
-| 2019          | ![](https://img.shields.io/docker/image-size/minidocks/texlive/2019?style=flat-square&logo=docker&label=size)     |
 
 Related images
 --------------

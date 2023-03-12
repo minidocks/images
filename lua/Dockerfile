@@ -1,4 +1,4 @@
-ARG version=5.3
+ARG version=5.4
 ARG base=latest
 
 FROM minidocks/base AS latest
@@ -22,5 +22,7 @@ RUN if [ "$base" = "build" ]; then \
         apk add "lua${version}-dev" \
         && clean; \
      fi
+
+RUN luarocks install inspect && clean
 
 CMD [ "lua" ]

@@ -6,11 +6,13 @@ versions="
 5.1;5.1
 5.2;5.2
 5.3;5.3
+5.4;5.4
 5.1-build;5.1;build
 5.2-build;5.2;build
 5.3-build;5.3;build
-build;5.3;build
-latest;5.3
+5.4-build;5.4;build
+build;5.4;build
+latest;5.4
 "
 
 build() {

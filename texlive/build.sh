@@ -3,15 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/texlive"
 versions="
-2019;2019;basic
-2019-minimal;2019;minimal
-2019-context;2019;context
-2019-basic;2019;basic
-2019-small;2019;small
-2019-gregorio;2019;gregorio
-2019-medium;2019;medium
-2019-full;2019;full
-
 2020;2020;basic
 2020-minimal;2020;minimal
 2020-context;2020;context
@@ -30,13 +21,22 @@ versions="
 2021-medium;2021;medium
 2021-full;2021;full
 
-minimal;2021;minimal
-context;2021;context
-basic;2021;basic
-small;2021;small
-gregorio;2021;gregorio
-medium;2021;medium
-full;2021;full
+2022;2022;basic
+2022-minimal;2022;minimal
+2022-context;2022;context
+2022-basic;2022;basic
+2022-small;2022;small
+2022-gregorio;2022;gregorio
+2022-medium;2022;medium
+2022-full;2022;full
+
+minimal;2022;minimal
+context;2022;context
+basic;2022;basic
+small;2022;small
+gregorio;2022;gregorio
+medium;2022;medium
+full;2022;full
 
 latest;2021;basic;
 "

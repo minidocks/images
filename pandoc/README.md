@@ -99,16 +99,11 @@ docker-compose run --rm pandoc https://raw.githubusercontent.com/mszep/pandoc_re
 Tags
 ----
 
-| Tag             | Size                                                                                                           |
-|-----------------|----------------------------------------------------------------------------------------------------------------|
-| latest, 2, 2.19 | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/latest?style=flat-square&logo=docker&label=size) |
-| 2               | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2?style=flat-square&logo=docker&label=size)      |
-| 2.19            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.19?style=flat-square&logo=docker&label=size)   |
-| 2.18            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.18?style=flat-square&logo=docker&label=size)   |
-| 2.17            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.17?style=flat-square&logo=docker&label=size)   |
-| 2.16            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.16?style=flat-square&logo=docker&label=size)   |
-| 2.15            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.15?style=flat-square&logo=docker&label=size)   |
-| 2.14            | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2.14?style=flat-square&logo=docker&label=size)   |
+| Tag       | Size                                                                                                           |
+|-----------|----------------------------------------------------------------------------------------------------------------|
+| latest, 3 | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/latest?style=flat-square&logo=docker&label=size) |
+| 3         | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/3?style=flat-square&logo=docker&label=size)      |
+| 2         | ![](https://img.shields.io/docker/image-size/minidocks/pandoc/2?style=flat-square&logo=docker&label=size)      |
 
 Related images
 --------------
@@ -121,5 +116,6 @@ Related images
 See also
 --------
 
+-   https://hub.docker.com/r/pandoc/minimal
 -   https://github.com/alexeygumirov/pandoc-for-pdf-how-to
 -   https://github.com/dalibo/pandocker
