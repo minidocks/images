@@ -1,0 +1,1 @@
+* * * * * cd /var/www; su-exec www-data:www-data flarum schedule:run >/dev/stdout 2>/dev/stderr

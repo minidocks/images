@@ -19,7 +19,7 @@ COPY rootfs /
 
 RUN chown -R www-data:www-data /var/www
 
-CMD ["supervise", "php-fpm", "nginx"]
+CMD ["supervise", "php-fpm", "nginx", "crond"]
 
 FROM base AS latest
 
