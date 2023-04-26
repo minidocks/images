@@ -79,6 +79,7 @@ RUN for module in \
         gd \
         gettext \
         gmp \
+        imap \
         ldap \
         mysqli \
         mysqlnd \

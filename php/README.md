@@ -53,6 +53,7 @@ Modules
 | gettext          | ✓   | ✓   | latest |
 | gmp              | ✓   | ✓   | latest |
 | iconv            | ✓   | ✓   | base   |
+| imap             | ✓   | ✓   | base   |
 | intl             | ✓   | ✓   | intl   |
 | json             | ✓   | ✓   | base   |
 | ldap             | ✓   | ✓   | latest |
