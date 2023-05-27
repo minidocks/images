@@ -83,7 +83,6 @@ RUN su-exec www-data:www-data composer require \
         justoverclock/thread-read-time \
         justoverclock/user-statistics \
         kyrne/whisper \
-        'league/flysystem-aws-s3-v3:^1.0' \
         luceos/flarum-ext-dofollow \
         nearata/flarum-ext-no-self-likes \
         nearata/flarum-ext-tags-color-generator \
