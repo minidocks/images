@@ -45,11 +45,15 @@ Tags
 
 | Tag             | Size                                                                                                                   |
 |-----------------|------------------------------------------------------------------------------------------------------------------------|
-| latest, 3, 3.10 | ![](https://img.shields.io/docker/image-size/minidocks/python/latest?style=flat-square&logo=docker&label=size)         |
-| 3, 3.10         | ![](https://img.shields.io/docker/image-size/minidocks/python/3?style=flat-square&logo=docker&label=size)              |
+| latest, 3, 3.11 | ![](https://img.shields.io/docker/image-size/minidocks/python/latest?style=flat-square&logo=docker&label=size)         |
+| 3, 3.11         | ![](https://img.shields.io/docker/image-size/minidocks/python/3?style=flat-square&logo=docker&label=size)              |
 | 3-packaging     | ![](https://img.shields.io/docker/image-size/minidocks/python/3-packaging?style=flat-square&logo=docker&label=size)    |
 | 3-build         | ![](https://img.shields.io/docker/image-size/minidocks/python/3-build?style=flat-square&logo=docker&label=size)        |
 | 3-uwsgi         | ![](https://img.shields.io/docker/image-size/minidocks/python/3-uwsgi?style=flat-square&logo=docker&label=size)        |
+| 3.11            | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11?style=flat-square&logo=docker&label=size)           |
+| 3.11-packaging  | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-packaging?style=flat-square&logo=docker&label=size) |
+| 3.11-build      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-build?style=flat-square&logo=docker&label=size)     |
+| 3.11-uwsgi      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-uwsgi?style=flat-square&logo=docker&label=size)     |
 | 3.10            | ![](https://img.shields.io/docker/image-size/minidocks/python/3.10?style=flat-square&logo=docker&label=size)           |
 | 3.10-packaging  | ![](https://img.shields.io/docker/image-size/minidocks/python/3.10-packaging?style=flat-square&logo=docker&label=size) |
 | 3.10-build      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.10-build?style=flat-square&logo=docker&label=size)     |
@@ -58,10 +62,6 @@ Tags
 | 3.9-packaging   | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-packaging?style=flat-square&logo=docker&label=size)  |
 | 3.9-build       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-build?style=flat-square&logo=docker&label=size)      |
 | 3.9-uwsgi       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-uwsgi?style=flat-square&logo=docker&label=size)      |
-| 3.8             | ![](https://img.shields.io/docker/image-size/minidocks/python/3.8?style=flat-square&logo=docker&label=size)            |
-| 3.8-packaging   | ![](https://img.shields.io/docker/image-size/minidocks/python/3.8-packaging?style=flat-square&logo=docker&label=size)  |
-| 3.8-build       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.8-build?style=flat-square&logo=docker&label=size)      |
-| 3.8-uwsgi       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.8-uwsgi?style=flat-square&logo=docker&label=size)      |
 | 2               | ![](https://img.shields.io/docker/image-size/minidocks/python/2?style=flat-square&logo=docker&label=size)              |
 | 2-packaging     | ![](https://img.shields.io/docker/image-size/minidocks/python/2-packaging?style=flat-square&logo=docker&label=size)    |
 | 2-build         | ![](https://img.shields.io/docker/image-size/minidocks/python/2-build?style=flat-square&logo=docker&label=size)        |

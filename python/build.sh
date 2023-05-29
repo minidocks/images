@@ -9,23 +9,23 @@ versions="
 2;2.7
 2-packaging;2.7;packaging
 2-build;2.7;build;-build
-3.8;3.8
-3.8-packaging;3.8;packaging
-3.8-uwsgi;3.8;uwsgi
-3.8-build;3.8;build;-build
 3.9;3.9
 3.9-packaging;3.9;packaging
 3.9-uwsgi;3.9;uwsgi
 3.9-build;3.9;build;-build
-3;3.10
 3.10;3.10
 3.10-packaging;3.10;packaging
 3.10-uwsgi;3.10;uwsgi
 3.10-build;3.10;build;-build
-3-packaging;3.10;packaging
-3-build;3.10;build;-build
-3-uwsgi;3.10;uwsgi
-latest;3.10
+3.11;3.11
+3.11-packaging;3.11;packaging
+3.11-uwsgi;3.11;uwsgi
+3.11-build;3.11;build;-build
+3;3.11
+3-packaging;3.11;packaging
+3-build;3.11;build;-build
+3-uwsgi;3.11;uwsgi
+latest;3.11
 "
 
 build() {
