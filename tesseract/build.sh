@@ -2,7 +2,7 @@
 set -e
 
 image="${namespace:-minidocks}/tesseract"
-europe="bel bul cat ces dan deu est eus fin fra grc hrv hun ita lat lav nor pol por ron rus slk slv spa srp swe ukr"
+europe="bel bul cat ces dan deu est eus fin fra grc hrv hun ita lav nor pol por ron rus slk slv spa srp swe ukr"
 versions="
 5
 5-europe;$europe;lang
