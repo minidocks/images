@@ -2,26 +2,21 @@
 set -e
 
 image="${namespace:-minidocks}/tesseract"
-europe="bel bul cat ces dan deu ell est eus fin fra grc hrv hun ita lav nor pol por ron rus slk slv spa srp swe ukr"
+europe="bel bul cat ces dan deu est eus fin fra grc hrv hun ita lat lav nor pol por ron rus slk slv spa srp swe ukr"
 versions="
-4.1;4.1
-4;4.1
-4-europe;4.1;$europe;lang
-5.0;5.0
-5;5.0
-5-europe;5.0;$europe;lang
-latest;5.0
+5
+5-europe;$europe;lang
+latest
 "
 
 for lang in $europe; do versions="
 $versions
-4-$lang;4.1;$lang;lang
-5-$lang;5.0;$lang;lang
+5-$lang;$lang;lang
 "; done
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --target "${4:-latest}" --build-arg lang="$3" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts --target "${3:-latest}" --build-arg lang="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
