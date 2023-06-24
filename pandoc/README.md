@@ -12,6 +12,10 @@ Extensions
 All extensions are instaled in `/pandoc` directory. Directory
 `/home/user/.pandoc` is symlink to `/pandoc`.
 
+### Tools
+
+-   [pandoc-lua-logging](https://github.com/wlupton/pandoc-lua-logging)
+
 ### Lua filters
 
 -   https://github.com/pandoc/lua-filters
