@@ -3,15 +3,12 @@ set -e
 
 image="${namespace:-minidocks}/ocrmypdf"
 versions="
-11;11.7.3
-12;12.7.2
-13;13.4.7
-latest;13.4.7
+latest
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

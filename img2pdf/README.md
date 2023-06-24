@@ -14,13 +14,12 @@ docker run --rm -it -v "`pwd`:/app" -w /app minidocks/img2pdf -o images.pdf *.jp
 Tags
 ----
 
-| Tag         | Size                                                                                                            |
-|-------------|-----------------------------------------------------------------------------------------------------------------|
-| latest, 0.4 | ![](https://img.shields.io/docker/image-size/minidocks/img2pdf/latest?style=flat-square&logo=docker&label=size) |
-| 0.4         | ![](https://img.shields.io/docker/image-size/minidocks/img2pdf/0.4?style=flat-square&logo=docker&label=size)    |
+| Tag    | Size                                                                                                            |
+|--------|-----------------------------------------------------------------------------------------------------------------|
+| latest | ![](https://img.shields.io/docker/image-size/minidocks/img2pdf/latest?style=flat-square&logo=docker&label=size) |
 
 Related images
 --------------
 
--   [Ghostscript](https://github.com/minidocks/ghostscript)
--   [OCRmyPDF](https://github.com/minidocks/ocrmypdf)
+- [Ghostscript](https://github.com/minidocks/ghostscript)
+- [OCRmyPDF](https://github.com/minidocks/ocrmypdf)

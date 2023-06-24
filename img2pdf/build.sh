@@ -3,13 +3,12 @@ set -e
 
 image="${namespace:-minidocks}/img2pdf"
 versions="
-0.4;0.4.4
-latest;0.4.4
+latest
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
