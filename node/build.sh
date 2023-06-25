@@ -3,19 +3,19 @@ set -e
 
 image="${namespace:-minidocks}/node"
 versions="
-14-base;14;nodejs<15;base
-14;14;nodejs<15
 16-base;16;nodejs<17;base
 16;16;nodejs<17
 18-base;18;nodejs<19;base
 18;18;nodejs<19
 19-base;19;nodejs-current<20;base
 19;19;nodejs-current<20
+20-base;20;nodejs-current<21;base
+20;20;nodejs-current<21
 lts-base;18;nodejs<19;base
 lts;18;nodejs<19
-current-base;19;nodejs-current<20;base
-current;19;nodejs-current<20
-latest;19;nodejs-current<20
+current-base;20;nodejs-current<21;base
+current;20;nodejs-current<21
+latest;20;nodejs-current<21
 "
 
 build() {
