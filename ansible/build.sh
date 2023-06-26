@@ -3,15 +3,17 @@ set -e
 
 image="${namespace:-minidocks}/ansible"
 versions="
-4;4.10.0
-5;5.10.0
-6;6.4.0
-latest;6.4.0
+4;ansible<5
+5;ansible<6
+6;ansible<7
+7;ansible<8
+8;ansible<9
+latest;ansible
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts --build-arg ansible_package="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
