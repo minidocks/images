@@ -1,10 +1,6 @@
 ARG version=3.11
 ARG suffix=""
 
-FROM minidocks/base:3.15 AS base_2.7
-
-FROM minidocks/base:3.15-build AS base_2.7-build
-
 FROM minidocks/base:3.15 AS base_3.9
 
 FROM minidocks/base:3.15-build AS base_3.9-build
@@ -31,13 +27,11 @@ ENV PIP_NO_COMPILE=1 \
 COPY rootfs /
 
 # make some useful symlinks that are expected to exist
-RUN if [ "${version::1}" = 3 ]; then \
-        ln -s /usr/bin/python3 /usr/bin/python; \
-        ln -s /usr/bin/pip3 /usr/bin/pip; \
-        ln -s /usr/bin/easy_install-$version /usr/bin/easy_install; \
-        ln -s /usr/bin/pydoc3 /usr/bin/pydoc; \
-        ln -s /usr/bin/python3-config /usr/bin/python-config; \
-    fi
+RUN ln -s /usr/bin/python3 /usr/bin/python; \
+    ln -s /usr/bin/pip3 /usr/bin/pip; \
+    ln -s /usr/bin/easy_install-$version /usr/bin/easy_install; \
+    ln -s /usr/bin/pydoc3 /usr/bin/pydoc; \
+    ln -s /usr/bin/python3-config /usr/bin/python-config;
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
     && apk add "python${version::1}" && "python${version::1}" -m ensurepip --upgrade \

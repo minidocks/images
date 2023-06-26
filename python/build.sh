@@ -25,6 +25,7 @@ versions="
 3-packaging;3.11;packaging
 3-build;3.11;build;-build
 3-uwsgi;3.11;uwsgi
+build;3.11;build;-build
 latest;3.11
 "
 

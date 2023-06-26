@@ -1,20 +1,8 @@
-ARG pyinstaller_version=5.7.0
-
-FROM minidocks/python:3-build AS build
-
-ARG pyinstaller_version
-
-RUN apk add zlib-dev \
-    && wget -O /tmp/pyinstaller.tar.gz "https://github.com/pyinstaller/pyinstaller/archive/v${pyinstaller_version}.tar.gz" && tar -xzf /tmp/pyinstaller.tar.gz -C /tmp \
-    && cd /tmp/pyinstaller*/bootloader && CFLAGS="-Wno-stringop-overflow" "python3" ./waf configure --no-lsb all \
-    && pip3 install --prefix="/tmp/pyinstaller" ..
-
-FROM minidocks/python:3 AS latest
+FROM minidocks/python AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk add binutils py3-pycryptodome && clean
+ARG pyinstaller_package=pyinstaller<6
 
-COPY --from=build /tmp/pyinstaller/ /usr/
-COPY rootfs /
+RUN apk add binutils py3-pycryptodome && pip install $pyinstaller_package && clean
 
 CMD [ "pyinstaller" ]

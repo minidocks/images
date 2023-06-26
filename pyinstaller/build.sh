@@ -3,14 +3,13 @@ set -e
 
 image="${namespace:-minidocks}/pyinstaller"
 versions="
-4;4.10
-5;5.7.0
-latest;5.7.0
+5;pyinstaller<6
+latest;pyinstaller<6
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --build-arg pyinstaller_version="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts --build-arg pyinstaller_package="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in
