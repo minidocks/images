@@ -3,12 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/python"
 versions="
-2.7;2.7
-2.7-packaging;2.7;packaging
-2.7-build;2.7;build;-build
-2;2.7
-2-packaging;2.7;packaging
-2-build;2.7;build;-build
 3.9;3.9
 3.9-packaging;3.9;packaging
 3.9-uwsgi;3.9;uwsgi
