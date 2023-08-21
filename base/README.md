@@ -30,6 +30,7 @@ All images contain the following extra packages:
 - [`su-exec`](https://github.com/ncopa/su-exec) Switch user and group id, setgroups and exec.
 - [`wait-for`](https://github.com/eficode/wait-for)  Wait for another service to become available.
 - [`libc6-compat`](https://musl.libc.org/) Compatibility libraries for glibc.
+- [`flock`](https://linux.die.net/man/2/flock) File locker from util-linux.
 
 Features
 --------
