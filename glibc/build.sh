@@ -3,9 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/glibc"
 versions="
-3.13;3.13
-3.13-i18n;3.13;i18n
-3.13-dev;3.13;dev
 3.14;3.14
 3.14-i18n;3.14;i18n
 3.14-dev;3.14;dev
@@ -15,7 +12,13 @@ versions="
 3.16;3.16
 3.16-i18n;3.16;i18n
 3.16-dev;3.16;dev
-latest;3.16
+3.17;3.17
+3.17-i18n;3.17;i18n
+3.17-dev;3.17;dev
+3.18;3.18
+3.18-i18n;3.18;i18n
+3.18-dev;3.18;dev
+latest;3.18
 "
 
 build() {

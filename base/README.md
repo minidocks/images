@@ -15,8 +15,6 @@ All images have registered the following apk repositories:
 - @316 ([@main316](https://dl-cdn.alpinelinux.org/alpine/v3.16/main), [@community316](https://dl-cdn.alpinelinux.org/alpine/v3.16/community))
 - @315 ([@main315](https://dl-cdn.alpinelinux.org/alpine/v3.15/main), [@community315](https://dl-cdn.alpinelinux.org/alpine/v3.15/community))
 - @314 ([@main314](https://dl-cdn.alpinelinux.org/alpine/v3.14/main), [@community314](https://dl-cdn.alpinelinux.org/alpine/v3.14/community))
-- …
-- @313 ([@main313](https://dl-cdn.alpinelinux.org/alpine/v3.13/main), [@community313](https://dl-cdn.alpinelinux.org/alpine/v3.13/community))
 
 Utilities
 ---------

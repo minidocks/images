@@ -38,9 +38,3 @@ https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE/community
 
 @314 https://dl-cdn.alpinelinux.org/alpine/v3.14/main
 @314 https://dl-cdn.alpinelinux.org/alpine/v3.14/community
-
-@main313 https://dl-cdn.alpinelinux.org/alpine/v3.13/main
-@community313 https://dl-cdn.alpinelinux.org/alpine/v3.13/community
-
-@313 https://dl-cdn.alpinelinux.org/alpine/v3.13/main
-@313 https://dl-cdn.alpinelinux.org/alpine/v3.13/community
