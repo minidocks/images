@@ -18,9 +18,7 @@ RUN cd /usr/share/tex && mtxrun --script install-modules --install --all
 
 RUN mkdir -p /tmp/modules \
     && wget -P /tmp https://github.com/Witiko/markdown/releases/download/latest/markdown.tds.zip \
-    && wget -P /tmp https://mirrors.ctan.org/install/macros/luatex/generic/lua-widow-control.tds.zip \
     && mkdir -p /tmp/modules/t-markdown && unzip -d /tmp/modules/t-markdown /tmp/markdown.tds.zip \
-    && mkdir -p /tmp/modules/t-lua-widow-control && unzip -d /tmp/modules/t-lua-widow-control /tmp/lua-widow-control.tds.zip \
     && rm -rf /tmp/modules/__MACOSX \
     && rsync -rlt --exclude=/VERSION /tmp/modules/*/ /usr/share/tex/texmf-modules
 
