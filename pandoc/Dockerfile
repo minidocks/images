@@ -1,7 +1,7 @@
 FROM minidocks/lua
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=3.1.7
+ARG version=3.1.8
 
 ENV XDG_DATA_HOME=/ \
     LUA_PATH="/pandoc/filters/?.lua;;"
