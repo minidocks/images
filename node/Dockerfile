@@ -29,11 +29,13 @@ ENV NPM_CONFIG_CACHE=/npm-cache \
     NODE_PATH=/node_modules \
     CLEAN="$CLEAN:\$NPM_CONFIG_CACHE/:\$YARN_CACHE_FOLDER/"
 
+ARG base_version
 ARG package
 
 # Fix https://github.com/npm/uid-number/issues/3#issuecomment-453727058
 # Fix https://bobbyhadz.com/blog/javascript-chalk-error-err-require-esm-of-es-module
-RUN /docker-entrypoint.d/10-cache.sh && apk --update add npm \
-    && npm i -g npm@latest corepack npm-check-updates && corepack prepare yarn@stable --activate \
+RUN /docker-entrypoint.d/10-cache.sh && apk add npm \
+    && if [ "$base_version" = "16" ] || [ "$base_version" = "19" ]; then npm_version="9"; else npm_version="latest"; fi \
+    && npm i -g "npm@$npm_version" corepack npm-check-updates && corepack prepare yarn@stable --activate \
     && if [ -d /usr/local/lib/node_modules ]; then local="local/"; apk del npm && rm -rf /usr/lib/node_modules; fi \
     && rm -rf "/usr/${local}lib/node_modules/npm/docs" "/usr/${local}lib/node_modules/npm/html" && clean

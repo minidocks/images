@@ -46,5 +46,3 @@ Tags
 | 18-base, lts-base     | [![](https://img.shields.io/docker/image-size/minidocks/node/18-base?style=flat-square&logo=docker&label=size)]() |
 | 16                    | [![](https://img.shields.io/docker/image-size/minidocks/node/16?style=flat-square&logo=docker&label=size)]()      |
 | 16-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/16-base?style=flat-square&logo=docker&label=size)]() |
-| 14                    | [![](https://img.shields.io/docker/image-size/minidocks/node/14?style=flat-square&logo=docker&label=size)]()      |
-| 14-base               | [![](https://img.shields.io/docker/image-size/minidocks/node/14-base?style=flat-square&logo=docker&label=size)]() |
