@@ -1,17 +1,14 @@
-ARG version=8.1
+ARG version=8.2
 ARG major=8
-ARG suffix=81
-ARG composer1_version=1.10.26
-ARG composer2_version=2.5.1
-ARG newrelic_version=10.5.0.317
-
-FROM minidocks/base:3.15 AS v7.4
+ARG suffix=82
+ARG composer_version=2.6.5
+ARG newrelic_version=10.13.0.2
 
 FROM minidocks/base:3.16 AS v8.0
 
-FROM minidocks/base:3.17 AS v8.1
+FROM minidocks/base:3.18 AS v8.1
 
-FROM minidocks/base:edge AS v8.2
+FROM minidocks/base:3.18 AS v8.2
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -44,15 +41,13 @@ ENV PHP_INI_DIR=/etc/php$major \
     COMPOSER_MEMORY_LIMIT=-1 \
     CLEAN="$CLEAN:\$COMPOSER_CACHE_DIR/"
 
-ARG composer1_version
-ARG composer2_version
+ARG composer_version
 
 RUN mkdir -p /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
 
 # Composer
 RUN php --version && wget -O composer-setup.php https://getcomposer.org/installer \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer1.phar --version="$composer1_version" \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer2.phar --version="$composer2_version" \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer --version="$composer_version" \
     && php -r "unlink('composer-setup.php');" \
     && clean
 
@@ -111,8 +106,7 @@ RUN for module in \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \
     && clean
 
-ENV BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307 \
-    FPM_DAEMONIZE=no \
+ENV FPM_DAEMONIZE=no \
     FPM_ERROR_LOG=/dev/stderr.pipe \
     FPM_PID=run/php-fpm.pid \
     FPM_WWW_ACCESS__LOG=/dev/stdout.pipe \
@@ -133,14 +127,6 @@ ENV BLACKFIRE_AGENT_SOCKET=tcp://blackfire:8307 \
     RAWEXEC="$RAWEXEC php-fpm php-fpm$major"
 
 ARG TARGETARCH
-
-# Blackfire
-RUN wget -O "/tmp/blackfire.tar.gz" https://blackfire.io/api/v1/releases/probe/php/alpine/${TARGETARCH}/${version/./} \
-    && mkdir /tmp/bf && tar -xzf /tmp/blackfire.tar.gz -C /tmp/bf && chown -R root:root /tmp/bf \
-    && mv /tmp/bf/blackfire*.so /usr/lib/php${major}/modules/blackfire.so && clean \
-    && mkdir /var/run/blackfire \
-    && chmod a+x /var/run/blackfire/ "/usr/lib/php${major}/modules/blackfire.so" \
-    && echo -e "extension=blackfire.so\n" > "${PHP_INI_DIR}/conf.d/blackfire.ini"
 
 ARG newrelic_version
 
@@ -167,6 +153,6 @@ ARG version
 ARG major
 ARG suffix
 
-RUN apk add "php${suffix}-intl" && if [ "$version" != "7.4" ]; then apk add icu-data-full; fi && clean
+RUN apk add "php${suffix}-intl" icu-data-full && clean
 
 FROM latest
