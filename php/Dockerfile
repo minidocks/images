@@ -10,6 +10,8 @@ FROM minidocks/base:3.18 AS v8.1
 
 FROM minidocks/base:3.18 AS v8.2
 
+FROM minidocks/base:edge AS v8.3
+
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 

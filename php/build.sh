@@ -15,6 +15,10 @@ versions="
 8.2-base;8.2;82;base
 8.2-nginx;8.2;82;nginx
 8.2-intl;8.2;82;intl
+8.3;8.3;83
+8.3-base;8.3;83;base
+8.3-nginx;8.3;83;nginx
+8.3-intl;8.3;83;intl
 latest;8.2;82
 "
 
