@@ -1,7 +1,7 @@
 FROM minidocks/perl AS minimal
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=2022
+ARG version=2023
 ARG TARGETARCH
 
 RUN export bindir="$([ "$TARGETARCH" = "arm64" ] && echo "aarch64" || echo "x86_64")" \
@@ -11,9 +11,9 @@ ENV PATH="$PATH:/usr/local/texlive/bin/linuxmusl"
 
 COPY rootfs /
 
-RUN apk add xz && wget -O /tmp/install-tl-unx.tar.gz "http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${version}/install-tl-unx.tar.gz" \
+RUN apk add xz && wget -O /tmp/install-tl-unx.tar.gz "https://pi.kwarc.info/historic/systems/texlive/${version}/install-tl-unx.tar.gz" \
     && tar -xvzf /tmp/install-tl-unx.tar.gz -C /tmp \
-    && if [ "$version" = 2022 ]; then repository="http://ftp.cvut.cz/tex-archive/systems/texlive/tlnet/"; else repository="http://ftp.math.utah.edu/pub/texlive/historic/systems/texlive/$version/tlnet-final"; fi \
+        && if [ "$version" = 2023 ]; then repository="https://mirrors.nic.cz/tex-archive/systems/texlive/tlnet/"; else repository="https://pi.kwarc.info/historic/systems/texlive/$version/tlnet-final"; fi \
     && /tmp/*/install-tl --repository="$repository" --profile=/etc/texlive.profile --scheme=minimal && clean
 
 FROM minimal AS basic

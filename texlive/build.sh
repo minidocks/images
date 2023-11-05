@@ -30,15 +30,24 @@ versions="
 2022-medium;2022;medium
 2022-full;2022;full
 
-minimal;2022;minimal
-context;2022;context
-basic;2022;basic
-small;2022;small
-gregorio;2022;gregorio
-medium;2022;medium
-full;2022;full
+2023;2023;basic
+2023-minimal;2023;minimal
+2023-context;2023;context
+2023-basic;2023;basic
+2023-small;2023;small
+2023-gregorio;2023;gregorio
+2023-medium;2023;medium
+2023-full;2023;full
 
-latest;2021;basic;
+minimal;2023;minimal
+context;2023;context
+basic;2023;basic
+small;2023;small
+gregorio;2023;gregorio
+medium;2023;medium
+full;2023;full
+
+latest;2023;basic;
 "
 
 build() {
