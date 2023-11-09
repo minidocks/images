@@ -18,7 +18,7 @@ RUN apk add xz && wget -O /tmp/install-tl-unx.tar.gz "https://pi.kwarc.info/hist
 
 FROM minimal AS basic
 
-RUN tlmgr install scheme-basic latexmk pdfpages pdflscape ms pdfjam pdfcrop pdfbook2 && clean
+RUN tlmgr install scheme-basic latexmk etoolbox pdfpages pdflscape ms pdfjam pdfcrop pdfbook2 && clean
 
 FROM minimal AS context
 
