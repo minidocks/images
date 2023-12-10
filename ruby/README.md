@@ -10,8 +10,10 @@ write.
 Tags
 ----
 
-| Tag         | Size                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------|
-| latest, 3.0 | ![](https://img.shields.io/docker/image-size/minidocks/ruby/latest?style=flat-square&logo=docker&label=size) |
-| 3.0         | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3.0?style=flat-square&logo=docker&label=size)    |
-| 2.7         | ![](https://img.shields.io/docker/image-size/minidocks/ruby/2.7?style=flat-square&logo=docker&label=size)    |
+| Tag            | Size                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------|
+| latest, 3, 3.2 | ![](https://img.shields.io/docker/image-size/minidocks/ruby/latest?style=flat-square&logo=docker&label=size) |
+| 3              | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3?style=flat-square&logo=docker&label=size)      |
+| 3.2            | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3.2?style=flat-square&logo=docker&label=size)    |
+| 3.1            | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3.1?style=flat-square&logo=docker&label=size)    |
+| 3.0            | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3.0?style=flat-square&logo=docker&label=size)    |

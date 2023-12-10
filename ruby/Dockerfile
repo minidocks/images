@@ -1,8 +1,10 @@
-ARG version=3.0
-
-FROM minidocks/base:3.14 AS v2.7
+ARG version=3.2
 
 FROM minidocks/base:3.15 AS v3.0
+
+FROM minidocks/base:3.17 AS v3.1
+
+FROM minidocks/base:3.19 AS v3.2
 
 FROM v${version}
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
