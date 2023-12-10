@@ -19,7 +19,7 @@ RUN sed -i "s/\$ALPINE_RELEASE/$([ 'edge' = "$version" ] && echo "$version" || e
     && apk add -u busybox-extras busybox-suid su-exec inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert ca-certificates flock gettext libc6-compat libintl tini monit \
     && mv /usr/bin/envsubst /usr/local/bin/ \
     && apk del gettext \
-    && wget -O /bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/v2.2.3/wait-for && chmod a+x /bin/wait-for \
+    && wget -O /bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/v2.2.4/wait-for && chmod a+x /bin/wait-for \
     && clean
 
 RUN chmod 600 /etc/monitrc
