@@ -49,11 +49,9 @@ To produce a pdf pandoc requires a pdf engine (LaTeX, ConTeXt, Weasyprint etc.).
 We must connect containers via the ssh protocol. The easiest solution is to use
 docker compose.
 
-So create a file `docker-compose.yml` with content:
+So create a file `compose.yaml` with content:
 
 ```yaml
-version: '3.4'
-
 x-base: &base
   volumes:
   - .:/app
@@ -82,22 +80,23 @@ services:
 ```
 
 And in the same directory run command:
-```bash
-docker-compose run --rm pandoc https://raw.githubusercontent.com/jgm/pandoc/master/MANUAL.txt -o manual-latex.pdf
 
-docker-compose run --rm pandoc https://raw.githubusercontent.com/jgm/pandoc/master/MANUAL.txt -t context -o manual-context.pdf
+```bash
+docker compose run --rm pandoc https://raw.githubusercontent.com/jgm/pandoc/master/MANUAL.txt -o manual-latex.pdf
+
+docker compose run --rm pandoc https://raw.githubusercontent.com/jgm/pandoc/master/MANUAL.txt -t context -o manual-context.pdf
 ```
 
 It is possible to use custom LaTeX template:
 
 ```bash
-docker-compose run --rm pandoc https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/examples/custom-titlepage/custom-titlepage.md --template eisvogel -o custom-titlepage.pdf
+docker compose run --rm pandoc https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/master/examples/custom-titlepage/custom-titlepage.md --template eisvogel -o custom-titlepage.pdf
 ```
 
 or ConTeXt template:
 
 ```bash
-docker-compose run --rm pandoc https://raw.githubusercontent.com/mszep/pandoc_resume/master/markdown/resume.md --template chmduquesne.tex -s -t context --variable papersize=A4 -o resume.pdf
+docker compose run --rm pandoc https://raw.githubusercontent.com/mszep/pandoc_resume/master/markdown/resume.md --template chmduquesne.tex -s -t context --variable papersize=A4 -o resume.pdf
 ```
 
 Tags
