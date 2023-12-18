@@ -35,7 +35,7 @@ register_id_rsa()(
     su_exec touch "$(get_home)/.ssh/id_rsa"
     printf '%s\n' "$SSH_ID_RSA" | tr -d '\r' > "$(get_home)/.ssh/id_rsa"
     chmod 600 "$(get_home)/.ssh/id_rsa"
-    ! su_exec dropbearconvert openssh dropbear "$(get_home)/.ssh/id_rsa" "$(get_home)/.ssh/id_dropbear" 2>/dev/null
+    su_exec dropbearconvert openssh dropbear "$(get_home)/.ssh/id_rsa" "$(get_home)/.ssh/id_dropbear" 2>/dev/null || true
   fi
 )
 
@@ -48,8 +48,8 @@ register_known_hosts()(
   fi
 )
 
-! register_id_dropbear
-! register_id_rsa
-! register_known_hosts
+register_id_dropbear || true
+register_id_rsa || true
+register_known_hosts || true
 
 unset -f su_exec get_home register_id_dropbear register_id_rsa register_known_hosts

@@ -97,7 +97,7 @@ if [ "$GROUP_ID" = 0 ] && [ -n "$GROUP_NAME" ] && [ "$GROUP_NAME" != 'root' ]; t
 fi
 
 if [ "$(id -u)" = 0 ]; then
-    ! fix_user_group "$USER_ID" "$USER_NAME" "$GROUP_ID" "$GROUP_NAME"
+    fix_user_group "$USER_ID" "$USER_NAME" "$GROUP_ID" "$GROUP_NAME" || true
 fi
 
 unset -f del_group get_id get_suexec fix_user_group non_empty
