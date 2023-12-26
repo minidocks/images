@@ -1,16 +1,15 @@
 ARG version=8.2
 ARG major=8
 ARG suffix=82
-ARG composer_version=2.6.5
-ARG newrelic_version=10.13.0.2
+ARG newrelic_version=10.15.0.4
 
 FROM minidocks/base:3.16 AS v8.0
 
-FROM minidocks/base:3.18 AS v8.1
+FROM minidocks/base:3.19 AS v8.1
 
-FROM minidocks/base:3.18 AS v8.2
+FROM minidocks/base:3.19 AS v8.2
 
-FROM minidocks/base:edge AS v8.3
+FROM minidocks/base:3.19 AS v8.3
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -43,13 +42,11 @@ ENV PHP_INI_DIR=/etc/php$major \
     COMPOSER_MEMORY_LIMIT=-1 \
     CLEAN="$CLEAN:\$COMPOSER_CACHE_DIR/"
 
-ARG composer_version
-
 RUN mkdir -p /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chown www-data:www-data /var/www "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR" && chmod a+rwx "$COMPOSER_HOME" "$COMPOSER_CACHE_DIR"
 
 # Composer
 RUN php --version && wget -O composer-setup.php https://getcomposer.org/installer \
-    && php composer-setup.php --install-dir=/usr/bin --filename=composer --version="$composer_version" \
+    && php composer-setup.php --install-dir=/usr/bin --filename=composer \
     && php -r "unlink('composer-setup.php');" \
     && clean
 
@@ -85,7 +82,6 @@ RUN for module in \
         pecl-memcached \
         pecl-mongodb \
         pecl-uploadprogress \
-        pecl-protobuf \
         pecl-redis \
         pecl-xdebug \
         pdo_mysql \
@@ -104,6 +100,7 @@ RUN for module in \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
+    && if [ "$suffix" != "83" ]; then modules="$modules php$suffix-pecl-protobuf"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \
     && clean
