@@ -9,9 +9,9 @@ FROM minidocks/base:3.17 AS base_3.10
 
 FROM minidocks/base:3.17-build AS base_3.10-build
 
-FROM minidocks/base:3.18 AS base_3.11
+FROM minidocks/base:3.19 AS base_3.11
 
-FROM minidocks/base:3.18-build AS base_3.11-build
+FROM minidocks/base:3.19-build AS base_3.11-build
 
 FROM base_$version$suffix AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -34,11 +34,11 @@ RUN ln -s /usr/bin/python3 /usr/bin/python; \
     ln -s /usr/bin/python3-config /usr/bin/python-config;
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
-    && apk add "python${version::1}" && "python${version::1}" -m ensurepip --upgrade \
+    && apk add python3 && python3 -m ensurepip --upgrade \
     && pip install -U pip setuptools wheel \
     && clean
 
-RUN if [ "${version::1}" = 2 ]; then pip install micropipenv==1.2.0; else pip install micropipenv; fi && clean
+RUN pip install micropipenv[toml] && clean
 
 CMD [ "python" ]
 
@@ -46,16 +46,13 @@ FROM latest AS packaging
 
 ARG version
 
-# TODO https://github.com/jelmer/dulwich/issues/1007
-RUN if [ "${version::1}" = 3 ]; then \
-      apk add py3-cryptography && pip install flit poetry==1.1.14; \
-    fi && pip install virtualenv pipenv twine && clean
+RUN apk add py3-cryptography && pip install flit poetry virtualenv pipenv twine && clean
 
 FROM packaging AS build
 
 ARG version
 
-RUN apk -U add "python${version::1}-dev" libffi-dev openssl-dev && clean
+RUN apk -U add python3-dev libffi-dev openssl-dev && clean
 
 FROM latest AS uwsgi
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
