@@ -17,10 +17,7 @@ Installed extensions
   Google’s Material Design guidelines.
 - [Alabaster theme](https://mkdocs-alabaster.ale.sh/) is a visually (c)lean,
   responsive, configurable theme.
-- [Ivory](https://github.com/daizutabi/mkdocs-ivory)
 - [KPN Theme](https://kpn.github.io/mkdocs-kpn-theme/)
-- [ReadTheDocs Dropdown theme](http://readthedocs.sheets.ch/) with collapsing
-  menu support.
 
 ### Plugins
 
@@ -39,8 +36,11 @@ Installed extensions
 - [Exclude](https://github.com/apenwarr/mkdocs-exclude) allows you to exclude
   files from your input using unix-style wildcards (globs) or regular
   expressions (regexes).
+- [Gallery](https://smarie.github.io/mkdocs-gallery/)
+- [Gen files](https://oprypin.github.io/mkdocs-gen-files/) programmatically
+  generates documentation pages during the build.
 - [Git authors](https://github.com/timvink/mkdocs-git-authors-plugin)
-- [Git committers](https://github.com/byrnereese/mkdocs-git-committers-plugin)
+- [Git committers](https://github.com/ojacques/mkdocs-git-committers-plugin-2)
 - [Git revision
   date](https://github.com/timvink/mkdocs-git-revision-date-localized-plugin)
 - [Merge plugin](https://github.com/ovasquez/mkdocs-merge) allows you to merge
@@ -51,6 +51,9 @@ Installed extensions
   enumerate the headings (h1-h6) across site pages.
 - [Img2Fig](https://github.com/stuebersystems/mkdocs-img2fig-plugin) converts
   `<img>` to `<figure>`.
+- [Kroki](https://github.com/AVATEAM-IT-SYSTEMHAUS/mkdocs-kroki-plugin)
+- [Literate Nav](https://oprypin.github.io/mkdocs-literate-nav/) specifies the
+  navigation in Markdown instead of YAML.
 - [Macros](https://github.com/fralau/mkdocs_macros_plugin) transforms the
   markdown pages into jinja2 templates that use variables, calls to macros and
   custom filters.
@@ -69,23 +72,34 @@ Installed extensions
 - [Multirepo](https://github.com/jdoiro3/mkdocs-multirepo-plugin) Build
   documentation in multiple repos into one site.
 - [Neoterot plugins](https://www.neoteroi.dev/mkdocs-plugins/)
+- [No sitemap](https://github.com/leonardehrenfried/mkdocs-no-sitemap-plugin)
+  disables the generation of a sitemap in Mkdocs sites.
+- [Print site](https://timvink.github.io/mkdocs-print-site-plugin/index.html)
+  adds a page to your site combining all pages, allowing your site visitors to
+  `File > Print > Save as PDF` the entire site.
 - [Pymdownx Material
   Extras](https://github.com/facelessuser/mkdocs_pymdownx_material_extras)
 - [Safe text](https://github.com/raimon49/mkdocs-safe-text-plugin) for safe text
   editing with MKDocs.
+- [Same dir](https://oprypin.github.io/mkdocs-same-dir/) allows placing
+  mkdocs.yml in the same directory as documentation.
 - [Simple hooks](https://github.com/aklajnert/mkdocs-simple-hooks) to define
   your own hooks for mkdocs, without having to create a new package.
+- [Simple](https://www.althack.dev/mkdocs-simple-plugin) enables you to build a
+  documentation site from markdown interspersed within your repository using
+  mkdocs.
+- [Swagger UI](https://blueswen.github.io/mkdocs-swagger-ui-tag/)
 - [Redirects](https://github.com/datarobot/mkdocs-redirects) to create page
   redirects (e.g. for moved/renamed pages).
 - [Versioning](https://github.com/zayd62/mkdocs-versioning)
 
-##### Only in 1-pdf and 1.1-pdf tags
+##### Only in 1-pdf and pdf tags
 
 - [PDF export](https://github.com/zhaoterryy/mkdocs-pdf-export-plugin) will
   export all markdown pages in your project as PDF files using WeasyPrint. (only
-  in `1.0-pdf` tag)
+  in `pdf` and `1-pdf` tag)
 - [PDF generate](https://github.com/orzih/mkdocs-with-pdf) will generate a
-  single PDF file from MkDocs repository. (only in `1.0-pdf` tag)
+  single PDF file from MkDocs repository. (only in `pdf` and `1.0-pdf` tag)
 
 ### Markdown extension
 
@@ -119,6 +133,7 @@ Tags
 | latest, 1 | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/latest?style=flat-square&logo=docker&label=size) |
 | 1         | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1?style=flat-square&logo=docker&label=size)      |
 | 1-pdf     | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/1-pdf?style=flat-square&logo=docker&label=size)  |
+| pdf       | ![](https://img.shields.io/docker/image-size/minidocks/mkdocs/pdf?style=flat-square&logo=docker&label=size)    |
 
 Related images
 --------------

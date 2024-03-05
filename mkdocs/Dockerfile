@@ -7,7 +7,7 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG mkdocs_version=1.4.2
+ARG mkdocs_version=1.5.3
 
 RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs==$mkdocs_version \
@@ -20,22 +20,33 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-codeinclude-plugin \
       mkdocs-enumerate-headings-plugin \
       mkdocs-exclude \
+      mkdocs-exclude-search \
+      mkdocs-gallery \
+      mkdocs-gen-files \
       mkdocs-git-authors-plugin \
-      mkdocs-git-committers-plugin \
+      mkdocs-git-committers-plugin-2 \
       mkdocs-git-revision-date-localized-plugin \
       mkdocs-img2fig-plugin \
       mkdocs-include-markdown-plugin \
       mkdocs-kroki-plugin \
+      mkdocs-literate-nav \
       mkdocs-localsearch \
       mkdocs-macros-plugin \
       mkdocs-markdownextradata-plugin \
       mkdocs-merge \
       mkdocs-minify-plugin \
       mkdocs-monorepo-plugin \
+      mkdocs-multirepo \
       mkdocs-multirepo-plugin \
+      mkdocs-no-sitemap-plugin \
+      mkdocs-print-site-plugin \
       mkdocs_pymdownx_material_extras \
       mkdocs-safe-text-plugin \
+      mkdocs-same-dir \
+      mkdocs-section-index \
       mkdocs-simple-hooks \
+      mkdocs-simple-plugin \
+      mkdocs-swagger-ui-tag \
       mkdocs-redirects \
       mkdocs-versioning \
       mkdocs-with-confluence \
@@ -43,10 +54,8 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       \
       mkdocs-alabaster \
       mkdocs-cinder \
-      mkdocs-ivory \
       mkdocs-kpn \
       mkdocs-material \
-      mkdocs-rtd-dropdown \
       \
       neoteroi-mkdocs \
       \

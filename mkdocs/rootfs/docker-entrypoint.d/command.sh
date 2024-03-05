@@ -7,7 +7,7 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 case "$1" in
-    build|gh-deploy|new|serve)
+    build|get-deps|gh-deploy|new|serve)
         set -- mkdocs "$@"
     ;;
 esac
