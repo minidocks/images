@@ -4,8 +4,8 @@ set -e
 image="${namespace:-minidocks}/pandoc"
 versions="
 2;2.19.2
-3;3.1.11
-latest;3.1.11
+3;3.1.12.2
+latest;3.1.12.2
 "
 
 build() {

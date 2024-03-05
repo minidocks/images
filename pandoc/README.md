@@ -14,27 +14,29 @@ All extensions are instaled in `/pandoc` directory. Directory
 
 ### Tools
 
--   [pandoc-lua-logging](https://github.com/wlupton/pandoc-lua-logging)
+- [pandoc-lua-logging](https://github.com/wlupton/pandoc-lua-logging)
 
 ### Lua filters
 
--   https://github.com/pandoc/lua-filters
--   https://github.com/pandocker/pandocker-lua-filters
--   https://github.com/PlushBeaver/pandoc-table-filter
--   https://github.com/jgm/select-meta
--   https://github.com/mitinarseny/panpipe
--   https://github.com/tomncooper/pandoc-gls
--   https://github.com/a-vrma/pandoc-filters
--   https://github.com/jzeneto/pandoc-odt-filters
--   https://github.com/hason/pandoc-filters
--   https://github.com/teoric/pandoc-filters
+- https://github.com/pandoc/lua-filters
+- https://github.com/pandocker/pandocker-lua-filters
+- https://github.com/PlushBeaver/pandoc-table-filter
+- https://github.com/jgm/select-meta
+- https://github.com/mitinarseny/panpipe
+- https://github.com/tomncooper/pandoc-gls
+- https://github.com/a-vrma/pandoc-filters
+- https://github.com/jzeneto/pandoc-odt-filters
+- https://github.com/hason/pandoc-filters
+- https://github.com/teoric/pandoc-filters
+- https://github.com/CDSoft/panda
+- https://github.com/pandoc-ext
 
 ### Templates
 
--   [Latex template](https://github.com/Wandmalfarbe/pandoc-latex-template)
--   [Letter template](https://github.com/aaronwolen/pandoc-letter)
--   [Resume template](https://github.com/mszep/pandoc_resume)
--   [Leaflet Template](https://gitlab.com/daamien/pandoc-leaflet-template)
+- [Latex template](https://github.com/Wandmalfarbe/pandoc-latex-template)
+- [Letter template](https://github.com/aaronwolen/pandoc-letter)
+- [Resume template](https://github.com/mszep/pandoc_resume)
+- [Leaflet Template](https://gitlab.com/daamien/pandoc-leaflet-template)
 
 Usage
 -----
@@ -111,14 +113,14 @@ Tags
 Related images
 --------------
 
--   [ConTeXt](https://github.com/minidocks/context)
--   [ReLaXed](https://github.com/minidocks/relaxed)
--   [TeXlive](https://github.com/minidocks/texLive)
--   [WeasyPrint](https://github.com/minidocks/weasyprint)
+- [ConTeXt](https://github.com/minidocks/context)
+- [ReLaXed](https://github.com/minidocks/relaxed)
+- [TeXlive](https://github.com/minidocks/texLive)
+- [WeasyPrint](https://github.com/minidocks/weasyprint)
 
 See also
 --------
 
--   https://hub.docker.com/r/pandoc/minimal
--   https://github.com/alexeygumirov/pandoc-for-pdf-how-to
--   https://github.com/dalibo/pandocker
+- https://hub.docker.com/r/pandoc/minimal
+- https://github.com/alexeygumirov/pandoc-for-pdf-how-to
+- https://github.com/dalibo/pandocker

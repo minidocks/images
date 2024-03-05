@@ -100,6 +100,7 @@ RUN for module in \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
+    && if [ "$suffix" != "80" ]; then modules="$modules php$suffix-pecl-pcov"; fi \
     && if [ "$suffix" != "83" ]; then modules="$modules php$suffix-pecl-protobuf"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \
