@@ -71,6 +71,9 @@ fix_user_group()(
         echo "$2:x:$1:$3::/home/$2:/bin/sh" >> /etc/passwd
     fi
 
+    mkdir -p "/home/$2"
+    chown "$1:$3" "/home/$2"
+
     echo "$2:password" | chpasswd 2>/dev/null
 )
 
