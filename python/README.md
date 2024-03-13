@@ -9,30 +9,32 @@ programming language.
 Configuration by environment variables
 --------------------------------------
 
--   `VENV_PATH` - Path to a virtual environment that will be activated after the
-    start.
--   `PIP_CACHE_DIR` (default `/pip-cache`) - Path to directory with pip cache.
--   `PIP_NO_COMPILE` (default 1)
--   `PIPENV_VENV_IN_PROJECT` (default 1)
+- `VENV_PATH` - Path to a virtual environment that will be activated after the
+  start.
+- `PIP_CACHE_DIR` (default `/pip-cache`) - Path to directory with pip cache.
+- `PIP_NO_COMPILE` (default 1)
+- `PIPENV_VENV_IN_PROJECT` (default 1)
 
 Utilities
 ---------
 
--   `pyclean` - Remove all `.pyc`, `.pyo` and `__pycache__` files from directory
-    (default `/`).
--   [micropipenv](https://pypi.org/project/micropipenv/) - A lightweight wrapper
-    for pip to support requirements.txt, Pipenv and Poetry lock files or
-    converting them to pip-tools compatible output.
+- `pyclean` - Remove all `.pyc`, `.pyo` and `__pycache__` files from directory
+  (default `/`).
+- [pipx](https://pipx.pypa.io) - Install and Run Python Applications in Isolated
+  Environments.
+- [micropipenv](https://pypi.org/project/micropipenv/) - A lightweight wrapper
+  for pip to support requirements.txt, Pipenv and Poetry lock files or
+  converting them to pip-tools compatible output.
 
 Packaging
 ---------
 
--   [twine](https://github.com/pypa/twine) - Utilities for interacting with PyPI
--   [pipenv](https://pipenv.pypa.io) - Python Dev Workflow for Humans
--   [poetry](https://python-poetry.org/) - Python packaging and dependency
-    management made easy
--   [flit](https://flit.readthedocs.io)- Simple way to put Python packages and
-    modules on PyPI
+- [twine](https://github.com/pypa/twine) - Utilities for interacting with PyPI
+- [pipenv](https://pipenv.pypa.io) - Python Dev Workflow for Humans
+- [poetry](https://python-poetry.org/) - Python packaging and dependency
+  management made easy
+- [flit](https://flit.readthedocs.io)- Simple way to put Python packages and
+  modules on PyPI
 
 uWSGI
 -----
@@ -62,14 +64,8 @@ Tags
 | 3.9-packaging   | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-packaging?style=flat-square&logo=docker&label=size)  |
 | 3.9-build       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-build?style=flat-square&logo=docker&label=size)      |
 | 3.9-uwsgi       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-uwsgi?style=flat-square&logo=docker&label=size)      |
-| 2               | ![](https://img.shields.io/docker/image-size/minidocks/python/2?style=flat-square&logo=docker&label=size)              |
-| 2-packaging     | ![](https://img.shields.io/docker/image-size/minidocks/python/2-packaging?style=flat-square&logo=docker&label=size)    |
-| 2-build         | ![](https://img.shields.io/docker/image-size/minidocks/python/2-build?style=flat-square&logo=docker&label=size)        |
-| 2.7             | ![](https://img.shields.io/docker/image-size/minidocks/python/2.7?style=flat-square&logo=docker&label=size)            |
-| 2.7-packaging   | ![](https://img.shields.io/docker/image-size/minidocks/python/2.7-packaging?style=flat-square&logo=docker&label=size)  |
-| 2.7-build       | ![](https://img.shields.io/docker/image-size/minidocks/python/2.7-build?style=flat-square&logo=docker&label=size)      |
 
 Related images
 --------------
 
--   [PyInstaller](https://github.com/minidocks/pyinstaller)
+- [PyInstaller](https://github.com/minidocks/pyinstaller)

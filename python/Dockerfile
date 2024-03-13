@@ -34,8 +34,9 @@ RUN ln -s /usr/bin/python3 /usr/bin/python; \
     ln -s /usr/bin/python3-config /usr/bin/python-config;
 
 RUN mkdir "$PIP_CACHE_DIR" && chmod a+rwx "$PIP_CACHE_DIR" \
-    && apk add python3 && python3 -m ensurepip --upgrade \
-    && pip install -U pip setuptools wheel \
+    && apk add python3 && rm -rf /usr/lib/python*/EXTERNALLY-MANAGED \
+    && python3 -m ensurepip --upgrade \
+    && pip install -U pip setuptools wheel pipx \
     && clean
 
 RUN pip install micropipenv[toml] && clean
