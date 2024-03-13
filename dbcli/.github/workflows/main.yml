@@ -3,6 +3,10 @@ name: docker
 on:
   push:
   workflow_dispatch:
+    inputs:
+      build_parents:
+        description: 'Build parents images'
+        type: boolean
   schedule:
     - cron: '0 12 * * *'
 
@@ -17,4 +21,5 @@ jobs:
       - env:
           DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          BUILD_PARENTS: ${{ github.event.inputs.build_parents }}
         run: bash ./run github:build_and_push

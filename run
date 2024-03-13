@@ -79,7 +79,7 @@ lsdir()(
     fi
 )
 
-froms()(
+parents()(
     for namespace in $IMAGE_NAMESPACE; do
         _print "$1" | grep "FROM $namespace/" | cut -d/ -f2 | cut -d' ' -f1 | uniq
     done
@@ -88,20 +88,20 @@ froms()(
 deps()(
     dir="${1:-$(pwd)}"
     basename="$(basename "$dir")"
-    froms=""
+    parents=""
 
     if [ -d "$dir" ]; then
         for file in $(find "$dir" -name "Dockerfile"); do
-            froms="$(froms "$(cat "$file")") $froms"
+            parents="$(parents "$(cat "$file")") $parents"
         done
     fi
 
-    froms="$(echo "$froms" | sed -e 's/ /\n/g' | grep -v "$basename" | cut -d: -f1 | sort | uniq | xargs)"
-    for from in $froms; do
-        froms="$(deps "$from") $froms"
+    parents="$(echo "$parents" | sed -e 's/ /\n/g' | grep -v "$basename" | cut -d: -f1 | sort | uniq | xargs)"
+    for parent in $parents; do
+        parents="$(deps "$parent") $parents"
     done
 
-    echo "$froms" | xargs
+    echo "$parents" | xargs
 )
 
 split()(
@@ -131,12 +131,13 @@ versions()(
 )
 
 build()(
-    package="" version="" source_dir="" output="" opts=""
+    package="" version="" source_dir="" build_parents="false" output="" opts=""
     while [ -n "$1" ]; do
         case "$1" in
             --force) opts="$opts --no-cache";;
             --no-clear) no_clear="1";;
             --push) output="--push";;
+            --build-parents=*) build_parents="${1#*=}";;
             --dir*) source_dir="$2"; shift;;
             -*) opts="$opts $1";;
             *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
@@ -159,18 +160,20 @@ build()(
         return
     fi
 
-    froms="$(froms "$(cat "$source_dir/Dockerfile")")"
-    for from in $froms; do
-        tag="$(echo "$from" | cut -d: -f2 -s)"
-        task_build "$(echo "$from" | cut -d: -f1)" "${tag:-latest}" $opts $output
-    done
+    if [ "$build_parents" = "true" ]; then
+      parents="$(parents "$(cat "$source_dir/Dockerfile")")"
+      for parent in $parents; do
+          tag="$(echo "$parent" | cut -d: -f2 -s)"
+          task_build "$(echo "$parent" | cut -d: -f1)" "${tag:-latest}" --build-parents="true" $opts $output
+      done
+    fi
 
     target_dir="/tmp/${package}-${version}"
     if [ -f "$source_dir/build.sh" ]; then
         for namespace in $IMAGE_NAMESPACE; do
             _ansi --nl --green --format "Build %s/%s:%s - %s" "$namespace" "$package" "$version" "$source_dir"
             echo namespace="$namespace" docker_opts="$(echo "$opts $output" | xargs)" "$source_dir/build.sh" "$version"
-            if ! namespace="$namespace" docker_opts="$(echo "$opts $output" | xargs)" "$source_dir/build.sh" "$version";
+            if ! namespace="$namespace" docker_opts="$(echo "$opts $output" | xargs)" GITHUB_TOKEN="$GITHUB_TOKEN" "$source_dir/build.sh" "$version";
             then exit 1; fi
         done
         printf "\n"
@@ -207,11 +210,13 @@ task_format__markdown()(
 # --dir
 # --force
 task_build()(
-    package="" version="" dir="" opts=""
+    package="" version="" dir="" clone="" build_parents="false" opts="--progress=plain"
     while [ -n "$1" ]; do
         case "$1" in
             --dir*) dir="$2"; shift;;
             --force) opts="${opts} --no-cache";;
+            --clone) clone=1;;
+            --build-parents=*) build_parents="${1#*=}";;
             -*) opts="${opts} $1";;
             *) if [ -z "$package" ]; then package="$1"; else version="$1"; fi;;
         esac
@@ -223,17 +228,17 @@ task_build()(
         package="$(printf '%s' "$package" | cut -d/ -f1)"
     fi
 
-    if [ ! -d "${dir:-$package}" ]; then
+    if [ "$clone" = "1" ] && [ ! -d "${dir:-$package}" ]; then
         run_git clone "https://github.com/$GIT_NAMESPACE/$package"
     fi
 
     versions="$(versions "${dir:-$package}")"
     if [ -n "$version" ] && echo "$versions" | grep -qx "$version"; then
-        if ! build "$package" "$version" --dir "$dir" $opts
+        if ! build "$package" "$version" --dir "$dir" --build-parents="$build_parents" $opts
         then exit 1; fi
     else
         for version in $versions; do
-            if ! build "$package" "$version" --dir "$dir" $opts
+            if ! build "$package" "$version" --dir "$dir" --build-parents="$build_parents" $opts
             then exit 1; fi
         done
     fi
@@ -343,5 +348,5 @@ task_github__build_and_push()(
     REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
     task_sync "$REPOSITORY_NAME"
     mkdir -p /tmp/docker-cache
-    task_build "$REPOSITORY_NAME" --dir "." --push --platform="${DOCKER_PLATFORM:-linux/amd64,linux/arm64}" --no-cache
+    task_build "$REPOSITORY_NAME" --dir "." --push --platform="${DOCKER_PLATFORM:-linux/amd64,linux/arm64}" --no-cache --build-parents="${BUILD_PARENTS:-false}"
 )
