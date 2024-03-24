@@ -1,9 +1,7 @@
-ARG version=8.2
+ARG version=8.3
 ARG major=8
-ARG suffix=82
+ARG suffix=83
 ARG newrelic_version=10.15.0.4
-
-FROM minidocks/base:3.16 AS v8.0
 
 FROM minidocks/base:3.19 AS v8.1
 
@@ -81,6 +79,7 @@ RUN for module in \
         pecl-apcu \
         pecl-memcached \
         pecl-mongodb \
+        pecl-pcov \
         pecl-uploadprogress \
         pecl-redis \
         pecl-xdebug \
@@ -100,7 +99,6 @@ RUN for module in \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
-    && if [ "$suffix" != "80" ]; then modules="$modules php$suffix-pecl-pcov"; fi \
     && if [ "$suffix" != "83" ]; then modules="$modules php$suffix-pecl-protobuf"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \

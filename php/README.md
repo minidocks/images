@@ -13,79 +13,80 @@ library](https://github.com/docker-library/php/issues/240#issuecomment-506651614
 Configuration by environment variables
 --------------------------------------
 
--   `PHP_EXT_*=0/1` - enable/disable php extension (e.g. `PHP_EXT_XDEBUG=1`)
--   `PHP_*=value` - set PHP configuration in `php.ini`
-    (e.g. `PHP_MEMORY__LIMIT=0`)
--   `FPM_*=value` - set PHP FPM configuration in `php-fpm.conf`
-    (e.g. `FPM_ERROR_LOG=/dev/stderr.pipe`)
--   `FPM_WWW_*=value` - set PHP FPM configuration in `php-fpm.d/www.conf`
-    (e.g. `FPM_WWW_ACCESS__LOG=/dev/stdout.pipe`)
--   `NEWRELIC_*=value` - set New Relic configuration in `newrelic.ini`
+- `PHP_EXT_*=0/1` - enable/disable php extension (e.g. `PHP_EXT_XDEBUG=1`)
+- `PHP_*=value` - set PHP configuration in `php.ini`
+  (e.g. `PHP_MEMORY__LIMIT=0`)
+- `FPM_*=value` - set PHP FPM configuration in `php-fpm.conf`
+  (e.g. `FPM_ERROR_LOG=/dev/stderr.pipe`)
+- `FPM_WWW_*=value` - set PHP FPM configuration in `php-fpm.d/www.conf`
+  (e.g. `FPM_WWW_ACCESS__LOG=/dev/stdout.pipe`)
+- `NEWRELIC_*=value` - set New Relic configuration in `newrelic.ini`
 
 Installed applications
 ----------------------
 
--   [Composer](https://getcomposer.org/): Dependency Manager for PHP `composer1`
-    and `composer2` (alias `composer`).
--   [PsySH](https://psysh.org/): A runtime developer console, interactive
-    debugger and REPL for PHP.
+- [Composer](https://getcomposer.org/): Dependency Manager for PHP `composer1`
+  and `composer2` (alias `composer`).
+- [PsySH](https://psysh.org/): A runtime developer console, interactive debugger
+  and REPL for PHP.
 
 Modules
 -------
 
-| module           | 8.x | tag    |
-|------------------|-----|--------|
-| apcu             |  ✓  | base   |
-| bcmath           |  ✓  | latest |
-| blackfire        |  ✓  | latest |
-| calendar         |  ✓  | latest |
-| cgi              |  ✓  | latest |
-| ctype            |  ✓  | base   |
-| curl             |  ✓  | base   |
-| dom              |  ✓  | latest |
-| exif             |  ✓  | latest |
-| ffi              |  ✓  | latest |
-| fileinfo         |  ✓  | latest |
-| fpm              |  ✓  | latest |
-| ftp              |  ✓  | latest |
-| gd               |  ✓  | latest |
-| gettext          |  ✓  | latest |
-| gmp              |  ✓  | latest |
-| iconv            |  ✓  | base   |
-| imap             |  ✓  | base   |
-| intl             |  ✓  | intl   |
-| json             |  ✓  | base   |
-| ldap             |  ✓  | latest |
-| mbstring         |  ✓  | base   |
-| memcached        |  ✓  | latest |
-| mongodb          |  ✓  | latest |
-| mysqli           |  ✓  | latest |
-| mysqlnd          |  ✓  | latest |
-| newrelic (amd64) |  ✓  | latest |
-| opcache          |  ✓  | latest |
-| openssl          |  ✓  | base   |
-| pcntl            |  ✓  | base   |
-| pdo_mysql        |  ✓  | latest |
-| pdo_pgsq         |  ✓  | latest |
-| pdo_sqlite       |  ✓  | latest |
-| pgsql            |  ✓  | latest |
-| phar             |  ✓  | base   |
-| posix            |  ✓  | base   |
-| protobuf         |  ✓  | latest |
-| redis            |  ✓  | latest |
-| session          |  ✓  | latest |
-| simplexml        |  ✓  | latest |
-| soap             |  ✓  | latest |
-| sockets          |  ✓  | latest |
-| sodium           |  ✓  | latest |
-| sqlite3          |  ✓  | latest |
-| tokenizer        |  ✓  | base   |
-| xdebug           |  ✓  | latest |
-| xml              |  ✓  | latest |
-| xmlreader        |  ✓  | latest |
-| xmlwriter        |  ✓  | latest |
-| xsl              |  ✓  | latest |
-| zip              |  ✓  | latest |
+| module           | 8.x | 8.3 | tag    |
+|------------------|:---:|:---:|--------|
+| apcu             |  ✓  |  ✓  | base   |
+| bcmath           |  ✓  |  ✓  | latest |
+| blackfire        |  ✓  |  ✓  | latest |
+| calendar         |  ✓  |  ✓  | latest |
+| cgi              |  ✓  |  ✓  | latest |
+| ctype            |  ✓  |  ✓  | base   |
+| curl             |  ✓  |  ✓  | base   |
+| dom              |  ✓  |  ✓  | latest |
+| exif             |  ✓  |  ✓  | latest |
+| ffi              |  ✓  |  ✓  | latest |
+| fileinfo         |  ✓  |  ✓  | latest |
+| fpm              |  ✓  |  ✓  | latest |
+| ftp              |  ✓  |  ✓  | latest |
+| gd               |  ✓  |  ✓  | latest |
+| gettext          |  ✓  |  ✓  | latest |
+| gmp              |  ✓  |  ✓  | latest |
+| iconv            |  ✓  |  ✓  | base   |
+| imap             |  ✓  |  ✓  | base   |
+| intl             |  ✓  |  ✓  | intl   |
+| json             |  ✓  |  ✓  | base   |
+| ldap             |  ✓  |  ✓  | latest |
+| mbstring         |  ✓  |  ✓  | base   |
+| memcached        |  ✓  |  ✓  | latest |
+| mongodb          |  ✓  |  ✓  | latest |
+| mysqli           |  ✓  |  ✓  | latest |
+| mysqlnd          |  ✓  |  ✓  | latest |
+| newrelic (amd64) |  ✓  |  ✓  | latest |
+| opcache          |  ✓  |  ✓  | latest |
+| openssl          |  ✓  |  ✓  | base   |
+| pcntl            |  ✓  |  ✓  | base   |
+| pcov             |  ✓  |  ✓  | base   |
+| pdo_mysql        |  ✓  |  ✓  | latest |
+| pdo_pgsq         |  ✓  |  ✓  | latest |
+| pdo_sqlite       |  ✓  |  ✓  | latest |
+| pgsql            |  ✓  |  ✓  | latest |
+| phar             |  ✓  |  ✓  | base   |
+| posix            |  ✓  |  ✓  | base   |
+| protobuf         |  ✓  |  𐄂  | latest |
+| redis            |  ✓  |  ✓  | latest |
+| session          |  ✓  |  ✓  | latest |
+| simplexml        |  ✓  |  ✓  | latest |
+| soap             |  ✓  |  ✓  | latest |
+| sockets          |  ✓  |  ✓  | latest |
+| sodium           |  ✓  |  ✓  | latest |
+| sqlite3          |  ✓  |  ✓  | latest |
+| tokenizer        |  ✓  |  ✓  | base   |
+| xdebug           |  ✓  |  ✓  | latest |
+| xml              |  ✓  |  ✓  | latest |
+| xmlreader        |  ✓  |  ✓  | latest |
+| xmlwriter        |  ✓  |  ✓  | latest |
+| xsl              |  ✓  |  ✓  | latest |
+| zip              |  ✓  |  ✓  | latest |
 
 Usage
 -----
@@ -115,13 +116,10 @@ Tags
 | 8.1-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1-nginx?style=flat-square&logo=docker&label=size) |
 | 8.1-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1-intl?style=flat-square&logo=docker&label=size)  |
 | 8.0-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0-base?style=flat-square&logo=docker&label=size)  |
-| 8.0         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0?style=flat-square&logo=docker&label=size)       |
-| 8.0-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0-nginx?style=flat-square&logo=docker&label=size) |
-| 8.0-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0-intl?style=flat-square&logo=docker&label=size)  |
 
 See also
 --------
 
--   https://github.com/codecasts/php-alpine
--   https://github.com/thecodingmachine/docker-images-php
--   https://github.com/joseluisq/alpine-php-fpm
+- https://github.com/codecasts/php-alpine
+- https://github.com/thecodingmachine/docker-images-php
+- https://github.com/joseluisq/alpine-php-fpm
