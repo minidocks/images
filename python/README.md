@@ -60,10 +60,6 @@ Tags
 | 3.10-packaging  | ![](https://img.shields.io/docker/image-size/minidocks/python/3.10-packaging?style=flat-square&logo=docker&label=size) |
 | 3.10-build      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.10-build?style=flat-square&logo=docker&label=size)     |
 | 3.10-uwsgi      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.10-uwsgi?style=flat-square&logo=docker&label=size)     |
-| 3.9             | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9?style=flat-square&logo=docker&label=size)            |
-| 3.9-packaging   | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-packaging?style=flat-square&logo=docker&label=size)  |
-| 3.9-build       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-build?style=flat-square&logo=docker&label=size)      |
-| 3.9-uwsgi       | ![](https://img.shields.io/docker/image-size/minidocks/python/3.9-uwsgi?style=flat-square&logo=docker&label=size)      |
 
 Related images
 --------------
