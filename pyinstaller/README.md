@@ -12,15 +12,16 @@ Tags
 
 | Tag       | Size                                                                                                                |
 |-----------|---------------------------------------------------------------------------------------------------------------------|
-| latest, 5 | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/latest?style=flat-square&logo=docker&label=size) |
+| latest, 6 | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/latest?style=flat-square&logo=docker&label=size) |
+| 6         | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/6?style=flat-square&logo=docker&label=size)      |
 | 5         | ![](https://img.shields.io/docker/image-size/minidocks/pyinstaller/5?style=flat-square&logo=docker&label=size)      |
 
 Related images
 --------------
 
--   [Python](https://github.com/minidocks/python)
+- [Python](https://github.com/minidocks/python)
 
 Alternatives
 ------------
 
--   https://github.com/six8/pyinstaller-alpine
+- https://github.com/six8/pyinstaller-alpine

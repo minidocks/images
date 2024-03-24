@@ -4,6 +4,7 @@ set -e
 image="${namespace:-minidocks}/pyinstaller"
 versions="
 5;pyinstaller<6
+6;pyinstaller
 latest;pyinstaller
 "
 
