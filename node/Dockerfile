@@ -1,13 +1,11 @@
-ARG package=nodejs-current<21
-ARG base_version=20
-
-FROM minidocks/base:3.16 AS v16
+ARG package=nodejs-current<22
+ARG base_version=21
 
 FROM minidocks/base:3.18 AS v18
 
-FROM minidocks/base:3.17 AS v19
+FROM minidocks/base:3.19 AS v20
 
-FROM minidocks/base:3.18 AS v20
+FROM minidocks/base:3.19 AS v21
 
 FROM v$base_version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -35,7 +33,6 @@ ARG package
 # Fix https://github.com/npm/uid-number/issues/3#issuecomment-453727058
 # Fix https://bobbyhadz.com/blog/javascript-chalk-error-err-require-esm-of-es-module
 RUN /docker-entrypoint.d/10-cache.sh && apk add npm \
-    && if [ "$base_version" = "16" ] || [ "$base_version" = "19" ]; then npm_version="9"; else npm_version="latest"; fi \
-    && npm i -g "npm@$npm_version" corepack npm-check-updates && corepack prepare yarn@stable --activate \
+    && npm i -g "npm" corepack npm-check-updates && corepack prepare yarn@stable --activate \
     && if [ -d /usr/local/lib/node_modules ]; then local="local/"; apk del npm && rm -rf /usr/lib/node_modules; fi \
     && rm -rf "/usr/${local}lib/node_modules/npm/docs" "/usr/${local}lib/node_modules/npm/html" && clean
