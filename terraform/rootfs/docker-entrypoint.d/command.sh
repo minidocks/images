@@ -9,7 +9,7 @@ case "$1" in
   init|validate|plan|apply|destroy)
     set -- terraform "$@"
   ;;
-  console|fmt|force-unlock|get|graph|import|login|logout|output|providers|refresh|show|state|taint|test|untaint|version|workspace)
+  console|fmt|force-unlock|get|graph|import|login|logout|metadata|output|providers|refresh|show|state|taint|test|untaint|version|workspace)
     set -- terraform "$@"
   ;;
 esac

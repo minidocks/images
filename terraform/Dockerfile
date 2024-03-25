@@ -1,11 +1,11 @@
-ARG TERRAGRUNT_VERSION=0.38.12
-ARG TERRAFORMER_VERSION=0.8.21
+ARG TERRAGRUNT_VERSION=0.55.19
+ARG TERRAFORMER_VERSION=0.8.24
 ARG TERRAFORMER_PROVIDER=all
 
 FROM minidocks/base AS terraform
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-RUN apk add terraform@edge && clean
+COPY --from=hashicorp/terraform /bin/terraform /bin/terraform
 
 COPY rootfs /
 
