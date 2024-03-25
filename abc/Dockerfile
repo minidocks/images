@@ -14,7 +14,7 @@ RUN wget -O /tmp/abcpp.tar.gz "https://sourceforge.net/projects/abcplus/files/ab
     && tar -xvzf /tmp/abcpp.tar.gz -C /tmp && cd /tmp/abcpp* \
     && mkdir -p /tmp/build && make && mv abcpp /tmp/build
 
-ARG abcm2ps_version=8.14.14
+ARG abcm2ps_version=8.14.15
 
 RUN wget -O /tmp/abcm2ps.tar.gz "https://github.com/leesavide/abcm2ps/archive/v${abcm2ps_version}.tar.gz" \
     && tar -xvzf /tmp/abcm2ps.tar.gz -C /tmp && cd /tmp/abcm2ps* \
@@ -37,13 +37,13 @@ RUN unzip /tmp/xml2abc.zip -d /tmp && unzip /tmp/abc2xml.zip -d /tmp
 RUN pyinstaller -s /tmp/xml2abc*/xml2abc.py && pyinstaller -s /tmp/abc2xml*/abc2xml.py
 
 RUN mkdir /tmp/final && cp -r /dist/xml2abc/* /tmp/final && cp -r /dist/abc2xml/* /tmp/final \
-    && rm /tmp/final/libcrypto*so*
+    && rm /tmp/final/_internal/libcrypto*so*
 
 FROM minidocks/node:lts-base AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 COPY --from=abcm2ps /tmp/build /
-COPY --from=abc2xml /tmp/final/* /usr/local/bin/
+COPY --from=abc2xml /tmp/final/ /usr/local/bin/
 
 RUN apk add -u pango npm && npm i -g abc2svg jszip && apk del npm && clean
 

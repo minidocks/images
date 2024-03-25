@@ -7,9 +7,10 @@ ENV PATH=$PATH:/usr/share/tex/texmf/bin:/usr/share/bin
 RUN apk --no-cache add curl rsync && clean
 
 RUN cd /usr/share \
-    && export platform="$([ "$TARGETARCH" = "arm64" ] && echo "linux-aarch64" || echo "linuxmusl")" \
+    && export platform="$([ "$TARGETARCH" = "arm64" ] && echo "linux-aarch64" || echo "linuxmusl-64")" \
     && wget -O context.zip https://lmtx.pragma-ade.com/install-lmtx/context-$platform.zip && unzip context.zip && rm context.zip \
     && chmod a+x install.sh bin/mtxrun && mkdir -p tex \
+    && sed -i 's/PLATFORM="linuxmusl.*/PLATFORM="linuxmusl-64" ;;/g' ./install.sh \
     && ./install.sh \
     && ln -s "../texmf-$platform/bin" tex/texmf/bin
 
@@ -50,7 +51,7 @@ RUN apk add libgcc && wget -P /usr/share/fonts http://quivira-font.com/files/Qui
 # https://www.contextgarden.net/Barcodes
 RUN apk add libpng && clean
 COPY --from=minidocks/zint /usr/local/ /usr/local/
-RUN export platform="$([ "$TARGETARCH" = "arm64" ] && echo "linux-aarch64" || echo "linuxmusl")" \
+RUN export platform="$([ "$TARGETARCH" = "arm64" ] && echo "linux-aarch64" || echo "linuxmusl-64")" \
     && mkdir -p /usr/share/tex/texmf-$platform/bin/lib/luametatex/zint \
     && ln -s /usr/local/lib/libzint.so /usr/share/tex/texmf-$platform/bin/lib/luametatex/zint/libzint.so
 
