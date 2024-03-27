@@ -1,5 +1,5 @@
-LibreOffice docker image ([minidocks/libreoffice]((https://hub.docker.com/r/minidocks/libreoffice)))
-====================================================================================================
+LibreOffice docker image ([minidocks/libreoffice](https://hub.docker.com/r/minidocks/libreoffice))
+==================================================================================================
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/LibreOffice_logo.svg/640px-LibreOffice_logo.svg.png)
 
