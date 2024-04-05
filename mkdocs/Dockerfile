@@ -17,10 +17,12 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-autolinks-plugin \
       mkdocs-autorefs \
       mkdocs-awesome-pages-plugin \
+      mkdocs-categories-plugin \
       mkdocs-codeinclude-plugin \
       mkdocs-enumerate-headings-plugin \
       mkdocs-exclude \
       mkdocs-exclude-search \
+      mkdocs-extract-listings-plugin \
       mkdocs-gallery \
       mkdocs-gen-files \
       mkdocs-git-authors-plugin \
@@ -38,6 +40,7 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-monorepo-plugin \
       mkdocs-multirepo \
       mkdocs-multirepo-plugin \
+      mkdocs-nav-weight \
       mkdocs-no-sitemap-plugin \
       mkdocs-print-site-plugin \
       mkdocs_pymdownx_material_extras \
@@ -59,6 +62,7 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       \
       neoteroi-mkdocs \
       \
+      markdown-customblocks \
       markdown-include \
       pygments \
       pymdown-extensions \
@@ -84,9 +88,9 @@ RUN apk add libsass && pip install \
       mkpdfs-mkdocs \
     && clean
 
-RUN wget -O /tmp/roboto.zip https://fonts.google.com/download?family=Roboto \
-    && unzip /tmp/roboto.zip -d /usr/share/fonts/truetype \
-    && fc-cache -f \
-    && clean
+RUN apk add msttcorefonts-installer font-freefont font-noto font-opensans font-roboto font-carlito font-overpass font-dejavu && clean
+RUN wget -P /usr/share/fonts http://quivira-font.com/files/Quivira.otf
+RUN wget -P /usr/share/fonts https://catrinity-font.de/downloads/Catrinity.otf
+RUN update-ms-fonts && fc-cache -f && clean
 
 FROM latest

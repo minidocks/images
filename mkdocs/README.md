@@ -36,6 +36,8 @@ Installed extensions
 - [Exclude](https://github.com/apenwarr/mkdocs-exclude) allows you to exclude
   files from your input using unix-style wildcards (globs) or regular
   expressions (regexes).
+- [Categories](https://github.com/EddyLuten/mkdocs-categories-plugin) allows for
+  multiple categories per page and will generate a category index page
 - [Gallery](https://smarie.github.io/mkdocs-gallery/)
 - [Gen files](https://oprypin.github.io/mkdocs-gen-files/) programmatically
   generates documentation pages during the build.
@@ -71,6 +73,8 @@ Installed extensions
   documentation in a single Mkdocs. Designed for large codebases.
 - [Multirepo](https://github.com/jdoiro3/mkdocs-multirepo-plugin) Build
   documentation in multiple repos into one site.
+- [Nav weight](https://github.com/shu307/mkdocs-nav-weight) enables to organize
+  navigation in a more markdownic way
 - [Neoterot plugins](https://www.neoteroi.dev/mkdocs-plugins/)
 - [No sitemap](https://github.com/leonardehrenfried/mkdocs-no-sitemap-plugin)
   disables the generation of a sitemap in Mkdocs sites.
@@ -103,6 +107,8 @@ Installed extensions
 
 ### Markdown extension
 
+- [Customblocks](https://github.com/vokimon/markdown-customblocks) settles a
+  common markup for parametrizable and nestable components.
 - [Include](https://github.com/cmacmackin/markdown-include/) allows the
   inclusion of the contents of other Markdown documents.
 - [Pygments](http://pygments.org/) is a generic syntax highlighter.
