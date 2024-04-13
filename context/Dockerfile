@@ -36,17 +36,21 @@ ARG TARGETARCH
 ENV CONTEXT_HOME=/usr/share \
     PATH=$PATH:/usr/share/tex/texmf/bin:/usr/share/bin \
     TEXMFCACHE=/usr/share/tex/texmf-cache \
+    TEXMF=/usr/share/tex \
     OSFONTDIR=/usr/share/fonts \
     MTX_FONTS_AUTOLOAD=yes
 
 COPY --from=dist /usr/share/bin /usr/share/bin
 COPY --from=dist /usr/share/tex /usr/share/tex
+COPY --from=minidocks/texlive /usr/local/texlive/bin/x86_64-linuxmusl/luatex /usr/share/bin/luatex
 
+# Fonts
 COPY --from=dist /usr/share/texmf-fonts/public/dejavu /usr/share/tex/texmf/fonts/data/public/dejavu
 COPY --from=dist /usr/share/texmf-fonts/gust/lm /usr/share/tex/texmf/fonts/data/gust/lm
+RUN wget -P /usr/share/fonts http://quivira-font.com/files/Quivira.otf
 
 # --jit
-RUN apk add libgcc && wget -P /usr/share/fonts http://quivira-font.com/files/Quivira.otf && clean
+RUN apk add libgcc && clean
 
 # https://www.contextgarden.net/Barcodes
 RUN apk add libpng && clean
@@ -55,7 +59,8 @@ RUN export platform="$([ "$TARGETARCH" = "arm64" ] && echo "linux-aarch64" || ec
     && mkdir -p /usr/share/tex/texmf-$platform/bin/lib/luametatex/zint \
     && ln -s /usr/local/lib/libzint.so /usr/share/tex/texmf-$platform/bin/lib/luametatex/zint/libzint.so
 
-RUN mtxrun --generate && context --make en && mtxrun --script fonts --reload \
+RUN context --luatex --generate && context --generate \
+    && context --luatex --make && context --make && mtxrun --script fonts --reload \
     && find "$TEXMFCACHE" -type d -exec chmod 777 {} \; \
     && find "$TEXMFCACHE" -type f -exec chmod 666 {} \;
 
