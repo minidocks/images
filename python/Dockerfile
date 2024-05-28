@@ -1,13 +1,13 @@
-ARG version=3.11
+ARG version=3.12
 ARG suffix=""
-
-FROM minidocks/base:3.17 AS base_3.10
-
-FROM minidocks/base:3.17-build AS base_3.10-build
 
 FROM minidocks/base:3.19 AS base_3.11
 
 FROM minidocks/base:3.19-build AS base_3.11-build
+
+FROM minidocks/base:3.20 AS base_3.12
+
+FROM minidocks/base:3.20-build AS base_3.12-build
 
 FROM base_$version$suffix AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
