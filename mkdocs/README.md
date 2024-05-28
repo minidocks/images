@@ -81,6 +81,7 @@ Installed extensions
 - [Print site](https://timvink.github.io/mkdocs-print-site-plugin/index.html)
   adds a page to your site combining all pages, allowing your site visitors to
   `File > Print > Save as PDF` the entire site.
+- [Publisher](https://mkusz.github.io/mkdocs-publisher/)
 - [Pymdownx Material
   Extras](https://github.com/facelessuser/mkdocs_pymdownx_material_extras)
 - [Safe text](https://github.com/raimon49/mkdocs-safe-text-plugin) for safe text
@@ -95,7 +96,6 @@ Installed extensions
 - [Swagger UI](https://blueswen.github.io/mkdocs-swagger-ui-tag/)
 - [Redirects](https://github.com/datarobot/mkdocs-redirects) to create page
   redirects (e.g. for moved/renamed pages).
-- [Versioning](https://github.com/zayd62/mkdocs-versioning)
 
 ##### Only in 1-pdf and pdf tags
 

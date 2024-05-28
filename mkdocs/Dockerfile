@@ -7,10 +7,8 @@ FROM minidocks/weasyprint AS weasyprint
 FROM $base_image AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG mkdocs_version=1.5.3
-
 RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
-      mkdocs==$mkdocs_version \
+      mkdocs \
       \
       mkdocs-abs-rel-plugin \
       mkdocs-add-number-plugin \
@@ -19,6 +17,7 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-awesome-pages-plugin \
       mkdocs-categories-plugin \
       mkdocs-codeinclude-plugin \
+      mkdocs-embed-external-markdown \
       mkdocs-enumerate-headings-plugin \
       mkdocs-exclude \
       mkdocs-exclude-search \
@@ -43,6 +42,7 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-nav-weight \
       mkdocs-no-sitemap-plugin \
       mkdocs-print-site-plugin \
+      mkdocs-publisher \
       mkdocs_pymdownx_material_extras \
       mkdocs-safe-text-plugin \
       mkdocs-same-dir \
@@ -51,7 +51,6 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-simple-plugin \
       mkdocs-swagger-ui-tag \
       mkdocs-redirects \
-      mkdocs-versioning \
       mkdocs-with-confluence \
       mkdocstrings \
       \
@@ -59,6 +58,8 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       mkdocs-cinder \
       mkdocs-kpn \
       mkdocs-material \
+      \
+      mike \
       \
       neoteroi-mkdocs \
       \
@@ -70,7 +71,7 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
 
 COPY rootfs /
 
-CMD [ "mkdocs", "serve", "--dev-addr", "0.0.0.0:8000" ]
+CMD [ "mkdocs", "serve", "--cleanr", "--dev-addr", "0.0.0.0:8000" ]
 
 FROM minidocks/python:3-build AS build
 
