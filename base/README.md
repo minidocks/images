@@ -2,7 +2,7 @@ Base image ([minidocks/base](https://hub.docker.com/r/minidocks/base))
 ======================================================================
 
 The best docker container for developers. This is a very small container
-(total < 7 MB) based on Alpine image.
+(total < 8 MB) based on Alpine image.
 
 Alpine repositories
 -------------------
@@ -10,11 +10,9 @@ Alpine repositories
 All images have registered the following apk repositories:
 
 - @edge ([@main](https://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](https://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](https://dl-cdn.alpinelinux.org/alpine/edge/testing))
-- @318 ([@main318](https://dl-cdn.alpinelinux.org/alpine/v3.17/main), [@community318](https://dl-cdn.alpinelinux.org/alpine/v3.17/community))
-- @317 ([@main317](https://dl-cdn.alpinelinux.org/alpine/v3.17/main), [@community317](https://dl-cdn.alpinelinux.org/alpine/v3.17/community))
-- @316 ([@main316](https://dl-cdn.alpinelinux.org/alpine/v3.16/main), [@community316](https://dl-cdn.alpinelinux.org/alpine/v3.16/community))
-- @315 ([@main315](https://dl-cdn.alpinelinux.org/alpine/v3.15/main), [@community315](https://dl-cdn.alpinelinux.org/alpine/v3.15/community))
-- @314 ([@main314](https://dl-cdn.alpinelinux.org/alpine/v3.14/main), [@community314](https://dl-cdn.alpinelinux.org/alpine/v3.14/community))
+- @320 ([@main320](https://dl-cdn.alpinelinux.org/alpine/v3.20/main), [@community320](https://dl-cdn.alpinelinux.org/alpine/v3.20/community))
+- @319 ([@main319](https://dl-cdn.alpinelinux.org/alpine/v3.19/main), [@community319](https://dl-cdn.alpinelinux.org/alpine/v3.19/community))
+- @318 ([@main318](https://dl-cdn.alpinelinux.org/alpine/v3.18/main), [@community318](https://dl-cdn.alpinelinux.org/alpine/v3.18/community))
 
 Utilities
 ---------
@@ -100,16 +98,16 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.19      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
- build, 3.19-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
+ latest, 3.20      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
+ build, 3.20-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
  edge              | ![](https://img.shields.io/docker/image-size/minidocks/base/edge?style=flat-square&logo=docker&label=size)
  edge-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/edge-build?style=flat-square&logo=docker&label=size)
+ 3.20              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.20?style=flat-square&logo=docker&label=size)
+ 3.20-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.20-build?style=flat-square&logo=docker&label=size)
  3.19              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.19?style=flat-square&logo=docker&label=size)
  3.19-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.19-build?style=flat-square&logo=docker&label=size)
  3.18              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.18?style=flat-square&logo=docker&label=size)
  3.18-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.18-build?style=flat-square&logo=docker&label=size)
- 3.17              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.17?style=flat-square&logo=docker&label=size)
- 3.17-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.17-build?style=flat-square&logo=docker&label=size)
 
 Inspiration
 -----------
