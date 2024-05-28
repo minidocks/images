@@ -1,5 +1,6 @@
-ARG version=3.18
-ARG glibc_version="2.35-r1"
+ARG version=3.20
+# NOTE: Glibc 2.35 package is broken: https://github.com/sgerrand/alpine-pkg-glibc/issues/176, so we stick to 2.34 for now
+ARG glibc_version="2.34-r0"
 ARG prefix="https://github.com/sgerrand/alpine-pkg-glibc/releases/download/"
 
 FROM minidocks/base:$version as latest
