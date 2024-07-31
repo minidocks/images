@@ -3,7 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/curl"
 versions="
-7
 latest
 "
 
