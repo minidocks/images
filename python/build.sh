@@ -3,20 +3,20 @@ set -e
 
 image="${namespace:-minidocks}/python"
 versions="
-3.10;3.10
-3.10-packaging;3.10;packaging
-3.10-uwsgi;3.10;uwsgi
-3.10-build;3.10;build;-build
 3.11;3.11
 3.11-packaging;3.11;packaging
 3.11-uwsgi;3.11;uwsgi
 3.11-build;3.11;build;-build
-3;3.11
-3-packaging;3.11;packaging
-3-build;3.11;build;-build
-3-uwsgi;3.11;uwsgi
-build;3.11;build;-build
-latest;3.11
+3.12;3.11
+3.12-packaging;3.12;packaging
+3.12-uwsgi;3.12;uwsgi
+3.12-build;3.12;build;-build
+3;3.12
+3-packaging;3.12;packaging
+3-build;3.12;build;-build
+3-uwsgi;3.12;uwsgi
+build;3.12;build;-build
+latest;3.12
 "
 
 build() {

@@ -3,11 +3,6 @@ set -e
 
 image="${namespace:-minidocks}/ansible"
 versions="
-4;ansible<5
-5;ansible<6
-6;ansible<7
-7;ansible<8
-8;ansible<9
 9;ansible<10
 10;ansible<11
 latest;ansible

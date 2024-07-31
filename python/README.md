@@ -45,21 +45,21 @@ servers Nginx, which offer direct support for uWSGI’s native uwsgi protocol.
 Tags
 ----
 
-| Tag            | Size                                                                                                                   |
-|----------------|------------------------------------------------------------------------------------------------------------------------|
+| Tag             | Size                                                                                                                   |
+|-----------------|------------------------------------------------------------------------------------------------------------------------|
 | latest, 3, 3.12 | ![](https://img.shields.io/docker/image-size/minidocks/python/latest?style=flat-square&logo=docker&label=size)         |
-| 3, 3.12        | ![](https://img.shields.io/docker/image-size/minidocks/python/3?style=flat-square&logo=docker&label=size)              |
-| 3-packaging    | ![](https://img.shields.io/docker/image-size/minidocks/python/3-packaging?style=flat-square&logo=docker&label=size)    |
-| 3-build        | ![](https://img.shields.io/docker/image-size/minidocks/python/3-build?style=flat-square&logo=docker&label=size)        |
-| 3-uwsgi        | ![](https://img.shields.io/docker/image-size/minidocks/python/3-uwsgi?style=flat-square&logo=docker&label=size)        |
-| 3.12           | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12?style=flat-square&logo=docker&label=size)           |
-| 3.12-packaging | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-packaging?style=flat-square&logo=docker&label=size) |
-| 3.12-build     | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-build?style=flat-square&logo=docker&label=size)     |
-| 3.12-uwsgi     | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-uwsgi?style=flat-square&logo=docker&label=size)     |
-| 3.11           | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11?style=flat-square&logo=docker&label=size)           |
-| 3.11-packaging | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-packaging?style=flat-square&logo=docker&label=size) |
-| 3.11-build     | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-build?style=flat-square&logo=docker&label=size)     |
-| 3.11-uwsgi     | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-uwsgi?style=flat-square&logo=docker&label=size)     |
+| 3, 3.12         | ![](https://img.shields.io/docker/image-size/minidocks/python/3?style=flat-square&logo=docker&label=size)              |
+| 3-packaging     | ![](https://img.shields.io/docker/image-size/minidocks/python/3-packaging?style=flat-square&logo=docker&label=size)    |
+| 3-build         | ![](https://img.shields.io/docker/image-size/minidocks/python/3-build?style=flat-square&logo=docker&label=size)        |
+| 3-uwsgi         | ![](https://img.shields.io/docker/image-size/minidocks/python/3-uwsgi?style=flat-square&logo=docker&label=size)        |
+| 3.12            | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12?style=flat-square&logo=docker&label=size)           |
+| 3.12-packaging  | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-packaging?style=flat-square&logo=docker&label=size) |
+| 3.12-build      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-build?style=flat-square&logo=docker&label=size)     |
+| 3.12-uwsgi      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-uwsgi?style=flat-square&logo=docker&label=size)     |
+| 3.11            | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11?style=flat-square&logo=docker&label=size)           |
+| 3.11-packaging  | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-packaging?style=flat-square&logo=docker&label=size) |
+| 3.11-build      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-build?style=flat-square&logo=docker&label=size)     |
+| 3.11-uwsgi      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-uwsgi?style=flat-square&logo=docker&label=size)     |
 
 Related images
 --------------
