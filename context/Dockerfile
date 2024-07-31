@@ -48,6 +48,7 @@ COPY --from=minidocks/texlive /usr/local/texlive/bin/x86_64-linuxmusl/luatex /us
 COPY --from=dist /usr/share/texmf-fonts/public/dejavu /usr/share/tex/texmf/fonts/data/public/dejavu
 COPY --from=dist /usr/share/texmf-fonts/gust/lm /usr/share/tex/texmf/fonts/data/gust/lm
 RUN wget -P /usr/share/fonts http://quivira-font.com/files/Quivira.otf
+RUN wget -P /usr/share/fonts https://catrinity-font.de/downloads/Catrinity.otf
 
 # --jit
 RUN apk add libgcc && clean

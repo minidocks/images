@@ -1,5 +1,5 @@
-ConTeXt standalone docker image ([minidocks/context](https://hub.docker.com/r/minidocks/python))
-================================================================================================
+ConTeXt standalone docker image ([minidocks/context](https://hub.docker.com/r/minidocks/context))
+=================================================================================================
 
 ![](https://wiki.contextgarden.net/skins/common/images/context/context_logo_inv.png?6c748)
 
@@ -22,6 +22,9 @@ Fonts
 - [Quivira](http://quivira-font.com/) is a proportional Unicode serif font that
   contains more than the standard characters for some western European
   languages.
+- [Catrinity](https://catrinity-font.de/) is a free sans-serif OpenType font
+  that contains a lot of characters for various languages, plus many symbols,
+  including colorful emoji.
 
 Usage
 -----
