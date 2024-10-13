@@ -15,7 +15,7 @@ versions="
 8.3-base;8.3;83;base
 8.3-nginx;8.3;83;nginx
 8.3-intl;8.3;83;intl
-latest;8.2;82
+latest;8.3;83
 "
 
 build() {

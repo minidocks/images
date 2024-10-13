@@ -33,7 +33,7 @@ Installed applications
 Modules
 -------
 
-| module           | 8.x | 8.3 | tag    |
+| module           | 8.x | 8.4 | tag    |
 |------------------|:---:|:---:|--------|
 | apcu             |  ✓  |  ✓  | base   |
 | bcmath           |  ✓  |  ✓  | latest |
@@ -44,6 +44,7 @@ Modules
 | curl             |  ✓  |  ✓  | base   |
 | dom              |  ✓  |  ✓  | latest |
 | exif             |  ✓  |  ✓  | latest |
+| excimer          |  ✓  |  ✓  | latest |
 | ffi              |  ✓  |  ✓  | latest |
 | fileinfo         |  ✓  |  ✓  | latest |
 | fpm              |  ✓  |  ✓  | latest |
@@ -63,6 +64,7 @@ Modules
 | mysqlnd          |  ✓  |  ✓  | latest |
 | newrelic (amd64) |  ✓  |  ✓  | latest |
 | opcache          |  ✓  |  ✓  | latest |
+| opentelemetry    |  ✓  |  ✓  | latest |
 | openssl          |  ✓  |  ✓  | base   |
 | pcntl            |  ✓  |  ✓  | base   |
 | pcov             |  ✓  |  ✓  | base   |

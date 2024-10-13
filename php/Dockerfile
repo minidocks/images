@@ -1,13 +1,13 @@
 ARG version=8.3
 ARG major=8
 ARG suffix=83
-ARG newrelic_version=10.15.0.4
+ARG newrelic_version=11.2.0.15
 
 FROM minidocks/base:3.19 AS v8.1
 
-FROM minidocks/base:3.19 AS v8.2
+FROM minidocks/base:3.20 AS v8.2
 
-FROM minidocks/base:3.19 AS v8.3
+FROM minidocks/base:3.20 AS v8.3
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -20,13 +20,13 @@ ARG suffix
 RUN getent group www-data >/dev/null || addgroup -g 82 -S www-data; getent passwd www-date >/dev/null || adduser -u 82 -S -s /bin/sh -G www-data www-data
 
 RUN for module in ctype curl iconv json mbstring openssl pcntl pecl-apcu phar posix tokenizer; do modules="$modules php$suffix-$module"; done \
-    && apk add "gnu-libiconv$libiconv_version" "php$suffix" $modules && clean \
-    && if [ ! -f /usr/bin/php ]; then ln -s "/usr/bin/php$suffix" /usr/bin/php; fi \
-    && if [ ! -f /usr/bin/phar ]; then ln -s "/usr/bin/phar$suffix" /usr/bin/phar; fi \
-    && if [ ! -d /etc/php$major ]; then ln -s "/etc/php$suffix" "/etc/php$major"; fi \
-    && if [ ! -d /usr/lib/php$major ]; then ln -s "/usr/lib/php$suffix" "/usr/lib/php$major"; fi
+    && apk add "gnu-libiconv" "php$suffix" $modules && clean \
+    && if [ ! -e /usr/bin/php ]; then ln -s "php$suffix" /usr/bin/php; fi \
+    && ln -fs "phar$suffix" /usr/bin/phar \
+    && if [ ! -e /etc/php$major ]; then ln -s "php$suffix" "/etc/php$major"; fi \
+    && if [ ! -e /usr/lib/php$major ]; then ln -s "php$suffix" "/usr/lib/php$major"; fi
 
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+ENV LD_PRELOAD="/usr/lib/preloadable_libiconv.so php"
 
 #Psysh
 RUN wget https://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
@@ -79,6 +79,7 @@ RUN for module in \
         pecl-apcu \
         pecl-memcached \
         pecl-mongodb \
+        pecl-opentelemetry \
         pecl-pcov \
         pecl-uploadprogress \
         pecl-redis \
@@ -99,7 +100,8 @@ RUN for module in \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
-    && if [ "$suffix" != "83" ]; then modules="$modules php$suffix-pecl-protobuf"; fi \
+    && if [ "$suffix" != "84" ]; then modules="$modules php$suffix-pecl-protobuf"; fi \
+    && if [ "$suffix" != "81" ]; then modules="$modules php$suffix-pecl-excimer@edge"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \
     && clean
