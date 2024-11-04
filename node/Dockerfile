@@ -3,9 +3,9 @@ ARG base_version=21
 
 FROM minidocks/base:3.18 AS v18
 
-FROM minidocks/base:3.19 AS v20
+FROM minidocks/base:3.20 AS v20
 
-FROM minidocks/base:3.19 AS v21
+FROM minidocks/base:3.20 AS v21
 
 FROM v$base_version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
