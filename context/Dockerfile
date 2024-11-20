@@ -1,27 +1,30 @@
-FROM minidocks/base AS dist
+FROM minidocks/base:build AS dist
 
 ARG TARGETARCH
 
 ENV PATH=$PATH:/usr/share/tex/texmf/bin:/usr/share/bin
 
-RUN apk --no-cache add curl rsync && clean
+RUN apk add curl && clean
 
 RUN cd /usr/share \
     && export platform="$([ "$TARGETARCH" = "arm64" ] && echo "linux-aarch64" || echo "linuxmusl-64")" \
     && wget -O context.zip https://lmtx.pragma-ade.com/install-lmtx/context-$platform.zip && unzip context.zip && rm context.zip \
-    && chmod a+x install.sh bin/mtxrun && mkdir -p tex \
-    && sed -i 's/PLATFORM="linuxmusl.*/PLATFORM="linuxmusl-64" ;;/g' ./install.sh \
-    && ./install.sh \
+    && sh ./install.sh \
     && ln -s "../texmf-$platform/bin" tex/texmf/bin
+
+# Build LuaMetaTeX
+RUN cd /usr/share/tex/texmf-context/source/luametatex && sh ./build.sh \
+    && mv build/native/luametatex /usr/share/tex/texmf/bin/luametatex \
+    && rm -rf build
 
 # Install modules
 RUN cd /usr/share/tex && mtxrun --script install-modules --install --all
 
-RUN mkdir -p /tmp/modules \
-    && wget -P /tmp https://github.com/Witiko/markdown/releases/download/latest/markdown.tds.zip \
-    && mkdir -p /tmp/modules/t-markdown && unzip -d /tmp/modules/t-markdown /tmp/markdown.tds.zip \
-    && rm -rf /tmp/modules/__MACOSX \
-    && rsync -rlt --exclude=/VERSION /tmp/modules/*/ /usr/share/tex/texmf-modules
+#RUN mkdir -p /tmp/modules \
+#    && wget -P /tmp https://github.com/Witiko/markdown/releases/download/latest/markdown.tds.zip \
+#    && mkdir -p /tmp/modules/t-markdown && unzip -d /tmp/modules/t-markdown /tmp/markdown.tds.zip \
+#    && rm -rf /tmp/modules/__MACOSX \
+#    && rsync -rlt --exclude=/VERSION /tmp/modules/*/ /usr/share/tex/texmf-modules
 
 RUN mkdir -p /usr/share/tex/texmf-modules/doc && mv /usr/share/tex/texmf-modules/doc /usr/share/texmf-modules-doc
 RUN mv /usr/share/tex/texmf-context/doc /usr/share/texmf-context-doc
