@@ -9,6 +9,12 @@ https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE/community
 @edge https://dl-cdn.alpinelinux.org/alpine/edge/community
 @edge https://dl-cdn.alpinelinux.org/alpine/edge/testing
 
+@main321 https://dl-cdn.alpinelinux.org/alpine/v3.21/main
+@community321 https://dl-cdn.alpinelinux.org/alpine/v3.21/community
+
+@321 https://dl-cdn.alpinelinux.org/alpine/v3.21/main
+@321 https://dl-cdn.alpinelinux.org/alpine/v3.21/community
+
 @main320 https://dl-cdn.alpinelinux.org/alpine/v3.20/main
 @community320 https://dl-cdn.alpinelinux.org/alpine/v3.20/community
 

@@ -98,10 +98,12 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.20      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
- build, 3.20-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
+ latest, 3.21      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
+ build, 3.21-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
  edge              | ![](https://img.shields.io/docker/image-size/minidocks/base/edge?style=flat-square&logo=docker&label=size)
  edge-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/edge-build?style=flat-square&logo=docker&label=size)
+ 3.21              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21?style=flat-square&logo=docker&label=size)
+ 3.21-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21-build?style=flat-square&logo=docker&label=size)
  3.20              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.20?style=flat-square&logo=docker&label=size)
  3.20-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.20-build?style=flat-square&logo=docker&label=size)
  3.19              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.19?style=flat-square&logo=docker&label=size)

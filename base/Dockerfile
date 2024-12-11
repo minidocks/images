@@ -1,6 +1,6 @@
 ARG version=3.20
 
-FROM alpine:$version as latest
+FROM alpine:$version AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version
@@ -16,7 +16,7 @@ COPY rootfs /
 
 RUN sed -i "s/\$ALPINE_RELEASE/$([ 'edge' = "$version" ] && echo "$version" || echo "v$version")/g" /etc/apk/repositories \
     && [ 'edge' = "$version" ] && sed -i 's/@testing //' /etc/apk/repositories || echo "ok" >/dev/null \
-    && apk add -u busybox-extras busybox-suid su-exec inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert ca-certificates flock gettext libc6-compat libintl tini monit \
+    && apk add -u busybox-extras busybox-suid su-exec inotify-tools dropbear dropbear-scp dropbear-dbclient dropbear-convert ca-certificates flock gettext libc6-compat libintl tini monit nano \
     && mv /usr/bin/envsubst /usr/local/bin/ \
     && apk del gettext \
     && wget -O /bin/wait-for https://raw.githubusercontent.com/eficode/wait-for/v2.2.4/wait-for && chmod a+x /bin/wait-for \
