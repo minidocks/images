@@ -74,7 +74,7 @@ Modules
 | pgsql            |  ✓  |  ✓  | latest |
 | phar             |  ✓  |  ✓  | base   |
 | posix            |  ✓  |  ✓  | base   |
-| protobuf         |  ✓  |  𐄂  | latest |
+| protobuf         |  ✓  |  ✓  | latest |
 | redis            |  ✓  |  ✓  | latest |
 | session          |  ✓  |  ✓  | latest |
 | simplexml        |  ✓  |  ✓  | latest |
@@ -104,7 +104,11 @@ Tags
 
 | Tag         | Size                                                                                                           |
 |-------------|----------------------------------------------------------------------------------------------------------------|
-| latest, 8.2 | ![](https://img.shields.io/docker/image-size/minidocks/php/latest?style=flat-square&logo=docker&label=size)    |
+| latest, 8.4 | ![](https://img.shields.io/docker/image-size/minidocks/php/latest?style=flat-square&logo=docker&label=size)    |
+| 8.4-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.4-base?style=flat-square&logo=docker&label=size)  |
+| 8.4         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.4?style=flat-square&logo=docker&label=size)       |
+| 8.4-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.4-nginx?style=flat-square&logo=docker&label=size) |
+| 8.4-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.4-intl?style=flat-square&logo=docker&label=size)  |
 | 8.3-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.3-base?style=flat-square&logo=docker&label=size)  |
 | 8.3         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.3?style=flat-square&logo=docker&label=size)       |
 | 8.3-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.3-nginx?style=flat-square&logo=docker&label=size) |

@@ -1,13 +1,13 @@
-ARG version=8.3
+ARG version=8.4
 ARG major=8
-ARG suffix=83
-ARG newrelic_version=11.2.0.15
+ARG suffix=84
+ARG newrelic_version=11.4.0.17
 
-FROM minidocks/base:3.19 AS v8.1
+FROM minidocks/base:3.21 AS v8.2
 
-FROM minidocks/base:3.20 AS v8.2
+FROM minidocks/base:3.21 AS v8.3
 
-FROM minidocks/base:3.20 AS v8.3
+FROM minidocks/base:3.21 AS v8.4
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -81,8 +81,9 @@ RUN for module in \
         pecl-mongodb \
         pecl-opentelemetry \
         pecl-pcov \
-        pecl-uploadprogress \
+        pecl-protobuf \
         pecl-redis \
+        pecl-uploadprogress \
         pecl-xdebug \
         pdo_mysql \
         pdo_pgsql \
@@ -100,8 +101,7 @@ RUN for module in \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
-    && if [ "$suffix" != "84" ]; then modules="$modules php$suffix-pecl-protobuf"; fi \
-    && if [ "$suffix" != "81" ]; then modules="$modules php$suffix-pecl-excimer@edge"; fi \
+    && if [ "$suffix" != "84" ]; then modules="$modules php$suffix-pecl-excimer@edge"; else modules="$modules php$suffix-pecl-excimer"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \
     && clean
