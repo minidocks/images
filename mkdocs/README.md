@@ -114,6 +114,12 @@ Installed extensions
 - [Pygments](http://pygments.org/) is a generic syntax highlighter.
 - [PyMdown Extensions](https://facelessuser.github.io/pymdown-extensions/) is a
   collection of extensions for Python Markdown.
+- [Mdx Truly Sane Lists](https://github.com/radude/mdx_truly_sane_lists) that
+  makes lists truly sane. Features custom indents for nested lists and fix for
+  messy linebreaks and paragraphs between lists.
+- [Breakless Lists Markdown
+  Extension](https://github.com/adamb70/mdx-breakless-lists) Use lists without
+  requiring a line break above them.
 
 Usage
 -----

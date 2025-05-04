@@ -65,13 +65,15 @@ RUN apk add py3-regex py3-pynacl py3-ruamel.yaml && pip install \
       \
       markdown-customblocks \
       markdown-include \
+      mdx-breakless-lists \
+      mdx_truly_sane_lists \
       pygments \
       pymdown-extensions \
     && clean
 
 COPY rootfs /
 
-CMD [ "mkdocs", "serve", "--cleanr", "--dev-addr", "0.0.0.0:8000" ]
+CMD [ "mkdocs", "serve", "--clean", "--dev-addr", "0.0.0.0:8000" ]
 
 FROM minidocks/python:3-build AS build
 
