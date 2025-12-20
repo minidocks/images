@@ -33,7 +33,7 @@ Installed applications
 Modules
 -------
 
-| module           | 8.x | 8.4 | tag    |
+| module           | 8.x | 8.5 | tag    |
 |------------------|:---:|:---:|--------|
 | apcu             |  ✓  |  ✓  | base   |
 | bcmath           |  ✓  |  ✓  | latest |
@@ -63,7 +63,7 @@ Modules
 | mysqli           |  ✓  |  ✓  | latest |
 | mysqlnd          |  ✓  |  ✓  | latest |
 | newrelic (amd64) |  ✓  |  ✓  | latest |
-| opcache          |  ✓  |  ✓  | latest |
+| opcache          |  ✓  |  ×  | latest |
 | opentelemetry    |  ✓  |  ✓  | latest |
 | openssl          |  ✓  |  ✓  | base   |
 | pcntl            |  ✓  |  ✓  | base   |
@@ -104,7 +104,11 @@ Tags
 
 | Tag         | Size                                                                                                           |
 |-------------|----------------------------------------------------------------------------------------------------------------|
-| latest, 8.4 | ![](https://img.shields.io/docker/image-size/minidocks/php/latest?style=flat-square&logo=docker&label=size)    |
+| latest, 8.5 | ![](https://img.shields.io/docker/image-size/minidocks/php/latest?style=flat-square&logo=docker&label=size)    |
+| 8.5-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.5-base?style=flat-square&logo=docker&label=size)  |
+| 8.5         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.5?style=flat-square&logo=docker&label=size)       |
+| 8.5-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.5-nginx?style=flat-square&logo=docker&label=size) |
+| 8.5-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.5-intl?style=flat-square&logo=docker&label=size)  |
 | 8.4-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.4-base?style=flat-square&logo=docker&label=size)  |
 | 8.4         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.4?style=flat-square&logo=docker&label=size)       |
 | 8.4-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.4-nginx?style=flat-square&logo=docker&label=size) |
@@ -117,11 +121,6 @@ Tags
 | 8.2         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.2?style=flat-square&logo=docker&label=size)       |
 | 8.2-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.2-nginx?style=flat-square&logo=docker&label=size) |
 | 8.2-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.2-intl?style=flat-square&logo=docker&label=size)  |
-| 8.1-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1-base?style=flat-square&logo=docker&label=size)  |
-| 8.1         | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1?style=flat-square&logo=docker&label=size)       |
-| 8.1-nginx   | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1-nginx?style=flat-square&logo=docker&label=size) |
-| 8.1-intl    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.1-intl?style=flat-square&logo=docker&label=size)  |
-| 8.0-base    | ![](https://img.shields.io/docker/image-size/minidocks/php/8.0-base?style=flat-square&logo=docker&label=size)  |
 
 See also
 --------

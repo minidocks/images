@@ -15,7 +15,11 @@ versions="
 8.4-base;8.4;84;base
 8.4-nginx;8.4;84;nginx
 8.4-intl;8.4;84;intl
-latest;8.4;84
+8.5;8.5;85
+8.5-base;8.5;85;base
+8.5-nginx;8.5;85;nginx
+8.5-intl;8.5;85;intl
+latest;8.5;85
 "
 
 build() {

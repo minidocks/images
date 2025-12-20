@@ -1,13 +1,15 @@
 ARG version=8.4
 ARG major=8
 ARG suffix=84
-ARG newrelic_version=11.4.0.17
+ARG newrelic_version=12.3.0.28
 
-FROM minidocks/base:3.21 AS v8.2
+FROM minidocks/base:3.22 AS v8.2
 
-FROM minidocks/base:3.21 AS v8.3
+FROM minidocks/base:3.23 AS v8.3
 
-FROM minidocks/base:3.21 AS v8.4
+FROM minidocks/base:3.23 AS v8.4
+
+FROM minidocks/base:3.23 AS v8.5
 
 FROM v$version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -71,11 +73,9 @@ RUN for module in \
         gd \
         gettext \
         gmp \
-        imap \
         ldap \
         mysqli \
         mysqlnd \
-        opcache \
         pecl-apcu \
         pecl-memcached \
         pecl-mongodb \
@@ -101,7 +101,9 @@ RUN for module in \
         xsl \
         zip \
     ; do modules="$modules php$suffix-$module"; done \
-    && if [ "$suffix" != "84" ]; then modules="$modules php$suffix-pecl-excimer@edge"; else modules="$modules php$suffix-pecl-excimer"; fi \
+    && if [ "$suffix" -lt "84" ]; then modules="$modules php$suffix-imap"; else modules="$modules php$suffix-pecl-imap"; fi \
+    && if [ "$suffix" -lt "85" ]; then modules="$modules php$suffix-opcache"; fi \
+    && if [ "$suffix" -lt "84" ]; then modules="$modules php$suffix-pecl-excimer@edge"; else modules="$modules php$suffix-pecl-excimer"; fi \
     && apk add $modules \
     && if [ ! -f /usr/bin/php-fpm ]; then ln -s "$(ls /usr/sbin/php-fpm* -1| head -1)" /usr/bin/php-fpm; fi \
     && clean
