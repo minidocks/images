@@ -110,12 +110,7 @@ Tags
  3.22-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.22-build?style=flat-square&logo=docker&label=size)
  3.21              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21?style=flat-square&logo=docker&label=size)
  3.21-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21-build?style=flat-square&logo=docker&label=size)
- 3.20              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.20?style=flat-square&logo=docker&label=size)
- 3.20-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.20-build?style=flat-square&logo=docker&label=size)
- 3.19              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.19?style=flat-square&logo=docker&label=size)
- 3.19-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.19-build?style=flat-square&logo=docker&label=size)
- 3.18              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.18?style=flat-square&logo=docker&label=size)
- 3.18-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.18-build?style=flat-square&logo=docker&label=size)
+
 
 Inspiration
 -----------

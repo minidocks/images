@@ -26,21 +26,3 @@ https://dl-cdn.alpinelinux.org/alpine/$ALPINE_RELEASE/community
 
 @321 https://dl-cdn.alpinelinux.org/alpine/v3.21/main
 @321 https://dl-cdn.alpinelinux.org/alpine/v3.21/community
-
-@main320 https://dl-cdn.alpinelinux.org/alpine/v3.20/main
-@community320 https://dl-cdn.alpinelinux.org/alpine/v3.20/community
-
-@320 https://dl-cdn.alpinelinux.org/alpine/v3.20/main
-@320 https://dl-cdn.alpinelinux.org/alpine/v3.20/community
-
-@main319 https://dl-cdn.alpinelinux.org/alpine/v3.19/main
-@community319 https://dl-cdn.alpinelinux.org/alpine/v3.19/community
-
-@319 https://dl-cdn.alpinelinux.org/alpine/v3.19/main
-@319 https://dl-cdn.alpinelinux.org/alpine/v3.19/community
-
-@main318 https://dl-cdn.alpinelinux.org/alpine/v3.18/main
-@community318 https://dl-cdn.alpinelinux.org/alpine/v3.18/community
-
-@318 https://dl-cdn.alpinelinux.org/alpine/v3.18/main
-@318 https://dl-cdn.alpinelinux.org/alpine/v3.18/community
