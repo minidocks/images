@@ -12,7 +12,7 @@ Tags
 
 | Tag            | Size                                                                                                         |
 |----------------|--------------------------------------------------------------------------------------------------------------|
-| latest, 3, 3.3 | ![](https://img.shields.io/docker/image-size/minidocks/ruby/latest?style=flat-square&logo=docker&label=size) |
+| latest, 3, 3.4 | ![](https://img.shields.io/docker/image-size/minidocks/ruby/latest?style=flat-square&logo=docker&label=size) |
 | 3              | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3?style=flat-square&logo=docker&label=size)      |
+| 3.4            | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3.4?style=flat-square&logo=docker&label=size)    |
 | 3.3            | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3.3?style=flat-square&logo=docker&label=size)    |
-| 3.2            | ![](https://img.shields.io/docker/image-size/minidocks/ruby/3.2?style=flat-square&logo=docker&label=size)    |
