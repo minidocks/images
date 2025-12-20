@@ -33,7 +33,7 @@ Usage
   Then run command:
   ```bash
   docker run --rm -v `pwd`:/app -w /app -v ~/unsharp.scm:/gimp/scripts/unsharp.scm minidocks/gimp \
-      -i -b '(simple-unsharp-mask "/usr/share/gimp/2.0/images/gimp-splash.png" 5.0 0.5 0)' -b '(gimp-quit 0)'
+      -i -b '(simple-unsharp-mask "/usr/share/gimp/3.0/images/gimp-splash.png" 5.0 0.5 0)' -b '(gimp-quit 0)'
   ```
 
   And in you working directory is the processed image.
@@ -47,8 +47,6 @@ Usage
 Tags
 ----
 
- Tag          | Size
- ---          | ----
- latest, 2.10 | ![](https://img.shields.io/docker/image-size/minidocks/gimp/latest?style=flat-square&logo=docker&label=size)
- 2.10         | ![](https://img.shields.io/docker/image-size/minidocks/gimp/2.10?style=flat-square&logo=docker&label=size)
- 2.8          | ![](https://img.shields.io/docker/image-size/minidocks/gimp/2.8?style=flat-square&logo=docker&label=size)
+| Tag    | Size                                                                                                         |
+|--------|--------------------------------------------------------------------------------------------------------------|
+| latest | ![](https://img.shields.io/docker/image-size/minidocks/gimp/latest?style=flat-square&logo=docker&label=size) |

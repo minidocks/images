@@ -3,13 +3,12 @@ set -e
 
 image="${namespace:-minidocks}/gimp"
 versions="
-2.10;gimp<2.11
-latest;gimp<2.11
+latest
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --build-arg packages="$2" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

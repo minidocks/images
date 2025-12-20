@@ -1,4 +1,4 @@
-FROM minidocks/imagemagick:6 AS latest
+FROM minidocks/imagemagick AS latest
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
 ARG version

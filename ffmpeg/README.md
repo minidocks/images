@@ -17,7 +17,6 @@ docker run --rm -it -v `pwd`:/app -w /app minidocks/ffmpeg \
 Tags
 ----
 
-| Tag       | Size                                                                                                           |
-|-----------|----------------------------------------------------------------------------------------------------------------|
-| latest, 4 | ![](https://img.shields.io/docker/image-size/minidocks/ffmpeg/latest?style=flat-square&logo=docker&label=size) |
-| 4         | ![](https://img.shields.io/docker/image-size/minidocks/ffmpeg/4?style=flat-square&logo=docker&label=size)      |
+| Tag     | Size                                                                                                           |
+|---------|----------------------------------------------------------------------------------------------------------------|
+| latest | ![](https://img.shields.io/docker/image-size/minidocks/ffmpeg/latest?style=flat-square&logo=docker&label=size) |

@@ -1,7 +1,7 @@
 FROM minidocks/lua
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
 
-ARG version=3.6.4
+ARG version=3.8.3
 
 ENV XDG_DATA_HOME=/ \
     LUA_PATH="/pandoc/filters/?.lua;;"
@@ -10,8 +10,8 @@ RUN wget -O /tmp/pandoc.tar.gz "https://github.com/jgm/pandoc/releases/download/
     && tar -xvzf /tmp/pandoc.tar.gz -C /tmp && mv /tmp/pandoc*/bin/pandoc /usr/local/bin/pandoc && clean
 
 RUN mkdir -p /pandoc/templates \
-    && wget -O /pandoc/templates/eisvogel.latex https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/3.2.0/eisvogel.tex \
-    && wget -O /pandoc/templates/eisvogel.beamer https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/3.2.0/eisvogel.tex \
+    && wget -O /tmp/eisvogel.tar.gz https://github.com/Wandmalfarbe/pandoc-latex-template/releases/download/v3.2.1/Eisvogel-3.2.1.tar.gz \
+    && tar -xvzf /tmp/eisvogel.tar.gz -C /tmp && cp /tmp/Eisvogel*/eisvogel.* /pandoc/templates \
     && wget -O /pandoc/templates/template-letter.tex https://raw.githubusercontent.com/aaronwolen/pandoc-letter/master/template-letter.tex \
     && wget -O /pandoc/templates/chmduquesne.tex https://raw.githubusercontent.com/mszep/pandoc_resume/master/styles/chmduquesne.tex \
     && wget -O /pandoc/templates/chmduquesne.css https://raw.githubusercontent.com/mszep/pandoc_resume/master/styles/chmduquesne.css \
