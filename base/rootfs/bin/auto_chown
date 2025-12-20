@@ -3,6 +3,7 @@
 # Set chown for new files and dirs
 #
 # (c) 2016 Martin Hasoň <martin.hason@gmail.com>
+# https://superuser.com/questions/181517/how-to-execute-a-command-whenever-a-file-changes
 
 set -e
 

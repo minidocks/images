@@ -11,10 +11,14 @@ versions="
 3.20-build;3.20;build
 3.21;3.21
 3.21-build;3.21;build
+3.22;3.22
+3.22-build;3.22;build
+3.23;3.23
+3.23-build;3.23;build
 edge;edge
 edge-build;edge;build
-build;3.21;build
-latest;3.21
+build;3.23;build
+latest;3.23
 "
 
 build() {

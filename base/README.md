@@ -10,6 +10,8 @@ Alpine repositories
 All images have registered the following apk repositories:
 
 - @edge ([@main](https://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](https://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](https://dl-cdn.alpinelinux.org/alpine/edge/testing))
+- @322 ([@main322](https://dl-cdn.alpinelinux.org/alpine/v3.22/main), [@community322](https://dl-cdn.alpinelinux.org/alpine/v3.22/community))
+- @321 ([@main321](https://dl-cdn.alpinelinux.org/alpine/v3.21/main), [@community321](https://dl-cdn.alpinelinux.org/alpine/v3.21/community))
 - @320 ([@main320](https://dl-cdn.alpinelinux.org/alpine/v3.20/main), [@community320](https://dl-cdn.alpinelinux.org/alpine/v3.20/community))
 - @319 ([@main319](https://dl-cdn.alpinelinux.org/alpine/v3.19/main), [@community319](https://dl-cdn.alpinelinux.org/alpine/v3.19/community))
 - @318 ([@main318](https://dl-cdn.alpinelinux.org/alpine/v3.18/main), [@community318](https://dl-cdn.alpinelinux.org/alpine/v3.18/community))
@@ -98,10 +100,14 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.21      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
- build, 3.21-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
+ latest, 3.23      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
+ build, 3.23-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
  edge              | ![](https://img.shields.io/docker/image-size/minidocks/base/edge?style=flat-square&logo=docker&label=size)
  edge-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/edge-build?style=flat-square&logo=docker&label=size)
+ 3.23              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.23?style=flat-square&logo=docker&label=size)
+ 3.22-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.23-build?style=flat-square&logo=docker&label=size)
+ 3.23              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.22?style=flat-square&logo=docker&label=size)
+ 3.22-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.22-build?style=flat-square&logo=docker&label=size)
  3.21              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21?style=flat-square&logo=docker&label=size)
  3.21-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21-build?style=flat-square&logo=docker&label=size)
  3.20              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.20?style=flat-square&logo=docker&label=size)
