@@ -3,15 +3,16 @@ set -e
 
 image="${namespace:-minidocks}/flarum"
 versions="
-1-base;base
-1;latest
-base;base
-latest
+1-base;1.*;base
+1;1.*;latest
+2-base;2.*@beta;base
+base;1.*;base
+latest;1.*
 "
 
 build() {
     IFS=" "
-    docker buildx build $docker_opts --target="${2:-latest}" -t "$image:$1" "$(dirname $0)"
+    docker buildx build $docker_opts --target="${3:-latest}" --build-arg version="$2" -t "$image:$1" "$(dirname $0)"
 }
 
 case "$1" in

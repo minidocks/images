@@ -50,6 +50,9 @@ Tags
 |--------|----------------------------------------------------------------------------------------------------------------|
 | latest | ![](https://img.shields.io/docker/image-size/minidocks/flarum/latest?style=flat-square&logo=docker&label=size) |
 | base   | ![](https://img.shields.io/docker/image-size/minidocks/flarum/base?style=flat-square&logo=docker&label=size)   |
+| 1-base | ![](https://img.shields.io/docker/image-size/minidocks/flarum/1-base?style=flat-square&logo=docker&label=size) |
+| 1      | ![](https://img.shields.io/docker/image-size/minidocks/flarum/1?style=flat-square&logo=docker&label=size)      |
+| 2-base | ![](https://img.shields.io/docker/image-size/minidocks/flarum/2-base?style=flat-square&logo=docker&label=size) |
 
 Alternatives
 ------------
