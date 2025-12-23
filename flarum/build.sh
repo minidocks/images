@@ -4,6 +4,7 @@ set -e
 image="${namespace:-minidocks}/flarum"
 versions="
 1-base;1.*;base
+1-languages;1.*;languages
 1;1.*;latest
 2-base;2.*@beta;base
 base;1.*;base

@@ -25,7 +25,45 @@ RUN chown -R www-data:www-data /var/www
 
 CMD ["supervise", "php-fpm", "nginx", "crond"]
 
-FROM base AS latest
+FROM base AS languages
+
+RUN su-exec www-data:www-data composer require \
+    flarum-lang/arabic \
+    flarum-lang/azerbaijani \
+    flarum-lang/brazilian \
+    flarum-lang/chinese-simplified \
+    flarum-lang/chinese-traditional \
+    flarum-lang/czech \
+    flarum-lang/dutch \
+    flarum-lang/finnish \
+    flarum-lang/french \
+    flarum-lang/german \
+    flarum-lang/greek \
+    flarum-lang/hebrew \
+    flarum-lang/hindi \
+    flarum-lang/hungarian \
+    flarum-lang/indonesian \
+    flarum-lang/italian \
+    flarum-lang/japanese \
+    flarum-lang/korean \
+    flarum-lang/latvian \
+    flarum-lang/lithuanian \
+    flarum-lang/persian \
+    flarum-lang/polish \
+    flarum-lang/romanian \
+    flarum-lang/russian \
+    flarum-lang/sinhala \
+    flarum-lang/slovak \
+    flarum-lang/spanish \
+    flarum-lang/swedish \
+    flarum-lang/tamil \
+    flarum-lang/turkish \
+    flarum-lang/ukrainian \
+    flarum-lang/uzbek \
+    flarum-lang/vietnamese \
+    && clean
+
+FROM languages AS latest
 
 RUN su-exec www-data:www-data composer require \
         acpl/mobile-tab \
@@ -41,8 +79,6 @@ RUN su-exec www-data:www-data composer require \
         blomstra/mark-unread \
         blomstra/search \
         blomstra/user-filter \
-        capybash/magicread \
-        capybash/magicslider \
         clarkwinkelmann/flarum-ext-advanced-search-highlight \
         clarkwinkelmann/flarum-ext-author-change \
         clarkwinkelmann/flarum-ext-composer-page \
@@ -138,7 +174,6 @@ RUN su-exec www-data:www-data composer require \
         sycho/flarum-profile-cover \
         syntaxoutlaw/threadify \
         the-turk/flarum-diff \
-        the-turk/flarum-flamoji \
         the-turk/flarum-nodp \
         the-turk/flarum-stickiest \
         tpokorra/flarum-ext-post-notification \
