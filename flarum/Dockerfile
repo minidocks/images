@@ -75,7 +75,8 @@ RUN su-exec www-data:www-data composer require \
         askvortsov/flarum-pwa \
         askvortsov/flarum-rich-text \
         betterflarum/messenger \
-        blomstra/fontawesome    \
+        blomstra/database-queue \
+        blomstra/fontawesome \
         blomstra/mark-unread \
         blomstra/search \
         blomstra/user-filter \
@@ -111,6 +112,7 @@ RUN su-exec www-data:www-data composer require \
         fof/discussion-views \
         fof/discussion-thumbnail \
         fof/disposable-emails \
+        fof/discussion-templates \
         fof/doorman \
         fof/drafts \
         fof/filter \
