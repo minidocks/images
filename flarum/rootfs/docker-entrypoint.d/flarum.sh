@@ -42,14 +42,14 @@ if [ "${counttables}" -eq "0" ]; then
   echo "Creating installation config ..."
   su-exec www-data:www-data cat >/tmp/config.yml <<EOL
 debug: ${FLARUM_DEBUG}
-baseUrl: ${FLARUM_BASE_URL}
+baseUrl: "${FLARUM_BASE_URL}"
 databaseConfiguration:
   driver: mysql
-  host: ${MYSQL_HOST}
-  database: ${MYSQL_DATABASE}
-  username: ${MYSQL_USER}
-  password: ${MYSQL_PASSWORD}
-  prefix: ${FLARUM_TABLE_PREFIX}
+  host: "${MYSQL_HOST}"
+  database: "${MYSQL_DATABASE}"
+  username: "${MYSQL_USER}"
+  password: "${MYSQL_PASSWORD}"
+  prefix: "${FLARUM_TABLE_PREFIX}"
   port: ${MYSQL_PORT}
 adminUser:
   username: "${FLARUM_ADMIN_NAME}"

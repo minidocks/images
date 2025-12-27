@@ -156,6 +156,7 @@ RUN su-exec www-data:www-data composer require \
         huseyinfiliz/sort-changer \
         huseyinfiliz/sticky-title \
         ianm/follow-users \
+        ianm/log-viewer \
         justoverclock/flarum-ext-hashtag \
         justoverclock/thread-read-time \
         justoverclock/user-statistics \
