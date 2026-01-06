@@ -20,9 +20,11 @@ fi
 # check to see if tzdata is installed
 #
 
+uninstall=
 if [ ! -d /usr/share/zoneinfo ]; then
   echo "need to install tzdata"
   apk add --update tzdata
+  uninstall=1
 fi
 
 if [ "$1" = "list" ]; then
@@ -38,6 +40,7 @@ else
   fi
 fi
 
-# remove package, not needed anymore
-apk del tzdata
-clean
+if [ -n "$uninstall" ]; then
+  apk del tzdata
+  clean
+fi

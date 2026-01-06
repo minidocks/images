@@ -10,11 +10,8 @@ Alpine repositories
 All images have registered the following apk repositories:
 
 - @edge ([@main](https://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](https://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](https://dl-cdn.alpinelinux.org/alpine/edge/testing))
-- @322 ([@main322](https://dl-cdn.alpinelinux.org/alpine/v3.22/main), [@community322](https://dl-cdn.alpinelinux.org/alpine/v3.22/community))
+- @323 ([@main323](https://dl-cdn.alpinelinux.org/alpine/v3.22/main), [@community323](https://dl-cdn.alpinelinux.org/alpine/v3.22/community))- @322 ([@main322](https://dl-cdn.alpinelinux.org/alpine/v3.22/main), [@community322](https://dl-cdn.alpinelinux.org/alpine/v3.22/community))
 - @321 ([@main321](https://dl-cdn.alpinelinux.org/alpine/v3.21/main), [@community321](https://dl-cdn.alpinelinux.org/alpine/v3.21/community))
-- @320 ([@main320](https://dl-cdn.alpinelinux.org/alpine/v3.20/main), [@community320](https://dl-cdn.alpinelinux.org/alpine/v3.20/community))
-- @319 ([@main319](https://dl-cdn.alpinelinux.org/alpine/v3.19/main), [@community319](https://dl-cdn.alpinelinux.org/alpine/v3.19/community))
-- @318 ([@main318](https://dl-cdn.alpinelinux.org/alpine/v3.18/main), [@community318](https://dl-cdn.alpinelinux.org/alpine/v3.18/community))
 
 Utilities
 ---------
@@ -31,6 +28,7 @@ All images contain the following extra packages:
 - [`wait-for`](https://github.com/eficode/wait-for)  Wait for another service to become available.
 - [`libc6-compat`](https://musl.libc.org/) Compatibility libraries for glibc.
 - [`flock`](https://linux.die.net/man/2/flock) File locker from util-linux.
+- [`tzdata`](https://www.iana.org/time-zones) Timezone data
 
 Features
 --------
