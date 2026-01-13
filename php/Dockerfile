@@ -35,6 +35,7 @@ RUN wget https://psysh.org/psysh && chmod +x psysh && mv psysh /usr/bin/psysh
 
 ENV PHP_INI_DIR=/etc/php$major \
     PHP_ERROR_LOG=/dev/stderr.pipe \
+    PHP_MEMORY_LIMIT=-1 \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer \
     COMPOSER_CACHE_DIR=/composer-cache \
