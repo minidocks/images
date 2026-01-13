@@ -12,6 +12,7 @@ versions="
 3-build;3.12;build;-build
 3-uwsgi;3.12;uwsgi
 build;3.12;build;-build
+uwsgi;3.12;uwsgi
 latest;3.12
 "
 

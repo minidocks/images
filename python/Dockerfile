@@ -86,7 +86,7 @@ RUN apk --update --no-cache add nginx \
         uwsgi-pam \
         uwsgi-ping \
         uwsgi-pty \
-        uwsgi-python3 \
+#        uwsgi-python3 \
         uwsgi-rawrouter \
         uwsgi-redislog \
         uwsgi-router_basicauth \
