@@ -56,10 +56,6 @@ Tags
 | 3.12-packaging  | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-packaging?style=flat-square&logo=docker&label=size) |
 | 3.12-build      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-build?style=flat-square&logo=docker&label=size)     |
 | 3.12-uwsgi      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.12-uwsgi?style=flat-square&logo=docker&label=size)     |
-| 3.11            | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11?style=flat-square&logo=docker&label=size)           |
-| 3.11-packaging  | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-packaging?style=flat-square&logo=docker&label=size) |
-| 3.11-build      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-build?style=flat-square&logo=docker&label=size)     |
-| 3.11-uwsgi      | ![](https://img.shields.io/docker/image-size/minidocks/python/3.11-uwsgi?style=flat-square&logo=docker&label=size)     |
 
 Related images
 --------------
