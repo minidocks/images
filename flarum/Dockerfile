@@ -1,4 +1,4 @@
-ARG version=2@beta
+ARG version=1.*
 
 FROM minidocks/php:8.4-nginx AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"
@@ -98,6 +98,7 @@ RUN su-exec www-data:www-data composer require \
         datlechin/flarum-copy-links \
         datlechin/flarum-discussion-overview \
         datlechin/flarum-landing-page \
+        datlechin/flarum-link-preview \
         dshovchko/flarum-image-dimensions \
         dshovchko/flarum-image-migrate \
         flectar/flarum-fancybox \
@@ -108,6 +109,7 @@ RUN su-exec www-data:www-data composer require \
         fof/custom-footer \
         fof/default-group \
         fof/default-user-preferences \
+        fof/direct-links \
         fof/discussion-language \
         fof/discussion-views \
         fof/discussion-thumbnail \
@@ -176,12 +178,10 @@ RUN su-exec www-data:www-data composer require \
         sycho/flarum-private-facade \
         sycho/flarum-profile-cover \
         syntaxoutlaw/threadify \
-        the-turk/flarum-diff \
-        the-turk/flarum-nodp \
-        the-turk/flarum-stickiest \
         tpokorra/flarum-ext-post-notification \
         v17development/flarum-blog \
         v17development/flarum-user-badges \
+        walsgit/external-links-in-new-tab \
         webbinaro/flarum-calendar \
         xelson/flarum-ext-chat \
         zhihe/primary-posts \
