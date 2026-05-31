@@ -1,7 +1,7 @@
 ARG version=8.4
 ARG major=8
 ARG suffix=84
-ARG newrelic_version=12.3.0.28
+ARG newrelic_version=12.7.0.36
 
 FROM minidocks/base:3.22 AS v8.2
 
@@ -95,6 +95,7 @@ RUN for module in \
         soap \
         sockets \
         sodium \
+        spx \
         sqlite3 \
         xml \
         xmlreader \

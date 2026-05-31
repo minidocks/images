@@ -84,6 +84,7 @@ RUN for module in \
         soap \
         sockets \
         sodium \
+        spx \
         sqlite3 \
         xml \
         xmlreader \

@@ -81,6 +81,7 @@ Modules
 | soap             |  ✓  |  ✓  | latest |
 | sockets          |  ✓  |  ✓  | latest |
 | sodium           |  ✓  |  ✓  | latest |
+| spx              |  ✓  |  ✓  | latest |
 | sqlite3          |  ✓  |  ✓  | latest |
 | tokenizer        |  ✓  |  ✓  | base   |
 | xdebug           |  ✓  |  ✓  | latest |
