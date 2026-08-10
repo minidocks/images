@@ -10,7 +10,9 @@ Alpine repositories
 All images have registered the following apk repositories:
 
 - @edge ([@main](https://dl-cdn.alpinelinux.org/alpine/edge/main), [@community](https://dl-cdn.alpinelinux.org/alpine/edge/community), [@testing](https://dl-cdn.alpinelinux.org/alpine/edge/testing))
-- @323 ([@main323](https://dl-cdn.alpinelinux.org/alpine/v3.22/main), [@community323](https://dl-cdn.alpinelinux.org/alpine/v3.22/community))- @322 ([@main322](https://dl-cdn.alpinelinux.org/alpine/v3.22/main), [@community322](https://dl-cdn.alpinelinux.org/alpine/v3.22/community))
+- @324 ([@main324](https://dl-cdn.alpinelinux.org/alpine/v3.24/main), [@community324](https://dl-cdn.alpinelinux.org/alpine/v3.24/community))
+- @323 ([@main323](https://dl-cdn.alpinelinux.org/alpine/v3.23/main), [@community323](https://dl-cdn.alpinelinux.org/alpine/v3.23/community))
+- @322 ([@main322](https://dl-cdn.alpinelinux.org/alpine/v3.22/main), [@community322](https://dl-cdn.alpinelinux.org/alpine/v3.22/community))
 - @321 ([@main321](https://dl-cdn.alpinelinux.org/alpine/v3.21/main), [@community321](https://dl-cdn.alpinelinux.org/alpine/v3.21/community))
 
 Utilities
@@ -29,6 +31,7 @@ All images contain the following extra packages:
 - [`libc6-compat`](https://musl.libc.org/) Compatibility libraries for glibc.
 - [`flock`](https://linux.die.net/man/2/flock) File locker from util-linux.
 - [`tzdata`](https://www.iana.org/time-zones) Timezone data
+- [`musl-locales`](https://git.adelielinux.org/adelie/musl-locales/-/wikis/home) Locales support for musl.
 
 Features
 --------
@@ -41,16 +44,66 @@ Inspiration:
 - https://github.com/Graham42/mapped-uid-docker
 - https://github.com/reduardo7/docker-host-user
 
+Handling user permissions
+-------------------------
+
+    docker run --rm -e SUEXEC=$(id -u):$(id -g) <minidocks/image> sh
+
+- https://denibertovic.com/posts/handling-permissions-with-docker-volumes/
+- https://boxboat.com/2017/07/25/fixuid-change-docker-container-uid-gid/
+- https://github.com/reduardo7/docker-host-user
+
+Process Supervision
+-------------------
+
+- https://github.com/nimmis/docker-alpine-micro
+- http://jtimberman.housepub.org/blog/2012/12/29/process-supervision-solved-problem/
+- https://github.com/rawmind0/alpine-monit/
+
+escape
+quote
+https://stackoverflow.com/questions/15783701/which-characters-need-to-be-escaped-when-using-bash
+http://www.etalabs.net/sh_tricks.html
+
+SSH
+---
+
+Pregenerated keys by
+dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
+dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key
 
 ### rootfs
 
 ### ssh
 
+### Timezone
+
+
+### Wait
+https://github.com/erikogan/wait4ports
+https://raw.githubusercontent.com/eficode/wait-for/master/wait-for
+https://raw.githubusercontent.com/CraftShell/wait-host/master/wait-host.sh
+https://github.com/bash-suite/wait-host/blob/master/wait-host.sh
+https://stackoverflow.com/questions/31746182/docker-compose-wait-for-container-x-before-starting-y/41854997#41854997
+wget -O /usr/local/bin/wait https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait && chmod a+x /usr/local/bin/wait \
+
+### Locales
+https://github.com/gliderlabs/docker-alpine/issues/144
+
 ### Supervise
 
 - https://github.com/bahamas10/vsv
-- https://github.com/SwagDevOps/sv-utils
+- https://github.com/ido50/Svsh
+- https://github.com/lecram/isv
+- https://github.com/sigmonsays/runitcmd
+- https://github.com/kskeigrshi/runitctl
+- https://github.com/threefoldtech/zinit
+- https://github.com/bitmeal/fission
+- https://github.com/daltomi/xsv
+
+- https://github.com/kosma/runit-docker
 - https://github.com/cheshirecode/alpine-runit
+- https://github.com/docker-suite/alpine-runit
 
 Environment variables
 ---------------------
@@ -81,6 +134,7 @@ Environment variables
 - `USER_MASK`: User mask.
 
 - `PATH_HOME`: Default value: `/home/${HOST_USER_NAME}`.
+- `TIMEZONE`:
 
 https://github.com/hejack0207/empty.c
 (sexpect)
@@ -98,13 +152,15 @@ Tags
 
  Tag               | Size
  ---               | ----
- latest, 3.23      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
- build, 3.23-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
+ latest, 3.24      | ![](https://img.shields.io/docker/image-size/minidocks/base/latest?style=flat-square&logo=docker&label=size)
+ build, 3.24-build | ![](https://img.shields.io/docker/image-size/minidocks/base/build?style=flat-square&logo=docker&label=size)
  edge              | ![](https://img.shields.io/docker/image-size/minidocks/base/edge?style=flat-square&logo=docker&label=size)
  edge-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/edge-build?style=flat-square&logo=docker&label=size)
+ 3.24              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.24?style=flat-square&logo=docker&label=size)
+ 3.24-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.24-build?style=flat-square&logo=docker&label=size)
  3.23              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.23?style=flat-square&logo=docker&label=size)
- 3.22-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.23-build?style=flat-square&logo=docker&label=size)
- 3.23              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.22?style=flat-square&logo=docker&label=size)
+ 3.23-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.23-build?style=flat-square&logo=docker&label=size)
+ 3.22              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.22?style=flat-square&logo=docker&label=size)
  3.22-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.22-build?style=flat-square&logo=docker&label=size)
  3.21              | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21?style=flat-square&logo=docker&label=size)
  3.21-build        | ![](https://img.shields.io/docker/image-size/minidocks/base/3.21-build?style=flat-square&logo=docker&label=size)
