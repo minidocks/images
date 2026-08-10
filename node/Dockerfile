@@ -5,7 +5,9 @@ FROM minidocks/base:3.22 AS v22
 
 FROM minidocks/base:3.22 AS v23
 
-FROM minidocks/base:3.23 AS v24
+FROM minidocks/base:3.24 AS v24
+
+FROM minidocks/base:3.24 AS v26
 
 FROM v$base_version AS base
 LABEL maintainer="Martin Hasoň <martin.hason@gmail.com>"

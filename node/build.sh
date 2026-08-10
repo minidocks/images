@@ -9,9 +9,9 @@ versions="
 23;23;nodejs-current<24
 lts-base;24;nodejs<25;base
 lts;24;nodejs<25
-current-base;25;nodejs-current<26;base
-current;25;nodejs-current<26
-latest;25;nodejs-current<26
+current-base;26;nodejs-current<27;base
+current;26;nodejs-current<27
+latest;26;nodejs-current<27
 "
 
 build() {
