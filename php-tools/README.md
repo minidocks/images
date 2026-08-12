@@ -42,11 +42,11 @@ Installed tools
 | phpbench                           | [PHP Benchmarking framework](https://github.com/phpbench/phpbench)                                                                       | ✓       | ✓       | ✓       |
 | phpca                              | [Finds usage of non-built-in extensions](https://github.com/wapmorgan/PhpCodeAnalyzer)                                                   | ✓       | ✓       | ✓       |
 | phpcb                              | [PHP Code Browser](https://github.com/mayflower/PHP_CodeBrowser)                                                                         | ✓       | ✓       | ✓       |
-| phpcbf                             | [Automatically corrects coding standard violations](https://github.com/squizlabs/PHP_CodeSniffer)                                        | ✓       | ✓       | ✓       |
+| phpcbf                             | [Automatically corrects coding standard violations](https://github.com/PHPCSStandards/PHP_CodeSniffer)                                        | ✓       | ✓       | ✓       |
 | phpcodesniffer-composer-install    | [Easy installation of PHP_CodeSniffer coding standards (rulesets).](https://github.com/Dealerdirect/phpcodesniffer-composer-installer)   | ✓       | ✓       | ✓       |
 | phpcov                             | [a command-line frontend for the PHP_CodeCoverage library](https://github.com/sebastianbergmann/phpcov)                                  | ✓       | ✓       | ✓       |
 | phpcpd                             | [Copy/Paste Detector](https://github.com/sebastianbergmann/phpcpd)                                                                       | ✓       | ✓       | ✓       |
-| phpcs                              | [Detects coding standard violations](https://github.com/squizlabs/PHP_CodeSniffer)                                                       | ✓       | ✓       | ✓       |
+| phpcs                              | [Detects coding standard violations](https://github.com/PHPCSStandards/PHP_CodeSniffer)                                                       | ✓       | ✓       | ✓       |
 | phpcs-security-audit               | [Finds vulnerabilities and weaknesses related to security in PHP code](https://github.com/FloeDesignTechnologies/phpcs-security-audit)   | ✓       | ✓       | ✓       |
 | phpda                              | [Generates dependency graphs](https://mamuz.github.io/PhpDependencyAnalysis/)                                                            | ✓       | ✓       | –       |
 | phpdd                              | [Finds usage of deprecated features](http://wapmorgan.github.io/PhpDeprecationDetector)                                                  | ✓       | ✓       | ✓       |
