@@ -17,7 +17,8 @@ RUN apk add --no-cache --virtual .wget-deps wget \
     && apk del .wget-deps && clean
 
 # libgcc: henderkes packages link against libgcc_s.so.1 but don't declare it
-RUN apk add libgcc php-zts-cli php-zts-apcu nss-tools frankenphp && clean \
+# libgcc and nss-tools must be installed first, frankenphp post-install runs "frankenphp trust"
+RUN apk add libgcc nss-tools && apk add php-zts-cli php-zts-apcu frankenphp && clean \
     && if [ ! -e "/usr/bin/php$suffix" ]; then ln -s php-zts "/usr/bin/php$suffix"; fi
 
 #Psysh
