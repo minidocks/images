@@ -16,7 +16,8 @@ RUN apk add --no-cache --virtual .wget-deps wget \
     && wget -q --content-disposition -P /etc/apk/keys/ "https://pkg.henderkes.com/api/packages/${suffix}/alpine/key" \
     && apk del .wget-deps && clean
 
-RUN apk add php-zts-cli php-zts-apcu nss-tools frankenphp && clean \
+# libgcc: henderkes packages link against libgcc_s.so.1 but don't declare it
+RUN apk add libgcc php-zts-cli php-zts-apcu nss-tools frankenphp && clean \
     && if [ ! -e "/usr/bin/php$suffix" ]; then ln -s php-zts "/usr/bin/php$suffix"; fi
 
 #Psysh
